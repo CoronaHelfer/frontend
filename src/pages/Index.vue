@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <div class="header-box">
-        <h1>Gemeinsam Helfen</h1>
+        <h4>Gemeinsam Helfen</h4>
         <div>
           <router-link to="/get-help">
             <q-btn style="margin-right: 30px">Ich brauche Hilfe</q-btn>
@@ -17,7 +17,7 @@
     <q-page-container>
       <q-page class="flex flex-center">
         <div class="StartPage">
-            <h2>Portal für Nachbarschaftshilfe in deiner Region</h2>
+            <h5>Portal für Nachbarschaftshilfe in deiner Region</h5>
             <p>
               <i>“Aus der Region - für die Region”</i> <br/>
               Ganz nach diesem Motto möchten wir Coronavirus-Nachbarschaftshilfe erleichtern und vermitteln. <br/><br/>
@@ -26,7 +26,7 @@
               das Projekt CoronaHelfer ins Leben gerufen, um gemeinsam die Ausbreitung des Virus zu verlangsamen und
               einander dort zu unterstützen, wo es möglich ist.
             </p>
-            <h2>Ziel und Vision der Initiative CoronaHelfer</h2>
+            <h5>Ziel und Vision der Initiative CoronaHelfer</h5>
             <ul>
               <li>CoronaHelfer schützt gefährdete Personen</li>
               <li>CoronaHelfer entlastet Menschen in systemrelevanten Berufen (Gesundheits-, Dienstleistungssystem
@@ -35,7 +35,7 @@
               <li>CoronaHelfer unterstütz generell Hilfesuchende</li>
               <li>Coronaviurs-Nachbarschaftshilfe für alle!</li>
             </ul>
-            <h2>Leitsätze für Coronavirus-Nachbarschaftshilfe</h2>
+            <h5>Leitsätze für Coronavirus-Nachbarschaftshilfe</h5>
             <ul>
               <li><b>C</b>ool bleiben</li>
               <li><b>O</b>rdentlich Hände waschen</li>
@@ -44,7 +44,7 @@
               <li><b>N</b>achbarschaftshilfe</li>
               <li><b>A</b>bstand halten</li>
             </ul>
-            <h2>Unser Hintergrund</h2>
+            <h5>Unser Hintergrund</h5>
             <p>
               Wie ist unsere Idee entstanden? Über soziale Netzwerke sind wir darauf aufmerksam geworden, wie unfassbar
               viele von euch in ihrer Umgebung Hilfe angesichts der aktuellen Situation anbieten möchten. Bei anderen
@@ -70,10 +70,9 @@
     background: url('../statics/background.jpg') no-repeat
     background-size: cover
     padding: 50px
-    h1
-      font-size: 40px
+    h4
       text-transform: uppercase
-      margin: 0
+      margin: 0 0 20px 0
 
     .q-btn
       background: white
@@ -83,7 +82,7 @@
       cursor: pointer
       font-size: 20px
       font-weight: 400
-      padding: 10px 50px
+      padding: 0 50px
       text-transform: uppercase
 
       &:focus
@@ -105,8 +104,10 @@
     margin: 20px auto 0
     max-width: 800px
 
-  h2
+  h5
     color: $secondary
+    text-transform: uppercase
+    font-weight: 600
 
 </style>
 
