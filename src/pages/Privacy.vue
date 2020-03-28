@@ -26,77 +26,77 @@
           <h5>Inhaltsübersicht</h5>
           <ul className="index">
             <li>
-              <a className="index-link" href="privacy/#m14">
+              <a className="index-link" href="privacy#m14">
                 Einleitung
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m3">
+              <a className="index-link" href="privacy#m3">
                 Verantwortlicher
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#mOverview">
+              <a className="index-link" href="privacy#mOverview">
                 Übersicht der Verarbeitungen
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m13">
+              <a className="index-link" href="privacy#m13">
                 Maßgebliche Rechtsgrundlagen
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m27">
+              <a className="index-link" href="privacy#m27">
                 Sicherheitsmaßnahmen
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m25">
+              <a className="index-link" href="privacy#m25">
                 Übermittlung und Offenbarung von personenbezogenen Daten
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m134">
+              <a className="index-link" href="privacy#m134">
                 Einsatz von Cookies
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m367">
+              <a className="index-link" href="privacy#m367">
                 Registrierung, Anmeldung und Nutzerkonto
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m225">
+              <a className="index-link" href="privacy#m225">
                 Bereitstellung des Onlineangebotes und Webhosting
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m136">
+              <a className="index-link" href="privacy#m136">
                 Präsenzen in sozialen Netzwerken
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m328">
+              <a className="index-link" href="privacy#m328">
                 Plugins und eingebettete Funktionen sowie Inhalte
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m12">
+              <a className="index-link" href="privacy#m12">
                 Löschung von Daten
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m15">
+              <a className="index-link" href="privacy#m15">
                 Änderung und Aktualisierung der Datenschutzerklärung
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m10">
+              <a className="index-link" href="privacy#m10">
                 Rechte der betroffenen Personen
               </a>
             </li>
             <li>
-              <a className="index-link" href="privacy/#m42">
+              <a className="index-link" href="privacy#m42">
                 Begriffsdefinitionen
               </a>
             </li>
