@@ -1,14 +1,8 @@
 <template>
-  <div>
+  <q-page>
     Flyer
-  </div>
+  </q-page>
 </template>
-
-<style lang="sass">
-  div
-    background: url('../statics/background.jpg') no-repeat
-    background-size: cover
-</style>
 
 <script>
 export default {

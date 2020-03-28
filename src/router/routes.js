@@ -8,7 +8,9 @@ const routes = [
       { path: 'flyer', component: () => import('pages/Flyer.vue') },
       { path: 'information', component: () => import('pages/Information.vue') },
       { path: 'contact', component: () => import('pages/Contact.vue') },
-      { path: 'login', component: () => import('pages/Login.vue') }
+      { path: 'login', component: () => import('pages/Login.vue') },
+      { path: 'imprint', component: () => import('pages/Imprint.vue') },
+      { path: 'privacy', component: () => import('pages/Privacy.vue') }
     ]
   }
 ]
