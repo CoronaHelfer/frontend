@@ -7,12 +7,12 @@
         <!-- </q-avatar> -->
       </q-toolbar-title>
       <q-tabs align="right">
-        <q-route-tab to="#" label="Helfen" />
-        <q-route-tab to="#" label="Hilfe Bekommen" />
-        <q-route-tab to="#" label="Flyer" />
-        <q-route-tab to="#" label="Informationen" />
-        <q-route-tab to="#" label="Kontakt" />
-        <q-btn to="#" class="login-btn" label="Login" />
+        <q-route-tab to="/help" label="Helfen" />
+        <q-route-tab to="/get-help" label="Hilfe Bekommen" />
+        <q-route-tab to="/flyer" label="Flyer" />
+        <q-route-tab to="/information" label="Informationen" />
+        <q-route-tab to="/contact" label="Kontakt" />
+        <q-btn to="/login" class="login-btn" label="Login" />
       </q-tabs>
     </q-toolbar>
   </q-header>

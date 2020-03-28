@@ -2,8 +2,8 @@
   <q-footer container="true">
     <q-toolbar class="footer-links">
       <q-tabs align="center">
-        <q-route-tab to="#" label="Impressum" />
-        <q-route-tab to="#" label="Privacy" />
+        <q-route-tab to="/imprint" label="Impressum" />
+        <q-route-tab to="/privacy" label="Privacy" />
       </q-tabs>
     </q-toolbar>
   </q-footer>
