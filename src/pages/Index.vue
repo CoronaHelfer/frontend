@@ -14,7 +14,7 @@
 
     <body>
     <q-page-container>
-      <q-page class="flex flex-center">
+      <q-page class="flex">
         <article>
           <h5>Portal für Nachbarschaftshilfe in deiner Region</h5>
           <p>
