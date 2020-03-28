@@ -67,6 +67,7 @@
     color: white
 
     height: 4px
+    h4
       text-transform: uppercase
       margin: 0 0 30px 0
 
