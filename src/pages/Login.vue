@@ -15,7 +15,7 @@
           <q-btn
             rounded
             label="Login"
-            v-on:click="login"/>
+            v-on:click="login()"/>
           <!--          onClick={login}>Login</q-btn>-->
           <!--v-show="sent"-->
 
@@ -30,7 +30,7 @@
   </q-page>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
   body
     background: url('../statics/background.jpg') no-repeat
     background-size: cover
@@ -97,5 +97,66 @@
 
 <script>
 export default {
+  data () {
+    return {
+      name: '',
+      password: '',
+      isPwd: true
+    }
+  },
+
+  mounted () {
+  },
+
+  methods: {
+    async login () {
+      try {
+        /* setLoading(true) */
+        if (this.name === '' || this.password === '') {
+          throw new Error('Fields cant be empty.')
+        }
+        let res = await fetch('http://coronahelfer.eu:3000/api/v1/auth/login', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: this.name,
+            password: this.password
+          })
+        })
+
+        res = await res.json()
+
+        if (res.error) throw new Error(res.error)
+        if (!res.token) throw new Error('No token provided.')
+
+        // TODO: local or sessionstorage?
+        window.localStorage.setItem('coronahelp-token', res.token)
+
+        /*        const me = await callApi(
+                  '/users/me',
+                  window.localStorage.getItem('coronahelp-token'),
+                ) */
+        /*
+                if (me.error) throw new Error('Token invalid.')
+
+                auth.set({
+                  authenticated: true,
+                  firstname: me.user.firstName,
+                  lastname: me.user.lastName,
+                  email: me.user.email,
+                  token: res.token,
+                }) */
+
+        /* setLoading(false) */
+        history.push(history.location.state ? history.location.state.from : '/')
+      } catch (e) {
+        console.log(e)
+        /*        setError('E-Mail/Telefonnummer oder Passwort falsch.')
+                setLoading(false) */
+      }
+    }
+  }
 }
 </script>
