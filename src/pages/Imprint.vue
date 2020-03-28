@@ -99,6 +99,9 @@
         text-transform: uppercase
         font-weight: 600
         margin: 20px 0
+
+      strong
+        color: $secondary
 </style>
 
 <script>
