@@ -3,26 +3,43 @@
     <body>
     <div class="authenticate">
       <div class="container">
-        <form class="login">
+        <form class="register">
+          <div class="aligner">
+            <div class="left">
+              <div class="avatar"/>
+            </div>
+            <div class="right">
+              <input
+                type="text"
+                placeholder="Vorname"
+              />
+              <input
+                type="text"
+                placeholder="Nachname"
+              />
+            </div>
+          </div>
           <input
             type="text"
-            placeholder="E-Mail oder Telefonnummer"
+            placeholder="E-Mail"
+          />
+          <input
+            class="spacer"
+            type="text"
+            placeholder="Telefon"
           />
           <input
             type="password"
             placeholder="Passwort"
           />
-          <q-btn
-            rounded
-            label="Login"
-            v-on:click="login"/>
-          <!--          onClick={login}>Login</q-btn>-->
-          <!--v-show="sent"-->
-
+          <input
+            type="password"
+            placeholder="Passwort wiederholen"
+          />
           <q-btn
             rounded
             label="Registrieren"
-            @click="$router.push('/register')"/>
+            v-on:click="register"/>
         </form>
       </div>
     </div>
@@ -44,6 +61,12 @@
     box-sizing: border-box
     .container
       width: 400px
+      .divider
+        color: WHITE
+        font-weight: 600
+        font-size: 14px
+        text-align: center
+        margin: 14px
       .login,
       .register
         background-color: WHITE
