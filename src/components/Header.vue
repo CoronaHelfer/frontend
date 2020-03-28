@@ -1,10 +1,10 @@
 <template>
   <q-header elevated class="bg-primary text-white" height-hint="98">
-    <q-toolbar>
+    <q-toolbar class="nav">
       <q-toolbar-title>
-        <!-- <q-avatar> -->
-        <img class="logo" width="100" src="~assets/CoronaHelfer-Logo.svg" />
-        <!-- </q-avatar> -->
+        <router-link to="/">
+          <img class="logo" width="100" src="~assets/CoronaHelfer-Logo.svg" />
+        </router-link>
       </q-toolbar-title>
       <q-tabs align="right">
         <q-route-tab to="/help" label="Helfen" />
@@ -19,6 +19,15 @@
 </template>
 
 <style lang="sass" scoped>
+.nav
+  width: 100%
+  display: flex
+  background-color: $primary
+  color: WHITE
+  justify-content: space-between
+  box-sizing: border-box
+  height: 90px
+  padding: 0 80px
 .logo
   margin: 0.75rem
 .login-btn

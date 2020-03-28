@@ -1,14 +1,8 @@
 <template>
-  <div>
+  <q-page>
     Information
-  </div>
+  </q-page>
 </template>
-
-<style lang="sass" scoped>
-  div
-    background: url('../statics/background.jpg') no-repeat
-    background-size: cover
-</style>
 
 <script>
 export default {

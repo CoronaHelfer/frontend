@@ -64,7 +64,7 @@
   </q-layout>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
   header
     text-align: center
     background: url('../statics/background.jpg') no-repeat
