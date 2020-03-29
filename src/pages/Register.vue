@@ -12,29 +12,35 @@
               <input
                 type="text"
                 placeholder="Vorname"
+                v-model="firstname"
               />
               <input
                 type="text"
                 placeholder="Nachname"
+                v-model="lastname"
               />
             </div>
           </div>
           <input
             type="text"
             placeholder="E-Mail"
+            v-model="mail"
           />
           <input
             class="spacer"
             type="text"
             placeholder="Telefon"
+            v-model="phone"
           />
           <input
             type="password"
             placeholder="Passwort"
+            v-model="password"
           />
           <input
             type="password"
             placeholder="Passwort wiederholen"
+            v-model="passwordRepeat"
           />
           <q-btn
             rounded
@@ -120,5 +126,66 @@
 
 <script>
 export default {
+  data () {
+    return {
+      firstname: '',
+      lastname: '',
+      mail: '',
+      phone: '',
+      password: '',
+      passwordRepeat: ''
+    }
+  },
+
+  methods: {
+    async register () {
+      try {
+        // setLoading(true)
+        if (this.password !== this.passwordRepeat) throw new Error('Passwords do not match.')
+
+        if (this.firstname === '' || this.lastname === '' || this.mail === '' || this.phone === '') {
+          throw new Error('Not all fields are filled.')
+        }
+
+        let res = await fetch(this.$q.sessionStorage.getItem('server') + '/auth/register', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            firstName: this.firstname,
+            lastName: this.lastname,
+            password: this.password,
+            email: this.mail,
+            phoneNumber: this.phone
+          })
+        })
+
+        res = await res.json()
+
+        if (res.error) throw new Error(res.error)
+        if (!res.token) throw new Error('No token provided.')
+
+        // TODO: local or sessionstorage?
+        window.localStorage.setItem('coronahelp-token', res.token)
+
+        // TODO: Fetch User information
+        /*        auth.set({
+                  token: res.token,
+                  firstname: '',
+                  lastname: '',
+                  email: '',
+                  authenticated: true
+                }) */
+      } catch (e) {
+        console.log(e)
+        // setError(
+        //   'Registrierung konnte nicht abgeschlossen werden. Überprüfen sie ihre Eingabe.',
+        // )
+      } finally {
+        // setLoading(false)
+      }
+    }
+  }
 }
 </script>

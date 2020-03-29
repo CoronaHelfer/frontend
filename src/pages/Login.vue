@@ -7,10 +7,12 @@
           <input
             type="text"
             placeholder="E-Mail oder Telefonnummer"
+            v-model="name"
           />
           <input
             type="password"
             placeholder="Passwort"
+            v-model="password"
           />
           <q-btn
             rounded
@@ -100,12 +102,8 @@ export default {
   data () {
     return {
       name: '',
-      password: '',
-      isPwd: true
+      password: ''
     }
-  },
-
-  mounted () {
   },
 
   methods: {
@@ -115,7 +113,7 @@ export default {
         if (this.name === '' || this.password === '') {
           throw new Error('Fields cant be empty.')
         }
-        let res = await fetch('http://coronahelfer.eu:3000/api/v1/auth/login', {
+        let res = await fetch(this.$q.sessionStorage.getItem('server') + '/auth/login', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
