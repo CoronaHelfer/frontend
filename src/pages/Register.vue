@@ -148,6 +148,7 @@ export default {
   },
 
   methods: {
+
     async register () {
       try {
         this.loading = true
@@ -158,7 +159,7 @@ export default {
           throw new Error('Not all fields are filled.')
         }
 
-        let res = await fetch(this.$q.sessionStorage.getItem('server') + '/auth/register', {
+        let res = await fetch(this.$q.localStorage.getItem('server') + 'auth/register', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
@@ -177,17 +178,14 @@ export default {
         if (res.error) throw new Error(res.error)
         if (!res.token) throw new Error('No token provided.')
 
-        // TODO: local or sessionstorage?
-        window.localStorage.setItem('coronahelp-token', res.token)
-
         // TODO: Fetch User information
-        /*        auth.set({
-                  token: res.token,
-                  firstname: '',
-                  lastname: '',
-                  email: '',
-                  authenticated: true
-                }) */
+        this.$q.localStorage.set('auth', {
+          token: res.token,
+          firstname: '',
+          lastname: '',
+          email: '',
+          authenticated: true
+        })
       } catch (e) {
         console.log(e)
         this.error = e

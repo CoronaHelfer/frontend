@@ -113,7 +113,7 @@ export default {
         if (this.name === '' || this.password === '') {
           throw new Error('Fields cant be empty.')
         }
-        let res = await fetch(this.$q.sessionStorage.getItem('server') + '/auth/login', {
+        let res = await fetch(this.$q.localStorage.getItem('server') + '/auth/login', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
