@@ -4,6 +4,11 @@
     <div class="authenticate">
       <div class="container">
         <form class="register">
+          <div
+            v-show="error != ''"
+            class="error"
+          >{{error}}
+          </div>
           <div class="aligner">
             <div class="left">
               <div class="avatar"/>
@@ -42,8 +47,10 @@
             placeholder="Passwort wiederholen"
             v-model="passwordRepeat"
           />
+
           <q-btn
             rounded
+            :loading="loading"
             label="Registrieren"
             v-on:click="register"/>
         </form>
@@ -133,14 +140,18 @@ export default {
       mail: '',
       phone: '',
       password: '',
-      passwordRepeat: ''
+      passwordRepeat: '',
+
+      error: '',
+      loading: false
     }
   },
 
   methods: {
     async register () {
       try {
-        // setLoading(true)
+        this.loading = true
+        this.error = ''
         if (this.password !== this.passwordRepeat) throw new Error('Passwords do not match.')
 
         if (this.firstname === '' || this.lastname === '' || this.mail === '' || this.phone === '') {
@@ -179,11 +190,9 @@ export default {
                 }) */
       } catch (e) {
         console.log(e)
-        // setError(
-        //   'Registrierung konnte nicht abgeschlossen werden. Überprüfen sie ihre Eingabe.',
-        // )
+        this.error = e
       } finally {
-        // setLoading(false)
+        this.loading = false
       }
     }
   }
