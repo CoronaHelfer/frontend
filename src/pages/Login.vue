@@ -4,6 +4,11 @@
     <div class="authenticate">
       <div class="container">
         <form class="login">
+          <div
+            v-show="error != ''"
+            class="error"
+          >{{error}}
+          </div>
           <input
             type="text"
             placeholder="E-Mail oder Telefonnummer"
@@ -14,13 +19,12 @@
             placeholder="Passwort"
             v-model="password"
           />
+
           <q-btn
             rounded
+            :loading="loading"
             label="Login"
             v-on:click="login()"/>
-          <!--          onClick={login}>Login</q-btn>-->
-          <!--v-show="sent"-->
-
           <q-btn
             rounded
             label="Registrieren"
@@ -98,22 +102,25 @@
 </style>
 
 <script>
+import { callApi } from '../../api/requests'
+
 export default {
   data () {
     return {
       name: '',
-      password: ''
+      password: '',
+      error: '',
+      loading: false
     }
   },
 
   methods: {
     async login () {
       try {
-        /* setLoading(true) */
-        if (this.name === '' || this.password === '') {
-          throw new Error('Fields cant be empty.')
-        }
-        let res = await fetch(this.$q.localStorage.getItem('server') + '/auth/login', {
+        this.loading = true
+        this.error = ''
+        if (this.name === '' || this.password === '') throw new Error('Fields cant be empty.')
+        let res = await fetch(this.$q.localStorage.getItem('server') + 'auth/login', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
@@ -129,30 +136,27 @@ export default {
         if (res.error) throw new Error(res.error)
         if (!res.token) throw new Error('No token provided.')
 
-        // TODO: local or sessionstorage?
-        window.localStorage.setItem('coronahelp-token', res.token)
+        const me = await callApi(
+          this.$q.localStorage.getItem('server') + 'users/me',
+          this.$q.localStorage.getItem('coronahelp-token').token
+        )
 
-        /*        const me = await callApi(
-                  '/users/me',
-                  window.localStorage.getItem('coronahelp-token'),
-                ) */
-        /*
-                if (me.error) throw new Error('Token invalid.')
+        if (me.error) throw new Error('Token invalid.')
 
-                auth.set({
-                  authenticated: true,
-                  firstname: me.user.firstName,
-                  lastname: me.user.lastName,
-                  email: me.user.email,
-                  token: res.token,
-                }) */
+        this.$q.localStorage.set('auth', {
+          authenticated: true,
+          firstname: me.user.firstName,
+          lastname: me.user.lastName,
+          email: me.user.email,
+          token: res.token
+        })
 
-        /* setLoading(false) */
+        this.loading = false
         history.push(history.location.state ? history.location.state.from : '/')
       } catch (e) {
         console.log(e)
-        /*        setError('E-Mail/Telefonnummer oder Passwort falsch.')
-                setLoading(false) */
+        this.error = e
+        this.loading = false
       }
     }
   }

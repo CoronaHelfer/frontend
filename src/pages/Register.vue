@@ -141,20 +141,17 @@ export default {
       phone: '',
       password: '',
       passwordRepeat: '',
-
       error: '',
       loading: false
     }
   },
 
   methods: {
-
     async register () {
       try {
         this.loading = true
         this.error = ''
         if (this.password !== this.passwordRepeat) throw new Error('Passwords do not match.')
-
         if (this.firstname === '' || this.lastname === '' || this.mail === '' || this.phone === '') {
           throw new Error('Not all fields are filled.')
         }
