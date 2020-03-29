@@ -1,23 +1,23 @@
 <template>
   <div>
     <q-btn
-      v-show="!$q.localStorage.getItem('auth').authenticated"
+      v-if="!auth.authenticated"
       to="/login"
       class="login-btn"
       label="Login"/>
 
     <li
-      v-show="$q.localStorage.getItem('auth').authenticated"
+      v-if="auth.authenticated"
       class="menu-btn"
       v-on:click="open = !open">
-      <span>{{$q.localStorage.getItem('auth').firstname.toLocaleUpperCase()}}</span>
+      <span>{{auth.firstname.toLocaleUpperCase()}}</span>
       <q-icon :name="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></q-icon>
       <ul :class="open ? '' : 'hidden'">
         <li>PROFIL</li>
         <li>
           <router-link to="/profile/requests">MEINE ANZEIGEN</router-link>
         </li>
-        <li onClick="logout()">ABMELDEN</li>
+        <li v-on:click="logout()">ABMELDEN</li>
       </ul>
     </li>
   </div>
@@ -91,9 +91,27 @@ export default {
     }
   },
 
+  computed: {
+    auth: {
+      get () {
+        return Object.assign({}, this.$store.state.auth.data)
+      },
+      set (val) {
+        this.$store.commit('auth/updateData', val)
+      }
+    }
+  },
+
   methods: {
     logout () {
-
+      this.auth = {
+        token: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        authenticated: false
+      }
+      this.$router.push('/login')
     }
   }
 }
