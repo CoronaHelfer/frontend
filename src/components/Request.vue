@@ -7,7 +7,7 @@
               :src="user.image"
               :alt="'Foto von ' + user.firstName" />
             <span
-              v-if="!user.image"
+              v-else
               class="placeholder">
               {{user.firstName[0]}}
             </span>
@@ -18,7 +18,7 @@
           {{user.firstName}} wartet {{request.distance}} Meter entfernt auf deine Hilfe!
         </sub>
       </div>
-      <button class="primary" onclick="onClick(request._id)">Helfen
+      <button class="primary" v-on:click="onClick($vnode.key)">Helfen
       </button>
     </header>
     <p>

@@ -7,26 +7,47 @@
     <body>
     <Request
       v-for="(request, idx) in requests"
-      v-bind:key="request.title + idx"
+      v-bind:key="idx"
       :user="{ firstName: 'Anonym', image: undefined }"
       :request="request"
       :onClick="openPopUp"/>
     <article v-if="requests.length === 0">Momentan gibt es keine Gesuche!</article>
-<!--    <div>-->
-<!--      <Modal-->
-<!--        isOpen={!!selectedRequest}-->
-<!--        onRequestClose={closeModal}-->
-<!--        style={modalStyles}-->
-<!--        className="Modal"-->
-<!--        overlayClassName="Overlay"-->
-<!--        contentLabel="Modal Window"-->
-<!--      >-->
+
+    <q-dialog
+      persistent
+      v-model="isDialogOpen"
+    >
+      <q-card style="min-width: 350px">
+<!--        <form className="offer-form">-->
+<!--          <textarea-->
+<!--            required-->
+<!--            placeholder="Nachricht *"-->
+<!--            onChange={ev => setOffer(ev.target.value)}-->
+<!--              value={offer}-->
+<!--              />-->
+<!--          <Button type="button" isPrimary={true} size="small" onClick={sendOffer}>-->
+<!--            Absenden-->
+<!--          </Button>-->
+<!--        </form>-->
+        <q-card-section class="q-pt-none">
+          <q-input
+            dense autofocus
+            type="textarea"
+            v-model="message"
+            label="Nachricht"
+            @keyup.enter="selectedRequest = undefined"/>
+        </q-card-section>
+
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="X" v-close-popup/>
+          <q-btn flat label="Absenden" v-close-popup/>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
 <!--        <button onClick={closeModal} className="close-modal">-->
 <!--          X-->
 <!--        </button>-->
 <!--        {selectedRequest && <Offer requestId={selectedRequest} />}-->
-<!--      </Modal>-->
-<!--    </div>-->
     </body>
   </q-page>
 </template>
@@ -110,7 +131,9 @@ export default {
   data () {
     return {
       requests: [],
-      selectedRequest: null
+      selectedRequest: undefined,
+      message: '',
+      isDialogOpen: false
     }
   },
 
@@ -164,6 +187,7 @@ export default {
 
     openPopUp (idx) {
       this.selectedRequest = idx
+      this.isDialogOpen = true
     }
   }
 }
