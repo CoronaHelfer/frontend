@@ -29,9 +29,13 @@
 <!--            Absenden-->
 <!--          </Button>-->
 <!--        </form>-->
+        <q-card-section class="row items-center q-pb-none">
+          <q-space />
+          <q-btn icon="close" flat round dense v-close-popup />
+        </q-card-section>
         <q-card-section class="q-pt-none">
           <q-input
-            dense autofocus
+            dense autofocus rounded filled
             type="textarea"
             v-model="message"
             label="Nachricht"
@@ -39,8 +43,7 @@
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="X" v-close-popup/>
-          <q-btn flat label="Absenden" v-close-popup/>
+          <q-btn flat color="secondary" icon="send" v-close-popup/>
         </q-card-actions>
       </q-card>
     </q-dialog>
