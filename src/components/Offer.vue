@@ -1,0 +1,128 @@
+<template>
+  <q-dialog
+    v-model="isDialogOpen"
+    persistent>
+    <q-card v-if="success" class="card">
+        <h2>DANKE FÜR DEINE NACHRICHT</h2>
+        <p>Du wirst bestimmt bald kontaktiert!</p>
+        <q-btn
+          rounded
+          to="/profile/requests"
+          color="secondary"
+          label="Anfragen zeigen"
+          style="width: 100%"></q-btn>
+    </q-card>
+
+    <q-card
+      v-else-if="!auth.authenticated"
+      class="card">
+      <q-card-section class="column items-center q-pb-none">
+        <h2>DANKE, DASS DU HELFEN WILLST</h2>
+        <p>Um zu antworten, musst du angemeldet sein.</p>
+      </q-card-section>
+      <q-card-actions align="center">
+        <q-btn
+          rounded
+          to="login"
+          color="secondary"
+          label="Zum Login"
+          style="width: 100%"></q-btn>
+      </q-card-actions>
+    </q-card>
+
+    <q-card
+      v-else
+      style="min-width: 350px"
+      class="card">
+      <q-card-section class="row items-center q-pb-none">
+        <q-space/>
+        <q-btn icon="close" flat round dense v-close-popup></q-btn>
+      </q-card-section>
+      <q-card-section class="q-pt-none">
+        <q-input
+          dense autofocus rounded filled
+          type="textarea"
+          v-model="offer"
+          label="Nachricht"
+          @keyup.enter="selectedRequest = undefined"></q-input>
+      </q-card-section>
+
+      <q-card-actions align="right" class="text-primary">
+        <q-btn
+          flat
+          color="secondary"
+          icon="send"
+          v-close-popup
+          v-on:click="sendOffer"></q-btn>
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+</template>
+
+<style lang="sass" scoped>
+  .card
+    border-radius: 10px
+    padding: 20px
+    h2
+      font-size: 1.5em
+      margin: 10px 0
+</style>
+
+<script>
+import { callApi } from '../../api/requests'
+
+export default {
+  props: {
+    isDialogOpen: Boolean,
+    requestId: Number
+  },
+
+  data () {
+    return {
+      success: false,
+      offer: ''
+    }
+  },
+
+  computed: {
+    auth: {
+      get () {
+        return Object.assign({}, this.$store.state.auth.data)
+      },
+      set (val) {
+        this.$store.commit('auth/updateData', val)
+      }
+    }
+  },
+
+  methods: {
+    async sendOffer () {
+      try {
+        if (this.offer === '') throw new Error('No offer text given')
+
+        if (!this.auth.authenticated) {
+          throw new Error('You need to be logged in.')
+        }
+
+        const res = await callApi(
+          '/request/helper',
+          this.auth.token,
+          {
+            offerText: this.offer,
+            id: this.requestId // TODO: is 'id' correct?
+          },
+          'POST'
+        )
+
+        if (res.error) throw new Error('Error while creating request.')
+
+        this.success = true
+
+        // TODO: What todo if created
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
+}
+</script>

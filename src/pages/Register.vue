@@ -146,6 +146,17 @@ export default {
     }
   },
 
+  computed: {
+    auth: {
+      get () {
+        return Object.assign({}, this.$store.state.auth.data)
+      },
+      set (val) {
+        this.$store.commit('auth/updateData', val)
+      }
+    }
+  },
+
   methods: {
     async register () {
       try {
@@ -176,15 +187,15 @@ export default {
         if (!res.token) throw new Error('No token provided.')
 
         // TODO: Fetch User information
-        this.$q.localStorage.set('auth', {
+        this.auth = {
           token: res.token,
-          firstname: '',
-          lastname: '',
-          email: '',
+          firstname: this.firstname,
+          lastname: this.lastname,
+          email: this.mail,
           authenticated: true
-        })
+        }
       } catch (e) {
-        console.log(e)
+        console.error(e)
         this.error = e
       } finally {
         this.loading = false

@@ -12,8 +12,8 @@
         <q-route-tab to="/flyer" label="Flyer" />
         <q-route-tab to="/information" label="Informationen" />
         <q-route-tab to="/contact" label="Kontakt" />
-        <q-btn to="/login" class="login-btn" label="Login" />
       </q-tabs>
+      <ProfileButton/>
     </q-toolbar>
   </q-header>
 </template>
@@ -34,3 +34,11 @@
   background: #ef7d18
   color: white
 </style>
+
+<script>
+import ProfileButton from './ProfileButton'
+
+export default {
+  components: { ProfileButton }
+}
+</script>

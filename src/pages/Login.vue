@@ -114,6 +114,17 @@ export default {
     }
   },
 
+  computed: {
+    auth: {
+      get () {
+        return Object.assign({}, this.$store.state.auth.data)
+      },
+      set (val) {
+        this.$store.commit('auth/updateData', val)
+      }
+    }
+  },
+
   methods: {
     async login () {
       try {
@@ -138,23 +149,24 @@ export default {
 
         const me = await callApi(
           this.$q.localStorage.getItem('server') + 'users/me',
-          this.$q.localStorage.getItem('coronahelp-token').token
+          this.auth.token
         )
 
         if (me.error) throw new Error('Token invalid.')
 
-        this.$q.localStorage.set('auth', {
-          authenticated: true,
-          firstname: me.user.firstName,
-          lastname: me.user.lastName,
-          email: me.user.email,
-          token: res.token
-        })
+        // TODO: Fetch User information
+        this.auth = {
+          token: res.token,
+          firstname: 'FOO',
+          lastname: 'BAR',
+          email: 'foo@bar.eu',
+          authenticated: true
+        }
 
         this.loading = false
-        history.push(history.location.state ? history.location.state.from : '/')
+        // history.push(history.location.state ? history.location.state.from : '/')
       } catch (e) {
-        console.log(e)
+        console.error(e)
         this.error = e
         this.loading = false
       }

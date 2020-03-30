@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // import example from './module-example'
+import auth from './auth'
 
 Vue.use(Vuex)
 
@@ -17,13 +18,21 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      // example
+      auth
     },
 
     // enable strict mode (adds overhead!)
     // for dev mode only
     strict: process.env.DEV
   })
+
+  // HMR magic
+  if (process.env.DEV && module.hot) {
+    module.hot.accept(['./auth'], () => {
+      const newShowcase = require('./auth').default
+      Store.hotUpdate({ modules: { showcase: newShowcase } })
+    })
+  }
 
   return Store
 }
