@@ -12,45 +12,11 @@
       :request="request"
       :onClick="openPopUp"/>
     <article v-if="requests.length === 0">Momentan gibt es keine Gesuche!</article>
-
-    <q-dialog
-      persistent
-      v-model="isDialogOpen"
-    >
-      <q-card style="min-width: 350px">
-<!--        <form className="offer-form">-->
-<!--          <textarea-->
-<!--            required-->
-<!--            placeholder="Nachricht *"-->
-<!--            onChange={ev => setOffer(ev.target.value)}-->
-<!--              value={offer}-->
-<!--              />-->
-<!--          <Button type="button" isPrimary={true} size="small" onClick={sendOffer}>-->
-<!--            Absenden-->
-<!--          </Button>-->
-<!--        </form>-->
-        <q-card-section class="row items-center q-pb-none">
-          <q-space />
-          <q-btn icon="close" flat round dense v-close-popup />
-        </q-card-section>
-        <q-card-section class="q-pt-none">
-          <q-input
-            dense autofocus rounded filled
-            type="textarea"
-            v-model="message"
-            label="Nachricht"
-            @keyup.enter="selectedRequest = undefined"/>
-        </q-card-section>
-
-        <q-card-actions align="right" class="text-primary">
-          <q-btn flat color="secondary" icon="send" v-close-popup/>
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-<!--        <button onClick={closeModal} className="close-modal">-->
-<!--          X-->
-<!--        </button>-->
-<!--        {selectedRequest && <Offer requestId={selectedRequest} />}-->
+    <Offer
+      v-if="true"
+      :isDialogOpen="isDialogOpen"
+      :selectedRequest="selectedRequest"
+    />
     </body>
   </q-page>
 </template>
@@ -124,18 +90,19 @@
 
 <script>
 import Request from '../components/Request'
+import Offer from '../components/Offer'
 // import { callApi } from '../../api/requests'
 
 export default {
   components: {
-    Request
+    Request,
+    Offer
   },
 
   data () {
     return {
       requests: [],
       selectedRequest: undefined,
-      message: '',
       isDialogOpen: false
     }
   },
