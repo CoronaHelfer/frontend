@@ -131,5 +131,9 @@
 
 <script>
 export default {
+  mounted () {
+    const config = require('../assets/config.json')
+    this.$q.localStorage.set('server', config.url)
+  }
 }
 </script>
