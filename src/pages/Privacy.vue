@@ -1075,9 +1075,6 @@
       h6
         font-size: 30px
         margin: 30px 0
-
-      strong
-        color: $secondary
 </style>
 
 <script>

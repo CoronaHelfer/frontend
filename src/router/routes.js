@@ -11,7 +11,8 @@ const routes = [
       { path: 'login', component: () => import('pages/Login.vue') },
       { path: 'register', component: () => import('pages/Register.vue') },
       { path: 'imprint', component: () => import('pages/Imprint.vue') },
-      { path: 'privacy', component: () => import('pages/Privacy.vue') }
+      { path: 'privacy', component: () => import('pages/Privacy.vue') },
+      { path: 'help', component: () => import('pages/Help.vue') }
     ]
   }
 ]
