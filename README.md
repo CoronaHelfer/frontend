@@ -1,6 +1,8 @@
-# Corona Helfer (corona-helfer)
-
-The Quasar frontend for Corona Helfer
+# CoronaHelfer Quasar Frontend
+## Install the Quasar CLI
+```bash
+npm install -g @quasar/cli
+```
 
 ## Install the dependencies
 ```bash
