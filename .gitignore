@@ -34,3 +34,5 @@ yarn-error.log*
 
 # Misc.
 .editorconfig
+
+.now
