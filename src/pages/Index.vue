@@ -30,7 +30,7 @@
           etc.)
         </li>
         <li>CoronaHelfer unterstütz generell Hilfesuchende</li>
-        <li>Coronaviurs-Nachbarschaftshilfe für alle!</li>
+        <li>Coronavirus-Nachbarschaftshilfe für alle!</li>
       </ul>
       <h5>Leitsätze für Coronavirus-Nachbarschaftshilfe</h5>
       <ul>
