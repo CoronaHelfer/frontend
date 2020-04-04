@@ -62,7 +62,7 @@
 
 <style lang="sass" scoped>
   body
-    background: url('../statics/background.jpg') no-repeat
+    background: url('../statics/images/background.jpg') no-repeat
     background-size: cover
 
   .authenticate
