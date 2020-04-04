@@ -1038,7 +1038,7 @@
 <style lang="sass" scoped>
   header
     text-align: center
-    background: url('../statics/background.jpg') no-repeat
+    background: url('../statics/images/background.jpg') no-repeat
     background-size: cover
     padding: 50px
     color: white
