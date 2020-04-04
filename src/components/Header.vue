@@ -6,7 +6,7 @@
           <img class="logo" width="100" src="~assets/CoronaHelfer-Logo.svg" />
         </router-link>
       </q-toolbar-title>
-      <q-tabs v-if="$q.screen.gt.xs" v-model="tab" shrink stretch align="right">
+      <q-tabs v-if="$q.screen.gt.xs" shrink stretch align="right">
         <q-route-tab to="/help" :label="$t('help')" />
         <q-route-tab to="/get-help" :label="$t('getHelp')" />
         <q-route-tab to="/flyer" :label="$t('flyer')" />

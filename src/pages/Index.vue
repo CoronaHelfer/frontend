@@ -1,12 +1,12 @@
 <template>
-  <q-page padding>
+  <q-page>
     <header>
       <h4>Gemeinsam Helfen</h4>
-      <div>
+      <div class="row justify-evenly">
         <router-link to="/get-help">
           <q-btn>Ich brauche Hilfe</q-btn>
         </router-link>
-        <router-link to="/help">
+        <router-link class="q-mt-xs" to="/help">
           <q-btn>Ich möchte helfen</q-btn>
         </router-link>
       </div>
