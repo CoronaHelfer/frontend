@@ -23,26 +23,26 @@
         label="Beschreibung"
         v-model="description"
       ></q-input>
-<!--      <div class="withLabel">-->
-<!--        <label>Bis</label>-->
-<!--        <DatePicker-->
-<!--          selected={enddate}-->
-<!--          onChange={(v: any) => setEnddate(v)}-->
-<!--          dateFormat="dd/MM/yyyy"-->
-<!--          />-->
-<!--      </div>-->
+      <q-input
+        dense rounded outlined
+        v-model="enddate"
+        mask="##/##/####"
+        label="Bis"
+        class="input"
+        :rules="['date']">
+        <template v-slot:append>
+          <q-icon name="event" class="cursor-pointer">
+            <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+              <q-date
+                first-day-of-week="1"
+                v-model="enddate"
+                @input="() => $refs.qDateProxy.hide()"
+                mask="DD-MM-YYYY"></q-date>
+            </q-popup-proxy>
+          </q-icon>
+        </template>
+      </q-input>
 
-<!--      <div class="q-pa-md" style="max-width: 300px">-->
-<!--        <q-input dense outlined v-model="date" mask="date" :rules="['date']">-->
-<!--          <template v-slot:append>-->
-<!--            <q-icon name="event" class="cursor-pointer">-->
-<!--              <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">-->
-<!--                <q-date v-model="date" @input="() => $refs.qDateProxy.hide()" />-->
-<!--              </q-popup-proxy>-->
-<!--            </q-icon>-->
-<!--          </template>-->
-<!--        </q-input>-->
-<!--      </div>-->
       <h3>Adresse</h3>
       <q-input
         dense rounded outlined
@@ -120,7 +120,8 @@ export default {
       zip: '',
       categories: ['Kurierdienste', 'Bildung', 'Warenleistungen', 'Soziales & Gemeinschaft'],
       category: '',
-      isHelpForElse: false
+      isHelpForElse: false,
+      enddate: ''
     }
   },
 
