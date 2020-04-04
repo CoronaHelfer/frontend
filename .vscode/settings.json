@@ -1,24 +1,9 @@
 {
-  "editor.formatOnSave": false,
-  "eslint.enable": false,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": false
+    "source.fixAll": true
   },
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#6778c2",
-    "activityBar.activeBackground": "#6778c2",
-    "activityBar.activeBorder": "#722e3a",
-    "activityBar.foreground": "#e7e7e7",
-    "activityBar.inactiveForeground": "#e7e7e799",
-    "activityBarBadge.background": "#722e3a",
-    "activityBarBadge.foreground": "#e7e7e7",
-    "titleBar.activeBackground": "#475aaf",
-    "titleBar.inactiveBackground": "#475aaf99",
-    "titleBar.activeForeground": "#e7e7e7",
-    "titleBar.inactiveForeground": "#e7e7e799",
-    "statusBar.background": "#475aaf",
-    "statusBarItem.hoverBackground": "#6778c2",
-    "statusBar.foreground": "#e7e7e7"
-  },
-  "peacock.color": "#475aaf"
+  "vetur.format.defaultFormatter.html": "prettyhtml",
+  "vetur.format.defaultFormatter.js": "prettier-eslint"
 }

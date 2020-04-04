@@ -5,9 +5,6 @@
     "esbenp.prettier-vscode",
     // eslint support
     // see https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
-    "dbaeumer.vscode-eslint",
-    // syntax highlighting for css``
-    // see https://marketplace.visualstudio.com/items?itemName=jpoissonnier.vscode-styled-components
-    "jpoissonnier.vscode-styled-components"
+    "dbaeumer.vscode-eslint"
   ]
 }

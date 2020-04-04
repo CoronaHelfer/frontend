@@ -3,5 +3,11 @@
 
 export default {
   failed: 'Action failed',
-  success: 'Action was successful'
+  success: 'Action was successful',
+  wrongLogin: 'Wrong Username or Password',
+  help: 'Help',
+  getHelp: 'Get Help',
+  flyer: 'Flyer',
+  information: 'Information',
+  contact: 'Contact'
 }
