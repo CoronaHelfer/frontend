@@ -6,5 +6,7 @@ export default {
   getHelp: 'Hilfe bekommen',
   flyer: 'Flyer',
   information: 'Information',
-  contact: 'Kontakt'
+  contact: 'Kontakt',
+  noMatchingPassword: 'Passwörter stimmen nicht überein.',
+  missingFields: 'Nicht alle Felder sind ausgefüllt.'
 }
