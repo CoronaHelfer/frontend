@@ -9,5 +9,7 @@ export default {
   getHelp: 'Get Help',
   flyer: 'Flyer',
   information: 'Information',
-  contact: 'Contact'
+  contact: 'Contact',
+  noMatchingPassword: 'Passwords do not match.',
+  missingFields: 'Not all fields are filled.'
 }
