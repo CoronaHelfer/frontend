@@ -103,9 +103,19 @@
 
   .input
     margin: 5px 0
+
+  .error
+    background: RED
+    color: WHITE
+    padding: 10px 25px
+    margin-bottom: 15px
+    border-radius: 19px !important
+    font-size: 13px
 </style>
 
 <script>
+import { callApi } from '../../api/requests'
+
 export default {
   data () {
     return {
@@ -137,7 +147,50 @@ export default {
 
   methods: {
     async send () {
+      try {
+        this.loading = true
+        if (
+          this.title === '' ||
+          this.description === '' ||
+          this.zip === '' ||
+          this.city === '' ||
+          this.street === '' ||
+          this.streetNumber === ''
+        ) {
+          throw new Error('Some fields are empty.')
+        }
 
+        if (!this.auth || !this.auth.authenticated) {
+          throw new Error('You need to be logged in.')
+        }
+
+        const res = await callApi(
+          this.$q.localStorage.getItem('server') + '/request',
+          this.auth.token,
+          {
+            title: this.title,
+            description: this.description,
+            category: this.category,
+            'address.plz': this.zip,
+            'address.city': this.city,
+            'address.street': this.street,
+            'address.street_nr': this.streetNumber,
+            time_end: this.enddate
+          },
+          'POST'
+        )
+
+        if (res.error) {
+          throw new Error('Error while creating request.')
+        }
+
+        this.loading = false
+        history.push('/profile/search')
+      } catch (e) {
+        console.error(e)
+        this.loading = false
+        this.error = 'Anzeige konnte nicht angelegt werden. Eingaben überprüfen.'
+      }
     }
   }
 }
