@@ -160,15 +160,13 @@ export default {
           email: 'foo@bar.eu',
           authenticated: true
         }
-
-        // history.push(history.location.state ? history.location.state.from : '/')
       } catch (e) {
         console.error(e)
         this.error = e
         this.loading = false
       } finally {
         this.loading = false
-        this.$router.push('/')
+        this.$router.go(-1)
       }
     }
   }
