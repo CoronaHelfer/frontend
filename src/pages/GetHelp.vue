@@ -150,6 +150,9 @@ export default {
   },
 
   mounted () {
+    if (!this.auth.authenticated) {
+      this.$router.push('login')
+    }
     this.loadCategories()
   },
 
@@ -180,10 +183,6 @@ export default {
           this.streetNumber === ''
         ) {
           throw new Error('Some fields are empty.')
-        }
-
-        if (!this.auth || !this.auth.authenticated) {
-          throw new Error('You need to be logged in.')
         }
 
         const res = await callApi(
