@@ -75,6 +75,7 @@
     background-color: white
     position: relative
     padding-bottom: 20px
+    min-height: calc(100vh - 340px)
 
     article
       padding-top: 30px
