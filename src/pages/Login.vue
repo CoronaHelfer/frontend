@@ -15,12 +15,12 @@
             <q-btn
               rounded
               :loading="loading"
-              :label="$t('login')"
+              label="Login"
               v-on:click="login()"
             />
             <q-btn
               rounded
-              :label="$t('register')"
+              label="Registrieren"
               @click="$router.push('/register')"
             />
           </form>
@@ -148,39 +148,26 @@ export default {
             body: JSON.stringify(body)
           }
         )
-
         res = await res.json()
-        // console.log(res)
-        if (res.token) {
-          const me = await callApi(
-            this.$q.localStorage.getItem('server') + 'users/me',
-            res.token
-          )
 
-          if (me.error) throw new Error('Token invalid.')
+        if (res.error) throw new Error(res.error)
+        if (!res.token) throw new Error('No token provided.')
 
+        await callApi(
+          this.$q.localStorage.getItem('server') + 'users/me',
+          res.token
+        ).then((resp) => {
           this.auth = {
             token: res.token,
-            firstname: me.user.firstName,
-            lastname: me.user.lastName,
-            email: me.user.email,
-            phoneNumber: me.user.phoneNumber,
-            picture: me.user.picture,
-            createdAt: me.user.created_at,
-            updatedAt: me.user.updated_at,
+            firstname: resp.user.firstName,
+            lastname: resp.user.lastName,
+            email: resp.user.email,
             authenticated: true
           }
-          // console.log(this.auth)
-          this.$router.push('/')
-        } else {
-          // We need another way to log this
-          // if (res.error) throw new Error(res.error)
-          // throw new Error('No token provided.')
-        }
-        // history.push(history.location.state ? history.location.state.from : '/')
+        })
       } catch (e) {
         console.error(e)
-        this.error = this.$t('somethingWentWrong')
+        this.error = e
         this.loading = false
       } finally {
         this.loading = false
