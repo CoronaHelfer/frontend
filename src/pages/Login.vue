@@ -126,6 +126,18 @@ export default {
         if (this.name === '' || this.password === '') {
           this.error = this.$t('wrongLogin')
         }
+
+        let body = {
+          email: this.name,
+          password: this.password
+        }
+        if (this.name.indexOf('@') === -1) {
+          body = {
+            phone: this.name,
+            password: this.password
+          }
+        }
+
         let res = await fetch(
           this.$q.localStorage.getItem('server') + 'auth/login',
           {
@@ -133,10 +145,7 @@ export default {
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-              email: this.name,
-              password: this.password
-            })
+            body: JSON.stringify(body)
           }
         )
 
@@ -168,7 +177,6 @@ export default {
         this.loading = false
       } finally {
         this.loading = false
-        this.$router.push('/')
       }
     }
   }
