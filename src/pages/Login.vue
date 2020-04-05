@@ -99,7 +99,7 @@ body
 import { callApi } from '../../api/requests'
 
 export default {
-  data () {
+  data() {
     return {
       name: '',
       password: '',
@@ -110,17 +110,17 @@ export default {
 
   computed: {
     auth: {
-      get () {
+      get() {
         return Object.assign({}, this.$store.state.auth.data)
       },
-      set (val) {
+      set(val) {
         this.$store.commit('auth/updateData', val)
       }
     }
   },
 
   methods: {
-    async login () {
+    async login() {
       try {
         this.loading = true
         if (this.name === '' || this.password === '') {
@@ -161,12 +161,14 @@ export default {
           authenticated: true
         }
 
-        this.loading = false
         // history.push(history.location.state ? history.location.state.from : '/')
       } catch (e) {
         console.error(e)
         this.error = e
         this.loading = false
+      } finally {
+        this.loading = false
+        this.$router.push('/')
       }
     }
   }
