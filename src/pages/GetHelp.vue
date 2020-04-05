@@ -1,5 +1,5 @@
 <template>
-  <q-page style="justify-content: center; align-items: center; display: flex; padding: 20px;">
+  <q-page style="justify-content: center; align-items: center; display: flex; padding: 20px">
     <q-card style="width: 400px; padding: 15px 30px; border-radius: 25px">
       <div v-if="error" class="error">{{error}}</div>
       <h2>HILFE BEKOMMEN</h2>
@@ -8,7 +8,11 @@
         dense filled
         v-model="category"
         :options="categories"
-        label="Kategorie"></q-select>
+        label="Kategorie"
+        option-value="_id"
+        option-label="name"
+        map-options
+      ></q-select>
       <h3>Details</h3>
       <q-input
         dense filled
@@ -127,7 +131,7 @@ export default {
       streetNumber: '',
       city: '',
       zip: '',
-      categories: ['Kurierdienste', 'Bildung', 'Warenleistungen', 'Soziales & Gemeinschaft'],
+      categories: [],
       category: '',
       isHelpForElse: false,
       enddate: ''
@@ -145,7 +149,25 @@ export default {
     }
   },
 
+  mounted () {
+    this.loadCategories()
+  },
+
   methods: {
+    async loadCategories () {
+      try {
+        let categories = await fetch(this.$q.localStorage.getItem('server') + 'category')
+        categories = await categories.json()
+
+        if (categories.error || !categories.result) throw new Error('Error while fetching categories')
+
+        this.categories = categories.result
+        this.category = categories.result[0]._id
+      } catch (e) {
+        console.error(e)
+      }
+    },
+
     async send () {
       try {
         this.loading = true
