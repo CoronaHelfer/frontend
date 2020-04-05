@@ -5,26 +5,26 @@
       <h2>HILFE BEKOMMEN</h2>
       <h3>Wobei brauchen Sie Hilfe?</h3>
       <q-select
-        rounded outlined dense
+        dense filled
         v-model="category"
         :options="categories"
         label="Kategorie"></q-select>
       <h3>Details</h3>
       <q-input
-        dense rounded outlined
+        dense filled
         class="input"
         label="Titel"
         v-model="title"
       ></q-input>
       <q-input
-        dense rounded outlined
+        dense filled
         class="input"
         type="textarea"
         label="Beschreibung"
         v-model="description"
       ></q-input>
       <q-input
-        dense rounded outlined
+        dense filled
         v-model="enddate"
         mask="##/##/####"
         label="Bis"
@@ -45,26 +45,26 @@
 
       <h3>Adresse</h3>
       <q-input
-        dense rounded outlined
+        dense filled
         class="input"
         label="Straße"
         v-model="street"
       ></q-input>
       <q-input
-        dense rounded outlined
+        dense filled
         class="input"
         type="number"
         label="Nummer"
         v-model="streetNumber"
       ></q-input>
       <q-input
-        dense rounded outlined
+        dense filled
         class="input"
         label="Stadt"
         v-model="city"
       ></q-input>
       <q-input
-        dense rounded outlined
+        dense filled
         class="input"
         type="number"
         label="Postleitzahl"
@@ -73,23 +73,22 @@
       <h3>Hilfe für eine andere Person?</h3>
       <q-btn-toggle
         v-model="isHelpForElse"
-        spread
-        class="my-custom-toggle"
-        no-caps
-        rounded
-        unelevated
-        toggle-color="primary"
-        color="white"
+        spread no-caps unelevated
+        toggle-color="secondary"
+        color="grey-3"
         text-color="primary"
         :options="[
-          {label: 'Option 1', value: 'one'},
-          {label: 'Option 2', value: 'two'}
+          {label: 'Ja', value: true},
+          {label: 'Nein', value: false}
         ]"
       ></q-btn-toggle>
       <q-btn
         rounded
+        color="secondary"
         :loading="loading"
         label="Abschicken"
+        class="full-width"
+        style="margin-top: 15px"
         v-on:click="send()"></q-btn>
     </q-card>
   </q-page>
