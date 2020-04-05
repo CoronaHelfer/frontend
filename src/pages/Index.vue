@@ -2,14 +2,13 @@
   <q-page>
     <header>
       <h4>Gemeinsam Helfen</h4>
-      <div>
-        <q-btn
-          to="/get-help"
-          label="Ich brauche Hilfe"
-          style="margin-right: 30px"></q-btn>
-        <q-btn
-          to="/help"
-          label="Ich möchte helfen"></q-btn>
+      <div class="row justify-evenly">
+        <router-link to="/get-help">
+          <q-btn>Ich brauche Hilfe</q-btn>
+        </router-link>
+        <router-link class="q-mt-xs" to="/help">
+          <q-btn>Ich möchte helfen</q-btn>
+        </router-link>
       </div>
     </header>
 
