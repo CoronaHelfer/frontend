@@ -160,13 +160,13 @@ export default {
           email: 'foo@bar.eu',
           authenticated: true
         }
+        this.$router.go(-1)
       } catch (e) {
         console.error(e)
         this.error = e
         this.loading = false
       } finally {
         this.loading = false
-        this.$router.go(-1)
       }
     }
   }

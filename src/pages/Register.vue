@@ -186,12 +186,12 @@ export default {
           email: this.mail,
           authenticated: true
         }
+        this.$router.go(-2) // Assumes that user came via /login page
       } catch (e) {
         console.error(e)
         this.error = e
       } finally {
         this.loading = false
-        this.$router.go(-2) // Assumes that user came via /login page
       }
     }
   }
