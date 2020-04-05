@@ -186,7 +186,7 @@ export default {
         }
 
         const res = await callApi(
-          this.$q.localStorage.getItem('server') + '/request',
+          this.$q.localStorage.getItem('server') + 'request',
           this.auth.token,
           {
             title: this.title,
