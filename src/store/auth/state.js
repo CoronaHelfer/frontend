@@ -5,6 +5,10 @@ export default function () {
       firstname: '',
       lastname: '',
       email: '',
+      phoneNumber: '',
+      picture: '',
+      createdAt: '',
+      updatedAt: '',
       authenticated: false
     }
   }

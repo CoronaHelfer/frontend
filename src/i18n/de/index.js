@@ -7,6 +7,10 @@ export default {
   flyer: 'Flyer',
   information: 'Information',
   contact: 'Kontakt',
+  register: 'Registrieren',
+  login: 'Login',
   noMatchingPassword: 'Passwörter stimmen nicht überein.',
-  missingFields: 'Nicht alle Felder sind ausgefüllt.'
+  missingFields: 'Nicht alle Felder sind ausgefüllt.',
+  somethingWentWrong:
+    'Irgendwas ist schief gelaufen. Bitte versuche es nochmal!'
 }

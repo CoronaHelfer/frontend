@@ -15,12 +15,12 @@
             <q-btn
               rounded
               :loading="loading"
-              label="Login"
+              :label="$t('login')"
               v-on:click="login()"
             />
             <q-btn
               rounded
-              label="Registrieren"
+              :label="$t('register')"
               @click="$router.push('/register')"
             />
           </form>
@@ -141,34 +141,40 @@ export default {
         )
 
         res = await res.json()
+        // console.log(res)
+        if (res.token) {
+          const me = await callApi(
+            this.$q.localStorage.getItem('server') + 'users/me',
+            res.token
+          )
 
-        if (res.error) throw new Error(res.error)
-        if (!res.token) throw new Error('No token provided.')
+          if (me.error) throw new Error('Token invalid.')
 
-        const me = await callApi(
-          this.$q.localStorage.getItem('server') + 'users/me',
-          this.auth.token
-        )
-
-        if (me.error) throw new Error('Token invalid.')
-
-        // TODO: Fetch User information
-        this.auth = {
-          token: res.token,
-          firstname: 'FOO',
-          lastname: 'BAR',
-          email: 'foo@bar.eu',
-          authenticated: true
+          this.auth = {
+            token: res.token,
+            firstname: me.user.firstName,
+            lastname: me.user.lastName,
+            email: me.user.email,
+            phoneNumber: me.user.phoneNumber,
+            picture: me.user.picture,
+            createdAt: me.user.created_at,
+            updatedAt: me.user.updated_at,
+            authenticated: true
+          }
+          // console.log(this.auth)
+          this.$router.push('/')
+        } else {
+          // We need another way to log this
+          // if (res.error) throw new Error(res.error)
+          // throw new Error('No token provided.')
         }
-
         // history.push(history.location.state ? history.location.state.from : '/')
       } catch (e) {
         console.error(e)
-        this.error = e
+        this.error = this.$t('somethingWentWrong')
         this.loading = false
       } finally {
         this.loading = false
-        this.$router.push('/')
       }
     }
   }
