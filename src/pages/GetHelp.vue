@@ -30,10 +30,8 @@
       <q-input
         dense filled
         v-model="enddate"
-        mask="##.##.####"
         label="Bis"
-        class="input"
-        :rules="['date']">
+        class="input">
         <template v-slot:append>
           <q-icon name="event" class="cursor-pointer">
             <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -41,7 +39,7 @@
                 first-day-of-week="1"
                 v-model="enddate"
                 @input="() => $refs.qDateProxy.hide()"
-                mask="DD-MM-YYYY"></q-date>
+                mask="DD.MM.YYYY"></q-date>
             </q-popup-proxy>
           </q-icon>
         </template>
