@@ -30,7 +30,7 @@
       <q-input
         dense filled
         v-model="enddate"
-        mask="##/##/####"
+        mask="##.##.####"
         label="Bis"
         class="input"
         :rules="['date']">
@@ -185,6 +185,7 @@ export default {
           throw new Error('Some fields are empty.')
         }
 
+        const [day, month, year] = this.enddate.split('.')
         const res = await callApi(
           this.$q.localStorage.getItem('server') + 'request',
           this.auth.token,
@@ -196,7 +197,7 @@ export default {
             'address.city': this.city,
             'address.street': this.street,
             'address.street_nr': this.streetNumber,
-            time_end: this.enddate
+            time_end: month + '/' + day + '/' + year
           },
           'POST'
         )
@@ -206,7 +207,6 @@ export default {
         }
 
         this.loading = false
-        history.push('/profile/search')
       } catch (e) {
         console.error(e)
         this.loading = false
