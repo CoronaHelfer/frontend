@@ -3,7 +3,7 @@
     <q-card style="width: 400px; padding: 15px 30px; border-radius: 25px">
       <div v-if="error" class="error">{{error}}</div>
       <h2>HILFE BEKOMMEN</h2>
-      <h3>Wobei brauchen Sie Hilfe?</h3>
+      <h3>Wobei brauchst du Hilfe?</h3>
       <q-select
         dense filled
         v-model="category"
@@ -30,10 +30,8 @@
       <q-input
         dense filled
         v-model="enddate"
-        mask="##/##/####"
         label="Bis"
-        class="input"
-        :rules="['date']">
+        class="input">
         <template v-slot:append>
           <q-icon name="event" class="cursor-pointer">
             <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -41,7 +39,7 @@
                 first-day-of-week="1"
                 v-model="enddate"
                 @input="() => $refs.qDateProxy.hide()"
-                mask="DD-MM-YYYY"></q-date>
+                mask="DD.MM.YYYY"></q-date>
             </q-popup-proxy>
           </q-icon>
         </template>
@@ -185,8 +183,9 @@ export default {
           throw new Error('Some fields are empty.')
         }
 
+        const [day, month, year] = this.enddate.split('.')
         const res = await callApi(
-          this.$q.localStorage.getItem('server') + '/request',
+          this.$q.localStorage.getItem('server') + 'request',
           this.auth.token,
           {
             title: this.title,
@@ -196,7 +195,7 @@ export default {
             'address.city': this.city,
             'address.street': this.street,
             'address.street_nr': this.streetNumber,
-            time_end: this.enddate
+            time_end: month + '/' + day + '/' + year
           },
           'POST'
         )
@@ -206,7 +205,7 @@ export default {
         }
 
         this.loading = false
-        history.push('/profile/search')
+        this.$router.push('/')
       } catch (e) {
         console.error(e)
         this.loading = false

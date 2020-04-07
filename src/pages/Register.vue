@@ -28,6 +28,7 @@
               v-model="passwordRepeat"
             />
 
+            <p>Mit der Registrierung akzeptierst du unsere <router-link to="/privacy">Datenschutzerklärung</router-link>.</p>
             <q-btn
               rounded
               :loading="loading"
@@ -98,7 +99,6 @@ body
         font-size: 15px
         font-weight: 600
         margin-top: 15px
-    .register
       .aligner
         display: flex
         margin-bottom: 10px
@@ -186,12 +186,12 @@ export default {
           email: this.mail,
           authenticated: true
         }
+        this.$router.go(-2) // Assumes that user came via /login page
       } catch (e) {
         console.error(e)
         this.error = e
       } finally {
         this.loading = false
-        this.$router.push('/')
       }
     }
   }
