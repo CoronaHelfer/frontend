@@ -62,6 +62,7 @@ export function logout(state) {
 export function verify(state, token) {
   return axiosInstance.get(VERIFICATION_ROUTE + '?token=' + token)
 }
+
 export function passwordForgot(state, data) {
   return axiosInstance.post(PASSWORD_FORGOT_ROUTE, data)
 }
