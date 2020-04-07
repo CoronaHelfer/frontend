@@ -10,6 +10,9 @@ export default {
   flyer: 'Flyer',
   information: 'Information',
   contact: 'Contact',
+  register: 'Register',
+  login: 'Login',
   noMatchingPassword: 'Passwords do not match.',
-  missingFields: 'Not all fields are filled.'
+  missingFields: 'Not all fields are filled.',
+  somethingWentWrong: 'Something went wrong. Please try again.'
 }

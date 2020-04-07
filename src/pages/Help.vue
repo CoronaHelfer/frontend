@@ -75,6 +75,7 @@
     background-color: white
     position: relative
     padding-bottom: 20px
+    min-height: calc(100vh - 340px)
 
     article
       padding-top: 30px
@@ -91,7 +92,7 @@
 <script>
 import Request from '../components/Request'
 import Offer from '../components/Offer'
-// import { callApi } from '../../api/requests'
+import { callApi } from '../../api/requests'
 
 export default {
   components: {
@@ -119,37 +120,20 @@ export default {
   },
 
   mounted () {
+    if (!this.auth.authenticated) {
+      this.$router.push('login')
+    }
     this.fetchRequests()
   },
 
   methods: {
     async fetchRequests () {
       try {
-        // await callApi(
-        //   this.$q.localStorage.getItem('server') + 'request',
-        //   this.auth.token,
-        //   {
-        //     title: 'Kuchen für meinen Enkel',
-        //     description: 'Ich traue mich nicht das Haus zu verlassen. Mein Enkel soll aber seinen Kuchen bekommen. Kann ihn jemand vorbei bringen? Er wohnt auch nur 5 Minuten entfernt.',
-        //     category: '5e760820c8a4b63ee0c4cfba',
-        //     'address.plz': '68199',
-        //     'address.city': 'Mannheim',
-        //     'address.street': 'Paul-Wittsack-Straße',
-        //     'address.street_nr': '3',
-        //     enddate: '2020-03-21T16:26:49.472Z'
-        //   },
-        //   'POST'
-        // )
-        // const result = await callApi(
-        //   this.$q.localStorage.getItem('server') + 'publicRequest',
-        //   this.auth.token
-        // )
-        // this.requests = result.result
-        this.requests = [
-          { title: 'help1', description: 'I need help', distance: '100m', category: { name: 'Kurierdienst' } },
-          { title: 'help2', description: 'I need more help', distance: '100m', category: { name: 'Kurierdienst' } },
-          { title: 'help3', description: 'I need even more help', distance: '100m', category: { name: 'Kurierdienst' } }
-        ]
+        const result = await callApi(
+          this.$q.localStorage.getItem('server') + 'request',
+          this.auth.token
+        )
+        this.requests = result.result
       } catch (err) {
         console.error(err)
       }

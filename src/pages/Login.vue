@@ -148,27 +148,24 @@ export default {
             body: JSON.stringify(body)
           }
         )
-
         res = await res.json()
 
         if (res.error) throw new Error(res.error)
         if (!res.token) throw new Error('No token provided.')
 
-        const me = await callApi(
+        await callApi(
           this.$q.localStorage.getItem('server') + 'users/me',
-          this.auth.token
-        )
-
-        if (me.error) throw new Error('Token invalid.')
-
-        // TODO: Fetch User information
-        this.auth = {
-          token: res.token,
-          firstname: 'FOO',
-          lastname: 'BAR',
-          email: 'foo@bar.eu',
-          authenticated: true
-        }
+          res.token
+        ).then((resp) => {
+          this.auth = {
+            token: res.token,
+            firstname: resp.user.firstName,
+            lastname: resp.user.lastName,
+            email: resp.user.email,
+            authenticated: true
+          }
+        })
+        
         this.$router.go(-1)
       } catch (e) {
         console.error(e)
