@@ -148,10 +148,11 @@ export default {
   },
 
   mounted () {
-    if (!this.auth.authenticated) {
+    if (this.auth.authenticated) {
+      this.loadCategories()
+    } else {
       this.$router.push('login')
     }
-    this.loadCategories()
   },
 
   methods: {

@@ -139,15 +139,7 @@ body
 <script>
 export default {
   mounted() {
-    if (this.auth === undefined) {
-      this.auth = {
-        token: '',
-        firstname: '',
-        lastname: '',
-        email: '',
-        authenticated: false
-      }
-
+    if (this.$q.localStorage.getItem('server') === undefined) {
       const config = require('../assets/config.json')
       this.$q.localStorage.set('server', config.url)
     }
