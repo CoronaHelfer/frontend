@@ -41,7 +41,7 @@
       </q-card-section>
       <q-card-section class="q-pt-none">
         <q-input
-          dense autofocus rounded filled
+          dense autofocus filled
           type="textarea"
           v-model="offer"
           label="Nachricht"
