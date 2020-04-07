@@ -14,22 +14,22 @@
       <!--TODO: redirect to /profile/requests once this page exists -->
     </q-card>
 
-    <q-card
-      v-else-if="!auth.authenticated"
-      class="card">
-      <q-card-section class="column items-center q-pb-none">
-        <h2>DANKE, DASS DU HELFEN WILLST</h2>
-        <p>Um zu antworten, musst du angemeldet sein.</p>
-      </q-card-section>
-      <q-card-actions align="center">
-        <q-btn
-          rounded
-          to="login"
-          color="secondary"
-          label="Zum Login"
-          style="width: 100%"></q-btn>
-      </q-card-actions>
-    </q-card>
+<!--    <q-card-->
+<!--      v-else-if="!auth.authenticated"-->
+<!--      class="card">-->
+<!--      <q-card-section class="column items-center q-pb-none">-->
+<!--        <h2>DANKE, DASS DU HELFEN WILLST</h2>-->
+<!--        <p>Um zu antworten, musst du angemeldet sein.</p>-->
+<!--      </q-card-section>-->
+<!--      <q-card-actions align="center">-->
+<!--        <q-btn-->
+<!--          rounded-->
+<!--          to="login"-->
+<!--          color="secondary"-->
+<!--          label="Zum Login"-->
+<!--          style="width: 100%"></q-btn>-->
+<!--      </q-card-actions>-->
+<!--    </q-card>-->
 
     <q-card
       v-else
