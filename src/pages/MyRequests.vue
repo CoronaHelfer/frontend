@@ -10,7 +10,7 @@
         v-bind:key="request._id"
         :user="{ firstName: 'Anonym', image: undefined }"
         :request="request"/>
-      <article v-if="requests.length === 0">Momentan gibt es keine Gesuche!</article>
+      <article v-if="ownRequests.length === 0">Du hast noch keine Anzeigen erstellt.</article>
     </body>
   </q-page>
 </template>
