@@ -6,7 +6,7 @@
 
     <body>
       <Request
-        v-for="request in requests"
+        v-for="request in ownRequests"
         v-bind:key="request._id"
         :user="{ firstName: 'Anonym', image: undefined }"
         :request="request"/>
@@ -99,6 +99,12 @@ export default {
       set (val) {
         this.$store.commit('auth/updateData', val)
       }
+    },
+
+    ownRequests: function () {
+      return this.requests.filter(function (request) {
+        return request.created_by === this.auth.id
+      }, this)
     }
   },
 
@@ -106,19 +112,17 @@ export default {
     if (!this.auth.authenticated) {
       this.$router.push('login')
     }
-    this.fetchAndFilterRequests()
+    this.fetchRequests()
   },
 
   methods: {
-    async fetchAndFilterRequests () {
+    async fetchRequests () {
       try {
         const result = await callApi( // TODO: deduplicate this function
           this.$q.localStorage.getItem('server') + 'request',
           this.auth.token
         )
-        this.requests = result.result.filter(function (request) {
-          return request.created_by === this.auth.id
-        }, this)
+        this.requests = result.result
       } catch (err) {
         console.error(err)
       }
