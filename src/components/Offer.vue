@@ -7,10 +7,11 @@
         <p>Du wirst bestimmt bald kontaktiert!</p>
         <q-btn
           rounded
-          to="/profile/requests"
+          to="/"
           color="secondary"
           label="Anfragen zeigen"
           style="width: 100%"></q-btn>
+      <!--TODO: redirect to /profile/requests once this page exists -->
     </q-card>
 
     <q-card
@@ -52,7 +53,6 @@
           flat
           color="secondary"
           icon="send"
-          v-close-popup
           v-on:click="sendOffer"></q-btn>
       </q-card-actions>
     </q-card>
@@ -60,12 +60,13 @@
 </template>
 
 <style lang="sass" scoped>
-  .card
-    border-radius: 10px
-    padding: 20px
-    h2
-      font-size: 1.5em
-      margin: 10px 0
+.card
+  border-radius: 10px
+  padding: 20px
+
+  h2
+    font-size: 1.5em
+    margin: 10px 0
 </style>
 
 <script>
@@ -74,7 +75,7 @@ import { callApi } from '../../api/requests'
 export default {
   props: {
     isDialogOpen: Boolean,
-    requestId: Number
+    requestId: String
   },
 
   data () {
@@ -105,11 +106,11 @@ export default {
         }
 
         const res = await callApi(
-          '/request/helper',
+          this.$q.localStorage.getItem('server') + 'request/helper',
           this.auth.token,
           {
             offerText: this.offer,
-            id: this.requestId // TODO: is 'id' correct?
+            requestId: this.requestId
           },
           'POST'
         )
