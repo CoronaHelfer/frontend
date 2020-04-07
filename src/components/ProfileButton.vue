@@ -114,6 +114,7 @@ export default {
         updatedAt: '',
         authenticated: false
       }
+      this.$q.sessionStorage.clear()
       this.$router.push('/login')
     }
   }

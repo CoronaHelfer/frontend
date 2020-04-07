@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 // import example from './module-example'
 import auth from './auth'
@@ -23,16 +24,12 @@ export default function (/* { ssrContext } */) {
 
     // enable strict mode (adds overhead!)
     // for dev mode only
-    strict: process.env.DEV
-  })
+    strict: process.env.DEV,
 
-  // HMR magic
-  if (process.env.DEV && module.hot) {
-    module.hot.accept(['./auth'], () => {
-      const newShowcase = require('./auth').default
-      Store.hotUpdate({ modules: { showcase: newShowcase } })
-    })
-  }
+    plugins: [createPersistedState({
+      storage: window.sessionStorage
+    })]
+  })
 
   return Store
 }
