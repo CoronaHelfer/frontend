@@ -28,6 +28,7 @@
               v-model="passwordRepeat"
             />
 
+            <p>Mit der Registrierung akzeptierst du unsere <router-link to="/privacy">Datenschutzerklärung</router-link>.</p>
             <q-btn
               rounded
               :loading="loading"
@@ -98,7 +99,6 @@ body
         font-size: 15px
         font-weight: 600
         margin-top: 15px
-    .register
       .aligner
         display: flex
         margin-bottom: 10px

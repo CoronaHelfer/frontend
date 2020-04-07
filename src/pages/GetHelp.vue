@@ -3,7 +3,7 @@
     <q-card style="width: 400px; padding: 15px 30px; border-radius: 25px">
       <div v-if="error" class="error">{{error}}</div>
       <h2>HILFE BEKOMMEN</h2>
-      <h3>Wobei brauchen Sie Hilfe?</h3>
+      <h3>Wobei brauchst du Hilfe?</h3>
       <q-select
         dense filled
         v-model="category"
