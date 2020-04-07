@@ -120,10 +120,11 @@ export default {
   },
 
   mounted () {
-    if (!this.auth.authenticated) {
+    if (this.auth.authenticated) {
+      this.fetchRequests()
+    } else {
       this.$router.push('login')
     }
-    this.fetchRequests()
   },
 
   methods: {
