@@ -114,7 +114,7 @@ export default {
         updatedAt: '',
         authenticated: false
       }
-      this.$router.push('/login')
+      this.$router.push('login')
     }
   }
 }

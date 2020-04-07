@@ -205,7 +205,7 @@ export default {
         }
 
         this.loading = false
-        this.$router.push('/')
+        this.$router.push('profile/requests')
       } catch (e) {
         console.error(e)
         this.loading = false
