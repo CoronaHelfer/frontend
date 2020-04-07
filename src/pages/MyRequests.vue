@@ -5,10 +5,9 @@
     </header>
 
     <body>
-      <Request
+      <MyRequest
         v-for="request in ownRequests"
         v-bind:key="request._id"
-        :user="{ firstName: 'Anonym', image: undefined }"
         :request="request"/>
       <article v-if="ownRequests.length === 0">Du hast noch keine Anzeigen erstellt.</article>
     </body>
@@ -77,12 +76,12 @@ body
 </style>
 
 <script>
-import Request from '../components/Request'
 import { callApi } from '../../api/requests'
+import MyRequest from '../components/MyRequest'
 
 export default {
   components: {
-    Request
+    MyRequest
   },
 
   data () {
