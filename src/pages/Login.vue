@@ -124,7 +124,7 @@ export default {
       try {
         this.loading = true
         if (this.name === '' || this.password === '') {
-          this.error = this.$t('wrongLogin')
+          throw new Error(this.$t('wrongLogin'))
         }
 
         let body = {
@@ -150,8 +150,13 @@ export default {
         )
         res = await res.json()
 
-        if (res.error) throw new Error(res.error)
-        if (!res.token) throw new Error('No token provided.')
+        if (res.error) {
+          console.error(res.error)
+          throw new Error(this.$t('somethingWentWrong'))
+        } else if (!res.token) {
+          console.error('No token provided.')
+          throw new Error(this.$t('somethingWentWrong'))
+        }
 
         await callApi(
           this.$q.localStorage.getItem('server') + 'users/me',
@@ -167,7 +172,6 @@ export default {
         })
         this.$router.go(-1)
       } catch (e) {
-        console.error(e)
         this.error = e
         this.loading = false
       } finally {

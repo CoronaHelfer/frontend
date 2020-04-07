@@ -161,12 +161,15 @@ export default {
         let categories = await fetch(this.$q.localStorage.getItem('server') + 'category')
         categories = await categories.json()
 
-        if (categories.error || !categories.result) throw new Error('Error while fetching categories')
+        if (categories.error || !categories.result) {
+          console.error('Error while fetching categories')
+          throw new Error(this.$t('somethingWentWrong'))
+        }
 
         this.categories = categories.result
         this.category = categories.result[0]._id
       } catch (e) {
-        console.error(e)
+        this.error = e
       }
     },
 
@@ -181,7 +184,7 @@ export default {
           this.street === '' ||
           this.streetNumber === ''
         ) {
-          throw new Error('Some fields are empty.')
+          throw new Error(this.$t('missingFields'))
         }
 
         const [day, month, year] = this.enddate.split('.')
@@ -202,15 +205,15 @@ export default {
         )
 
         if (res.error) {
-          throw new Error('Error while creating request.')
+          console.error('Error while creating request.')
+          throw new Error(this.$t('somethingWentWrong'))
         }
 
         this.loading = false
         this.$router.push('/')
       } catch (e) {
-        console.error(e)
         this.loading = false
-        this.error = 'Anzeige konnte nicht angelegt werden. Eingaben überprüfen.'
+        this.error = e
       }
     }
   }

@@ -99,11 +99,7 @@ export default {
   methods: {
     async sendOffer () {
       try {
-        if (this.offer === '') throw new Error('No offer text given')
-
-        if (!this.auth.authenticated) {
-          throw new Error('You need to be logged in.')
-        }
+        if (this.offer === '') throw new Error(this.$t('emptyField'))
 
         const res = await callApi(
           this.$q.localStorage.getItem('server') + 'request/helper',
@@ -115,11 +111,9 @@ export default {
           'POST'
         )
 
-        if (res.error) throw new Error('Error while creating request.')
+        if (res.error) throw new Error(this.$t('somethingWentWrong'))
 
         this.success = true
-
-        // TODO: What todo if created
       } catch (e) {
         console.error(e)
       }
