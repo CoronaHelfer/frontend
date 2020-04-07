@@ -6,8 +6,8 @@
 
     <body>
     <Request
-      v-for="(request, idx) in requests"
-      v-bind:key="idx"
+      v-for="request in requests"
+      v-bind:key="request._id"
       :user="{ firstName: 'Anonym', image: undefined }"
       :request="request"
       :onClick="openPopUp"/>
@@ -15,7 +15,7 @@
     <Offer
       v-if="true"
       :isDialogOpen="isDialogOpen"
-      :selectedRequest="selectedRequest"
+      :requestId="selectedRequest"
     />
     </body>
   </q-page>
@@ -139,8 +139,8 @@ export default {
       }
     },
 
-    openPopUp (idx) {
-      this.selectedRequest = idx
+    openPopUp (requestId) {
+      this.selectedRequest = requestId
       this.isDialogOpen = true
     }
   }

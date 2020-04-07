@@ -165,7 +165,6 @@ export default {
             authenticated: true
           }
         })
-        
         this.$router.go(-1)
       } catch (e) {
         console.error(e)
