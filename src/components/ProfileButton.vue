@@ -58,8 +58,8 @@
     flex-direction: column
     top: 0
     right: 0
-    margin-top: 100px
-    margin-right: 80px
+    margin-top: 80px
+    margin-right: 15px
     display: flex
     padding: 3px 3px
     border-radius: 20px
