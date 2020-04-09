@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <header>
-      <h1>Meine Anzeigen</h1>
+      <h1>{{$t('myRequests')}}</h1>
     </header>
 
     <body>
@@ -9,7 +9,7 @@
         v-for="request in ownRequests"
         v-bind:key="request._id"
         :request="request"/>
-      <article v-if="ownRequests.length === 0">Du hast noch keine Anzeigen erstellt.</article>
+      <article v-if="ownRequests.length === 0">{{$t('noRequestsCreated')}}</article>
     </body>
   </q-page>
 </template>

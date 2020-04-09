@@ -4,10 +4,10 @@
       <h2>{{request.title}}</h2>
     </header>
     <p>
-      <strong>Kategorie:</strong> {{request.category.name}}
+      <strong>{{$t('category')}}:</strong> {{request.category.name}}
     </p>
     <p>
-      <strong>Gesuch:</strong> {{request.description}}
+      <strong>{{$t('request')}}:</strong> {{request.description}}
     </p>
   </article>
 </template>

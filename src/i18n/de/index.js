@@ -12,5 +12,9 @@ export default {
   noMatchingPassword: 'Passwörter stimmen nicht überein.',
   missingFields: 'Nicht alle Felder sind ausgefüllt.',
   somethingWentWrong:
-    'Irgendwas ist schief gelaufen. Bitte versuche es nochmal!'
+    'Irgendwas ist schief gelaufen. Bitte versuche es nochmal!',
+  category: 'Kategorie',
+  request: 'Gesuch',
+  myRequests: 'Meine Anzeigen',
+  noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.'
 }
