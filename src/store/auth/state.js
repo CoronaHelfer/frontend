@@ -9,6 +9,7 @@ export default function () {
       picture: '',
       createdAt: '',
       updatedAt: '',
+      id: '',
       authenticated: false
     }
   }

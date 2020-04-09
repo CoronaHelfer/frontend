@@ -32,11 +32,6 @@
 
 <style lang="sass" scoped>
   .request
-    h2
-      color: $secondary
-      margin: 0
-      flex-shrink: 1
-
     header
       align-items: center
       display: flex

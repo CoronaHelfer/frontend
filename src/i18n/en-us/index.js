@@ -15,5 +15,9 @@ export default {
   noMatchingPassword: 'Passwords do not match.',
   emptyField: 'The field is empty.',
   missingFields: 'Not all fields are filled.',
-  somethingWentWrong: 'Something went wrong. Please check the input and try again.'
+  somethingWentWrong: 'Something went wrong. Please try again.',
+  category: 'Category',
+  request: 'request',
+  myRequests: 'My Requests',
+  noRequestsCreated: 'You have not created requests yet.'
 }

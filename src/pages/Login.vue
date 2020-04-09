@@ -167,6 +167,7 @@ export default {
             firstname: resp.user.firstName,
             lastname: resp.user.lastName,
             email: resp.user.email,
+            id: resp.user._id,
             authenticated: true
           }
         })
