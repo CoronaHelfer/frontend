@@ -63,10 +63,6 @@
 .card
   border-radius: 10px
   padding: 20px
-
-  h2
-    font-size: 1.5em
-    margin: 10px 0
 </style>
 
 <script>

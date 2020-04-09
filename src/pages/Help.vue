@@ -13,7 +13,6 @@
       :onClick="openPopUp"/>
     <article v-if="foreignRequests.length === 0">Momentan gibt es keine Gesuche!</article>
     <Offer
-      v-if="true"
       :isDialogOpen="isDialogOpen"
       :requestId="selectedRequest"
     />
@@ -120,7 +119,7 @@ export default {
 
     foreignRequests: function () {
       return this.requests.filter(function (request) {
-        return request.created_by !== this.auth.id
+        return true// request.created_by !== this.auth.id
       }, this)
     }
   },

@@ -61,12 +61,6 @@ body
     padding-top: 30px
     margin: 20px auto 0
     max-width: 800px
-
-    h2
-      color: $secondary
-      text-transform: uppercase
-      font-weight: 600
-      margin: 20px 0
 </style>
 
 <script>

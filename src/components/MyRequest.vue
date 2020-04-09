@@ -13,11 +13,6 @@
 </template>
 
 <style lang="sass" scoped>
-h2
-  color: $secondary
-  margin: 0
-  flex-shrink: 1
-
 header
   align-items: center
   display: flex
