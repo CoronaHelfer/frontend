@@ -10,6 +10,7 @@ export default {
   register: 'Registrieren',
   login: 'Login',
   noMatchingPassword: 'Passwörter stimmen nicht überein.',
+  emptyField: 'Das Feld ist nicht ausgefüllt.',
   missingFields: 'Nicht alle Felder sind ausgefüllt.',
   somethingWentWrong:
     'Irgendwas ist schief gelaufen. Bitte versuche es nochmal!',

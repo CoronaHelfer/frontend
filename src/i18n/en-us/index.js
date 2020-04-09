@@ -13,6 +13,7 @@ export default {
   register: 'Register',
   login: 'Login',
   noMatchingPassword: 'Passwords do not match.',
+  emptyField: 'The field is empty.',
   missingFields: 'Not all fields are filled.',
   somethingWentWrong: 'Something went wrong. Please try again.',
   category: 'Category',

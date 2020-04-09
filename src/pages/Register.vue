@@ -174,9 +174,13 @@ export default {
 
         res = await res.json()
 
-        // We need a logger to throw this error
-        // if (res.error) throw new Error(res.error)
-        // if (!res.token) throw new Error('No token provided.')
+        if (res.error) {
+          console.error(res.error)
+          throw new Error(this.$t('somethingWentWrong'))
+        } else if (!res.token) {
+          console.error('No token provided.')
+          throw new Error(this.$t('somethingWentWrong'))
+        }
 
         // TODO: Fetch User information
         this.auth = {
@@ -188,7 +192,6 @@ export default {
         }
         this.$router.go(-2) // Assumes that user came via /login page
       } catch (e) {
-        console.error(e)
         this.error = e
       } finally {
         this.loading = false
