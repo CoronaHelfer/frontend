@@ -10,6 +10,7 @@
         <q-route-tab to="/help" :label="$t('help')" />
         <q-route-tab to="/get-help" :label="$t('getHelp')" />
         <q-route-tab to="/information" :label="$t('information')" />
+        <q-route-tab to="/jobs" :label="$t('jobs')" />
       </q-tabs>
       <q-btn v-else flat dense round aria-label="Menu" icon="menu">
         <q-menu transition-show="jump-down" transition-hide="jump-up">
@@ -23,6 +24,9 @@
             <q-separator />
             <q-item to="/information" clickable>
               <q-item-section>{{ $t('information') }}</q-item-section>
+            </q-item>
+            <q-item to="/jobs" clickable>
+              <q-item-section>{{ $t('jobs') }}</q-item-section>
             </q-item>
           </q-list>
         </q-menu>

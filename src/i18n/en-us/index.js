@@ -8,6 +8,7 @@ export default {
   help: 'Help',
   getHelp: 'Get Help',
   information: 'Information',
+  jobs: 'Jobs',
   profile: 'Profile',
   register: 'Register',
   login: 'Login',

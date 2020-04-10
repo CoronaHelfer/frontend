@@ -5,6 +5,7 @@ export default {
   help: 'Helfen',
   getHelp: 'Hilfe bekommen',
   information: 'Information',
+  jobs: 'Jobs',
   profile: 'Profil',
   register: 'Registrieren',
   login: 'Login',
