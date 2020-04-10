@@ -21,7 +21,7 @@
       <button class="primary" v-on:click="onClick($vnode.key)">Helfen
       </button>
     </header>
-    <p>
+    <p v-if="request.category">
       <strong>Kategorie:</strong> {{request.category.name}}
     </p>
     <p>
