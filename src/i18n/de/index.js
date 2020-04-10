@@ -15,5 +15,7 @@ export default {
   category: 'Kategorie',
   request: 'Gesuch',
   myRequests: 'Meine Anzeigen',
-  noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.'
+  noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.',
+  imprint: 'Impressum',
+  privacy: 'Datenschutz'
 }
