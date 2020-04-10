@@ -4,12 +4,12 @@
       <div class="authenticate">
         <div class="container">
           <form class="register">
-            <div v-show="error !== ''" class="error">{{ error }}</div>
+            <div v-show="error !== ''" class="error">{{error}}</div>
             <div class="aligner">
               <div class="left">
-                <div class="avatar" />
+                <div class="avatar"/>
               </div>
-              <div class="right">
+              <div>
                 <input type="text" placeholder="Vorname" v-model="firstname" />
                 <input type="text" placeholder="Nachname" v-model="lastname" />
               </div>
@@ -186,7 +186,7 @@ export default {
 
         await callApi(
           this.$q.localStorage.getItem('server') + 'users/me',
-          this.auth.token
+          res.token
         ).then((resp) => {
           this.auth = {
             token: res.token,

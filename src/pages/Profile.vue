@@ -7,10 +7,17 @@
     <body>
       <article>
         <h2>Willkommen {{auth.firstname}} {{auth.lastname}}</h2>
-        <p>{{auth.firstname}} {{auth.lastname}}</p>
-        <p>{{auth.street}} {{auth.streetNumber}}</p>
-        <p>{{auth.zip}} {{auth.city}}</p>
-        <p>{{auth.phone}}</p>
+        <div class="row">
+          <div class="col-2">
+            <q-avatar color="grey-3" text-color="white" size="100px">{{auth.firstname[0]}}</q-avatar>
+          </div>
+          <div class="col">
+            <p>{{auth.firstname}} {{auth.lastname}}</p>
+            <p>{{auth.street}} {{auth.streetNumber}}</p>
+            <p>{{auth.zip}} {{auth.city}}</p>
+            <p>{{auth.phone}}</p>
+          </div>
+        </div>
 
         <div v-if="error !== ''" class="error">{{error}}</div>
 
@@ -147,6 +154,9 @@ body
   margin-bottom: 15px
   border-radius: 19px
   font-size: 13px
+
+h2
+  text-transform: none
 </style>
 
 <script>
