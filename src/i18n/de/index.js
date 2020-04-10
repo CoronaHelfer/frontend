@@ -5,6 +5,7 @@ export default {
   help: 'Helfen',
   getHelp: 'Hilfe bekommen',
   information: 'Information',
+  profile: 'Profil',
   register: 'Registrieren',
   login: 'Login',
   noMatchingPassword: 'Passwörter stimmen nicht überein.',
@@ -17,5 +18,10 @@ export default {
   myRequests: 'Meine Anzeigen',
   noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.',
   imprint: 'Impressum',
-  privacy: 'Datenschutz'
+  privacy: 'Datenschutz',
+  notImplemented:
+    'Entschuldigung, diese Funktion ist leider noch nicht verfügbar.',
+  supportTogether: 'Gemeinsam Helfen',
+  needHelp: 'Ich brauche Hilfe',
+  wantHelp: 'Ich möchte helfen'
 }
