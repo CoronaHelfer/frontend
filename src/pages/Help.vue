@@ -128,7 +128,7 @@ export default {
     if (this.auth.authenticated) {
       this.fetchRequests()
     } else {
-      this.$router.push('login')
+      this.$router.push('/login')
     }
   },
 

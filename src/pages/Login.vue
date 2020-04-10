@@ -21,7 +21,7 @@
             <q-btn
               rounded
               label="Registrieren"
-              @click="$router.push('/register')"
+              to="/register"
             />
           </form>
         </div>

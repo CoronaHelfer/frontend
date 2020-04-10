@@ -151,7 +151,7 @@ export default {
     if (this.auth.authenticated) {
       this.loadCategories()
     } else {
-      this.$router.push('login')
+      this.$router.push('/login')
     }
   },
 
@@ -210,7 +210,7 @@ export default {
         }
 
         this.loading = false
-        this.$router.push('profile/requests')
+        this.$router.push('/profile/requests')
       } catch (e) {
         this.loading = false
         this.error = e

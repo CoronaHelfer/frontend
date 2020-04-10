@@ -7,11 +7,10 @@
         <p>Du wirst bestimmt bald kontaktiert!</p>
         <q-btn
           rounded
-          to="/"
+          to="/profile/requests"
           color="secondary"
           label="Anfragen zeigen"
           style="width: 100%"></q-btn>
-      <!--TODO: redirect to /profile/requests once this page exists -->
     </q-card>
 
 <!--    <q-card-->
@@ -24,7 +23,7 @@
 <!--      <q-card-actions align="center">-->
 <!--        <q-btn-->
 <!--          rounded-->
-<!--          to="login"-->
+<!--          to="/login"-->
 <!--          color="secondary"-->
 <!--          label="Zum Login"-->
 <!--          style="width: 100%"></q-btn>-->
