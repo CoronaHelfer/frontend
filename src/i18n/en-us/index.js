@@ -1,6 +1,3 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
   failed: 'Action failed',
   success: 'Action was successful',
@@ -27,5 +24,11 @@ export default {
   request: 'request',
   myRequests: 'My Requests',
   noRequestsCreated: 'You have not created requests yet.',
-  notImplemented: 'This feature is not available yet. We apologize for this inconvenience.'
+  imprint: 'Imprint',
+  privacy: 'Privacy',
+  notImplemented:
+    'This feature is not available yet. We apologize for this inconvenience.',
+  supportTogether: 'support together',
+  needHelp: 'I need help',
+  wantHelp: 'I want to help'
 }

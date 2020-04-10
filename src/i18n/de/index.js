@@ -25,5 +25,11 @@ export default {
   request: 'Gesuch',
   myRequests: 'Meine Anzeigen',
   noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.',
-  notImplemented: 'Entschuldigung, diese Funktion ist leider noch nicht verfügbar.'
+  imprint: 'Impressum',
+  privacy: 'Datenschutz',
+  notImplemented:
+    'Entschuldigung, diese Funktion ist leider noch nicht verfügbar.',
+  supportTogether: 'Gemeinsam Helfen',
+  needHelp: 'Ich brauche Hilfe',
+  wantHelp: 'Ich möchte helfen'
 }
