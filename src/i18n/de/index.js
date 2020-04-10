@@ -5,6 +5,7 @@ export default {
   help: 'Helfen',
   getHelp: 'Hilfe bekommen',
   information: 'Information',
+  profile: 'Profil',
   register: 'Registrieren',
   login: 'Login',
   noMatchingPassword: 'Passwörter stimmen nicht überein.',
@@ -15,5 +16,6 @@ export default {
   category: 'Kategorie',
   request: 'Gesuch',
   myRequests: 'Meine Anzeigen',
-  noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.'
+  noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.',
+  notImplemented: 'Entschuldigung, diese Funktion ist leider noch nicht verfügbar.'
 }

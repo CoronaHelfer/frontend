@@ -4,12 +4,12 @@
       <div class="authenticate">
         <div class="container">
           <form class="register">
-            <div v-show="error != ''" class="error">{{ error }}</div>
+            <div v-show="error !== ''" class="error">{{error}}</div>
             <div class="aligner">
               <div class="left">
-                <div class="avatar" />
+                <div class="avatar"/>
               </div>
-              <div class="right">
+              <div>
                 <input type="text" placeholder="Vorname" v-model="firstname" />
                 <input type="text" placeholder="Nachname" v-model="lastname" />
               </div>
@@ -113,6 +113,8 @@ body
 </style>
 
 <script>
+import { callApi } from '../../api/requests'
+
 export default {
   data() {
     return {
@@ -182,14 +184,19 @@ export default {
           throw new Error(this.$t('somethingWentWrong'))
         }
 
-        // TODO: Fetch User information
-        this.auth = {
-          token: res.token,
-          firstname: this.firstname,
-          lastname: this.lastname,
-          email: this.mail,
-          authenticated: true
-        }
+        await callApi(
+          this.$q.localStorage.getItem('server') + 'users/me',
+          res.token
+        ).then((resp) => {
+          this.auth = {
+            token: res.token,
+            firstname: resp.user.firstName,
+            lastname: resp.user.lastName,
+            email: resp.user.email,
+            id: resp.user._id,
+            authenticated: true
+          }
+        })
         this.$router.go(-2) // Assumes that user came via /login page
       } catch (e) {
         this.error = e

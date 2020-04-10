@@ -13,10 +13,8 @@
         :name="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
       ></q-icon>
       <ul :class="open ? '' : 'hidden'">
-        <li>PROFIL</li>
-        <li>
-          <router-link to="/profile/requests">MEINE ANZEIGEN</router-link>
-        </li>
+        <li v-on:click="$router.push('/profile')">PROFIL</li>
+        <li v-on:click="$router.push('/profile/requests')">MEINE ANZEIGEN</li>
         <li v-on:click="logout()">ABMELDEN</li>
       </ul>
     </li>
