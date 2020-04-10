@@ -92,6 +92,8 @@
 import Request from '../components/Request'
 import Offer from '../components/Offer'
 import { callApi } from '../../api/requests'
+import { Plugins } from '@capacitor/core'
+const { Geolocation } = Plugins
 
 export default {
   components: {
@@ -103,7 +105,8 @@ export default {
     return {
       requests: [],
       selectedRequest: undefined,
-      isDialogOpen: false
+      isDialogOpen: false,
+      position: ''
     }
   },
 
@@ -125,24 +128,34 @@ export default {
   },
 
   mounted () {
-    if (this.auth.authenticated) {
-      this.fetchRequests()
-    } else {
-      this.$router.push('/login')
-    }
+    // if (this.auth.authenticated) {
+    //   this.fetchRequests()
+    // } else {
+    //   this.$router.push('/login')
+    // }
+
+    this.getCurrentPosition()
+    this.geoId = Geolocation.watchPosition({}, (position, err) => {
+      this.position = position
+      this.fetchRequests(position)
+    })
   },
 
   methods: {
-    async fetchRequests () {
+    getCurrentPosition() {
+      Geolocation.getCurrentPosition().then(position => {
+        this.position = position
+      })
+    },
+
+    async fetchRequests(position) {
+      console.log(position)
       try {
         const result = await callApi(
           this.$q.localStorage.getItem('server') + 'publicRequest',
           '',
           {
-            'address.plz': '69199', // TODO: use actual values via geocoding
-            'address.city': 'Mannheim',
-            'address.street': 'Hans-Sachs-Ring',
-            'address.street_nr': '5'
+            position: [position.latitude, position.longitude]
           },
           'POST'
         )
@@ -156,6 +169,10 @@ export default {
       this.selectedRequest = requestId
       this.isDialogOpen = true
     }
+  },
+
+  beforeDestroy () {
+    Geolocation.clearWatch(this.geoId)
   }
 }
 </script>

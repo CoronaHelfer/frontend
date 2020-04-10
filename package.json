@@ -12,6 +12,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@capacitor/core": "^2.0.1",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
     "gitmoji-cli": "^3.2.3",
