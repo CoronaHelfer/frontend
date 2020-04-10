@@ -5,6 +5,74 @@
     </header>
 
     <body>
+      <article>
+        <h2>Willkommen {{auth.firstname}} {{auth.lastname}}</h2>
+
+        <div class="row">
+          <div class="col">
+            <q-input
+              dense filled
+              v-model="firstname"
+              label="Vorname"
+              class="input"
+            ></q-input>
+          </div>
+          <div class="col">
+            <q-input
+              dense filled
+              v-model="lastname"
+              label="Nachname"
+              class="input"
+            ></q-input>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <q-input
+              dense filled
+              v-model="street"
+              label="Straße"
+              class="input"
+            ></q-input>
+          </div>
+          <div class="col-2">
+            <q-input
+              dense filled
+              v-model="streetNumber"
+              label="Hausnummer"
+              class="input"
+            ></q-input>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-2">
+            <q-input
+              dense filled
+              v-model="zip"
+              label="PLZ"
+              class="input"
+            ></q-input>
+          </div>
+          <div class="col">
+            <q-input
+              dense filled
+              v-model="city"
+              label="Stadt"
+              class="input"
+            ></q-input>
+          </div>
+        </div>
+
+        <q-btn
+          rounded
+          color="secondary"
+          label="Speichern"
+          class="full-width"
+          :loading="loading"
+          v-on:click="update()"></q-btn>
+      </article>
     </body>
   </q-page>
 </template>
@@ -62,9 +130,38 @@ body
     padding-top: 30px
     margin: 20px auto 0
     max-width: 800px
+
+.input
+  margin: 20px 10px
 </style>
 
 <script>
 export default {
+  data() {
+    return {
+      firstname: '',
+      lastname: '',
+      street: '',
+      streetNumber: '',
+      zip: '',
+      city: ''
+    }
+  },
+
+  computed: {
+    auth: {
+      get() {
+        return Object.assign({}, this.$store.state.auth.data)
+      },
+      set(val) {
+        this.$store.commit('auth/updateData', val)
+      }
+    }
+  },
+
+  methods: {
+    update() {
+    }
+  }
 }
 </script>
