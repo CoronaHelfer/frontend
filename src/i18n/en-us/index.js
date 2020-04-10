@@ -8,6 +8,7 @@ export default {
   help: 'Help',
   getHelp: 'Get Help',
   information: 'Information',
+  profile: 'Profile',
   register: 'Register',
   login: 'Login',
   noMatchingPassword: 'Passwords do not match.',

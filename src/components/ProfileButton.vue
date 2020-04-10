@@ -13,7 +13,9 @@
         :name="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
       ></q-icon>
       <ul :class="open ? '' : 'hidden'">
-        <li>PROFIL</li>
+        <li>
+          <router-link to="/profile">PROFIL</router-link>
+        </li>
         <li>
           <router-link to="/profile/requests">MEINE ANZEIGEN</router-link>
         </li>

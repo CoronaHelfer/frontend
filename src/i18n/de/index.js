@@ -5,6 +5,7 @@ export default {
   help: 'Helfen',
   getHelp: 'Hilfe bekommen',
   information: 'Information',
+  profile: 'Profil',
   register: 'Registrieren',
   login: 'Login',
   noMatchingPassword: 'Passwörter stimmen nicht überein.',
