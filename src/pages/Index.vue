@@ -140,7 +140,6 @@ body
 <script>
 export default {
   mounted() {
-    console.log(this.$q.localStorage.getItem('server'))
     // TODO: Set default values in a way that user does not have to access the landing page first
     const config = require('../assets/config.json')
     this.$q.localStorage.set('server', config.url)
