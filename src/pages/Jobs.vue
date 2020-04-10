@@ -1,20 +1,20 @@
 <template>
   <q-page>
     <header>
-      <h1>Become part of the team</h1>
+      <h1>{{$t('jobsHeader')}}</h1>
     </header>
     <body>
       <article>
-        <h2>Frontend Developer</h2>
-        <p><strong>Qualifications:</strong> Vue.js + Quasar</p>
-        <p>You can work from anywhere in the world.</p>
+        <h2>{{$t('jobsFeDev')}}</h2>
+        <strong>{{$t('jobsQualifications')}}:</strong> Vue.js + Quasar
+        <p>{{$t('jobsLocation')}}</p>
 
-        <h2>Backend Developer</h2>
-        <strong>Qualifications:</strong> Node.js + Swagger
-        <p>You can work from anywhere in the world.</p>
+        <h2>{{$t('jobsBeDev')}}</h2>
+        <strong>{{$t('jobsQualifications')}}:</strong> Node.js + Swagger
+        <p>{{$t('jobsLocation')}}</p>
 
-        <h2>Sounds intereting?</h2>
-        Get in touch: <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a>
+        <h2>{{$t('jobsContact1')}}</h2>
+        {{$t('jobsContact2')}}: <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a>
       </article>
     </body>
   </q-page>
