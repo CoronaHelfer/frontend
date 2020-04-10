@@ -7,6 +7,12 @@
     <body>
       <article>
         <h2>Willkommen {{auth.firstname}} {{auth.lastname}}</h2>
+        <p>{{auth.firstname}} {{auth.lastname}}</p>
+        <p>{{auth.street}} {{auth.streetNumber}}</p>
+        <p>{{auth.zip}} {{auth.city}}</p>
+        <p>{{auth.phone}}</p>
+
+        <div v-if="error !== ''" class="error">{{error}}</div>
 
         <div class="row">
           <div class="col">
@@ -133,9 +139,19 @@ body
 
 .input
   margin: 20px 10px
+
+.error
+  background: RED
+  color: WHITE
+  padding: 10px 25px
+  margin-bottom: 15px
+  border-radius: 19px
+  font-size: 13px
 </style>
 
 <script>
+import { callApi } from '../../api/requests'
+
 export default {
   data() {
     return {
@@ -144,7 +160,9 @@ export default {
       street: '',
       streetNumber: '',
       zip: '',
-      city: ''
+      city: '',
+      error: '',
+      loading: false
     }
   },
 
@@ -159,8 +177,44 @@ export default {
     }
   },
 
+  mounted() {
+    this.firstname = this.auth.firstname
+    this.lastname = this.auth.lastname
+    this.street = this.auth.street
+    this.streetNumber = this.auth.streetNumber
+    this.zip = this.auth.zip
+    this.city = this.auth.city
+  },
+
   methods: {
+    async fetchUserData() { // TODO: Deduplicate this request
+      await callApi(
+        this.$q.localStorage.getItem('server') + 'users/me',
+        this.auth.token
+      ).then((resp) => {
+        this.auth = {
+          token: this.auth.token,
+          firstname: resp.user.firstName,
+          lastname: resp.user.lastName,
+          email: resp.user.email,
+          id: resp.user._id,
+          authenticated: true
+        }
+      })
+    },
+
     update() {
+      try {
+        this.loading = true
+        this.error = ''
+        // TODO: Update user data in the backend
+        throw new Error(this.$t('notImplemented'))
+        // this.fetchUserData()
+      } catch (e) {
+        this.error = e
+      } finally {
+        this.loading = false
+      }
     }
   }
 }

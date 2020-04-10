@@ -4,7 +4,7 @@
       <div class="authenticate">
         <div class="container">
           <form class="login">
-            <div v-show="error != ''" class="error">{{ error }}</div>
+            <div v-show="error !== ''" class="error">{{ error }}</div>
             <input
               type="text"
               placeholder="E-Mail oder Telefonnummer"

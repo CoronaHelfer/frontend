@@ -18,5 +18,6 @@ export default {
   category: 'Category',
   request: 'request',
   myRequests: 'My Requests',
-  noRequestsCreated: 'You have not created requests yet.'
+  noRequestsCreated: 'You have not created requests yet.',
+  notImplemented: 'This feature is not available yet. We apologize for this inconvenience.'
 }
