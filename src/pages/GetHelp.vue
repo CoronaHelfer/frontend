@@ -96,22 +96,25 @@
 </template>
 
 <style lang="sass" scoped>
-  h3:first-of-type
-    margin: 0 0 5px
+h3:first-of-type
+  margin: 0 0 5px
 
-  h3
-    margin: 20px 0 0
+h3
+  margin: 20px 0 0
 
-  .input
-    margin: 5px 0
+.input
+  margin: 5px 0
 
-  .error
-    background: RED
-    color: WHITE
-    padding: 10px 25px
-    margin-bottom: 15px
-    border-radius: 19px !important
-    font-size: 13px
+.error
+  background: RED
+  color: WHITE
+  padding: 10px 25px
+  margin-bottom: 15px
+  font-size: 13px
+
+.q-card
+  div
+    border-radius: 19px
 </style>
 
 <script>
