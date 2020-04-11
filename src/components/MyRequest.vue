@@ -21,13 +21,14 @@
                 <q-item>
                   <q-btn
                     icon-right="fas fa-pencil-alt"
-                    label="Bearbeiten"
-                    class="full-width"></q-btn>
+                    label="Bearbeiten X"
+                    class="full-width"
+                    v-on:click="editRequest"></q-btn>
                 </q-item>
                 <q-item>
                   <q-btn
                     icon-right="fas fa-trash"
-                    label="Löschen"
+                    label="Löschen X"
                     class="full-width"
                     :loading="loading"
                     v-on:click="deleteRequest"></q-btn>
@@ -94,6 +95,10 @@ export default {
   },
 
   methods: {
+    async editRequest() {
+      this.$emit('error', this.$t('notImplemented'))
+    },
+
     async deleteRequest() {
       try {
         this.loading = true

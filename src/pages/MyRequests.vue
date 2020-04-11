@@ -7,7 +7,7 @@
     <body>
       <article>
         <div v-if="error !== ''" class="error">{{error}}</div>
-        <p v-else-if="ownRequests.length === 0">{{$t('noRequestsCreated')}}</p>
+        <p v-if="ownRequests.length === 0">{{$t('noRequestsCreated')}}</p>
         <MyRequest
           v-else
           v-for="request in ownRequests"
