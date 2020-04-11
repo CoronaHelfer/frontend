@@ -28,7 +28,9 @@
                   <q-btn
                     icon-right="fas fa-trash"
                     label="Löschen"
-                    class="full-width"></q-btn>
+                    class="full-width"
+                    :loading="loading"
+                    v-on:click="deleteRequest"></q-btn>
                 </q-item>
               </q-list>
             </q-menu>
@@ -67,9 +69,52 @@ h2, strong
 </style>
 
 <script>
+import { callApi } from '../../api/requests'
+
 export default {
   props: {
     request: Object
+  },
+
+  data() {
+    return {
+      loading: false
+    }
+  },
+
+  computed: {
+    auth: {
+      get() {
+        return Object.assign({}, this.$store.state.auth.data)
+      },
+      set(val) {
+        this.$store.commit('auth/updateData', val)
+      }
+    }
+  },
+
+  methods: {
+    async deleteRequest() {
+      try {
+        this.loading = true
+        this.$emit('error', '')
+
+        await callApi(
+          this.$q.localStorage.getItem('server') + 'request',
+          this.auth.token,
+          {
+            requestId: this.request._id
+          },
+          'DELETE'
+        )
+        this.$emit('reloadRequests')
+      } catch (err) {
+        console.error(err)
+        this.$emit('error', this.$t('somethingWentWrong'))
+      } finally {
+        this.loading = false
+      }
+    }
   }
 }
 </script>
