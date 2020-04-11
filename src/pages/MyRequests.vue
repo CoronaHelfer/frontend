@@ -5,11 +5,17 @@
     </header>
 
     <body>
-      <MyRequest
-        v-for="request in ownRequests"
-        v-bind:key="request._id"
-        :request="request"/>
-      <article v-if="ownRequests.length === 0">{{$t('noRequestsCreated')}}</article>
+      <article>
+        <div v-if="error !== ''" class="error">{{error}}</div>
+        <p v-else-if="ownRequests.length === 0">{{$t('noRequestsCreated')}}</p>
+        <MyRequest
+          v-else
+          v-for="request in ownRequests"
+          v-bind:key="request._id"
+          :request="request"
+          @reloadRequests="fetchRequests"
+          @error="(message) => error = message"/>
+      </article>
     </body>
   </q-page>
 </template>
@@ -86,7 +92,8 @@ export default {
 
   data () {
     return {
-      requests: []
+      requests: [],
+      error: ''
     }
   },
 
@@ -117,6 +124,7 @@ export default {
   methods: {
     async fetchRequests () {
       try {
+        this.error = ''
         const result = await callApi( // TODO: deduplicate this function
           this.$q.localStorage.getItem('server') + 'request',
           this.auth.token
@@ -124,6 +132,7 @@ export default {
         this.requests = result.result
       } catch (err) {
         console.error(err)
+        this.error = this.$t('somethingWentWrong')
       }
     }
   }
