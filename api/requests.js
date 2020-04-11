@@ -13,7 +13,7 @@ export const callApi = async (
       'X-Access-Token': token
     },
     body:
-        method === 'POST' || method === 'PUT' ? JSON.stringify(data) : undefined // body data type must match "Content-Type" header
+        method === 'POST' || method === 'PUT' || method === 'DELETE' ? JSON.stringify(data) : undefined // body data type must match "Content-Type" header
   })
   return await response.json() // parses JSON response into native JavaScript objects
 }
