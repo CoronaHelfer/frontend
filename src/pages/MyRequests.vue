@@ -98,13 +98,6 @@ export default {
           this.auth.token
         )
         this.requests = requests.result
-
-        const helpers = await callApi(
-          this.$q.localStorage.getItem('server') + 'request/helper',
-          this.auth.token
-        )
-
-        console.log(helpers.result)
       } catch (err) {
         console.error(err)
         this.error = this.$t('somethingWentWrong')

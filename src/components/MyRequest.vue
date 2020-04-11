@@ -1,6 +1,7 @@
 <template>
   <q-card>
     <q-card-section>
+      <q-badge v-if="request.helper.length" color="red" floating>{{request.helper.length}}</q-badge>
       <div class="row">
         <div class="col">
           <header>

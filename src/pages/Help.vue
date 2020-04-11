@@ -140,7 +140,7 @@ export default {
           this.auth.token,
           {
             offerText: 'Lorem ipsum',
-            requestId: '5e91e33e4134be001416abfb'
+            requestId: '5e91e37f4134be001416abfc'
           },
           'POST'
         )
