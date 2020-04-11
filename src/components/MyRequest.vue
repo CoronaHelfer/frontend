@@ -39,8 +39,8 @@
         </div>
       </div>
     </q-card-section>
-    <q-card-section>
-      {{request.time_end}}
+    <q-card-section align="right" class="text-grey-7">
+      {{end_date}}
     </q-card-section>
   </q-card>
 </template>
@@ -59,7 +59,7 @@ header
 
 .card
   border-radius: 10px
-  padding: 20px
+  padding: 5px
   margin: 20px 40px
 
 h2, strong
@@ -70,6 +70,7 @@ h2, strong
 </style>
 
 <script>
+import { date } from 'quasar'
 import { callApi } from '../../api/requests'
 
 export default {
@@ -91,6 +92,10 @@ export default {
       set(val) {
         this.$store.commit('auth/updateData', val)
       }
+    },
+
+    end_date() {
+      return date.formatDate(new Date(this.request.time_end), 'DD.MM.YYYY')
     }
   },
 
