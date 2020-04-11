@@ -17,12 +17,12 @@
               :loading="loading"
               label="Login"
               v-on:click="login()"
-            />
+            ></q-btn>
             <q-btn
               rounded
               label="Registrieren"
               to="/register"
-            />
+            ></q-btn>
           </form>
         </div>
       </div>
@@ -44,8 +44,7 @@ body
   box-sizing: border-box
   .container
     width: 400px
-    .login,
-    .register
+    .login, .register
       background-color: WHITE
       padding: 15px 30px
       display: flex
@@ -72,11 +71,8 @@ body
           outline: none
         &.spacer
           margin-bottom: 15px
-      button
-        background-color: $secondary
-        color: WHITE
-        height: 30px
-        line-height: 30px
+      button, a
+        height: 40px
         padding: 0
         font-size: 15px
         font-weight: 600

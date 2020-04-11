@@ -86,7 +86,6 @@
       ></q-btn-toggle>
       <q-btn
         rounded
-        color="secondary"
         :loading="loading"
         label="Abschicken"
         class="full-width"
