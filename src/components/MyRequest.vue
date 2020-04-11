@@ -5,14 +5,14 @@
     </header>
 
     <div class="row">
-    <div class="col">
-      <p>
-        <strong>{{$t('category')}}:</strong> {{request.category.name}}
-      </p>
-      <p>
-        <strong>{{$t('request')}}:</strong> {{request.description}}
-      </p>
-    </div>
+      <div class="col">
+        <p>
+          <strong>{{$t('category')}}:</strong> {{request.category.name}}
+        </p>
+        <p>
+          <strong>{{$t('request')}}:</strong> {{request.description}}
+        </p>
+      </div>
       <div class="col">
         <q-btn
           round
@@ -50,8 +50,7 @@ export default {
 
   data() {
     return {
-      loading: false,
-      error: ''
+      loading: false
     }
   },
 
@@ -70,7 +69,8 @@ export default {
     async deleteRequest() {
       try {
         this.loading = true
-        this.error = ''
+        this.$emit('error', '')
+
         await callApi(
           this.$q.localStorage.getItem('server') + 'request',
           this.auth.token,
@@ -79,9 +79,10 @@ export default {
           },
           'DELETE'
         )
+        this.$emit('reloadRequests')
       } catch (err) {
-        this.error = err
-        this.loading = false
+        console.error(err)
+        this.$emit('error', this.$t('somethingWentWrong'))
       } finally {
         this.loading = false
       }

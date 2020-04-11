@@ -4,7 +4,7 @@
       <div class="authenticate">
         <div class="container">
           <form class="register">
-            <div v-show="error !== ''" class="error">{{error}}</div>
+            <div v-if="error !== ''" class="error">{{error}}</div>
             <div class="aligner">
               <div class="left">
                 <div class="avatar"/>

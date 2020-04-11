@@ -4,7 +4,7 @@
       <div class="authenticate">
         <div class="container">
           <form class="login">
-            <div v-show="error !== ''" class="error">{{ error }}</div>
+            <div v-if="error !== ''" class="error">{{ error }}</div>
             <input
               type="text"
               placeholder="E-Mail oder Telefonnummer"
@@ -51,13 +51,6 @@ body
       display: flex
       flex-direction: column
       border-radius: 25px
-      .error
-        background: RED
-        color: WHITE
-        padding: 10px 25px
-        margin-bottom: 15px
-        border-radius: 19px
-        font-size: 13px
       input
         width: 100%
         background-color: LIGHTGRAY
