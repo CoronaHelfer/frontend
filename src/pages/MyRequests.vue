@@ -28,32 +28,6 @@ header
   padding: 50px
   color: white
 
-  .q-btn
-    background: white
-    border: 0
-    border-radius: 19px
-    color: $secondary
-    cursor: pointer
-    font-size: 20px
-    font-weight: 400
-    padding: 0 50px
-    text-transform: uppercase
-
-    &:focus
-      outline: none
-
-    &.primary
-      background: $secondary
-      color: white
-
-    &.small
-      height: 30px
-      line-height: 30px
-      padding: 0 30px
-      font-size: 15px
-      font-weight: 600
-      margin-top: 15px
-
 body
   &:before
     background-color: white
@@ -73,12 +47,6 @@ body
     padding-top: 30px
     margin: 20px auto 0
     max-width: 800px
-
-    h5
-      color: $secondary
-      text-transform: uppercase
-      font-weight: 600
-      margin: 20px 0
 </style>
 
 <script>

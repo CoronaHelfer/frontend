@@ -1,5 +1,5 @@
 <template>
-  <q-card class="card bg-red-1">
+  <q-card>
     <q-card-section>
       <div class="row">
         <div class="col">
@@ -20,6 +20,7 @@
               <q-list>
                 <q-item>
                   <q-btn
+                    flat
                     icon-right="fas fa-pencil-alt"
                     label="Bearbeiten X"
                     class="full-width"
@@ -27,6 +28,7 @@
                 </q-item>
                 <q-item>
                   <q-btn
+                    flat
                     icon-right="fas fa-trash"
                     label="Löschen X"
                     class="full-width"
@@ -57,16 +59,21 @@ header
   flex-direction: column
   text-align: left
 
-.card
+.q-card
   border-radius: 10px
   padding: 5px
   margin: 20px 40px
+  background-color: rgb(254, 246, 239)
 
 h2, strong
   color: $primary
 
 .q-item
   padding: 0
+
+.q-btn
+  color: $primary
+  background-color: initial
 </style>
 
 <script>
