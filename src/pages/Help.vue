@@ -135,16 +135,26 @@ export default {
   methods: {
     async fetchRequests () {
       try {
+        await callApi( // TODO(jj): remove this
+          this.$q.localStorage.getItem('server') + 'request/helper',
+          this.auth.token,
+          {
+            offerText: 'Lorem ipsum',
+            requestId: '5e91e33e4134be001416abfb'
+          },
+          'POST'
+        )
+
         const result = await callApi(
           this.$q.localStorage.getItem('server') + 'publicRequest',
           '',
           {
-            'address.plz': '69199', // TODO: use actual values via geocoding
-            'address.city': 'Mannheim',
+            'address.plz': '19395', // TODO: use actual values via geocoding
+            'address.city': 'Plau',
             'address.street': 'Hans-Sachs-Ring',
             'address.street_nr': '5'
           },
-          'POST'
+          'GET'
         )
         this.requests = result.result
       } catch (err) {

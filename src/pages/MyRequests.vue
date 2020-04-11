@@ -117,11 +117,18 @@ export default {
   methods: {
     async fetchRequests () {
       try {
-        const result = await callApi( // TODO: deduplicate this function
+        const requests = await callApi( // TODO: deduplicate this function
           this.$q.localStorage.getItem('server') + 'request',
           this.auth.token
         )
-        this.requests = result.result
+        this.requests = requests.result
+
+        const helpers = await callApi(
+          this.$q.localStorage.getItem('server') + 'request/helper',
+          this.auth.token
+        )
+
+        console.log(helpers.result)
       } catch (err) {
         console.error(err)
       }
