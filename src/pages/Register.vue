@@ -91,10 +91,7 @@ body
         &.spacer
           margin-bottom: 15px
       button
-        background-color: $secondary
-        color: WHITE
-        height: 30px
-        line-height: 30px
+        height: 40px
         padding: 0
         font-size: 15px
         font-weight: 600
