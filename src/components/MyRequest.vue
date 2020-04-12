@@ -23,7 +23,7 @@
                   <q-btn
                     flat
                     icon-right="mail"
-                    label="Nachrichten"
+                    :label="this.$t('offers')"
                     class="full-width"
                     :loading="loading"
                     v-on:click="showOffersPage()"></q-btn>
@@ -32,7 +32,7 @@
                   <q-btn
                     flat
                     icon-right="fas fa-pencil-alt"
-                    label="Bearbeiten X"
+                    :label="this.$t('edit')"
                     class="full-width"
                     v-on:click="editRequest"></q-btn>
                 </q-item>
@@ -40,7 +40,7 @@
                   <q-btn
                     flat
                     icon-right="fas fa-trash"
-                    label="Löschen"
+                    :label="this.$t('delete')"
                     class="full-width"
                     :loading="loading"
                     v-on:click="deleteRequest"></q-btn>

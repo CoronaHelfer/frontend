@@ -8,8 +8,7 @@
       </q-item-section>
 
       <q-item-section>
-        <q-item-label>{{offer.firstName}}</q-item-label>
-        <q-item-label caption>{{offer.lastName}}</q-item-label>
+        <q-item-label>{{offer.firstName}} {{offer.lastName}}</q-item-label>
       </q-item-section>
     </q-item>
 

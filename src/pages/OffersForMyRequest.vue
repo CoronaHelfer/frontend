@@ -1,17 +1,21 @@
 <template>
   <q-page>
     <header>
-      <h1>Angebote XX</h1>
+      <h1>{{$t('offers')}}</h1>
     </header>
 
     <body>
       <article>
-        <p v-if="offers.length === 0">{{$t('noRequestsCreated')}} XX</p>
+        <p v-if="offers.length === 0">{{$t('noOffers')}}</p>
         <OfferForMyRequest
           v-else
           v-for="(offer, index) in offers"
           v-bind:key="index"
           :offer="offer"/>
+        <q-btn
+          @click="$router.push('requests')"
+          class="full-width"
+        >{{$t('goBack')}}</q-btn>
       </article>
     </body>
   </q-page>

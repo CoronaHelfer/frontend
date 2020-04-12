@@ -1,9 +1,12 @@
 export default {
+  edit: 'Bearbeiten',
+  delete: 'Löschen',
   failed: 'Aktion fehlgeschlagen',
   success: 'Aktion erfolgreich',
   wrongLogin: 'Falscher Benutzername oder Passwort',
   help: 'Helfen',
   getHelp: 'Hilfe bekommen',
+  goBack: 'Zurück',
   information: 'Information',
   jobs: 'Jobs',
   jobsHeader: 'Werde Teil des Teams',
@@ -17,6 +20,8 @@ export default {
   register: 'Registrieren',
   login: 'Login',
   noMatchingPassword: 'Passwörter stimmen nicht überein.',
+  noOffers: 'Du hast noch keine Angebote für dieses Gesuch bekommen.',
+  offers: 'Angebote',
   emptyField: 'Das Feld ist nicht ausgefüllt.',
   missingFields: 'Nicht alle Felder sind ausgefüllt.',
   somethingWentWrong:
