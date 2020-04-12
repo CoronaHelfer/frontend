@@ -7,6 +7,13 @@
     <body>
       <article>
         <div v-if="error !== ''" class="error">{{error}}</div>
+        <div class="row justify-center">
+          <q-spinner
+            v-if="loading"
+            color="secondary"
+            size="5em"
+          />
+        </div>
         <p v-if="!loading && ownRequests.length === 0">{{$t('noRequestsCreated')}}</p>
         <MyRequest
           v-else
