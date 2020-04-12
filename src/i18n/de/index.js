@@ -1,3 +1,5 @@
+import register from './register'
+
 export default {
   failed: 'Aktion fehlgeschlagen',
   success: 'Aktion erfolgreich',
@@ -14,7 +16,7 @@ export default {
   jobsContact1: 'Interessiert?',
   jobsContact2: 'Kontaktiere uns',
   profile: 'Profil',
-  register: 'Registrieren',
+  // register: 'Registrieren',
   login: 'Login',
   noMatchingPassword: 'Passwörter stimmen nicht überein.',
   emptyField: 'Das Feld ist nicht ausgefüllt.',
@@ -31,5 +33,6 @@ export default {
     'Entschuldigung, diese Funktion ist leider noch nicht verfügbar.',
   supportTogether: 'Gemeinsam Helfen',
   needHelp: 'Ich brauche Hilfe',
-  wantHelp: 'Ich möchte helfen'
+  wantHelp: 'Ich möchte helfen',
+  ...register
 }

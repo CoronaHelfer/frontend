@@ -7,10 +7,16 @@
             <div v-show="error !== ''" class="error">{{ error }}</div>
             <input
               type="text"
+              name="username"
               placeholder="E-Mail oder Telefonnummer"
               v-model="name"
             />
-            <input type="password" placeholder="Passwort" v-model="password" />
+            <input
+              name="password"
+              type="password"
+              placeholder="Passwort"
+              v-model="password"
+            />
 
             <q-btn
               rounded
@@ -19,6 +25,7 @@
               v-on:click="login()"
             ></q-btn>
             <q-btn
+              class="register-btn"
               rounded
               label="Registrieren"
               to="/register"
@@ -157,7 +164,7 @@ export default {
         await callApi(
           this.$q.localStorage.getItem('server') + 'users/me',
           res.token
-        ).then((resp) => {
+        ).then(resp => {
           this.auth = {
             token: res.token,
             firstname: resp.user.firstName,
