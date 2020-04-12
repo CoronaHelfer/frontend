@@ -64,11 +64,6 @@ header
   justify-content: flex-start
   text-align: center
 
-.intro
-  display: flex
-  flex-direction: column
-  text-align: left
-
 .q-card
   border-radius: 10px
   padding: 5px

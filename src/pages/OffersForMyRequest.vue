@@ -43,7 +43,7 @@ body
   article
     padding-top: 30px
     margin: 20px auto 0
-    max-width: 800px
+    max-width: 500px
 </style>
 
 <script>
