@@ -19,6 +19,15 @@
           <q-btn color="grey-7" round flat icon="more_vert">
             <q-menu cover auto-close>
               <q-list>
+                <q-item v-if="request.helper.length">
+                  <q-btn
+                    flat
+                    icon-right="mail"
+                    label="Nachrichten"
+                    class="full-width"
+                    :loading="loading"
+                    v-on:click="showOffersPage()"></q-btn>
+                </q-item>
                 <q-item>
                   <q-btn
                     flat
@@ -35,15 +44,6 @@
                     class="full-width"
                     :loading="loading"
                     v-on:click="deleteRequest"></q-btn>
-                </q-item>
-                <q-item v-if="request.helper.length">
-                  <q-btn
-                    flat
-                    icon-right="mail"
-                    label="Nachrichten"
-                    class="full-width"
-                    :loading="loading"
-                    to="messages"></q-btn>
                 </q-item>
               </q-list>
             </q-menu>
@@ -144,6 +144,11 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+
+    showOffersPage() {
+      this.$q.localStorage.set('offers', this.request.helper)
+      this.$router.push('offers')
     }
   }
 }

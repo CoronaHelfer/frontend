@@ -113,6 +113,7 @@ export default {
         authenticated: false
       }
       this.$q.sessionStorage.clear()
+      this.$q.localStorage.clear()
       this.$router.push('/login')
     }
   }
