@@ -31,10 +31,19 @@
                   <q-btn
                     flat
                     icon-right="fas fa-trash"
-                    label="Löschen X"
+                    label="Löschen"
                     class="full-width"
                     :loading="loading"
                     v-on:click="deleteRequest"></q-btn>
+                </q-item>
+                <q-item v-if="request.helper.length">
+                  <q-btn
+                    flat
+                    icon-right="mail"
+                    label="Nachrichten"
+                    class="full-width"
+                    :loading="loading"
+                    to="messages"></q-btn>
                 </q-item>
               </q-list>
             </q-menu>
@@ -75,6 +84,9 @@ h2, strong
 .q-btn
   color: $primary
   background-color: initial
+
+a
+  font-size: 14px
 </style>
 
 <script>
