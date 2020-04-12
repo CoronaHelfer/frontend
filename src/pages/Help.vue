@@ -135,16 +135,6 @@ export default {
   methods: {
     async fetchRequests () {
       try {
-        await callApi( // TODO(jj): remove this
-          this.$q.localStorage.getItem('server') + 'request/helper',
-          this.auth.token,
-          {
-            offerText: 'Lorem ipsum',
-            requestId: '5e91e37f4134be001416abfc'
-          },
-          'POST'
-        )
-
         const result = await callApi(
           this.$q.localStorage.getItem('server') + 'publicRequest',
           '',

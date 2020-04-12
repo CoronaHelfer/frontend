@@ -7,7 +7,7 @@
     <body>
       <article>
         <div v-if="error !== ''" class="error">{{error}}</div>
-        <p v-if="ownRequests.length === 0">{{$t('noRequestsCreated')}}</p>
+        <p v-if="!loading && ownRequests.length === 0">{{$t('noRequestsCreated')}}</p>
         <MyRequest
           v-else
           v-for="request in ownRequests"
@@ -61,6 +61,7 @@ export default {
   data () {
     return {
       requests: [],
+      loading: false,
       error: ''
     }
   },
@@ -92,6 +93,7 @@ export default {
   methods: {
     async fetchRequests () {
       try {
+        this.loading = true
         this.error = ''
         const requests = await callApi( // TODO: deduplicate this function
           this.$q.localStorage.getItem('server') + 'request',
@@ -101,6 +103,8 @@ export default {
       } catch (err) {
         console.error(err)
         this.error = this.$t('somethingWentWrong')
+      } finally {
+        this.loading = false
       }
     }
   }
