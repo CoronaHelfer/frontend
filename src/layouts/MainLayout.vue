@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <Header />
-    <q-page-container style="padding-bottom: 0">
+    <q-page-container>
       <router-view />
     </q-page-container>
     <Footer />
@@ -9,9 +9,8 @@
 </template>
 
 <style lang="sass" scoped>
-  div
-    background: url('../statics/images/background.jpg') no-repeat
-    background-size: cover
+body
+  background-color: $background
 </style>
 
 <script>
