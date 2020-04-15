@@ -1,9 +1,9 @@
 <template>
   <q-page>
-    <div class="introduction">
+    <div class="tertiary-bg">
       <div class="wrapper">
         <h1 class="uppercase">{{ $t('supportTogether') }}</h1>
-        <div class="row justify-evenly">
+        <div class="row justify-between">
           <router-link class="q-mt-xs uppercase" to="/get-help">
             <MainButton content="want-help" />
           </router-link>
@@ -14,7 +14,7 @@
       </div>
     </div>
     <article class="wrapper">
-      <div class="fit row wrap justify-center items-start content-start">
+      <div class="fit row wrap justify-evenly items-start content-start">
         <img width="30%" src="~assets/Logo-2.svg" />
       </div>
       <h1 class="uppercase">Portal für Nachbarschaftshilfe in deiner Region</h1>
@@ -28,27 +28,98 @@
         CoronaHelfer ins Leben gerufen, um gemeinsam die Ausbreitung des Virus
         zu verlangsamen und einander dort zu unterstützen, wo es möglich ist.
       </p>
+      <q-input ref="input" filled v-model="region" :label="$t('searchRegion')">
+        <template v-slot:append>
+          <q-icon class="icon" name="room" />
+        </template>
+      </q-input>
+    </article>
+    <div class="tertiary-bg">
+      <div class="wrapper">
+        <h1 class="uppercase">Ziel und Vision der Initiative CoronaHelfer</h1>
+        <div class="fit row wrap justify-between items-center content-center">
+          <div class="vision-box">
+            <div class="content-box column">
+              <img src="statics/icons/elderly-people-294088.svg" />
+              <p class="q-mt-auto">
+                {{ $t('saveElder') }}
+              </p>
+            </div>
+          </div>
+          <div class="vision-box">
+            <div class="content-box column">
+              <img src="statics/icons/entlastet Menschen.svg" />
+              <p class="q-mt-auto">
+                {{ $t('relievePeople') }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="fit row wrap justify-between items-center content-center">
+          <div class="vision-box">
+            <div class="content-box column">
+              <img src="statics/icons/children-1296800.svg" />
+              <p class="q-mt-auto">
+                {{ $t('supportPeople') }}
+              </p>
+            </div>
+          </div>
+          <div class="vision-box">
+            <div class="content-box column">
+              <img src="statics/icons/volunteer.svg" />
+              <p class="q-mt-auto">
+                {{ $t('communitySupport') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <article class="wrapper">
+      <h1 class="uppercase">Leitsätze für Coronavirus-Nachbarschaftshilfe</h1>
 
-      <h1>Ziel und Vision der Initiative CoronaHelfer</h1>
-      <ul>
-        <li>CoronaHelfer schützt gefährdete Personen</li>
-        <li>
-          CoronaHelfer entlastet Menschen in systemrelevanten Berufen
-          (Gesundheits-, Dienstleistungssystem etc.)
-        </li>
-        <li>CoronaHelfer unterstütz generell Hilfesuchende</li>
-        <li>Coronavirus-Nachbarschaftshilfe für alle!</li>
-      </ul>
-      <h1>Leitsätze für Coronavirus-Nachbarschaftshilfe</h1>
-      <ul>
-        <li><b>C</b>ool bleiben</li>
-        <li><b>O</b>rdentlich Hände waschen</li>
-        <li><b>R</b>ücksichtsvoll bleiben</li>
-        <li><b>O</b>hne Hamsterkäufe</li>
-        <li><b>N</b>achbarschaftshilfe</li>
-        <li><b>A</b>bstand halten</li>
-      </ul>
-      <h1>Unser Hintergrund</h1>
+      <div class="column">
+        <div
+          class="principles row q-pa-lg q-mb-lg justify-between items-center"
+        >
+          <h2><b>C</b>ool bleiben</h2>
+          <img width="40" src="statics/icons/cool.svg" />
+        </div>
+        <div
+          class="principles row q-pa-lg q-mb-lg justify-between items-center"
+        >
+          <h2><b>O</b>rdentlich Hände waschen</h2>
+          <img width="40" src="statics/icons/Out line.svg" />
+        </div>
+        <div
+          class="principles row q-pa-lg q-mb-lg justify-between items-center"
+        >
+          <h2><b>R</b>ücksichtsvoll bleiben</h2>
+          <img width="40" src="statics/icons/buyer.svg" />
+        </div>
+        <div
+          class="principles row q-pa-lg q-mb-lg justify-between items-center"
+        >
+          <h2><b>O</b>hne Hamsterkäufe</h2>
+          <img width="40" src="statics/icons/hamster.svg" />
+        </div>
+        <div
+          class="principles row q-pa-lg q-mb-lg justify-between items-center"
+        >
+          <h2><b>N</b>achbarschaftshilfe</h2>
+          <img width="40" src="statics/icons/help.svg" />
+        </div>
+        <div
+          class="principles row q-pa-lg q-mb-lg justify-between items-center"
+        >
+          <h2><b>A</b>bstand halten</h2>
+          <img width="40" src="statics/icons/distance.svg" />
+        </div>
+      </div>
+
+      <q-separator inset />
+
+      <h1 class="uppercase">Unser Hintergrund</h1>
       <p>
         Wie ist unsere Idee entstanden? Über soziale Netzwerke sind wir darauf
         aufmerksam geworden, wie unfassbar viele von euch in ihrer Umgebung
@@ -69,51 +140,45 @@
 </template>
 
 <style lang="sass" scoped>
-.introduction
-  padding: 5%
+.tertiary-bg
+  padding: 5% 0
   text-align: center
   background-color: $tertiary
 
-  a
-    text-decoration: none
-    width: 35%
+.vision-box
+  width: 35%
+  box-shadow: 0px 10px 6px #00000029;
+  border-radius: 10px;
+  padding: 5% 0
+  margin-bottom: 2%
+  display: flex
+  background-color: $background
+  .content-box
+    margin: 0 auto
+    width: 75%
 
-  h4
-    text-transform: uppercase
-    margin: 0 0 30px 0
+.icon
+  color: $secondary
+  font-size: 2.5rem
 
-  .q-btn
-    background: white
-    border: 0
-    border-radius: 19px
+.principles
+  background-color: $tertiary
+  border-radius: 10px
+  b
     color: $secondary
-    cursor: pointer
-    font-size: 20px
-    font-weight: 400
-    padding: 0 50px
-    text-transform: uppercase
 
-    &:focus
-      outline: none
-
-    &.primary
-      background: $secondary
-      color: white
-
-    &.small
-      height: 30px
-      line-height: 30px
-      padding: 0 30px
-      font-size: 15px
-      font-weight: 600
-      margin-top: 15px
+.q-separator
+  width: 30%
+  margin: 3% auto 0 auto
+  border: 2px solid $tertiary;
+  background-color: $tertiary
 
 article
-  padding-top: 30px
+  padding: 5% 0
   margin: 20px auto 0
 
-  h1
-    text-align: center
+h1
+  text-align: center
 </style>
 
 <script>
