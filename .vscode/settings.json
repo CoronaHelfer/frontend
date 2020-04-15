@@ -5,24 +5,5 @@
     "source.fixAll": true
   },
   "vetur.format.defaultFormatter.html": "prettyhtml",
-  "vetur.format.defaultFormatter.js": "prettier-eslint",
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#73b553",
-    "activityBar.activeBackground": "#73b553",
-    "activityBar.activeBorder": "#4d6eb2",
-    "activityBar.foreground": "#15202b",
-    "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#4d6eb2",
-    "activityBarBadge.foreground": "#e7e7e7",
-    "titleBar.activeBackground": "#5c9540",
-    "titleBar.inactiveBackground": "#5c954099",
-    "titleBar.activeForeground": "#e7e7e7",
-    "titleBar.inactiveForeground": "#e7e7e799",
-    "statusBar.background": "#5c9540",
-    "statusBarItem.hoverBackground": "#73b553",
-    "statusBar.foreground": "#e7e7e7",
-    "statusBar.border": "#5c9540",
-    "titleBar.border": "#5c9540"
-  },
-  "peacock.color": "#5c9540"
+  "vetur.format.defaultFormatter.js": "prettier-eslint"
 }

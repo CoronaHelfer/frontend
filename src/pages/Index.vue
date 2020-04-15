@@ -1,19 +1,21 @@
 <template>
   <q-page>
     <div class="introduction">
-      <h1 class="uppercase">{{ $t('supportTogether') }}</h1>
-      <div class="row justify-evenly">
-        <router-link class="q-mt-xs uppercase" to="/get-help">
-          <MainButton content="want-help" />
-        </router-link>
-        <router-link class="q-mt-xs uppercase" to="/help">
-          <MainButton content="need-help" />
-        </router-link>
+      <div class="wrapper">
+        <h1 class="uppercase">{{ $t('supportTogether') }}</h1>
+        <div class="row justify-evenly">
+          <router-link class="q-mt-xs uppercase" to="/get-help">
+            <MainButton content="want-help" />
+          </router-link>
+          <router-link class="q-mt-xs uppercase" to="/help">
+            <MainButton content="need-help" />
+          </router-link>
+        </div>
       </div>
     </div>
-    <article>
+    <article class="wrapper">
       <div class="fit row wrap justify-center items-start content-start">
-        <img width="40%" src="~assets/Logo-2.svg" />
+        <img width="30%" src="~assets/Logo-2.svg" />
       </div>
       <h1 class="uppercase">Portal für Nachbarschaftshilfe in deiner Region</h1>
       <i>“Aus der Region - für die Region”</i>
@@ -74,6 +76,7 @@
 
   a
     text-decoration: none
+    width: 35%
 
   h4
     text-transform: uppercase
@@ -108,7 +111,6 @@
 article
   padding-top: 30px
   margin: 20px auto 0
-  width: 60%
 
   h1
     text-align: center
