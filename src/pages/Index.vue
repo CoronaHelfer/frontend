@@ -33,7 +33,7 @@
             CoronaHelfer entlastet Menschen in systemrelevanten Berufen
             (Gesundheits-, Dienstleistungssystem etc.)
           </li>
-          <li>CoronaHelfer unterstütz generell Hilfesuchende</li>
+          <li>CoronaHelfer unterstützt generell Hilfesuchende</li>
           <li>Coronavirus-Nachbarschaftshilfe für alle!</li>
         </ul>
         <h5>Leitsätze für Coronavirus-Nachbarschaftshilfe</h5>
