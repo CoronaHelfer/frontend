@@ -4,10 +4,13 @@
       <div class="wrapper">
         <h1 class="uppercase">{{ $t('supportTogether') }}</h1>
         <div class="row justify-between">
-          <router-link class="q-mt-xs uppercase" to="/get-help">
+          <router-link
+            class="col-xs-12 col-md-4 q-mt-xs uppercase"
+            to="/get-help"
+          >
             <MainButton content="want-help" />
           </router-link>
-          <router-link class="q-mt-xs uppercase" to="/help">
+          <router-link class="col-xs-12 col-md-4 q-mt-xs uppercase" to="/help">
             <MainButton content="need-help" />
           </router-link>
         </div>
@@ -80,40 +83,12 @@
 
       <div class="column">
         <div
+          v-for="item in items"
+          :key="item.img"
           class="principles row q-pa-lg q-mb-lg justify-between items-center"
         >
-          <h2><b>C</b>ool bleiben</h2>
-          <img width="40" src="statics/icons/cool.svg" />
-        </div>
-        <div
-          class="principles row q-pa-lg q-mb-lg justify-between items-center"
-        >
-          <h2><b>O</b>rdentlich Hände waschen</h2>
-          <img width="40" src="statics/icons/Out line.svg" />
-        </div>
-        <div
-          class="principles row q-pa-lg q-mb-lg justify-between items-center"
-        >
-          <h2><b>R</b>ücksichtsvoll bleiben</h2>
-          <img width="40" src="statics/icons/buyer.svg" />
-        </div>
-        <div
-          class="principles row q-pa-lg q-mb-lg justify-between items-center"
-        >
-          <h2><b>O</b>hne Hamsterkäufe</h2>
-          <img width="40" src="statics/icons/hamster.svg" />
-        </div>
-        <div
-          class="principles row q-pa-lg q-mb-lg justify-between items-center"
-        >
-          <h2><b>N</b>achbarschaftshilfe</h2>
-          <img width="40" src="statics/icons/help.svg" />
-        </div>
-        <div
-          class="principles row q-pa-lg q-mb-lg justify-between items-center"
-        >
-          <h2><b>A</b>bstand halten</h2>
-          <img width="40" src="statics/icons/distance.svg" />
+          <h2 v-html="item.principle"></h2>
+          <img width="40" :src="`statics/icons/${item.img}.svg`" />
         </div>
       </div>
 
@@ -187,6 +162,36 @@ import MainButton from 'src/components/MainButton'
 export default {
   components: {
     MainButton
+  },
+  data: () => {
+    return {
+      items: [
+        {
+          img: 'cool',
+          principle: '<b style="color:#EF7D18">C</b>ool bleiben'
+        },
+        {
+          img: 'Out line',
+          principle: '<b style="color:#EF7D18">O</b>rdentlich Hände waschen'
+        },
+        {
+          img: 'buyer',
+          principle: '<b style="color:#EF7D18">R</b>ücksichtsvoll bleiben'
+        },
+        {
+          img: 'hamster',
+          principle: '<b style="color:#EF7D18">O</b>hne Hamsterkäufe'
+        },
+        {
+          img: 'help',
+          principle: '<b style="color:#EF7D18">N</b>achbarschaftshilfe'
+        },
+        {
+          img: 'distance',
+          principle: '<b style="color:#EF7D18">A</b>bstand halten'
+        }
+      ]
+    }
   },
   mounted() {
     if (this.$q.localStorage.getItem('server') === undefined) {

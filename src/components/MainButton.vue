@@ -30,6 +30,7 @@ export default {
 .btn-card
     box-shadow: 0px 10px 6px #00000033
     border-radius: 10px
+
 .btn-card-label
     color: $secondary
     font-weight: bold
