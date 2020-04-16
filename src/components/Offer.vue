@@ -8,7 +8,6 @@
         <q-btn
           rounded
           to="/profile/requests"
-          color="secondary"
           label="Anfragen zeigen"
           style="width: 100%"></q-btn>
     </q-card>
@@ -24,7 +23,6 @@
 <!--        <q-btn-->
 <!--          rounded-->
 <!--          to="/login"-->
-<!--          color="secondary"-->
 <!--          label="Zum Login"-->
 <!--          style="width: 100%"></q-btn>-->
 <!--      </q-card-actions>-->
@@ -50,7 +48,6 @@
       <q-card-actions align="right" class="text-primary">
         <q-btn
           flat
-          color="secondary"
           icon="send"
           v-on:click="sendOffer"></q-btn>
       </q-card-actions>

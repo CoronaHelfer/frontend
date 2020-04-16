@@ -1,15 +1,14 @@
 <template>
   <q-page>
     <header>
-      <h4>Gemeinsam Helfen</h4>
-      <div>
-        <q-btn
-          to="/get-help"
-          label="Ich brauche Hilfe"
-          style="margin-right: 30px"></q-btn>
-        <q-btn
-          to="/help"
-          label="Ich möchte helfen"></q-btn>
+      <h4>{{ $t('supportTogether') }}</h4>
+      <div class="row justify-center">
+        <router-link class="q-mt-xs action-btn" to="/get-help">
+          <q-btn>{{ $t('needHelp') }}</q-btn>
+        </router-link>
+        <router-link class="q-mt-xs action-btn" to="/help">
+          <q-btn>{{ $t('wantHelp') }}</q-btn>
+        </router-link>
       </div>
     </header>
 
@@ -109,6 +108,9 @@ header
       font-weight: 600
       margin-top: 15px
 
+  .action-btn
+    margin-right: 1%
+
 body
   &:before
     background-color: white
@@ -140,9 +142,11 @@ body
 <script>
 export default {
   mounted() {
-    // TODO: Set default values in a way that user does not have to access the landing page first
-    const config = require('../assets/config.json')
-    this.$q.localStorage.set('server', config.url)
+    if (this.$q.localStorage.getItem('server') === null) {
+      // TODO: Set default values in a way that user does not have to access the landing page first
+      const config = require('../assets/config.json')
+      this.$q.localStorage.set('server', config.url)
+    }
   }
 }
 </script>

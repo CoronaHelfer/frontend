@@ -80,7 +80,6 @@
 
         <q-btn
           rounded
-          color="secondary"
           label="Speichern"
           class="full-width"
           :loading="loading"

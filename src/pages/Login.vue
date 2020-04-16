@@ -7,22 +7,22 @@
             <div v-show="error !== ''" class="error">{{ error }}</div>
             <input
               type="text"
-              placeholder="E-Mail oder Telefonnummer"
+              :placeholder="$t('emailOrPassword')"
               v-model="name"
             />
-            <input type="password" placeholder="Passwort" v-model="password" />
+            <input
+              type="password"
+              :placeholder="$t('password')"
+              v-model="password"
+            />
 
             <q-btn
               rounded
               :loading="loading"
-              label="Login"
+              :label="$t('login')"
               v-on:click="login()"
-            />
-            <q-btn
-              rounded
-              label="Registrieren"
-              to="/register"
-            />
+            ></q-btn>
+            <q-btn rounded :label="$t('register')" to="/register"></q-btn>
           </form>
         </div>
       </div>
@@ -44,8 +44,7 @@ body
   box-sizing: border-box
   .container
     width: 400px
-    .login,
-    .register
+    .login, .register
       background-color: WHITE
       padding: 15px 30px
       display: flex
@@ -72,11 +71,8 @@ body
           outline: none
         &.spacer
           margin-bottom: 15px
-      button
-        background-color: $secondary
-        color: WHITE
-        height: 30px
-        line-height: 30px
+      button, a
+        height: 40px
         padding: 0
         font-size: 15px
         font-weight: 600
@@ -161,7 +157,7 @@ export default {
         await callApi(
           this.$q.localStorage.getItem('server') + 'users/me',
           res.token
-        ).then((resp) => {
+        ).then(resp => {
           this.auth = {
             token: res.token,
             firstname: resp.user.firstName,
