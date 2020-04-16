@@ -2,16 +2,17 @@ export const callApi = async (
   url = '',
   token = '',
   data = {},
-  method = 'GET'
+  method = 'GET',
+  headers = {
+    'Content-Type': 'application/json',
+    'X-Access-Token': token
+  }
 ) => {
   const response = await fetch(url, {
     method,
     mode: 'cors',
     cache: 'no-cache',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Access-Token': token
-    },
+    headers: headers,
     body:
         method === 'POST' || method === 'PUT' ? JSON.stringify(data) : undefined // body data type must match "Content-Type" header
   })

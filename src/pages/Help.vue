@@ -128,16 +128,10 @@ export default {
   },
 
   mounted () {
-    // if (this.auth.authenticated) {
-    //   this.fetchRequests()
-    // } else {
-    //   this.$router.push('/login')
-    // }
-
     this.getCurrentPosition()
     this.geoId = Geolocation.watchPosition({}, (position, err) => {
       this.position = position
-      this.fetchRequests(position)
+      this.fetchRequests()
     })
   },
 
@@ -148,18 +142,20 @@ export default {
       })
     },
 
-    async fetchRequests(position) {
-      console.log(position)
+    async fetchRequests() {
       try {
-        const result = await callApi(
+        const headers = new Headers()
+        headers.append('position', this.position.coords.longitude)
+        headers.append('position', this.position.coords.latitude)
+
+        const response = await callApi(
           this.$q.localStorage.getItem('server') + 'publicRequest',
-          '',
-          {
-            position: [position.latitude, position.longitude]
-          },
-          'POST'
+          undefined,
+          undefined,
+          undefined,
+          headers
         )
-        this.requests = result.result
+        this.requests = response.result
       } catch (err) {
         console.error(err)
       }
