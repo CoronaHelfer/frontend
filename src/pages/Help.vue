@@ -105,8 +105,7 @@ export default {
     return {
       requests: [],
       selectedRequest: undefined,
-      isDialogOpen: false,
-      position: ''
+      isDialogOpen: false
     }
   },
 
@@ -129,24 +128,20 @@ export default {
 
   mounted () {
     this.getCurrentPosition()
-    this.geoId = Geolocation.watchPosition({}, (position, err) => {
-      this.position = position
-      this.fetchRequests()
-    })
   },
 
   methods: {
     getCurrentPosition() {
       Geolocation.getCurrentPosition().then(position => {
-        this.position = position
+        this.fetchRequests(position.coords.longitude, position.coords.latitude)
       })
     },
 
-    async fetchRequests() {
+    async fetchRequests(longitude, latitude) {
       try {
         const headers = new Headers()
-        headers.append('position', this.position.coords.longitude)
-        headers.append('position', this.position.coords.latitude)
+        headers.append('position', longitude)
+        headers.append('position', latitude)
 
         const response = await callApi(
           this.$q.localStorage.getItem('server') + 'publicRequest',
