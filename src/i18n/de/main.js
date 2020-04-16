@@ -3,8 +3,8 @@ export default {
   needHelp: 'Ich brauche Hilfe',
   wantHelp: 'Ich möchte helfen',
   searchRegion: 'Deine Region durchsuchen...',
-  saveElder: 'schütz gefährdete Personen',
+  saveElder: 'schützt gefährdete Personen',
   relievePeople: 'entlastet Menschen in systemrelevanten Berufen',
-  supportPeople: 'unterstütz Hilfesuchende',
+  supportPeople: 'unterstützt Hilfesuchende',
   communitySupport: 'Nachbarschaftshilfe für alle'
 }

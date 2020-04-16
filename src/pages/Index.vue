@@ -87,7 +87,9 @@
           :key="item.img"
           class="principles row q-pa-lg q-mb-lg justify-between items-center"
         >
-          <h2 v-html="item.principle"></h2>
+          <h2 class="principle-sentences">
+            {{ item.principle }}
+          </h2>
           <img width="40" :src="`statics/icons/${item.img}.svg`" />
         </div>
       </div>
@@ -122,11 +124,10 @@
 
 .vision-box
   width: 35%
-  box-shadow: 0px 10px 6px #00000029;
-  border-radius: 10px;
+  box-shadow: 0px 10px 6px #00000029
+  border-radius: 10px
   padding: 5% 0
   margin-bottom: 2%
-  display: flex
   background-color: $background
   .content-box
     margin: 0 auto
@@ -139,7 +140,8 @@
 .principles
   background-color: $tertiary
   border-radius: 10px
-  b
+  .principle-sentences::first-letter
+    font-weight: bold
     color: $secondary
 
 .q-separator
@@ -168,27 +170,27 @@ export default {
       items: [
         {
           img: 'cool',
-          principle: '<b style="color:#EF7D18">C</b>ool bleiben'
+          principle: 'Cool bleiben'
         },
         {
           img: 'Out line',
-          principle: '<b style="color:#EF7D18">O</b>rdentlich Hände waschen'
+          principle: 'Ordentlich Hände waschen'
         },
         {
           img: 'buyer',
-          principle: '<b style="color:#EF7D18">R</b>ücksichtsvoll bleiben'
+          principle: 'Rücksichtsvoll bleiben'
         },
         {
           img: 'hamster',
-          principle: '<b style="color:#EF7D18">O</b>hne Hamsterkäufe'
+          principle: 'Ohne Hamsterkäufe'
         },
         {
           img: 'help',
-          principle: '<b style="color:#EF7D18">N</b>achbarschaftshilfe'
+          principle: 'Nachbarschaftshilfe'
         },
         {
           img: 'distance',
-          principle: '<b style="color:#EF7D18">A</b>bstand halten'
+          principle: 'Abstand halten'
         }
       ]
     }
