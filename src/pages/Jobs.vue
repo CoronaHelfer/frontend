@@ -1,8 +1,8 @@
 <template>
   <q-page>
-    <header>
+    <div class="title">
       <h1>{{$t('jobsHeader')}}</h1>
-    </header>
+    </div>
     <body>
       <article>
         <h2>{{$t('jobsFeDev')}}</h2>
@@ -21,23 +21,18 @@
 </template>
 
 <style lang="sass" scoped>
-header
+.title
+  margin-top: 75px
   text-align: center
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
-  padding: 50px
+  background: url('../statics/images/Banner-Jobs.png') no-repeat
+  background-size: 100%
   color: white
+  height: 450px
+  h1
+    padding: 298px 676px 56px 404px
+    color: white
 
 body
-  &:before
-    background-color: white
-    border-radius: 100%
-    content: ''
-    height: 50px
-    position: absolute
-    top: -25px
-    width: 100%
-
   background-color: white
   position: relative
   padding-bottom: 20px
