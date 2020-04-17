@@ -27,5 +27,4 @@ describe('Login', () => {
         .click()
     })
   })
-  it('navigates to previous page on successful login', () => {})
 })
