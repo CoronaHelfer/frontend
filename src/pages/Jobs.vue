@@ -2,28 +2,24 @@
   <q-page>
     <div class="title"/>
     <article>
-      <h3>Reinschauen lohnt sich:</h3>
-      <h1>Wir suchen Verstärkung</h1>
+      <h3>{{$t('jobsSubtitle')}}</h3>
+      <h1>{{$t('jobsTitle')}}</h1>
 
-      <p>Der ideale Kandidat wird für den Entwurf, die Entwicklung, das Testen und das Debugging von reaktionsschnellen
-        Web- und Mobilanwendungen für das Unternehmen verantwortlich sein. Unter Verwendung von JavaScript und
-        Web-Framework-Anwendungen, wie Vue.Js und Quasar sollte dieser Kandidat in der Lage sein, Benutzer- und
-        Geschäftsanforderungen in funktionales Frontend-Design umzusetzen.</p>
+      <p>{{$t('jobsIntro')}}</p>
 
-      <h3 class="uppercase">Verantwortlichkeiten</h3>
-      <p>Entwerfen, Entwickeln und Testen von UI für mobile und Web-Anwendungen</p>
-      <p>Erstellen von wiederverwendbarem Code und Bibliotheken für die zukünftige Verwendung</p>
-      <p>Genaue Übersetzung von Benutzer- und Geschäftsanforderungen in funktionalen Frontend-Code</p>
+      <h3 class="uppercase">{{$t('jobsResponsibilities')}}</h3>
+      <p>{{$t('jobsResp1')}}</p>
+      <p>{{$t('jobsResp2')}}</p>
+      <p>{{$t('jobsResp3')}}</p>
 
-      <h3 class="uppercase">Qualifikationen</h3>
-      <p>Äquivalent in Informatik</p>
-      <p>optimalerweise 2 Jahre Erfahrung in der Frontend-Entwicklung</p>
-      <p>Motivation zur eigenstädigen Weiterentwicklung</p>
-      <p>Vertrautheit mit Scrum/Agile Entwicklungsmethoden</p>
-      <p>Erfahrung in der Erstellung</p>
-      <p>objektorientierter Webanwendungen in JavaScript, Vue.Js Framework und dem Quasar Framework</p>
+      <h3 class="uppercase">{{$t('jobsQualifications')}}</h3>
+      <p>{{$t('jobsQual1')}}</p>
+      <p>{{$t('jobsQual2')}}</p>
+      <p>{{$t('jobsQual3')}}</p>
+      <p>{{$t('jobsQual4')}}</p>
+      <p>{{$t('jobsQual5')}}</p>
 
-      <h3 class="uppercase">Interessiert?</h3>
+      <h3 class="uppercase">{{$t('jobsContact1')}}</h3>
       {{$t('jobsContact2')}}: <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a>
     </article>
   </q-page>
@@ -54,6 +50,7 @@ article
     font-weight: bold
     font-size: 4.4rem
     line-height: 4.7rem
+    white-space: nowrap
 
   p:first-of-type
     margin-top: 5rem
