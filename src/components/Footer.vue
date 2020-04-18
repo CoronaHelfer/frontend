@@ -1,10 +1,10 @@
 <template>
-  <q-footer container="true">
+  <q-footer container="true" class="q-py-md">
     <q-toolbar class="wrapper row no-wrap items-center justify-between">
       <router-link to="/">
         <img class="logo" width="100" src="~assets/CoronaHelfer-Logo.svg" />
       </router-link>
-      <q-tabs>
+      <q-tabs class="footer-links">
         <q-route-tab to="/imprint" :label="$t('imprint')" />
         <q-route-tab to="/privacy" :label="$t('privacy')" />
       </q-tabs>
@@ -29,6 +29,8 @@
 <style lang="sass" scoped>
 footer
   position: initial
+  .footer-links div
+    display: block
   .q-toolbar
     padding: 0
     .social-media

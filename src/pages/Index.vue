@@ -42,7 +42,7 @@
         <h1 class="uppercase">Ziel und Vision der Initiative CoronaHelfer</h1>
         <div class="fit row wrap justify-between items-center content-center">
           <div class="vision-box">
-            <div class="content-box column">
+            <div class="content-box">
               <img src="statics/icons/elderly-people-294088.svg" />
               <p class="q-mt-auto">
                 {{ $t('saveElder') }}
@@ -50,7 +50,7 @@
             </div>
           </div>
           <div class="vision-box">
-            <div class="content-box column">
+            <div class="content-box">
               <img src="statics/icons/entlastet Menschen.svg" />
               <p class="q-mt-auto">
                 {{ $t('relievePeople') }}
@@ -88,7 +88,7 @@
           class="principles row q-pa-lg q-mb-lg justify-between items-center"
         >
           <h2 class="principle-sentences">
-            {{ item.principle }}
+            {{ $t(item.principle) }}
           </h2>
           <img width="40" :src="`statics/icons/${item.img}.svg`" />
         </div>
@@ -123,7 +123,8 @@
   background-color: $tertiary
 
 .vision-box
-  width: 35%
+  width: 40%
+  height: 300px
   box-shadow: 0px 10px 6px #00000029
   border-radius: 10px
   padding: 5% 0
@@ -170,27 +171,27 @@ export default {
       items: [
         {
           img: 'cool',
-          principle: 'Cool bleiben'
+          principle: 'stayCool'
         },
         {
           img: 'Out line',
-          principle: 'Ordentlich Hände waschen'
+          principle: 'washHands'
         },
         {
           img: 'buyer',
-          principle: 'Rücksichtsvoll bleiben'
+          principle: 'behave'
         },
         {
           img: 'hamster',
-          principle: 'Ohne Hamsterkäufe'
+          principle: 'noHamster'
         },
         {
           img: 'help',
-          principle: 'Nachbarschaftshilfe'
+          principle: 'supportNeighbor'
         },
         {
           img: 'distance',
-          principle: 'Abstand halten'
+          principle: 'socialDistance'
         }
       ]
     }
