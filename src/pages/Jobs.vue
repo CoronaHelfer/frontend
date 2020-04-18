@@ -40,7 +40,7 @@
 
 article
   padding: 30px 0 20px 0
-  margin: -450px auto 0
+  margin: -400px auto 0
   max-width: 800px
   min-height: calc(100vh - 340px)
 
