@@ -5,5 +5,8 @@ export default {
   phone: 'Phone',
   password: 'Password',
   passwordRepeat: 'Repeat Password',
-  register: 'Register'
+  register: 'Register',
+  noMatchingPassword: 'Passwords do not match.',
+  emptyField: 'The field is empty.',
+  missingFields: 'Not all fields are filled.'
 }
