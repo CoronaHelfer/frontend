@@ -7,22 +7,22 @@
             <div v-if="error !== ''" class="error">{{ error }}</div>
             <input
               type="text"
-              placeholder="E-Mail oder Telefonnummer"
+              :placeholder="$t('emailOrPassword')"
               v-model="name"
             />
-            <input type="password" placeholder="Passwort" v-model="password" />
+            <input
+              type="password"
+              :placeholder="$t('password')"
+              v-model="password"
+            />
 
             <q-btn
               rounded
               :loading="loading"
-              label="Login"
+              :label="$t('login')"
               v-on:click="login()"
             ></q-btn>
-            <q-btn
-              rounded
-              label="Registrieren"
-              to="/register"
-            ></q-btn>
+            <q-btn rounded :label="$t('register')" to="/register"></q-btn>
           </form>
         </div>
       </div>

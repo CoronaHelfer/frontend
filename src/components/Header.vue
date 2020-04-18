@@ -44,7 +44,6 @@
   color: WHITE
   justify-content: space-between
   box-sizing: border-box
-  height: 90px
   padding: 0 80px
 .logo
   margin: 0.75rem

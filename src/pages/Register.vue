@@ -4,35 +4,61 @@
       <div class="authenticate">
         <div class="container">
           <form class="register">
-            <div v-if="error !== ''" class="error">{{error}}</div>
+            <div v-show="error !== ''" class="error">{{ error }}</div>
             <div class="aligner">
               <div class="left">
-                <div class="avatar"/>
+                <div class="avatar" />
               </div>
               <div>
-                <input type="text" placeholder="Vorname" v-model="firstname" />
-                <input type="text" placeholder="Nachname" v-model="lastname" />
+                <input
+                  type="text"
+                  name="firstname"
+                  :placeholder="$t('firstname')"
+                  v-model="firstname"
+                />
+                <input
+                  type="text"
+                  name="lastname"
+                  :placeholder="$t('lastname')"
+                  v-model="lastname"
+                />
               </div>
             </div>
-            <input type="text" placeholder="E-Mail" v-model="mail" />
+            <input
+              type="text"
+              name="mail"
+              :placeholder="$t('mail')"
+              v-model="mail"
+            />
             <input
               class="spacer"
               type="text"
-              placeholder="Telefon"
+              name="phone"
+              :placeholder="$t('phone')"
               v-model="phone"
             />
-            <input type="password" placeholder="Passwort" v-model="password" />
             <input
               type="password"
-              placeholder="Passwort wiederholen"
+              name="password"
+              :placeholder="$t('password')"
+              v-model="password"
+            />
+            <input
+              type="password"
+              name="passwordRepeat"
+              :placeholder="$t('passwordRepeat')"
               v-model="passwordRepeat"
             />
 
-            <p>Mit der Registrierung akzeptierst du unsere <router-link to="/privacy">Datenschutzerklärung</router-link>.</p>
+            <p>
+              Mit der Registrierung akzeptierst du unsere
+              <router-link to="/privacy">Datenschutzerklärung</router-link>.
+            </p>
             <q-btn
               rounded
+              id="register"
               :loading="loading"
-              label="Registrieren"
+              :label="$t('register')"
               v-on:click="register"
             />
           </form>

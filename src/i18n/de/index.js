@@ -1,40 +1,19 @@
+import register from './register'
+import login from './login'
+import main from './main'
+import pages from './pages'
+import jobs from './jobs'
+import requests from './requests'
+import principles from './principles'
+import errors from './errors'
+
 export default {
-  edit: 'Bearbeiten',
-  delete: 'Löschen',
-  failed: 'Aktion fehlgeschlagen',
-  success: 'Aktion erfolgreich',
-  wrongLogin: 'Falscher Benutzername oder Passwort',
-  help: 'Helfen',
-  getHelp: 'Hilfe bekommen',
-  goBack: 'Zurück',
-  information: 'Information',
-  jobs: 'Jobs',
-  jobsHeader: 'Werde Teil des Teams',
-  jobsFeDev: 'Frontend Developer',
-  jobsBeDev: 'Backend Developer',
-  jobsQualifications: 'Qualifikationen',
-  jobsLocation: 'Arbeite, von wo du willst.',
-  jobsContact1: 'Interessiert?',
-  jobsContact2: 'Kontaktiere uns',
-  profile: 'Profil',
-  register: 'Registrieren',
-  login: 'Login',
-  noMatchingPassword: 'Passwörter stimmen nicht überein.',
-  noOffers: 'Du hast noch keine Angebote für dieses Gesuch bekommen.',
-  offers: 'Angebote',
-  emptyField: 'Das Feld ist nicht ausgefüllt.',
-  missingFields: 'Nicht alle Felder sind ausgefüllt.',
-  somethingWentWrong:
-    'Irgendwas ist schief gelaufen. Bitte versuche es nochmal!',
-  category: 'Kategorie',
-  request: 'Gesuch',
-  myRequests: 'Meine Anzeigen',
-  noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.',
-  imprint: 'Impressum',
-  privacy: 'Datenschutz',
-  notImplemented:
-    'Entschuldigung, diese Funktion ist leider noch nicht verfügbar.',
-  supportTogether: 'Gemeinsam Helfen',
-  needHelp: 'Ich brauche Hilfe',
-  wantHelp: 'Ich möchte helfen'
+  ...main,
+  ...pages,
+  ...register,
+  ...login,
+  ...jobs,
+  ...requests,
+  ...principles,
+  ...errors
 }
