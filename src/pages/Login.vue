@@ -8,22 +8,31 @@
       <form>
         <div v-if="error !== ''" class="error">{{ error }}</div>
         <q-input
+          filled
+          bg-color="yellow-1"
           :label="$t('emailOrPassword')"
           v-model="name"
         />
         <q-input
+          filled
+          bg-color="yellow-1"
           type="password"
           :label="$t('password')"
           v-model="password"
         />
 
-        <q-btn
-          rounded
-          :loading="loading"
-          :label="$t('login')"
-          v-on:click="login()"
-        ></q-btn>
-        <q-btn rounded :label="$t('register')" to="/register"></q-btn>
+        <div class="row">
+          <q-btn
+            color="primary"
+            :loading="loading"
+            :label="$t('login')"
+            v-on:click="login()"
+          ></q-btn>
+          <q-btn
+            flat
+            label="Oder hier registieren"
+            to="/register"></q-btn>
+        </div>
       </form>
     </q-card>
     <img class="logo" width="100"  />
@@ -52,32 +61,15 @@
   position: absolute
 
 form
-  padding: 15px 30px
-  display: flex
-  flex-direction: column
+  padding: 63px
+  .q-input
+    margin: 1rem 0
 
-  input
-    background-color: $tertiary
-    border: none
-    box-shadow: none
-    padding: 0 25px
-    height: 30px
-    box-sizing: border-box
-    margin-bottom: 5px
-    border-radius: 19px
-
-    &:focus
-      outline: none
-
-    &.spacer
-      margin-bottom: 15px
-
-  button, a
-    height: 40px
-    padding: 0
+  .q-btn
+    padding: 0 3rem
     font-size: 15px
-    font-weight: 600
     margin-top: 15px
+    border-radius: 0.6rem
 </style>
 
 <script>
