@@ -33,6 +33,16 @@
             label="Oder hier registieren"
             to="/register"></q-btn>
         </div>
+
+        <button class="oauth facebook row">
+          <div><q-icon name="fab fa-facebook-f"></q-icon></div>
+          <div>Mit Facebook anmelden</div>
+        </button>
+
+        <button class="oauth google row">
+          <div><q-icon name="fab fa-google"></q-icon></div>
+          <div>Mit Google anmelden</div>
+        </button>
       </form>
     </q-card>
     <img class="logo" width="100"  />
@@ -62,14 +72,42 @@
 
 form
   padding: 63px
+  .error
+    background: RED
+    color: WHITE
+    padding: 10px 25px
+    margin-bottom: 15px
+    border-radius: 19px
+    font-size: 13px
+
   .q-input
     margin: 1rem 0
+
+  .q-btn:first-of-type
+    border-radius: 0.6rem
 
   .q-btn
     padding: 0 3rem
     font-size: 15px
     margin-top: 15px
-    border-radius: 0.6rem
+
+  .oauth
+    background-color: #4285F4
+    width: 100%
+    position: relative
+    border-radius: 0
+    i
+      position: absolute
+      top: 1rem
+      left: 1rem
+    div:last-of-type
+      width: 100%
+
+  .facebook
+    margin-top: 8rem
+
+  .google
+    margin-top: 2rem
 </style>
 
 <script>
