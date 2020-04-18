@@ -5,7 +5,10 @@
       to="/login"
       class="login-btn"
       label="Login"
-    />
+      size="md"
+    >
+      <q-icon right size="1em" name="fas fa-user" />
+    </q-btn>
 
     <li v-if="auth.authenticated" class="menu-btn" v-on:click="open = !open">
       <span>{{ auth.firstname }} {{ auth.lastname }}</span>
@@ -24,10 +27,8 @@
 <style lang="sass" scoped>
 .login-btn
   background-color: $secondary
-  padding: 3px 20px
-  border-radius: 20px
-  font-weight: 600
-  font-size: 15px
+  padding: 0 10px
+  border-radius: 10px
 
   button
     padding: 0
@@ -36,6 +37,9 @@
     color: WHITE
     border: 0
     font-size: 15px
+
+.q-icon
+  font-size: 1em
 
 .menu-btn
   background-color: $secondary
@@ -114,7 +118,8 @@ export default {
       }
       this.$q.sessionStorage.clear()
       this.$q.localStorage.clear()
-      if (this.$q.localStorage.getItem('server') === null) { // TODO: Deduplicate this
+      if (this.$q.localStorage.getItem('server') === null) {
+        // TODO: Deduplicate this
         const config = require('../assets/config.json')
         this.$q.localStorage.set('server', config.url)
       }
