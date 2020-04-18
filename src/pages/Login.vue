@@ -56,29 +56,28 @@
   display: flex
 
 .q-card:first-of-type
-  width: 544px
+  width: 34rem
   right: 20rem
   z-index: 1
   padding: 6.8rem 4.1rem
   position: relative
 
 .q-card:last-of-type
-  width: 1112px
-  height: 597px
+  width: 69.5rem
+  height: 37.5rem
   background-color: $secondary
   border-radius: 0.6rem
   padding-left: 30rem
   position: absolute
 
 form
-  padding: 63px
+  padding: 4rem
   .error
     background: RED
     color: WHITE
-    padding: 10px 25px
-    margin-bottom: 15px
-    border-radius: 19px
-    font-size: 13px
+    padding: 0.6rem 1.6rem
+    margin-bottom: 1rem
+    border-radius: 1.2rem
 
   .q-input
     margin: 1rem 0
@@ -87,9 +86,9 @@ form
     border-radius: 0.6rem
 
   .q-btn
-    padding: 0 3rem
-    font-size: 15px
-    margin-top: 15px
+    padding: 0 2rem
+    font-size: 1rem
+    margin-top: 1rem
 
   .oauth
     background-color: #4285F4
