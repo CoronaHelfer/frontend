@@ -4,6 +4,7 @@ import main from './main'
 import pages from './pages'
 import jobs from './jobs'
 import requests from './requests'
+import principles from './principles'
 import errors from './errors'
 
 export default {
@@ -13,5 +14,6 @@ export default {
   ...login,
   ...jobs,
   ...requests,
+  ...principles,
   ...errors
 }

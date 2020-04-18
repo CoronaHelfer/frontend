@@ -113,6 +113,11 @@ export default {
         authenticated: false
       }
       this.$q.sessionStorage.clear()
+      this.$q.localStorage.clear()
+      if (this.$q.localStorage.getItem('server') === null) { // TODO: Deduplicate this
+        const config = require('../assets/config.json')
+        this.$q.localStorage.set('server', config.url)
+      }
       this.$router.push('/login')
     }
   }

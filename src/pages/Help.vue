@@ -139,12 +139,12 @@ export default {
           this.$q.localStorage.getItem('server') + 'publicRequest',
           '',
           {
-            'address.plz': '69199', // TODO: use actual values via geocoding
-            'address.city': 'Mannheim',
+            'address.plz': '19395', // TODO: use actual values via geocoding
+            'address.city': 'Plau',
             'address.street': 'Hans-Sachs-Ring',
             'address.street_nr': '5'
           },
-          'POST'
+          'GET'
         )
         this.requests = result.result
       } catch (err) {

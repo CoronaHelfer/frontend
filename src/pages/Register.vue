@@ -210,7 +210,7 @@ export default {
         await callApi(
           this.$q.localStorage.getItem('server') + 'users/me',
           res.token
-        ).then(resp => {
+        ).then((resp) => {
           this.auth = {
             token: res.token,
             firstname: resp.user.firstName,
