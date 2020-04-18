@@ -1,87 +1,83 @@
 <template>
   <q-page>
-    <body>
-      <div class="authenticate">
-        <div class="container">
-          <form class="login">
-            <div v-if="error !== ''" class="error">{{ error }}</div>
-            <input
-              type="text"
-              :placeholder="$t('emailOrPassword')"
-              v-model="name"
-            />
-            <input
-              type="password"
-              :placeholder="$t('password')"
-              v-model="password"
-            />
+    <q-card class="bg-black flex flex-center">
+      <q-img src="~assets/CoronaHelfer-Logo.svg"></q-img>
+    </q-card>
 
-            <q-btn
-              rounded
-              :loading="loading"
-              :label="$t('login')"
-              v-on:click="login()"
-            ></q-btn>
-            <q-btn rounded :label="$t('register')" to="/register"></q-btn>
-          </form>
-        </div>
-      </div>
-    </body>
+    <q-card>
+      <form>
+        <div v-if="error !== ''" class="error">{{ error }}</div>
+        <q-input
+          :label="$t('emailOrPassword')"
+          v-model="name"
+        />
+        <q-input
+          type="password"
+          :label="$t('password')"
+          v-model="password"
+        />
+
+        <q-btn
+          rounded
+          :loading="loading"
+          :label="$t('login')"
+          v-on:click="login()"
+        ></q-btn>
+        <q-btn rounded :label="$t('register')" to="/register"></q-btn>
+      </form>
+    </q-card>
+    <img class="logo" width="100"  />
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-body
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
-
-.authenticate
-  padding: 20px
-  display: flex
+.q-page
   justify-content: center
   align-items: center
-  height: calc(100vh - 170px)
-  box-sizing: border-box
-  .container
-    width: 400px
-    .login, .register
-      background-color: WHITE
-      padding: 15px 30px
-      display: flex
-      flex-direction: column
-      border-radius: 25px
-      input
-        width: 100%
-        background-color: LIGHTGRAY
-        border: none
-        box-shadow: none
-        padding: 0 25px
-        height: 30px
-        box-sizing: border-box
-        margin-bottom: 5px
-        border-radius: 19px
-        &:focus
-          outline: none
-        &.spacer
-          margin-bottom: 15px
-      button, a
-        height: 40px
-        padding: 0
-        font-size: 15px
-        font-weight: 600
-        margin-top: 15px
-    .register
-      .aligner
-        display: flex
-        margin-bottom: 10px
-        .left
-          width: 40%
-          .avatar
-            background: url('../statics/images/avatar.jpg') no-repeat
-            background-size: cover
-            width: 65px
-            height: 65px
-            border-radius: 100%
+  display: flex
+
+.q-card:first-of-type
+  width: 544px
+  right: 20rem
+  z-index: 1
+  padding: 6.8rem 4.1rem
+  position: relative
+
+.q-card:last-of-type
+  width: 1112px
+  height: 597px
+  background-color: $secondary
+  border-radius: 0.6rem
+  padding-left: 30rem
+  position: absolute
+
+form
+  padding: 15px 30px
+  display: flex
+  flex-direction: column
+
+  input
+    background-color: $tertiary
+    border: none
+    box-shadow: none
+    padding: 0 25px
+    height: 30px
+    box-sizing: border-box
+    margin-bottom: 5px
+    border-radius: 19px
+
+    &:focus
+      outline: none
+
+    &.spacer
+      margin-bottom: 15px
+
+  button, a
+    height: 40px
+    padding: 0
+    font-size: 15px
+    font-weight: 600
+    margin-top: 15px
 </style>
 
 <script>
