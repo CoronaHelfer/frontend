@@ -1,58 +1,67 @@
 <template>
   <q-page>
-    <header>
-      <h1>{{$t('jobsHeader')}}</h1>
-    </header>
-    <body>
-      <article>
-        <h2>{{$t('jobsFeDev')}}</h2>
-        <strong>{{$t('jobsQualifications')}}:</strong> Vue.js + Quasar
-        <p>{{$t('jobsLocation')}}</p>
+    <div class="title"/>
+    <article>
+      <h3>{{$t('jobsSubtitle')}}</h3>
+      <h1>{{$t('jobsTitle')}}</h1>
 
-        <h2>{{$t('jobsBeDev')}}</h2>
-        <strong>{{$t('jobsQualifications')}}:</strong> Node.js + Swagger
-        <p>{{$t('jobsLocation')}}</p>
+      <p>{{$t('jobsIntro')}}</p>
 
-        <h2>{{$t('jobsContact1')}}</h2>
-        {{$t('jobsContact2')}}: <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a>
-      </article>
-    </body>
+      <h3 class="uppercase">{{$t('jobsResponsibilities')}}</h3>
+      <p>{{$t('jobsResp1')}}</p>
+      <p>{{$t('jobsResp2')}}</p>
+      <p>{{$t('jobsResp3')}}</p>
+
+      <h3 class="uppercase">{{$t('jobsQualifications')}}</h3>
+      <p>{{$t('jobsQual1')}}</p>
+      <p>{{$t('jobsQual2')}}</p>
+      <p>{{$t('jobsQual3')}}</p>
+      <p>{{$t('jobsQual4')}}</p>
+      <p>{{$t('jobsQual5')}}</p>
+
+      <h3 class="uppercase">{{$t('jobsContact1')}}</h3>
+      {{$t('jobsContact2')}}: <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a>
+    </article>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-header
+.title
+  margin-top: 4.7rem
   text-align: center
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
-  padding: 50px
+  background: url('../statics/images/Banner-Jobs.png') no-repeat
+  background-size: 100%
   color: white
+  height: 28.1rem
 
-body
-  &:before
-    background-color: white
-    border-radius: 100%
-    content: ''
-    height: 50px
-    position: absolute
-    top: -25px
-    width: 100%
+article
+  padding: 1.9rem 0 1.3rem 0
+  margin: -25rem auto 0
+  max-width: 50rem
+  min-height: calc(100vh - 21.3rem)
 
-  background-color: white
-  position: relative
-  padding-bottom: 20px
-  min-height: calc(100vh - 340px)
+  h3:first-of-type
+    margin-top: 13.8rem
+    color: white
 
-  article
-    padding-top: 30px
-    margin: 20px auto 0
-    max-width: 800px
+  h1
+    margin-top: -1.3rem
+    color: white
+    font-weight: bold
+    font-size: 4.4rem
+    line-height: 4.7rem
+    white-space: nowrap
 
-h2
-  margin-top: 40px
+  p:first-of-type
+    margin-top: 5rem
+
+  h3
+    margin-top: 6.3rem
+
+  a
+    color: $secondary
 </style>
 
 <script>
-export default {
-}
+export default {}
 </script>
