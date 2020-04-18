@@ -31,37 +31,35 @@
 
 <style lang="sass" scoped>
 .title
-  margin-top: 75px
+  margin-top: 4.7rem
   text-align: center
   background: url('../statics/images/Banner-Jobs.png') no-repeat
   background-size: 100%
   color: white
-  height: 450px
+  height: 28.1rem
 
 article
-  padding: 30px 0 20px 0
-  margin: -400px auto 0
-  max-width: 800px
-  min-height: calc(100vh - 340px)
+  padding: 1.9rem 0 1.3rem 0
+  margin: -25rem auto 0
+  max-width: 50rem
+  min-height: calc(100vh - 21.3rem)
 
   h3:first-of-type
-    margin-top: 220px
+    margin-top: 13.8rem
     color: white
-    text-align: left
 
   h1
-    margin-top: -20px
+    margin-top: -1.3rem
     color: white
     font-weight: bold
-    font-size: 70px
-    line-height: 96px
-    text-align: left
+    font-size: 4.4rem
+    line-height: 4.7rem
 
   p:first-of-type
-    margin-top: 75px
+    margin-top: 5rem
 
   h3
-    margin-top: 100px
+    margin-top: 6.3rem
 
   a
     color: $secondary
