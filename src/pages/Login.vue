@@ -1,87 +1,112 @@
 <template>
   <q-page>
-    <body>
-      <div class="authenticate">
-        <div class="container">
-          <form class="login">
-            <div v-if="error !== ''" class="error">{{ error }}</div>
-            <input
-              type="text"
-              :placeholder="$t('emailOrPassword')"
-              v-model="name"
-            />
-            <input
-              type="password"
-              :placeholder="$t('password')"
-              v-model="password"
-            />
+    <q-card class="bg-black flex flex-center">
+      <q-img src="~assets/CoronaHelfer-Logo.svg"></q-img>
+    </q-card>
 
-            <q-btn
-              rounded
-              :loading="loading"
-              :label="$t('login')"
-              v-on:click="login()"
-            ></q-btn>
-            <q-btn rounded :label="$t('register')" to="/register"></q-btn>
-          </form>
+    <q-card>
+      <form>
+        <div v-if="error !== ''" class="error">{{ error }}</div>
+        <q-input
+          filled
+          bg-color="yellow-1"
+          :label="$t('emailOrPassword')"
+          v-model="name"
+        />
+        <q-input
+          filled
+          bg-color="yellow-1"
+          type="password"
+          :label="$t('password')"
+          v-model="password"
+        />
+
+        <div class="row">
+          <q-btn
+            color="primary"
+            :loading="loading"
+            :label="$t('login')"
+            v-on:click="login()"
+          ></q-btn>
+          <q-btn
+            flat
+            :label="$t('orRegister')"
+            to="/register"></q-btn>
         </div>
-      </div>
-    </body>
+
+        <button class="oauth facebook row">
+          <div><q-icon name="fab fa-facebook-f"></q-icon></div>
+          <div>{{$t('loginFacebook')}}</div>
+        </button>
+
+        <button class="oauth google row">
+          <div><q-icon name="fab fa-google"></q-icon></div>
+          <div>{{$t('loginGoogle')}}</div>
+        </button>
+      </form>
+    </q-card>
+    <img class="logo" width="100"  />
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-body
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
-
-.authenticate
-  padding: 20px
-  display: flex
+.q-page
   justify-content: center
   align-items: center
-  height: calc(100vh - 170px)
-  box-sizing: border-box
-  .container
-    width: 400px
-    .login, .register
-      background-color: WHITE
-      padding: 15px 30px
-      display: flex
-      flex-direction: column
-      border-radius: 25px
-      input
-        width: 100%
-        background-color: LIGHTGRAY
-        border: none
-        box-shadow: none
-        padding: 0 25px
-        height: 30px
-        box-sizing: border-box
-        margin-bottom: 5px
-        border-radius: 19px
-        &:focus
-          outline: none
-        &.spacer
-          margin-bottom: 15px
-      button, a
-        height: 40px
-        padding: 0
-        font-size: 15px
-        font-weight: 600
-        margin-top: 15px
-    .register
-      .aligner
-        display: flex
-        margin-bottom: 10px
-        .left
-          width: 40%
-          .avatar
-            background: url('../statics/images/avatar.jpg') no-repeat
-            background-size: cover
-            width: 65px
-            height: 65px
-            border-radius: 100%
+  display: flex
+
+.q-card:first-of-type
+  width: 34rem
+  right: 20rem
+  z-index: 1
+  padding: 6.8rem 4.1rem
+  position: relative
+
+.q-card:last-of-type
+  width: 69.5rem
+  height: 37.5rem
+  background-color: $secondary
+  border-radius: 0.6rem
+  padding-left: 30rem
+  position: absolute
+
+form
+  padding: 4rem
+  .error
+    background: RED
+    color: WHITE
+    padding: 0.6rem 1.6rem
+    margin-bottom: 1rem
+    border-radius: 1.2rem
+
+  .q-input
+    margin: 1rem 0
+
+  .q-btn:first-of-type
+    border-radius: 0.6rem
+
+  .q-btn
+    padding: 0 2rem
+    font-size: 1rem
+    margin-top: 1rem
+
+  .oauth
+    background-color: #4285F4
+    width: 100%
+    position: relative
+    border-radius: 0
+    i
+      position: absolute
+      top: 1rem
+      left: 1rem
+    div:last-of-type
+      width: 100%
+
+  .facebook
+    margin-top: 8rem
+
+  .google
+    margin-top: 2rem
 </style>
 
 <script>
