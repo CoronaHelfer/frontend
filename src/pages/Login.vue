@@ -30,18 +30,18 @@
           ></q-btn>
           <q-btn
             flat
-            label="Oder hier registieren"
+            :label="$t('orRegister')"
             to="/register"></q-btn>
         </div>
 
         <button class="oauth facebook row">
           <div><q-icon name="fab fa-facebook-f"></q-icon></div>
-          <div>Mit Facebook anmelden</div>
+          <div>{{$t('loginFacebook')}}</div>
         </button>
 
         <button class="oauth google row">
           <div><q-icon name="fab fa-google"></q-icon></div>
-          <div>Mit Google anmelden</div>
+          <div>{{$t('loginGoogle')}}</div>
         </button>
       </form>
     </q-card>
