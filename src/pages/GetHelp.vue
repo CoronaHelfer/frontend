@@ -157,7 +157,7 @@ export default {
   methods: {
     async loadCategories () {
       try {
-        let categories = await fetch(this.$q.localStorage.getItem('server') + 'category')
+        let categories = await fetch(this.$q.localStorage.getItem('server') + '/api/v1/category')
         categories = await categories.json()
 
         if (categories.error || !categories.result) {
@@ -188,7 +188,7 @@ export default {
 
         const [day, month, year] = this.enddate.split('.')
         const res = await callApi(
-          this.$q.localStorage.getItem('server') + 'request',
+          this.$q.localStorage.getItem('server') + '/api/v1/' + 'request',
           this.auth.token,
           {
             title: this.title,

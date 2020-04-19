@@ -181,7 +181,7 @@ export default {
         }
 
         let res = await fetch(
-          this.$q.localStorage.getItem('server') + 'auth/register',
+          this.$q.localStorage.getItem('server') + '/api/v1/auth/register',
           {
             method: 'post',
             headers: {
@@ -208,7 +208,7 @@ export default {
         }
 
         await callApi(
-          this.$q.localStorage.getItem('server') + 'users/me',
+          this.$q.localStorage.getItem('server') + '/api/v1/' + 'users/me',
           res.token
         ).then(resp => {
           this.auth = {

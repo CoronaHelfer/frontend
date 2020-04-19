@@ -118,7 +118,7 @@ export default {
     async fetchRequests () {
       try {
         const result = await callApi( // TODO: deduplicate this function
-          this.$q.localStorage.getItem('server') + 'request',
+          this.$q.localStorage.getItem('server') + '/api/v1/' + 'request',
           this.auth.token
         )
         this.requests = result.result
