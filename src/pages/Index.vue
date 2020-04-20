@@ -145,7 +145,11 @@ export default {
     if (this.$q.localStorage.getItem('server') === null) {
       // TODO: Set default values in a way that user does not have to access the landing page first
       const config = require('../assets/config.json')
-      this.$q.localStorage.set('server', config.url)
+      if (config['use-external-backend']) {
+        this.$q.localStorage.set('server', config.url)
+      } else {
+        this.$q.localStorage.set('server', '')
+      }
     }
   }
 }

@@ -135,7 +135,7 @@ export default {
         }
 
         let res = await fetch(
-          this.$q.localStorage.getItem('server') + 'auth/login',
+          this.$q.localStorage.getItem('server') + '/api/v1/auth/login',
           {
             method: 'post',
             headers: {
@@ -155,7 +155,7 @@ export default {
         }
 
         await callApi(
-          this.$q.localStorage.getItem('server') + 'users/me',
+          this.$q.localStorage.getItem('server') + '/api/v1/users/me',
           res.token
         ).then((resp) => {
           this.auth = {
