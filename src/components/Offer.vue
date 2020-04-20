@@ -94,7 +94,7 @@ export default {
         if (this.offer === '') throw new Error(this.$t('emptyField'))
 
         const res = await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/' + 'request/helper',
+          this.$q.localStorage.getItem('server') + '/api/v1/request/helper',
           this.auth.token,
           {
             offerText: this.offer,
