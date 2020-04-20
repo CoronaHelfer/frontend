@@ -155,7 +155,7 @@ export default {
         }
 
         await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/' + 'users/me',
+          this.$q.localStorage.getItem('server') + '/api/v1/users/me',
           res.token
         ).then((resp) => {
           this.auth = {
