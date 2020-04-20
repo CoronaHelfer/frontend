@@ -144,7 +144,7 @@ export default {
         headers.append('position', latitude)
 
         const response = await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/' + 'publicRequest',
+          this.$q.localStorage.getItem('server') + '/api/v1/publicRequest',
           undefined,
           undefined,
           undefined,
