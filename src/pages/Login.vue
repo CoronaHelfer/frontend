@@ -56,18 +56,18 @@
   display: flex
 
 .q-card:first-of-type
-  width: 34rem
-  right: 20rem
+  width: 23%
+  right: 13.5%
   z-index: 1
   padding: 6.8rem 4.1rem
   position: relative
 
 .q-card:last-of-type
-  width: 69.5rem
-  height: 37.5rem
+  width: 46.7%
+  height: 55%
   background-color: $secondary
   border-radius: 0.6rem
-  padding-left: 30rem
+  padding-left: 20%
   position: absolute
 
 form
@@ -97,13 +97,13 @@ form
     border-radius: 0
     i
       position: absolute
-      top: 1rem
-      left: 1rem
+      top: 30%
+      left: 3%
     div:last-of-type
       width: 100%
 
   .facebook
-    margin-top: 8rem
+    margin-top: 25%
 
   .google
     margin-top: 2rem
