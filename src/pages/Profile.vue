@@ -198,7 +198,7 @@ export default {
   methods: {
     async fetchUserData() { // TODO: Deduplicate this request
       await callApi(
-        this.$q.localStorage.getItem('server') + 'users/me',
+        this.$q.localStorage.getItem('server') + '/api/v1/users/me',
         this.auth.token
       ).then((resp) => {
         this.auth = {

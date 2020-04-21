@@ -1,3 +1,4 @@
 {
-  "url": "https://dev.coronahelfer.eu/api/v1/"
+  "use-external-backend": false,
+  "url": "https://coronahelfer.eu"
 }

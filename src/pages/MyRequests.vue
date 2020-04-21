@@ -1,27 +1,26 @@
 <template>
   <q-page>
     <header>
-      <h1>{{$t('myRequests')}}</h1>
+      <h1>{{ $t('myRequests') }}</h1>
     </header>
 
     <body>
       <article>
-        <div v-if="error !== ''" class="error">{{error}}</div>
+        <div v-if="error !== ''" class="error">{{ error }}</div>
         <div class="row justify-center">
-          <q-spinner
-            v-if="loading"
-            color="secondary"
-            size="5em"
-          />
+          <q-spinner v-if="loading" color="secondary" size="5em" />
         </div>
-        <p v-if="!loading && ownRequests.length === 0">{{$t('noRequestsCreated')}}</p>
+        <p v-if="!loading && ownRequests.length === 0">
+          {{ $t('noRequestsCreated') }}
+        </p>
         <MyRequest
           v-else
           v-for="request in ownRequests"
           v-bind:key="request._id"
           :request="request"
           @reloadRequests="fetchRequests"
-          @error="(message) => error = message"/>
+          @error="(message) => (error = message)"
+        />
       </article>
     </body>
   </q-page>
@@ -65,7 +64,7 @@ export default {
     MyRequest
   },
 
-  data () {
+  data() {
     return {
       requests: [],
       loading: false,
@@ -75,22 +74,22 @@ export default {
 
   computed: {
     auth: {
-      get () {
+      get() {
         return Object.assign({}, this.$store.state.auth.data)
       },
-      set (val) {
+      set(val) {
         this.$store.commit('auth/updateData', val)
       }
     },
 
-    ownRequests: function () {
-      return this.requests.filter(function (request) {
+    ownRequests: function() {
+      return this.requests.filter(function(request) {
         return request.created_by === this.auth.id
       }, this)
     }
   },
 
-  mounted () {
+  mounted() {
     if (!this.auth.authenticated) {
       this.$router.push('/login')
     }
@@ -98,11 +97,12 @@ export default {
   },
 
   methods: {
-    async fetchRequests () {
+    async fetchRequests() {
       try {
         this.loading = true
         this.error = ''
-        const requests = await callApi( // TODO: deduplicate this function
+        const requests = await callApi(
+          // TODO: deduplicate this function
           this.$q.localStorage.getItem('server') + 'request',
           this.auth.token
         )
