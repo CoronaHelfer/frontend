@@ -1,112 +1,78 @@
 <template>
-  <q-page>
-    <q-card class="bg-black flex flex-center">
-      <q-img src="~assets/CoronaHelfer-Logo.svg"></q-img>
-    </q-card>
+  <q-page class="q-pa-md row justify-center items-center">
+    <div class="form q-pa-lg">
+      <div class="form-img row items-center justify-between">
+        <img width="100%" src="~assets/CoronaHelfer-Logo.svg" />
+      </div>
 
-    <q-card>
-      <form>
-        <div v-if="error !== ''" class="error">{{ error }}</div>
-        <q-input
-          filled
-          bg-color="yellow-1"
-          :label="$t('emailOrPassword')"
-          v-model="name"
-        />
-        <q-input
-          filled
-          bg-color="yellow-1"
-          type="password"
-          :label="$t('password')"
-          v-model="password"
-        />
+      <div class="form-fields row">
+        <div class="col-xs-12 col-md-4"></div>
+        <q-form
+          class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
+          action=""
+        >
+          <div v-if="error !== ''" class="error">{{ error }}</div>
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            :label="$t('emailOrPassword')"
+            v-model="name"
+          />
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            type="password"
+            :label="$t('password')"
+            v-model="password"
+          />
 
-        <div class="row">
-          <q-btn
-            color="primary"
-            :loading="loading"
-            :label="$t('login')"
-            v-on:click="login()"
-          ></q-btn>
-          <q-btn
-            flat
-            :label="$t('orRegister')"
-            to="/register"></q-btn>
-        </div>
+          <div class="row">
+            <q-btn
+              color="primary"
+              bg-color="white"
+              filled
+              class="c-btn form-input col-xs-12 col-md-4"
+              :loading="loading"
+              :label="$t('login')"
+              v-on:click="login()"
+            ></q-btn>
+            <q-btn
+              class="c-link q-py-sm col-xs-12 col-md-8"
+              flat
+              :label="$t('orRegister')"
+              to="/register"
+            ></q-btn>
+          </div>
 
-        <button class="oauth facebook row">
-          <div><q-icon name="fab fa-facebook-f"></q-icon></div>
-          <div>{{$t('loginFacebook')}}</div>
-        </button>
+          <button class="oauth q-my-md row">
+            <div>
+              <q-icon class="q-mr-xl" name="fab fa-facebook-f"></q-icon>
+            </div>
+            <div>{{ $t('loginFacebook') }}</div>
+          </button>
 
-        <button class="oauth google row">
-          <div><q-icon name="fab fa-google"></q-icon></div>
-          <div>{{$t('loginGoogle')}}</div>
-        </button>
-      </form>
-    </q-card>
-    <img class="logo" width="100"  />
+          <button class="oauth q-my-md row">
+            <div><q-icon class="q-mr-xl" name="fab fa-google"></q-icon></div>
+            <div>{{ $t('loginGoogle') }}</div>
+          </button>
+        </q-form>
+      </div>
+    </div>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-.q-page
-  justify-content: center
-  align-items: center
-  display: flex
+.form-img
+  padding: 20%
+  background-color: $primary
 
-.q-card:first-of-type
-  width: 34rem
-  right: 20rem
-  z-index: 1
-  padding: 6.8rem 4.1rem
-  position: relative
-
-.q-card:last-of-type
-  width: 69.5rem
-  height: 37.5rem
-  background-color: $secondary
-  border-radius: 0.6rem
-  padding-left: 30rem
-  position: absolute
-
-form
-  padding: 4rem
-  .error
-    background: RED
-    color: WHITE
-    padding: 0.6rem 1.6rem
-    margin-bottom: 1rem
-    border-radius: 1.2rem
-
-  .q-input
-    margin: 1rem 0
-
-  .q-btn:first-of-type
-    border-radius: 0.6rem
-
-  .q-btn
-    padding: 0 2rem
-    font-size: 1rem
-    margin-top: 1rem
-
-  .oauth
-    background-color: #4285F4
-    width: 100%
-    position: relative
-    border-radius: 0
-    i
-      position: absolute
-      top: 1rem
-      left: 1rem
-    div:last-of-type
-      width: 100%
-
-  .facebook
-    margin-top: 8rem
-
-  .google
-    margin-top: 2rem
+.oauth
+  background-color: #4285F4
+  width: 100%
+  padding: 0.5rem
+  border-radius: 0
 </style>
 
 <script>

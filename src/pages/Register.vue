@@ -1,139 +1,94 @@
 <template>
-  <q-page>
-    <body>
-      <div class="authenticate">
-        <div class="container">
-          <form class="register">
-            <div v-show="error !== ''" class="error">{{ error }}</div>
-            <div class="aligner">
-              <div class="left">
-                <div class="avatar" />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  name="firstname"
-                  :placeholder="$t('firstname')"
-                  v-model="firstname"
-                />
-                <input
-                  type="text"
-                  name="lastname"
-                  :placeholder="$t('lastname')"
-                  v-model="lastname"
-                />
-              </div>
+  <q-page class="q-pa-md row justify-center items-center">
+    <div class="form q-pa-lg">
+      <div class="form-img row items-center justify-between">
+        <img
+          width="100%"
+          src="statics/images/guus-baggermans.png"
+          alt=""
+          srcset=""
+        />
+      </div>
+      <div class="form-fields row">
+        <div class="col-xs-12 col-md-4"></div>
+        <q-form
+          class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
+          action=""
+        >
+          <div v-if="error !== ''" class="error">{{ error }}</div>
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-6"
+            v-model="text"
+            :label="$t('firstname')"
+            :dense="dense"
+          />
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-6"
+            v-model="text"
+            :label="$t('lastname')"
+            :dense="dense"
+          />
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            v-model="text"
+            :label="$t('mail')"
+            :dense="dense"
+          />
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            v-model="text"
+            :label="$t('phone')"
+            :dense="dense"
+          />
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            v-model="text"
+            :label="$t('password')"
+            :dense="dense"
+          />
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            v-model="text"
+            :label="$t('passwordRepeat')"
+            :dense="dense"
+          />
+          <div class="q-pa-sm">
+            <div>
+              {{ $t('acceptPrivacy') }}
             </div>
-            <input
-              type="text"
-              name="mail"
-              :placeholder="$t('mail')"
-              v-model="mail"
-            />
-            <input
-              class="spacer"
-              type="text"
-              name="phone"
-              :placeholder="$t('phone')"
-              v-model="phone"
-            />
-            <input
-              type="password"
-              name="password"
-              :placeholder="$t('password')"
-              v-model="password"
-            />
-            <input
-              type="password"
-              name="passwordRepeat"
-              :placeholder="$t('passwordRepeat')"
-              v-model="passwordRepeat"
-            />
-
-            <p>
-              Mit der Registrierung akzeptierst du unsere
-              <router-link to="/privacy">Datenschutzerklärung</router-link>.
-            </p>
+            <div class="c-link">
+              <router-link to="/privacy">{{ $t('privacy') }}</router-link
+              >.
+            </div>
             <q-btn
+              color="primary"
+              class="c-btn q-mt-lg"
               rounded
               id="register"
               :loading="loading"
               :label="$t('register')"
               v-on:click="register"
             />
-          </form>
-        </div>
+          </div>
+        </q-form>
       </div>
-    </body>
+    </div>
   </q-page>
 </template>
 
-<style lang="sass" scoped>
-body
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
-
-.authenticate
-  padding: 20px
-  display: flex
-  justify-content: center
-  align-items: center
-  height: calc(100vh - 170px)
-  box-sizing: border-box
-  .container
-    width: 400px
-    .divider
-      color: WHITE
-      font-weight: 600
-      font-size: 14px
-      text-align: center
-      margin: 14px
-    .login,
-    .register
-      background-color: WHITE
-      padding: 15px 30px
-      display: flex
-      flex-direction: column
-      border-radius: 25px
-      .error
-        background: RED
-        color: WHITE
-        padding: 10px 25px
-        margin-bottom: 15px
-        border-radius: 19px
-        font-size: 13px
-      input
-        width: 100%
-        background-color: LIGHTGRAY
-        border: none
-        box-shadow: none
-        padding: 0 25px
-        height: 30px
-        box-sizing: border-box
-        margin-bottom: 5px
-        border-radius: 19px
-        &:focus
-          outline: none
-        &.spacer
-          margin-bottom: 15px
-      button
-        height: 40px
-        padding: 0
-        font-size: 15px
-        font-weight: 600
-        margin-top: 15px
-      .aligner
-        display: flex
-        margin-bottom: 10px
-        .left
-          width: 40%
-          .avatar
-            background: url('../statics/images/avatar.jpg') no-repeat
-            background-size: cover
-            width: 65px
-            height: 65px
-            border-radius: 100%
-</style>
+<style lang="sass" scoped></style>
 
 <script>
 import { callApi } from '../../api/requests'

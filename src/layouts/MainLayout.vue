@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <Header />
-    <q-page-container style="padding-top:0">
+    <q-page-container>
       <router-view />
     </q-page-container>
     <Footer />
