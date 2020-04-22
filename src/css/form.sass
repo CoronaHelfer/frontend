@@ -1,0 +1,35 @@
+.form
+    display: grid
+    grid-template-columns: repeat(8, minmax(0, 1fr))
+    align-items: center
+    justify-items: center
+.form-img
+    grid-column: 2/4
+    grid-row: 1
+    z-index: 1
+.form-fields
+    border-radius: 10px
+    grid-column: 3/7
+    grid-row: 1
+    background-color: $secondary
+.form-input
+    opacity: 0.75
+    margin: 1rem 0
+.c-btn:first-of-type
+    border-radius: 0.6rem
+.c-btn
+    opacity: 1
+    padding: 0 2rem
+    font-size: 1rem
+    margin-top: 1rem
+.c-link, a
+    font-size: 1rem
+    padding: 0
+    color: white
+    font-weight: bold
+.error
+    background: RED
+    color: WHITE
+    padding: 0.6rem 1.6rem
+    margin-bottom: 1rem
+    border-radius: 1.2rem
