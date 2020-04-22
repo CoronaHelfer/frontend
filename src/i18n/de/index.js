@@ -6,6 +6,8 @@ import jobs from './jobs'
 import requests from './requests'
 import principles from './principles'
 import errors from './errors'
+import info from './info'
+import imprint from './imprint'
 
 export default {
   ...main,
@@ -15,5 +17,7 @@ export default {
   ...jobs,
   ...requests,
   ...principles,
-  ...errors
+  ...errors,
+  ...info,
+  ...imprint
 }
