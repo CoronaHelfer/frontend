@@ -27,7 +27,6 @@
 
 <style lang="sass" scoped>
 .title
-  margin-top: 4.7rem
   text-align: center
   background: url('../statics/images/Banner-Jobs.png') no-repeat
   background-size: 100%
