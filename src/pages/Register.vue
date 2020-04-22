@@ -11,58 +11,60 @@
       </div>
       <div class="form-fields row">
         <div class="col-xs-12 col-md-4"></div>
-        <q-form
+        <form
           class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
           action=""
         >
           <div v-if="error !== ''" class="error">{{ error }}</div>
           <q-input
+            name="firstname"
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-6"
-            v-model="text"
+            v-model="firstname"
             :label="$t('firstname')"
-            :dense="dense"
           />
           <q-input
+            name="lastname"
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-6"
-            v-model="text"
+            v-model="lastname"
             :label="$t('lastname')"
-            :dense="dense"
           />
           <q-input
+            name="mail"
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="text"
+            v-model="mail"
             :label="$t('mail')"
-            :dense="dense"
           />
           <q-input
+            name="phone"
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="text"
+            v-model="phone"
             :label="$t('phone')"
-            :dense="dense"
           />
           <q-input
+            name="password"
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="text"
+            v-model="password"
+            type="password"
             :label="$t('password')"
-            :dense="dense"
           />
           <q-input
+            name="passwordRepeat"
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="text"
+            v-model="passwordRepeat"
+            type="password"
             :label="$t('passwordRepeat')"
-            :dense="dense"
           />
           <div class="q-pa-sm">
             <div>
@@ -82,7 +84,7 @@
               v-on:click="register"
             />
           </div>
-        </q-form>
+        </form>
       </div>
     </div>
   </q-page>
@@ -91,7 +93,7 @@
 <style lang="sass" scoped></style>
 
 <script>
-import { callApi } from '../../api/requests'
+import { callApi, authApi } from '../../api/requests'
 
 export default {
   data() {
@@ -134,25 +136,16 @@ export default {
         ) {
           throw new Error(this.$t('missingFields'))
         }
-
-        let res = await fetch(
-          this.$q.localStorage.getItem('server') + '/api/v1/auth/register',
+        const res = await authApi(
           {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              firstName: this.firstname,
-              lastName: this.lastname,
-              password: this.password,
-              email: this.mail,
-              phoneNumber: this.phone
-            })
-          }
+            firstName: this.firstname,
+            lastName: this.lastname,
+            password: this.password,
+            email: this.mail,
+            phoneNumber: this.phone
+          },
+          'register'
         )
-
-        res = await res.json()
 
         if (res.error) {
           console.error(res.error)
@@ -162,10 +155,7 @@ export default {
           throw new Error(this.$t('somethingWentWrong'))
         }
 
-        await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/users/me',
-          res.token
-        ).then((resp) => {
+        await callApi('/users/me', res.token).then((resp) => {
           this.auth = {
             token: res.token,
             firstname: resp.user.firstName,
