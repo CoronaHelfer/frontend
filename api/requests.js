@@ -12,7 +12,8 @@ export const callApi = async (
     cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      'X-Access-Token': token
+      // Authorization: `Bearer ${token}`
     },
     body:
       method === 'POST' || method === 'PUT' || method === 'DELETE'
@@ -25,6 +26,7 @@ export const callApi = async (
 export const authApi = async (data = {}, auth = 'login') => {
   const response = await fetch(`${baseUrl}/auth/${auth}`, {
     method: 'post',
+    mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
     },
