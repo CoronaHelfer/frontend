@@ -1,4 +1,4 @@
-const baseUrl = 'https://coronahelfer.eu/api/v1'
+const baseUrl = 'https://dev.coronahelfer.eu/api/v1'
 
 export const callApi = async (
   url = '',

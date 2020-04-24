@@ -36,6 +36,7 @@
               class="c-btn form-input col-xs-12 col-md-4"
               :loading="loading"
               :label="$t('login')"
+              v-on:click="login()"
             ></q-btn>
             <q-btn
               class="c-link q-py-sm col-xs-12 col-md-8"

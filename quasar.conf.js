@@ -99,7 +99,7 @@ module.exports = function(ctx) {
       manifest: {
         name: 'Corona Helfer',
         short_name: 'Corona Helfer',
-        description: 'The Quasar frontend for Corona Helfer',
+        description: 'Corona Helfer',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
