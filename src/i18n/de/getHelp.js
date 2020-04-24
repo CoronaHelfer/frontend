@@ -1,0 +1,21 @@
+export default {
+  getHelp: 'Hilfe bekommen',
+  yourMessage: 'Ihre Nachricht',
+  yourAddress: 'Ihre Adresse',
+  questionHelp: 'Wobei brauchst du Hilfe?',
+  continue: 'Weiter',
+  send: 'Senden',
+  back: 'Zurück',
+  title: 'Titel',
+  description: 'Beschreibung',
+  street: 'Straße',
+  streetNumber: 'Hausnummer',
+  zip: 'Postleitzahl',
+  city: 'Stadt',
+  helpOthers: 'Hilfe für eine andere Person?',
+  yes: 'Ja',
+  no: 'Nein',
+  category: 'Kategorie',
+  startdate: 'Von',
+  enddate: 'Bis'
+}

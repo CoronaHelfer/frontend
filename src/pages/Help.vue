@@ -5,87 +5,87 @@
     </header>
 
     <body>
-    <Request
-      v-for="request in foreignRequests"
-      v-bind:key="request._id"
-      :user="{ firstName: 'Anonym', image: undefined }"
-      :request="request"
-      :onClick="openPopUp"/>
-    <article v-if="foreignRequests.length === 0">Momentan gibt es keine Gesuche!</article>
-    <Offer
-      :isDialogOpen="isDialogOpen"
-      :requestId="selectedRequest"
-    />
+      <Request
+        v-for="request in foreignRequests"
+        v-bind:key="request._id"
+        :user="{ firstName: 'Anonym', image: undefined }"
+        :request="request"
+        :onClick="openPopUp"
+      />
+      <article v-if="foreignRequests.length === 0">
+        Momentan gibt es keine Gesuche!
+      </article>
+      <Offer :isDialogOpen="isDialogOpen" :requestId="selectedRequest" />
     </body>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-  header
-    text-align: center
-    background: url('../statics/images/background.jpg') no-repeat
-    background-size: cover
-    padding: 50px
-    color: white
+header
+  text-align: center
+  background: url('../statics/images/background.jpg') no-repeat
+  background-size: cover
+  padding: 50px
+  color: white
 
-    a
-      text-decoration: none
+  a
+    text-decoration: none
 
-    h4
-      text-transform: uppercase
-      margin: 0 0 30px 0
+  h4
+    text-transform: uppercase
+    margin: 0 0 30px 0
 
-    .q-btn
-      background: white
-      border: 0
-      border-radius: 19px
-      color: $secondary
-      cursor: pointer
-      font-size: 20px
-      font-weight: 400
-      padding: 0 50px
-      text-transform: uppercase
+  .q-btn
+    background: white
+    border: 0
+    border-radius: 19px
+    color: $secondary
+    cursor: pointer
+    font-size: 20px
+    font-weight: 400
+    padding: 0 50px
+    text-transform: uppercase
 
-      &:focus
-        outline: none
+    &:focus
+      outline: none
 
-      &.primary
-        background: $secondary
-        color: white
+    &.primary
+      background: $secondary
+      color: white
 
-      &.small
-        height: 30px
-        line-height: 30px
-        padding: 0 30px
-        font-size: 15px
-        font-weight: 600
-        margin-top: 15px
+    &.small
+      height: 30px
+      line-height: 30px
+      padding: 0 30px
+      font-size: 15px
+      font-weight: 600
+      margin-top: 15px
 
-  body
-    &:before
-      background-color: white
-      border-radius: 100%
-      content: ''
-      height: 50px
-      position: absolute
-      top: -25px
-      width: 100%
-
+body
+  &:before
     background-color: white
-    position: relative
-    padding-bottom: 20px
-    min-height: calc(100vh - 340px)
+    border-radius: 100%
+    content: ''
+    height: 50px
+    position: absolute
+    top: -25px
+    width: 100%
 
-    article
-      padding-top: 30px
-      margin: 20px auto 0
-      max-width: 800px
+  background-color: white
+  position: relative
+  padding-bottom: 20px
+  min-height: calc(100vh - 340px)
 
-      h5
-        color: $secondary
-        text-transform: uppercase
-        font-weight: 600
-        margin: 20px 0
+  article
+    padding-top: 30px
+    margin: 20px auto 0
+    max-width: 800px
+
+    h5
+      color: $secondary
+      text-transform: uppercase
+      font-weight: 600
+      margin: 20px 0
 </style>
 
 <script>
@@ -101,7 +101,7 @@ export default {
     Offer
   },
 
-  data () {
+  data() {
     return {
       requests: [],
       selectedRequest: undefined,
@@ -111,28 +111,28 @@ export default {
 
   computed: {
     auth: {
-      get () {
+      get() {
         return Object.assign({}, this.$store.state.auth.data)
       },
-      set (val) {
+      set(val) {
         this.$store.commit('auth/updateData', val)
       }
     },
 
-    foreignRequests: function () {
-      return this.requests.filter(function (request) {
+    foreignRequests: function() {
+      return this.requests.filter(function(request) {
         return request.created_by._id !== this.auth.id
       }, this)
     }
   },
 
-  mounted () {
+  mounted() {
     this.getCurrentPosition()
   },
 
   methods: {
     getCurrentPosition() {
-      Geolocation.getCurrentPosition().then(position => {
+      Geolocation.getCurrentPosition().then((position) => {
         this.fetchRequests(position.coords.longitude, position.coords.latitude)
       })
     },
@@ -156,13 +156,13 @@ export default {
       }
     },
 
-    openPopUp (requestId) {
+    openPopUp(requestId) {
       this.selectedRequest = requestId
       this.isDialogOpen = true
     }
   },
 
-  beforeDestroy () {
+  beforeDestroy() {
     Geolocation.clearWatch(this.geoId)
   }
 }

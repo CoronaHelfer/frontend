@@ -8,5 +8,6 @@ export default {
   register: 'Register',
   noMatchingPassword: 'Passwords do not match.',
   emptyField: 'The field is empty.',
-  missingFields: 'Not all fields are filled.'
+  missingFields: 'Not all fields are filled.',
+  acceptPrivacy: 'By register you are accepting our'
 }

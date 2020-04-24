@@ -14,7 +14,8 @@ const routes = [
       { path: 'help', component: () => import('pages/Help.vue') },
       { path: 'get-help', component: () => import('pages/GetHelp.vue') },
       { path: 'profile', component: () => import('pages/Profile.vue') },
-      { path: 'profile/requests', component: () => import('pages/MyRequests.vue') }
+      { path: 'profile/requests', component: () => import('pages/MyRequests.vue') },
+      { path: 'profile/offers', component: () => import('pages/OffersForMyRequest.vue') }
     ]
   }
 ]

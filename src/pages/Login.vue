@@ -1,98 +1,85 @@
 <template>
-  <q-page>
-    <body>
-      <div class="authenticate">
-        <div class="container">
-          <form class="login">
-            <div v-show="error !== ''" class="error">{{ error }}</div>
-            <input
-              type="text"
-              :placeholder="$t('emailOrPassword')"
-              v-model="name"
-            />
-            <input
-              type="password"
-              :placeholder="$t('password')"
-              v-model="password"
-            />
+  <q-page class="q-pa-md row justify-center items-center">
+    <div class="form q-pa-lg">
+      <div class="form-img row items-center justify-between">
+        <img width="100%" src="~assets/CoronaHelfer-Logo.svg" />
+      </div>
 
+      <div class="form-fields row">
+        <div class="col-xs-12 col-md-4"></div>
+        <q-form
+          class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
+          @submit="login()"
+        >
+          <div v-if="error !== ''" class="error">{{ error }}</div>
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            :label="$t('emailOrPassword')"
+            v-model="name"
+          />
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            type="password"
+            :label="$t('password')"
+            v-model="password"
+          />
+
+          <div class="row login-register">
             <q-btn
-              rounded
+              color="primary"
+              bg-color="white"
+              filled
+              class="c-btn form-input col-xs-12 col-md-4"
               :loading="loading"
               :label="$t('login')"
-              v-on:click="login()"
             ></q-btn>
-            <q-btn rounded :label="$t('register')" to="/register"></q-btn>
-          </form>
-        </div>
+            <q-btn
+              class="c-link q-py-sm col-xs-12 col-md-8"
+              flat
+              :label="$t('orRegister')"
+              to="/register"
+            ></q-btn>
+          </div>
+
+          <button class="oauth q-my-md row">
+            <div>
+              <q-icon class="q-mr-xl q-ml-md" name="fab fa-facebook-f"></q-icon>
+            </div>
+            <div>{{ $t('loginFacebook') }}</div>
+          </button>
+
+          <button class="oauth q-my-md row">
+            <div>
+              <q-icon class="q-mr-xl q-ml-md" name="fab fa-google"></q-icon>
+            </div>
+            <div>{{ $t('loginGoogle') }}</div>
+          </button>
+        </q-form>
       </div>
-    </body>
+    </div>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-body
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
+.login-register
+  width: 100%
+.form-img
+  padding: 20%
+  background-color: $primary
 
-.authenticate
-  padding: 20px
-  display: flex
-  justify-content: center
-  align-items: center
-  height: calc(100vh - 170px)
-  box-sizing: border-box
-  .container
-    width: 400px
-    .login, .register
-      background-color: WHITE
-      padding: 15px 30px
-      display: flex
-      flex-direction: column
-      border-radius: 25px
-      .error
-        background: RED
-        color: WHITE
-        padding: 10px 25px
-        margin-bottom: 15px
-        border-radius: 19px
-        font-size: 13px
-      input
-        width: 100%
-        background-color: LIGHTGRAY
-        border: none
-        box-shadow: none
-        padding: 0 25px
-        height: 30px
-        box-sizing: border-box
-        margin-bottom: 5px
-        border-radius: 19px
-        &:focus
-          outline: none
-        &.spacer
-          margin-bottom: 15px
-      button, a
-        height: 40px
-        padding: 0
-        font-size: 15px
-        font-weight: 600
-        margin-top: 15px
-    .register
-      .aligner
-        display: flex
-        margin-bottom: 10px
-        .left
-          width: 40%
-          .avatar
-            background: url('../statics/images/avatar.jpg') no-repeat
-            background-size: cover
-            width: 65px
-            height: 65px
-            border-radius: 100%
+.oauth
+  background-color: #4285F4
+  width: 100%
+  padding: 0.5rem
+  border-radius: 0
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import { callApi, authApi } from '../../api/requests'
 
 export default {
   data() {
@@ -134,17 +121,7 @@ export default {
           }
         }
 
-        let res = await fetch(
-          this.$q.localStorage.getItem('server') + '/api/v1/auth/login',
-          {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-          }
-        )
-        res = await res.json()
+        const res = await authApi(body)
 
         if (res.error) {
           console.error(res.error)
@@ -154,10 +131,7 @@ export default {
           throw new Error(this.$t('somethingWentWrong'))
         }
 
-        await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/users/me',
-          res.token
-        ).then((resp) => {
+        await callApi('/users/me', res.token).then((resp) => {
           this.auth = {
             token: res.token,
             firstname: resp.user.firstName,
@@ -166,8 +140,8 @@ export default {
             id: resp.user._id,
             authenticated: true
           }
+          this.$router.go(-1)
         })
-        this.$router.go(-1)
       } catch (e) {
         this.error = e
         this.loading = false

@@ -4,7 +4,11 @@ import main from './main'
 import pages from './pages'
 import jobs from './jobs'
 import requests from './requests'
+import principles from './principles'
+import getHelp from './getHelp'
 import errors from './errors'
+import info from './info'
+import imprint from './imprint'
 
 export default {
   ...main,
@@ -13,5 +17,9 @@ export default {
   ...login,
   ...jobs,
   ...requests,
-  ...errors
+  ...principles,
+  ...getHelp,
+  ...errors,
+  ...info,
+  ...imprint
 }
