@@ -9,7 +9,7 @@
         <div class="col-xs-12 col-md-4"></div>
         <q-form
           class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
-          action=""
+          @submit="login()"
         >
           <div v-if="error !== ''" class="error">{{ error }}</div>
           <q-input
@@ -36,7 +36,6 @@
               class="c-btn form-input col-xs-12 col-md-4"
               :loading="loading"
               :label="$t('login')"
-              v-on:click="login()"
             ></q-btn>
             <q-btn
               class="c-link q-py-sm col-xs-12 col-md-8"
@@ -122,7 +121,7 @@ export default {
           }
         }
 
-        const res = authApi(body)
+        const res = await authApi(body)
 
         if (res.error) {
           console.error(res.error)
@@ -141,8 +140,8 @@ export default {
             id: resp.user._id,
             authenticated: true
           }
+          this.$router.go(-1)
         })
-        this.$router.go(-1)
       } catch (e) {
         this.error = e
         this.loading = false

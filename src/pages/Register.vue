@@ -11,7 +11,7 @@
       </div>
       <div class="form-fields row">
         <div class="col-xs-12 col-md-4"></div>
-        <form
+        <q-form
           class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
           action=""
         >
@@ -84,7 +84,7 @@
               v-on:click="register"
             />
           </div>
-        </form>
+        </q-form>
       </div>
     </div>
   </q-page>
