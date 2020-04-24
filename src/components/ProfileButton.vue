@@ -11,13 +11,12 @@
     </q-btn>
 
     <li v-if="auth.authenticated" class="menu-btn" v-on:click="open = !open">
-      <span>{{ auth.firstname }} {{ auth.lastname }}</span>
+      <span>{{ auth.firstname }} {{ auth.lastname }}</span> &nbsp;&nbsp;
       <q-icon
         :name="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
       ></q-icon>
       <ul :class="open ? '' : 'hidden'">
         <li v-on:click="$router.push('/profile')">PROFIL</li>
-        <li v-on:click="$router.push('/profile/requests')">MEINE ANZEIGEN</li>
         <li v-on:click="logout()">ABMELDEN</li>
       </ul>
     </li>

@@ -1,7 +1,7 @@
 export default {
-  request: 'Gesuch',
-  myRequests: 'Meine Anzeigen',
-  noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.',
+  request: 'Hilfseinrtag',
+  myRequests: 'Meine Hilfseinträge',
+  noRequestsCreated: 'Du hast noch keine Hilfseinträge erstellt.',
   category: 'Kategorie',
   success: 'Aktion erfolgreich'
 }

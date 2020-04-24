@@ -8,6 +8,7 @@ import principles from './principles'
 import getHelp from './getHelp'
 import errors from './errors'
 import info from './info'
+import profile from './profile'
 
 export default {
   ...main,
@@ -19,5 +20,6 @@ export default {
   ...principles,
   ...getHelp,
   ...errors,
-  ...info
+  ...info,
+  ...profile
 }
