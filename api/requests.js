@@ -1,4 +1,6 @@
-const baseUrl = 'https://coronahelfer.eu/api/v1'
+const baseUrl = process.env.NODE_ENV === 'production'
+  ? 'https://coronahelfer.eu/api/v1'
+  : 'http://localhost:3000/api/v1'
 
 export const callApi = async (
   url = '',
