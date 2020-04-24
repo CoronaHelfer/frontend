@@ -5,24 +5,28 @@
         <h1 class="uppercase">{{ $t('supportTogether') }}</h1>
         <div class="row justify-between">
           <router-link
-            class="col-xs-12 col-md-4 q-mt-xs uppercase"
-            to="/get-help"
+            class="col-xs-12 col-md-5 q-mt-xs uppercase my-card"
+            to="/help"
           >
             <MainButton content="want-help" />
           </router-link>
-          <router-link class="col-xs-12 col-md-4 q-mt-xs uppercase" to="/help">
+          <router-link class="col-xs-12 col-md-5 q-mt-xs uppercase my-card" to="/get-help">
             <MainButton content="need-help" />
           </router-link>
         </div>
+      </div>
+      <div class="mouse">
+        <div class="scroll"></div>
       </div>
     </div>
     <article class="wrapper">
       <div class="fit row wrap justify-evenly items-start content-start">
         <img width="30%" src="~assets/Logo-2.svg" />
       </div>
-      <h1 class="uppercase">Portal für Nachbarschaftshilfe in deiner Region</h1>
-      <i>“Aus der Region - für die Region”</i>
-
+      <div class="title-aboutus">
+        <h1 class="uppercase">Portal für Nachbarschaftshilfe in deiner Region</h1>
+        <i>“Aus der Region - für die Region”</i>
+      </div>
       <h3>Worum geht es?</h3>
       <p>
         Die aktuelle Situation stellt die Gesellschaft vor neue
@@ -31,11 +35,7 @@
         CoronaHelfer ins Leben gerufen, um gemeinsam die Ausbreitung des Virus
         zu verlangsamen und einander dort zu unterstützen, wo es möglich ist.
       </p>
-      <q-input ref="input" filled v-model="region" :label="$t('searchRegion')">
-        <template v-slot:append>
-          <q-icon class="icon" name="room" />
-        </template>
-      </q-input>
+      <CustomSearch/>
     </article>
     <div class="tertiary-bg">
       <div class="wrapper">
@@ -116,12 +116,67 @@
   </q-page>
 </template>
 
+<style lang="scss">
+.my-card{
+  transition: 300ms ease-in-out;
+  &:hover{
+    transform: scale(1.02) translate(0, -5px);
+    transition: 300ms ease-in-out;
+    .btn-card{
+      box-shadow: 0px 20px 12px rgba(0,0,0, 0.1);
+    }
+  }
+}
+.mouse {
+  width: 35px;
+  height: 50px;
+  border-radius: 25px;
+  border: 2px solid $primary;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%);
+  opacity: 0.3;
+  .scroll {
+    width: 2px;
+    height: 10px;
+    margin: 0 auto;
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: $primary;
+    animation-name: scroll;
+    transition: 800ms ease-in-out;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+}
+@keyframes scroll {
+  from {
+    margin-top: 5px;
+    opacity: 1;
+  }
+  to {
+    margin-top: 15px;
+    opacity: 0;
+  }
+}
+.title-aboutus {
+  display: table;
+  margin: 70px auto;
+  .uppercase {
+    margin-bottom: 0px;
+    line-height: inherit;
+  }
+}
+</style>
+
 <style lang="sass" scoped>
 .tertiary-bg
-  padding: 5% 0
+  padding-top: 1%
+  padding-bottom: 7%
   text-align: center
   background-color: $tertiary
-
+  position: relative
 .vision-box
   width: 40%
   height: 300px
@@ -161,10 +216,12 @@ h1
 
 <script>
 import MainButton from 'src/components/MainButton'
+import CustomSearch from 'src/components/CustomSearch'
 
 export default {
   components: {
-    MainButton
+    MainButton,
+    CustomSearch
   },
   data: () => {
     return {

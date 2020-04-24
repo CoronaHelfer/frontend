@@ -1,4 +1,37 @@
 <template>
+  <q-page class="wrapper">
+    <CustomSearch class="q-mb-xl" />
+    <Seperator/>
+    <BlockCard/>
+    <BlockCard/>
+    <BlockCard/>
+    <BlockCard/>
+  </q-page>
+</template>
+
+<script>
+import BlockCard from 'components/BlockCard'
+import CustomSearch from 'components/CustomSearch'
+import Seperator from 'components/Seperator'
+export default {
+  components: {
+    CustomSearch,
+    BlockCard,
+    Seperator
+  }
+}
+</script>
+
+<style lang="scss">
+.wrapper {
+  width: 65%;
+  margin: 0 auto;
+}
+</style>
+
+<!-- alter Stand -->
+<!--
+<template>
   <q-page>
     <header>
       <h1>Gesuche</h1>
@@ -167,3 +200,4 @@ export default {
   }
 }
 </script>
+-->

@@ -28,6 +28,7 @@ export default {
 
 <style lang="sass" scoped>
 .btn-card
+    transition: 300ms ease-in-out
     box-shadow: 0px 10px 6px #00000033
     border-radius: 10px
 
