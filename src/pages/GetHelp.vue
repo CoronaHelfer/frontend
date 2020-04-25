@@ -3,172 +3,213 @@
     <div class="wrapper">
       <div v-if="error" class="error">{{ error }}</div>
       <h1 class="q-px-lg uppercase">{{ $t('getHelp') }}</h1>
-
-      <q-stepper
-        v-model="step"
-        ref="stepper"
-        animated
-        alternative-labels
-        active-color="secondary"
-        inactive-color="primary"
-      >
-        <q-step :name="1" :title="$t('yourMessage')" label="1" :done="step > 1">
-          <h3>{{ $t('questionHelp') }}</h3>
-          <div class="row justify-center items-center">
-            <q-select
-              class="form-input q-pr-md col-xs-12 col-md-4"
-              filled
-              v-model="category"
-              :options="categories"
-              :label="$t('category')"
-              option-value="_id"
-              option-label="name"
-              map-options
-              bg-color="accent"
-            ></q-select>
-            <q-input
-              filled
-              class="form-input q-pr-md col-xs-12 col-md-4"
-              :label="$t('title')"
-              v-model="title"
-              bg-color="accent"
-            />
-            <q-input
-              class="q-pr-sm form-input-date form-input col-xs-12 col-md-2"
-              filled
-              v-model="startdate"
-              mask="date"
-              :rules="['date']"
-              :label="$t('startdate')"
-              bg-color="accent"
-            >
-              <template v-slot:append>
-                <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy
-                    ref="qDateProxy"
-                    transition-show="scale"
-                    transition-hide="scale"
-                  >
-                    <q-date
-                      v-model="date"
-                      @input="() => $refs.qDateProxy.hide()"
-                    />
-                  </q-popup-proxy>
-                </q-icon>
-              </template>
-            </q-input>
-            <q-input
-              class="q-pl-sm form-input-date form-input col-xs-12 col-md-2"
-              filled
-              v-model="enddate"
-              mask="date"
-              :rules="['date']"
-              :label="$t('enddate')"
-              bg-color="accent"
-            >
-              <template v-slot:append>
-                <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy
-                    ref="qDateProxy"
-                    transition-show="scale"
-                    transition-hide="scale"
-                  >
-                    <q-date
-                      v-model="date"
-                      @input="() => $refs.qDateProxy.hide()"
-                    />
-                  </q-popup-proxy>
-                </q-icon>
-              </template>
-            </q-input>
-            <q-input
-              dense
-              filled
-              class="form-input col-xs-12 col-md-12"
-              type="textarea"
-              :label="$t('description')"
-              v-model="description"
-              bg-color="accent"
-            ></q-input>
-          </div>
-        </q-step>
-
-        <q-step
-          :name="2"
-          :title="$t('yourAddress')"
-          icon="home"
-          :done="step > 2"
+      <q-form @submit="send()">
+        <q-stepper
+          v-model="step"
+          ref="stepper"
+          animated
+          alternative-labels
+          active-color="secondary"
+          inactive-color="primary"
         >
-          <h3>{{ $t('yourAddress') }}</h3>
+          <q-step
+            :name="1"
+            :title="$t('yourMessage')"
+            label="1"
+            :done="step > 1"
+          >
+            <h3>{{ $t('questionHelp') }}</h3>
+            <div class="row justify-center items-center">
+              <q-select
+                id="categories"
+                class="form-input q-pr-md col-xs-12 col-md-3"
+                filled
+                v-model="category"
+                :options="categories"
+                :label="$t('category')"
+                option-value="_id"
+                option-label="name"
+                map-options
+                bg-color="accent"
+              ></q-select>
+              <q-input
+                filled
+                name="title"
+                class="form-input q-pr-md col-xs-12 col-md-3"
+                :label="$t('title')"
+                v-model="title"
+                bg-color="accent"
+              />
+              <q-input
+                class="q-pr-sm form-input-date form-input col-xs-12 col-md-3"
+                filled
+                name="startdate"
+                v-model="startdate"
+                :rules="['date', 'time']"
+                :label="$t('startdate')"
+                bg-color="accent"
+              >
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy
+                      ref="qStartDateProxy"
+                      transition-show="scale"
+                      transition-hide="scale"
+                    >
+                      <div class="q-gutter-md row">
+                        <q-date
+                          mask="DD/MM/YYYY HH:mm"
+                          v-model="startdate"
+                          :rules="['date']"
+                          color="secondary"
+                          :options="fromToday"
+                        />
+                        <q-time
+                          v-model="startdate"
+                          mask="DD/MM/YYYY HH:mm"
+                          :rules="['time']"
+                          color="secondary"
+                          @input="() => $refs.qStartDateProxy.hide()"
+                        />
+                      </div>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+              <q-input
+                class="q-pl-sm form-input-date form-input col-xs-12 col-md-3"
+                filled
+                v-model="enddate"
+                name="enddate"
+                :rules="['date', 'time']"
+                :label="$t('enddate')"
+                bg-color="accent"
+              >
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy
+                      ref="endDateProxy"
+                      transition-show="scale"
+                      transition-hide="scale"
+                    >
+                      <div class="q-gutter-md row">
+                        <q-date
+                          mask="DD/MM/YYYY HH:mm"
+                          v-model="enddate"
+                          color="secondary"
+                          :rules="['date']"
+                          :options="fromToday"
+                        />
+                        <q-time
+                          v-model="enddate"
+                          mask="DD/MM/YYYY HH:mm"
+                          :rules="['time']"
+                          color="secondary"
+                          @input="() => $refs.endDateProxy.hide()"
+                        />
+                      </div>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
 
-          <div class="row">
-            <q-input
-              filled
-              class="form-input col-xs-12 col-md-10"
-              :label="$t('street')"
-              v-model="street"
-              bg-color="accent"
-            />
-            <q-input
-              filled
-              class="q-pl-md form-input col-xs-12 col-md-2"
-              :label="$t('streetNumber')"
-              v-model="streetNumber"
-              bg-color="accent"
-            />
-            <q-input
-              filled
-              class="q-pr-md form-input col-xs-12 col-md-2"
-              :label="$t('zip')"
-              v-model="zip"
-              bg-color="accent"
-            />
-            <q-input
-              filled
-              class="form-input col-xs-12 col-md-10"
-              :label="$t('city')"
-              v-model="city"
-              bg-color="accent"
-            />
-          </div>
+              <q-input
+                dense
+                filled
+                class="form-input col-xs-12 col-md-12"
+                type="textarea"
+                name="description"
+                :label="$t('description')"
+                v-model="description"
+                bg-color="accent"
+              ></q-input>
+            </div>
+          </q-step>
 
-          <h3>{{ $t('helpOthers') }}</h3>
+          <q-step
+            :name="2"
+            :title="$t('yourAddress')"
+            icon="home"
+            :done="step > 2"
+          >
+            <h3>{{ $t('yourAddress') }}</h3>
 
-          <div class="row">
-            <q-btn-toggle
-              class="form-input col-xs-12"
-              v-model="isHelpForElse"
-              spread
-              no-caps
-              toggle-color="secondary"
-              color="white"
-              text-color="black"
-              :options="[
-                { label: $t('yes'), value: true },
-                { label: $t('no'), value: false }
-              ]"
-            />
-          </div>
-        </q-step>
+            <div class="row">
+              <q-input
+                filled
+                class="form-input col-xs-12 col-md-10"
+                :label="$t('street')"
+                v-model="street"
+                bg-color="accent"
+              />
+              <q-input
+                filled
+                class="q-pl-md form-input col-xs-12 col-md-2"
+                :label="$t('streetNumber')"
+                v-model="streetNumber"
+                bg-color="accent"
+              />
+              <q-input
+                filled
+                class="q-pr-md form-input col-xs-12 col-md-2"
+                :label="$t('zip')"
+                v-model="zip"
+                bg-color="accent"
+                type="number"
+              />
+              <q-input
+                filled
+                class="form-input col-xs-12 col-md-10"
+                :label="$t('city')"
+                v-model="city"
+                bg-color="accent"
+              />
+            </div>
 
-        <template v-slot:navigation>
-          <q-stepper-navigation>
-            <q-btn
-              @click="$refs.stepper.next()"
-              color="primary"
-              :label="step === 2 ? $t('send') : $t('continue')"
-            />
-            <q-btn
-              v-if="step > 1"
-              flat
-              color="primary"
-              @click="$refs.stepper.previous()"
-              :label="$t('back')"
-              class="q-ml-sm"
-            />
-          </q-stepper-navigation>
-        </template>
-      </q-stepper>
+            <h3>{{ $t('helpOthers') }}</h3>
+
+            <div class="row">
+              <q-btn-toggle
+                class="form-input col-xs-12"
+                v-model="isHelpForElse"
+                spread
+                no-caps
+                toggle-color="secondary"
+                color="white"
+                text-color="black"
+                :options="[
+                  { label: $t('yes'), value: true },
+                  { label: $t('no'), value: false }
+                ]"
+              />
+            </div>
+          </q-step>
+
+          <template v-slot:navigation>
+            <q-stepper-navigation>
+              <div class="row justify-between">
+                <q-btn
+                  v-if="step > 1"
+                  flat
+                  @click="$refs.stepper.previous()"
+                  :label="$t('back')"
+                />
+                <q-space v-else />
+                <q-btn
+                  :loading="loading"
+                  @click="step === 2 ? send() : $refs.stepper.next()"
+                  color="primary"
+                  :label="step === 2 ? $t('send') : $t('continue')"
+                >
+                  <template v-slot:loading>
+                    <q-spinner-facebook />
+                  </template>
+                </q-btn>
+              </div>
+            </q-stepper-navigation>
+          </template>
+        </q-stepper>
+      </q-form>
     </div>
   </q-page>
 </template>
@@ -192,9 +233,12 @@
 
 <script>
 import { callApi } from '../../api/requests'
+import { date } from 'quasar'
 
 export default {
   data() {
+    const now = Date.now()
+    const defaultTime = date.formatDate(now, 'DD/MM/YYYY HH:mm')
     return {
       error: false,
       loading: false,
@@ -207,8 +251,8 @@ export default {
       categories: [],
       category: '',
       isHelpForElse: true,
-      startdate: '',
-      enddate: '',
+      startdate: defaultTime,
+      enddate: defaultTime,
       step: 1
     }
   },
@@ -265,8 +309,23 @@ export default {
         ) {
           throw new Error(this.$t('missingFields'))
         }
-
-        const [day, month, year] = this.enddate.split('.')
+        const start = this.startdate
+          .replace(' ', '/')
+          .replace(':', '/')
+          .split('/')
+        const end = this.enddate
+          .replace(' ', '/')
+          .replace(':', '/')
+          .split('/')
+        const startdate = date.formatDate(
+          new Date(start[2], start[1], start[0], start[3], start[4], 0),
+          'YYYY-MM-DDTHH:mm:ss.SSSZ'
+        )
+        const enddate = date.formatDate(
+          new Date(end[2], end[1], end[0], end[3], end[4], 0),
+          'YYYY-MM-DDTHH:mm:ss.SSSZ'
+        )
+        console.log(startdate, enddate)
         const res = await callApi(
           '/request',
           this.auth.token,
@@ -278,7 +337,8 @@ export default {
             'address.city': this.city,
             'address.street': this.street,
             'address.street_nr': this.streetNumber,
-            time_end: month + '/' + day + '/' + year
+            time_start: startdate,
+            time_end: enddate
           },
           'POST'
         )
@@ -294,6 +354,11 @@ export default {
         this.loading = false
         this.error = e
       }
+    },
+
+    fromToday(date) {
+      const today = new Date().toLocaleDateString().split('/')
+      return date >= today[2] + '/' + today[1] + '/' + today[0]
     }
   }
 }

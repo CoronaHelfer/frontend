@@ -32,7 +32,8 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^6.1.2"
+    "eslint-plugin-vue": "^6.1.2",
+    "quasar-app-extension-qdatetimepicker": "^1.0.0-rc.10"
   },
   "engines": {
     "node": ">= 10.18.1",

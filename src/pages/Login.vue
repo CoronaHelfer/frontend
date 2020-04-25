@@ -68,10 +68,6 @@
 <style lang="sass" scoped>
 .login-register
   width: 100%
-.form-img
-  padding: 20%
-  background-color: $primary
-
 .oauth
   background-color: #4285F4
   width: 100%
@@ -132,17 +128,20 @@ export default {
           throw new Error(this.$t('somethingWentWrong'))
         }
 
-        await callApi('/users/me', res.token).then((resp) => {
-          this.auth = {
-            token: res.token,
-            firstname: resp.user.firstName,
-            lastname: resp.user.lastName,
-            email: resp.user.email,
-            id: resp.user._id,
-            authenticated: true
-          }
-          this.$router.go(-1)
-        })
+        await callApi('/users/me', res.token)
+          .then((resp) => {
+            this.auth = {
+              token: res.token,
+              firstname: resp.user.firstName,
+              lastname: resp.user.lastName,
+              email: resp.user.email,
+              id: resp.user._id,
+              authenticated: true
+            }
+          })
+          .finally(() => {
+            this.$router.go('/')
+          })
       } catch (e) {
         this.error = e
         this.loading = false
