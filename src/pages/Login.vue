@@ -9,7 +9,7 @@
         <div class="col-xs-12 col-md-4"></div>
         <q-form
           class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
-          action=""
+          @submit="login()"
         >
           <div v-if="error !== ''" class="error">{{ error }}</div>
           <q-input
@@ -28,7 +28,7 @@
             v-model="password"
           />
 
-          <div class="row">
+          <div class="row login-register">
             <q-btn
               color="primary"
               bg-color="white"
@@ -48,13 +48,15 @@
 
           <button class="oauth q-my-md row">
             <div>
-              <q-icon class="q-mr-xl" name="fab fa-facebook-f"></q-icon>
+              <q-icon class="q-mr-xl q-ml-md" name="fab fa-facebook-f"></q-icon>
             </div>
             <div>{{ $t('loginFacebook') }}</div>
           </button>
 
           <button class="oauth q-my-md row">
-            <div><q-icon class="q-mr-xl" name="fab fa-google"></q-icon></div>
+            <div>
+              <q-icon class="q-mr-xl q-ml-md" name="fab fa-google"></q-icon>
+            </div>
             <div>{{ $t('loginGoogle') }}</div>
           </button>
         </q-form>
@@ -64,6 +66,8 @@
 </template>
 
 <style lang="sass" scoped>
+.login-register
+  width: 100%
 .form-img
   padding: 20%
   background-color: $primary
@@ -76,7 +80,7 @@
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import { callApi, authApi } from '../../api/requests'
 
 export default {
   data() {
@@ -118,17 +122,7 @@ export default {
           }
         }
 
-        let res = await fetch(
-          this.$q.localStorage.getItem('server') + '/api/v1/auth/login',
-          {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-          }
-        )
-        res = await res.json()
+        const res = await authApi(body)
 
         if (res.error) {
           console.error(res.error)
@@ -138,10 +132,7 @@ export default {
           throw new Error(this.$t('somethingWentWrong'))
         }
 
-        await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/users/me',
-          res.token
-        ).then((resp) => {
+        await callApi('/users/me', res.token).then((resp) => {
           this.auth = {
             token: res.token,
             firstname: resp.user.firstName,
@@ -150,8 +141,8 @@ export default {
             id: resp.user._id,
             authenticated: true
           }
+          this.$router.go(-1)
         })
-        this.$router.go(-1)
       } catch (e) {
         this.error = e
         this.loading = false

@@ -1,33 +1,33 @@
 <template>
   <q-page>
-    <div class="title"/>
+    <div class="title" />
     <article>
-      <h3>{{$t('jobsSubtitle')}}</h3>
-      <h1>{{$t('jobsTitle')}}</h1>
+      <h3>{{ $t('jobsSubtitle') }}</h3>
+      <h1>{{ $t('jobsTitle') }}</h1>
 
-      <p>{{$t('jobsIntro')}}</p>
+      <p>{{ $t('jobsIntro') }}</p>
 
-      <h3 class="uppercase">{{$t('jobsResponsibilities')}}</h3>
-      <p>{{$t('jobsResp1')}}</p>
-      <p>{{$t('jobsResp2')}}</p>
-      <p>{{$t('jobsResp3')}}</p>
+      <h3 class="uppercase">{{ $t('jobsResponsibilities') }}</h3>
+      <p>{{ $t('jobsResp1') }}</p>
+      <p>{{ $t('jobsResp2') }}</p>
+      <p>{{ $t('jobsResp3') }}</p>
 
-      <h3 class="uppercase">{{$t('jobsQualifications')}}</h3>
-      <p>{{$t('jobsQual1')}}</p>
-      <p>{{$t('jobsQual2')}}</p>
-      <p>{{$t('jobsQual3')}}</p>
-      <p>{{$t('jobsQual4')}}</p>
-      <p>{{$t('jobsQual5')}}</p>
+      <h3 class="uppercase">{{ $t('jobsQualifications') }}</h3>
+      <p>{{ $t('jobsQual1') }}</p>
+      <p>{{ $t('jobsQual2') }}</p>
+      <p>{{ $t('jobsQual3') }}</p>
+      <p>{{ $t('jobsQual4') }}</p>
+      <p>{{ $t('jobsQual5') }}</p>
 
-      <h3 class="uppercase">{{$t('jobsContact1')}}</h3>
-      {{$t('jobsContact2')}}: <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a>
+      <h3 class="uppercase">{{ $t('jobsContact1') }}</h3>
+      {{ $t('jobsContact2') }}:
+      <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a>
     </article>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
 .title
-  margin-top: 4.7rem
   text-align: center
   background: url('../statics/images/Banner-Jobs.png') no-repeat
   background-size: 100%

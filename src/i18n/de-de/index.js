@@ -5,7 +5,10 @@ import pages from './pages'
 import jobs from './jobs'
 import requests from './requests'
 import principles from './principles'
+import getHelp from './getHelp'
 import errors from './errors'
+import info from './info'
+import imprint from './imprint'
 
 export default {
   ...main,
@@ -15,5 +18,8 @@ export default {
   ...jobs,
   ...requests,
   ...principles,
-  ...errors
+  ...getHelp,
+  ...errors,
+  ...info,
+  ...imprint
 }

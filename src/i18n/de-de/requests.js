@@ -3,5 +3,6 @@ export default {
   myRequests: 'Meine Anzeigen',
   noRequestsCreated: 'Du hast noch keine Anzeigen erstellt.',
   category: 'Kategorie',
-  success: 'Aktion erfolgreich'
+  success: 'Aktion erfolgreich',
+  noRequests: 'Momentan gibt es keine Gesuche!'
 }
