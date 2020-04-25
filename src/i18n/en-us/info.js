@@ -1,7 +1,7 @@
 export default {
-  infoTitle: 'Sicherheitsleitfaden',
-  infoIntro: 'Unsere CoronaHelfer-Empfehlungen',
-  infoSubIntro: 'Bitte beachtet unsere Empfehlungen, damit Ihr bei der Coronavirus-Nachbarschaftshilfe sicher und gesund bleibt!',
+  infoTitle: 'Security Guide',
+  infoIntro: 'Our CoronaHelper recommendations',
+  infoSubIntro: 'Please follow our recommendations so that you stay safe and healthy with the Coronavirus Neighbourhood Help!',
   AlgTextTitle: 'GENERAL AND SAFETY TIPS',
   Alg1: 'Please ensure that another member of your household is present at the first meeting for your own safety.',
   Alg2: 'Please don’t give any confidential information to third parties, for example, bank information or passwords',
