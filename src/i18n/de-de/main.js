@@ -15,9 +15,8 @@ export default {
   guidingHeading: 'LEITSÄTZE FÜR CORONAVIRUS-NACHBARSCHAFTSHILFE',
   guidingT1: 'Cool bleiben',
   historyHeading: 'UNSER HINTERGRUND',
-  historyT1: 'Wie ist unsere Idee entstanden? Über soziale Netzwerke sind wir darauf\n' +
-      '        aufmerksam geworden, wie unfassbar viele von euch in ihrer Umgebung\n' +
-      '        Hilfe angesichts der aktuellen Situation anbieten möchten. Bei anderen\n' +
-      '        Vermittlungsportalen fiel uns die große Anzahl an hilfsbereiten Menschen\n' +
-      '        im Gegensatz zu nur wenigen Anfragen auf.'
+  historyT1: 'Wie ist unsere Idee entstanden? Über soziale Netzwerke sind wir darauf aufmerksam geworden, wie unfassbar viele von euch in ihrer Umgebung Hilfe angesichts der aktuellen Situation anbieten möchten. Bei anderen Vermittlungsportalen fiel uns die große Anzahl an hilfsbereiten Menschen im Gegensatz zu nur wenigen Anfragen auf.',
+  historyT2: 'Wir haben erkannt, dass die Vermittlung von Fremden an Fremde eine große Herausforderung darstellt und machten uns die Sicherheit unserer Nutzer zur Aufgabe. Auch eine verlässliche und schnelle Vermittlung sowie die Einbindung bereits bestehender Offline-Arbeit vor Ort sind uns bei der Coronavirus-Nachbarschaftshilfe wichtig.',
+  historyT3: 'Dank des Hackathons #WirVsVirus der Bundesregierung haben wir ein tolles Team für unsere Idee gewinnen können. Seitdem arbeiten wir gemeinsam auf Hochtouren an der Umsetzung und dem Ausbau unserer Vermittlungsplattform'
+
 }

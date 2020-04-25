@@ -92,17 +92,11 @@
 
       <q-separator inset />
 
-      <h1 class="uppercase">Unser Hintergrund</h1>
+      <h1 class="uppercase">{{ $t('historyHeading') }}</h1>
       <p>
-        <br /><br />
-        Wir haben erkannt, dass die Vermittlung von Fremden an Fremde eine große
-        Herausforderung darstellt und machten uns die Sicherheit unserer Nutzer
-        zur Aufgabe. Auch eine verlässliche und schnelle Vermittlung sowie die
-        Einbindung bereits bestehender Offline-Arbeit vor Ort sind uns bei der
-        Coronavirus-Nachbarschaftshilfe wichtig.<br /><br />
-        Dank des Hackathons #WirVsVirus der Bundesregierung haben wir ein tolles
-        Team für unsere Idee gewinnen können. Seitdem arbeiten wir gemeinsam auf
-        Hochtouren an der Umsetzung und dem Ausbau unserer Vermittlungsplattform
+        {{ $t('historyT1') }}<br /><br />
+        {{ $t('historyT2') }}<br /><br />
+        {{ $t('historyT3') }}
       </p>
     </article>
   </q-page>
