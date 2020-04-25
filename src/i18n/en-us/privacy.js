@@ -1,4 +1,4 @@
 export default {
   privacyIntro: 'Unsere Datenschutzerklärung',
-  privacyTitle: 'DATENSCHUTZERKLÄRUNG'
+  privacyTitle: 'Datenschutzerklärung'
 }
