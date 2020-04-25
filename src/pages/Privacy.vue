@@ -1,11 +1,10 @@
 <template>
   <q-page>
-    <header>
-      <h4>Datenschutzerklärung</h4>
-    </header>
-
-    <body>
+    <div class="title"/>
     <article>
+      <h3>{{$t('privacyIntro')}}</h3>
+      <h1>{{$t('privacyTitle')}}</h1>
+
       <h5>Einleitung</h5>
       <p>
         Mit der folgenden Datenschutzerklärung möchten wir Sie darüber
@@ -536,16 +535,16 @@
           </a>
           ; Datenschutzerklärung:
           <a
-            href="https://aws.amazon.com/de/privacy/?nc1=f_pr"
-            target="_blank"
+                  href="https://aws.amazon.com/de/privacy/?nc1=f_pr"
+                  target="_blank"
           >
             https://aws.amazon.com/de/privacy/?nc1=f_pr
           </a>
           ; Privacy Shield (Gewährleistung Datenschutzniveau bei
           Verarbeitung von Daten in den USA):
           <a
-            href="https://www.privacyshield.gov/participant?id=a2zt0000000TOWQAA4&status=Active"
-            target="_blank"
+                  href="https://www.privacyshield.gov/participant?id=a2zt0000000TOWQAA4&status=Active"
+                  target="_blank"
           >
             https://www.privacyshield.gov/participant?id=a2zt0000000TOWQAA4&status=Active
           </a>
@@ -635,8 +634,8 @@
           </a>
           ; Datenschutzerklärung:
           <a
-            href="https://instagram.com/about/legal/privacy"
-            target="_blank"
+                  href="https://instagram.com/about/legal/privacy"
+                  target="_blank"
           >
             https://instagram.com/about/legal/privacy
           </a>
@@ -657,16 +656,16 @@
           ; Privacy Shield (Gewährleistung Datenschutzniveau bei
           Verarbeitung von Daten in den USA):
           <a
-            href="https://www.privacyshield.gov/participant?id=a2zt0000000GnywAAC&status=Active"
-            target="_blank"
+                  href="https://www.privacyshield.gov/participant?id=a2zt0000000GnywAAC&status=Active"
+                  target="_blank"
           >
             https://www.privacyshield.gov/participant?id=a2zt0000000GnywAAC&status=Active
           </a>
           ; Widerspruchsmöglichkeit (Opt-Out): Einstellungen für
           Werbeanzeigen:
           <a
-            href="https://www.facebook.com/settings?tab=ads"
-            target="_blank"
+                  href="https://www.facebook.com/settings?tab=ads"
+                  target="_blank"
           >
             https://www.facebook.com/settings?tab=ads
           </a>
@@ -674,15 +673,15 @@
           gemeinsame Verarbeitung personenbezogener Daten auf
           Facebook-Seiten:
           <a
-            href="https://www.facebook.com/legal/terms/page_controller_addendum"
-            target="_blank"
+                  href="https://www.facebook.com/legal/terms/page_controller_addendum"
+                  target="_blank"
           >
             https://www.facebook.com/legal/terms/page_controller_addendum
           </a>
           , Datenschutzhinweise für Facebook-Seiten:
           <a
-            href="https://www.facebook.com/legal/terms/information_about_page_insights_data"
-            target="_blank"
+                  href="https://www.facebook.com/legal/terms/information_about_page_insights_data"
+                  target="_blank"
           >
             https://www.facebook.com/legal/terms/information_about_page_insights_data
           </a>
@@ -702,8 +701,8 @@
           ; Privacy Shield (Gewährleistung Datenschutzniveau bei
           Verarbeitung von Daten in den USA):
           <a
-            href="https://www.privacyshield.gov/participant?id=a2zt0000000TORzAAO&status=Active"
-            target="_blank"
+                  href="https://www.privacyshield.gov/participant?id=a2zt0000000TORzAAO&status=Active"
+                  target="_blank"
           >
             https://www.privacyshield.gov/participant?id=a2zt0000000TORzAAO&status=Active
           </a>
@@ -796,8 +795,8 @@
           ; Privacy Shield (Gewährleistung Datenschutzniveau bei
           Verarbeitung von Daten in den USA):
           <a
-            href="https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active"
-            target="_blank"
+                  href="https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active"
+                  target="_blank"
           >
             https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active
           </a>
@@ -823,22 +822,22 @@
           ; Privacy Shield (Gewährleistung Datenschutzniveau bei
           Verarbeitung von Daten in den USA):
           <a
-            href="https://www.privacyshield.gov/participant?id=a2zt0000000TRkEAAW&status=Active"
-            target="_blank"
+                  href="https://www.privacyshield.gov/participant?id=a2zt0000000TRkEAAW&status=Active"
+                  target="_blank"
           >
             https://www.privacyshield.gov/participant?id=a2zt0000000TRkEAAW&status=Active
           </a>
           ; Widerspruchsmöglichkeit (Opt-Out): Opt-Out-Plugin:
           <a
-            href="https://tools.google.com/dlpage/gaoptout?hl=de"
-            target="_blank"
+                  href="https://tools.google.com/dlpage/gaoptout?hl=de"
+                  target="_blank"
           >
             https://tools.google.com/dlpage/gaoptout?hl=de
           </a>
           , Einstellungen für die Darstellung von Werbeeinblendungen:
           <a
-            href="https://adssettings.google.com/authenticated"
-            target="_blank"
+                  href="https://adssettings.google.com/authenticated"
+                  target="_blank"
           >
             https://adssettings.google.com/authenticated
           </a>
@@ -1022,62 +1021,52 @@
       </ul>
       <p className="seal">
         <a
-          href="https://datenschutz-generator.de/?l=de"
-          title="Rechtstext von Dr. Schwenke - für weitere Informationen bitte anklicken."
-          target="_blank"
+                href="https://datenschutz-generator.de/?l=de"
+                title="Rechtstext von Dr. Schwenke - für weitere Informationen bitte anklicken."
+                target="_blank"
         >
           Erstellt mit kostenlosem Datenschutz-Generator.de von Dr. Thomas
           Schwenke
         </a>
       </p>
+
     </article>
-    </body>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-  header
-    text-align: center
-    background: url('../statics/images/background.jpg') no-repeat
-    background-size: cover
-    padding: 50px
+.title
+  text-align: center
+  background: url('../statics/images/Banner-Jobs.png') no-repeat
+  background-size: 100%
+  color: white
+  height: 28.1rem
+
+article
+  padding: 1.9rem 0 1.3rem 0
+  margin: -25rem auto 0
+  max-width: 50rem
+  min-height: calc(100vh - 21.3rem)
+
+  h3:first-of-type
+    margin-top: 13.8rem
     color: white
 
-    h4
-      text-transform: uppercase
-      margin: 0 0 30px 0
+  h1
+    margin-top: -1.3rem
+    color: white
+    font-weight: bold
+    font-size: 4.4rem
+    line-height: 4.7rem
+    white-space: nowrap
 
-  body
-    &:before
-      background-color: white
-      border-radius: 100%
-      content: ''
-      height: 50px
-      position: absolute
-      top: -25px
-      width: 100%
+  h3
+    margin-top: 6.3rem
 
-    background-color: white
-    position: relative
-    padding-bottom: 20px
-
-    article
-      padding-top: 30px
-      margin: 20px auto 0
-      max-width: 800px
-
-      h5
-        color: $secondary
-        text-transform: uppercase
-        font-weight: 600
-        margin: 20px 0
-
-      h6
-        font-size: 30px
-        margin: 30px 0
+  a
+    color: $secondary
 </style>
 
 <script>
-export default {
-}
+export default {}
 </script>
