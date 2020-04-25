@@ -66,7 +66,7 @@
   color: white
 .locale-selector
   min-width: 150px
-  margin-left: 25px;
+  margin-left: 25px
 </style>
 
 <script>
