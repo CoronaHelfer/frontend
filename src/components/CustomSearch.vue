@@ -22,18 +22,18 @@ export default {}
 
 <style lang="scss">
 .room-icon {
-  font-size: 44px;
+  font-size: 2rem;
   color: $secondary;
 }
 .regionale-suche-input {
-  margin-top: 50px;
+  margin-top: 4%;
   background-color: $inputcolor;
-  padding: 15px;
-  font-size: 20px;
+  padding: 2%;
+  font-size: 1rem;
   color: $secondary;
 }
 ::placeholder {
-  font-size: 20px;
+  font-size: 1rem;
   color: $secondary;
 }
 </style>

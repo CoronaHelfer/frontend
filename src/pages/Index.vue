@@ -133,7 +133,7 @@
   border-radius: 25px;
   border: 2px solid $primary;
   position: absolute;
-  bottom: 50px;
+  bottom: 5%;
   left: 50%;
   transform: translate(-50%);
   opacity: 0.3;
@@ -162,7 +162,7 @@
 }
 .title-aboutus {
   display: table;
-  margin: 70px auto;
+  margin: 6% auto;
   .uppercase {
     margin-bottom: 0px;
     line-height: inherit;
@@ -203,7 +203,7 @@
 .q-separator
   width: 30%
   margin: 3% auto 0 auto
-  border: 2px solid $tertiary;
+  border: 2px solid $tertiary
   background-color: $tertiary
 
 article
