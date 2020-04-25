@@ -13,7 +13,7 @@
         :onClick="openPopUp"
       />
       <article v-if="foreignRequests.length === 0">
-        Momentan gibt es keine Gesuche!
+        {{ $t('noRequests') }}
       </article>
       <Offer :isDialogOpen="isDialogOpen" :requestId="selectedRequest" />
     </body>
