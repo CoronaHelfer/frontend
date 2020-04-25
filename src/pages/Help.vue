@@ -1,10 +1,44 @@
 <template>
   <q-page>
-    <header>
-      <h1>Gesuche</h1>
-    </header>
-
     <body>
+      <article>
+        <div class="row wrap q-mb-md">
+          <div class="col-6 q-px-xs">
+            <q-input
+              outlined
+              color="secondary"
+              v-model="query.zipcode"
+              :label="$t('searchForm.zipcode')"
+            >
+              <template v-slot:append>
+                <q-icon class="icon" name="room" />
+              </template>
+            </q-input>
+          </div>
+          <div class="col-6 q-px-xs">
+            <q-select
+              outlined
+              color="secondary"
+              :options="radii"
+              :option-label="(item) => `${item} km`"
+              v-model="query.radius"
+              :label="$t('searchForm.radius')"
+            />
+          </div>
+        </div>
+        <div class="row wrap">
+          <q-chip
+            v-for="category in categories"
+            :key="category.id"
+            :selected.sync="categorySelection[category.id]"
+            color="secondary"
+            text-color="white"
+            size="md"
+          >
+            {{ category.label }}
+          </q-chip>
+        </div>
+      </article>
       <Request
         v-for="request in foreignRequests"
         v-bind:key="request._id"
@@ -89,6 +123,7 @@ body
 </style>
 
 <script>
+import Vue from 'vue'
 import Request from '../components/Request'
 import Offer from '../components/Offer'
 import { callApi } from '../../api/requests'
@@ -105,7 +140,25 @@ export default {
     return {
       requests: [],
       selectedRequest: undefined,
-      isDialogOpen: false
+      isDialogOpen: false,
+      categories: [
+        { label: 'Kurierdienste', id: 1 },
+        { label: 'Warenleistungen', id: 2 },
+        { label: 'Bildung', id: 3 },
+        { label: 'Soziales & Gemeinschaft', id: 4 }
+      ],
+      radii: [5, 10, 25, 50, 75, 100],
+      query: {
+        categoryIds: [],
+        zipcode: undefined,
+        radius: 5
+      },
+      categorySelection: {
+        1: false,
+        2: false,
+        3: false,
+        4: false
+      }
     }
   },
 
@@ -126,30 +179,21 @@ export default {
     }
   },
 
-  mounted() {
-    this.getCurrentPosition()
+  async mounted() {
+    if (this.$route.query && this.$route.query.zipcode) {
+      Vue.set(this.query, 'zipcode', this.$route.query.zipcode)
+    }
+
+    await this.fetchRequests()
   },
 
   methods: {
-    getCurrentPosition() {
-      Geolocation.getCurrentPosition().then((position) => {
-        this.fetchRequests(position.coords.longitude, position.coords.latitude)
-      })
-    },
-
     async fetchRequests(longitude, latitude) {
       try {
-        const headers = new Headers()
-        headers.append('position', longitude)
-        headers.append('position', latitude)
+        const queryString = new URLSearchParams(this.query)
 
-        const response = await callApi(
-          '/publicRequest',
-          undefined,
-          undefined,
-          undefined,
-          headers
-        )
+        const response = await callApi(`/publicRequest?${queryString}`)
+
         this.requests = response.result
       } catch (err) {
         console.error(err)

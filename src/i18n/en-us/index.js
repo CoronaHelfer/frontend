@@ -10,6 +10,7 @@ import errors from './errors'
 import info from './info'
 import imprint from './imprint'
 import privacy from './privacy'
+import search from './search'
 
 export default {
   ...main,
@@ -23,5 +24,6 @@ export default {
   ...errors,
   ...info,
   ...imprint,
-  ...privacy
+  ...privacy,
+  searchForm: { ...search }
 }

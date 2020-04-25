@@ -1,63 +1,52 @@
 <template>
   <article class="request">
-    <header>
-        <span class="avatar">
+    <q-card class="request-card" flat bordered>
+      <div class="row">
+        <div class="col-1">
+          <q-avatar
+            class="avatar"
+            v-if="request.created_by.picture"
+          >
             <img
-              v-if="user.image"
-              :src="user.image"
-              :alt="'Foto von ' + user.firstName" />
-            <span
-              v-else
-              class="placeholder">
-              {{user.firstName[0]}}
-            </span>
-        </span>
-      <div class="intro">
-        <h2>{{request.title}}</h2>
-        <sub>
-          {{user.firstName}} wartet {{request.distance}} Meter entfernt auf deine Hilfe!
-        </sub>
+              :src="request.created_by.picture"
+              :alt="'Foto von ' + user.firstName"
+            />
+          </q-avatar>
+        </div>
+        <div class="col-11">
+          <q-card-section horizontal>
+            <q-card-section class="q-pt-sm">
+              <h2>{{request.title}}</h2>
+              <h3>{{request.category.name}}</h3>
+              <div>
+                {{request.description}}
+              </div>
+            </q-card-section>
+          </q-card-section>
+          <q-card-actions>
+            <q-space></q-space>
+            <q-btn
+              class="card-action-button"
+              color="secondary"
+              v-on:click="onClick($vnode.key)"
+            >
+              Helfen
+            </q-btn>
+          </q-card-actions>
+        </div>
       </div>
-      <button class="primary" v-on:click="onClick($vnode.key)">Helfen
-      </button>
-    </header>
-    <p v-if="request.category">
-      <strong>Kategorie:</strong> {{request.category.name}}
-    </p>
-    <p>
-      <strong>Gesuch:</strong> {{request.description}}
-    </p>
+    </q-card>
   </article>
 </template>
 
 <style lang="sass" scoped>
-  .request
-    header
-      align-items: center
-      display: flex
-      justify-content: flex-start
-      text-align: center
-
-    .avatar
-      margin-right: 20px
-      width: 80px
-      height: 80px
-      background: #ddd
-      border-radius: 80px
-      overflow: hidden
-      flex-shrink: 0
-
-    .placeholder
-      font-size: 53px
-      color: white
-
-    .intro
-      display: flex
-      flex-direction: column
-      text-align: left
-
-    button
-      margin-left: auto
+.request-card
+  background-color: $tertiary
+  border: none
+  .avatar
+    margin: 16px
+  .card-action-button
+    margin: 8px
 </style>
 
 <script>

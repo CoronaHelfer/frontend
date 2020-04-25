@@ -17,7 +17,7 @@
       </div>
     </div>
     <article class="wrapper">
-      <div class="fit row wrap justify-evenly items-start content-start">
+      <div class="fit row wrap justify-evenly items-start content-start q-mb-xl">
         <img width="30%" src="~assets/Logo-2.svg" />
       </div>
       <h1 class="uppercase">{{ $t('indexHeading') }}</h1>
@@ -27,11 +27,31 @@
       <p>
         {{ $t('indexInfoText') }}
       </p>
-      <q-input ref="input" filled v-model="region" :label="$t('searchRegion')">
-        <template v-slot:append>
-          <q-icon class="icon" name="room" />
-        </template>
-      </q-input>
+
+      <div class="q-my-xl">
+        <h3>{{ $t('searchForm.title') }}</h3>
+        <div class="row wrap">
+          <div class="col-10 q-px-xs">
+            <q-input
+              filled
+              v-model="zipcode"
+              :label="$t('searchForm.zipcode')"
+            >
+              <template v-slot:append>
+                <q-icon class="icon" name="room" />
+              </template>
+            </q-input>
+          </div>
+          <div class="col-2 q-px-xs">
+            <q-btn
+              @click="goToHelp()"
+              :label="$t('searchForm.search')"
+              color="secondary"
+              size="lg"
+            />
+          </div>
+        </div>
+      </div>
     </article>
     <div class="tertiary-bg">
       <div class="wrapper">
@@ -152,8 +172,10 @@ export default {
   components: {
     MainButton
   },
+
   data: () => {
     return {
+      zipcode: undefined,
       items: [
         {
           img: 'cool',
@@ -182,15 +204,10 @@ export default {
       ]
     }
   },
-  mounted() {
-    if (this.$q.localStorage.getItem('server') === null) {
-      // TODO: Set default values in a way that user does not have to access the landing page first
-      const config = require('../assets/config.json')
-      if (config['use-external-backend']) {
-        this.$q.localStorage.set('server', config.url)
-      } else {
-        this.$q.localStorage.set('server', '')
-      }
+
+  methods: {
+    goToHelp() {
+      this.$router.push({ path: 'help', query: { zipcode: this.zipcode } })
     }
   }
 }
