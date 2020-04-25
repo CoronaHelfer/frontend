@@ -14,8 +14,7 @@ export const callApi = async (
     cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json',
-      'X-Access-Token': token
-      // Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     },
     body:
       method === 'POST' || method === 'PUT' || method === 'DELETE'
