@@ -1,6 +1,7 @@
 <template>
   <q-page>
     <body>
+      <q-linear-progress :indeterminate="loading" color="secondary" />
       <article>
         <div class="row wrap q-mb-md">
           <div class="col-6 q-px-xs">
@@ -26,17 +27,26 @@
             />
           </div>
         </div>
-        <div class="row wrap">
+        <div class="row wrap" v-if="categorySelection">
           <q-chip
             v-for="category in categories"
-            :key="category.id"
-            :selected.sync="categorySelection[category.id]"
+            :key="category._id"
+            :selected.sync="categorySelection[category._id]"
             color="secondary"
             text-color="white"
             size="md"
           >
-            {{ category.label }}
+            {{ category.name }}
           </q-chip>
+        </div>
+        <div class="row">
+          <q-btn
+            size="md"
+            class="q-ma-xs"
+            @click="fetchRequests"
+          >
+            {{ $t('searchForm.search') }}
+          </q-btn>
         </div>
       </article>
       <Request
@@ -138,27 +148,18 @@ export default {
 
   data() {
     return {
+      loading: true,
       requests: [],
       selectedRequest: undefined,
       isDialogOpen: false,
-      categories: [
-        { label: 'Kurierdienste', id: 1 },
-        { label: 'Warenleistungen', id: 2 },
-        { label: 'Bildung', id: 3 },
-        { label: 'Soziales & Gemeinschaft', id: 4 }
-      ],
+      categories: [],
       radii: [5, 10, 25, 50, 75, 100],
       query: {
         categoryIds: [],
         zipcode: undefined,
         radius: 5
       },
-      categorySelection: {
-        1: false,
-        2: false,
-        3: false,
-        4: false
-      }
+      categorySelection: {}
     }
   },
 
@@ -184,19 +185,48 @@ export default {
       Vue.set(this.query, 'zipcode', this.$route.query.zipcode)
     }
 
+    this.loading = true
+    await this.loadCategories()
     await this.fetchRequests()
   },
 
   methods: {
-    async fetchRequests(longitude, latitude) {
+    async fetchRequests() {
       try {
+        this.loading = true
+        this.query.categoryIds = Object.entries(this.categorySelection)
+          .filter(([key, value]) => !!value)
+          .map(([key, value]) => key)
+          .join(',')
+
         const queryString = new URLSearchParams(this.query)
 
         const response = await callApi(`/publicRequest?${queryString}`)
 
         this.requests = response.result
-      } catch (err) {
-        console.error(err)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async loadCategories() {
+      try {
+        const categories = await callApi('/category')
+
+        if (categories.error || !categories.result) {
+          console.error('Error while fetching categories')
+          throw new Error(this.$t('somethingWentWrong'))
+        }
+
+        this.categories = categories.result
+        this.categorySelection = this.categories.reduce((accumulator, current) => {
+          accumulator[current._id] = false
+          return accumulator
+        }, {})
+      } catch (e) {
+        this.error = e
       }
     },
 
