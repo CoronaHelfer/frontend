@@ -892,11 +892,6 @@
       <p>{{ $t('printCR1') }}</p>
 
       <p>
-<<<<<<< HEAD
-        <a href="https://datenschutz-generator.de/?l=de"
-          >Erstellt mit kostenlosem Datenschutz-Generator.de von Dr. Thomas
-          Schwenke</a
-=======
         In diesem Abschnitt erhalten Sie eine Übersicht über die in dieser
         Datenschutzerklärung verwendeten Begrifflichkeiten. Viele der
         Begriffe sind dem Gesetz entnommen und vor allem im Art. 4 DSGVO
@@ -971,7 +966,6 @@
                 href="https://datenschutz-generator.de/?l=de"
                 title="Rechtstext von Dr. Schwenke - für weitere Informationen bitte anklicken."
                 target="_blank"
->>>>>>> 74d10682d2cd93d5af3cfb2f07aa9e53bdec3341
         >
       </p>
 
@@ -986,7 +980,6 @@
   background-size: 100%
   color: white
   height: 28.1rem
-<<<<<<< HEAD
 
 article
   padding: 1.9rem 0 1.3rem 0
@@ -994,15 +987,6 @@ article
   max-width: 50rem
   min-height: calc(100vh - 21.3rem)
 
-=======
-
-article
-  padding: 1.9rem 0 1.3rem 0
-  margin: -25rem auto 0
-  max-width: 50rem
-  min-height: calc(100vh - 21.3rem)
-
->>>>>>> 74d10682d2cd93d5af3cfb2f07aa9e53bdec3341
   h3:first-of-type
     margin-top: 13.8rem
     color: white
