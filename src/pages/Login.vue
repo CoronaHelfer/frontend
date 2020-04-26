@@ -31,6 +31,7 @@
           <div class="row login-register">
             <q-btn
               color="primary"
+              type="submit"
               bg-color="white"
               filled
               class="c-btn form-input col-xs-12 col-md-4"
