@@ -30,7 +30,7 @@
               color="secondary"
               v-on:click="onClick($vnode.key)"
             >
-              Helfen
+              {{$t('help')}}
             </q-btn>
           </q-card-actions>
         </div>
