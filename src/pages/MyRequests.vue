@@ -103,7 +103,7 @@ export default {
         this.error = ''
         const requests = await callApi(
           // TODO: deduplicate this function
-          this.$q.localStorage.getItem('server') + 'request',
+          '/request',
           this.auth.token
         )
         this.requests = requests.result

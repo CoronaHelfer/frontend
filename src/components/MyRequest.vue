@@ -125,7 +125,7 @@ export default {
         this.$emit('error', '')
 
         await callApi(
-          this.$q.localStorage.getItem('server') + 'request',
+          '/request',
           this.auth.token,
           {
             requestId: this.request._id
