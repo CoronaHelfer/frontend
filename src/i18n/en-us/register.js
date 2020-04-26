@@ -9,5 +9,5 @@ export default {
   noMatchingPassword: 'Passwords do not match.',
   emptyField: 'The field is empty.',
   missingFields: 'Not all fields are filled.',
-  acceptPrivacy: 'By register you are accepting our'
+  acceptPrivacy: 'By registering you accept our'
 }

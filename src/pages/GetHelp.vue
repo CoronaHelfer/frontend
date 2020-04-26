@@ -268,7 +268,7 @@ export default {
 
         const [day, month, year] = this.enddate.split('.')
         const res = await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/request',
+          '/request',
           this.auth.token,
           {
             title: this.title,

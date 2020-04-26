@@ -1,8 +1,8 @@
 export default {
-  stayCool: 'Cool bleiben',
-  washHands: 'Ordentlich Hände waschen',
-  behave: 'Rücksichtsvoll bleiben',
-  noHamster: 'Ohne Hamsterkäufe',
-  supportNeighbor: 'Nachbarschaftshilfe',
-  socialDistance: 'Abstand halten'
+  stayCool: 'Stay Cool',
+  washHands: 'Always wash hands thoroughly',
+  behave: 'Stay Respectful',
+  noHamster: 'No panic buying',
+  supportNeighbor: 'Offer support to your community',
+  socialDistance: 'Observe social distancing'
 }

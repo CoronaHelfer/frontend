@@ -3,5 +3,6 @@ export default {
   myRequests: 'Meine Hilfseinträge',
   noRequestsCreated: 'Du hast noch keine Hilfseinträge erstellt.',
   category: 'Kategorie',
-  success: 'Aktion erfolgreich'
+  success: 'Aktion erfolgreich',
+  noRequests: 'Momentan gibt es keine Gesuche!'
 }

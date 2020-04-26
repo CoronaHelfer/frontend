@@ -9,6 +9,8 @@ import getHelp from './getHelp'
 import errors from './errors'
 import info from './info'
 import profile from './profile'
+import imprint from './imprint'
+import privacy from './privacy'
 
 export default {
   ...main,
@@ -21,5 +23,7 @@ export default {
   ...getHelp,
   ...errors,
   ...info,
-  ...profile
+  ...profile,
+  ...imprint,
+  ...privacy
 }

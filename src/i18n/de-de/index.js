@@ -10,6 +10,7 @@ import errors from './errors'
 import info from './info'
 import imprint from './imprint'
 import profile from './profile'
+import privacy from './privacy'
 
 export default {
   ...main,
@@ -23,5 +24,6 @@ export default {
   ...errors,
   ...info,
   ...imprint,
-  ...profile
+  ...profile,
+  ...privacy
 }

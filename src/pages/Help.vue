@@ -13,7 +13,7 @@
         :onClick="openPopUp"
       />
       <article v-if="foreignRequests.length === 0">
-        Momentan gibt es keine Gesuche!
+        {{ $t('noRequests') }}
       </article>
       <Offer :isDialogOpen="isDialogOpen" :requestId="selectedRequest" />
     </body>
@@ -144,7 +144,7 @@ export default {
         headers.append('position', latitude)
 
         const response = await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/publicRequest',
+          '/publicRequest',
           undefined,
           undefined,
           undefined,

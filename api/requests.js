@@ -1,4 +1,4 @@
-const baseUrl = 'https://coronahelfer.eu/api/v1'
+const baseUrl = 'https://dev.coronahelfer.eu/api/v1'
 
 export const callApi = async (
   url = '',
@@ -12,8 +12,8 @@ export const callApi = async (
     cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json',
-      'X-Access-Token': token
-      // Authorization: `Bearer ${token}`
+      // 'X-Access-Token': token
+      Authorization: `Bearer ${token}`
     },
     body:
       method === 'POST' || method === 'PUT' || method === 'DELETE'

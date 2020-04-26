@@ -20,16 +20,12 @@
       <div class="fit row wrap justify-evenly items-start content-start">
         <img width="30%" src="~assets/Logo-2.svg" />
       </div>
-      <h1 class="uppercase">Portal für Nachbarschaftshilfe in deiner Region</h1>
-      <i>“Aus der Region - für die Region”</i>
+      <h1 class="uppercase">{{ $t('indexHeading') }}</h1>
+      <i>{{ $t('indexSubHeading') }}</i>
 
-      <h3>Worum geht es?</h3>
+      <h3>{{ $t('indexSubHeadingTwo') }}</h3>
       <p>
-        Die aktuelle Situation stellt die Gesellschaft vor neue
-        Herausforderungen. Das neuartige Coronavirus hat unser Zusammenleben in
-        den vergangenen Wochen zunehmend eingeschränkt. Wir haben das Projekt
-        CoronaHelfer ins Leben gerufen, um gemeinsam die Ausbreitung des Virus
-        zu verlangsamen und einander dort zu unterstützen, wo es möglich ist.
+        {{ $t('indexInfoText') }}
       </p>
       <q-input ref="input" filled v-model="region" :label="$t('searchRegion')">
         <template v-slot:append>
@@ -39,7 +35,7 @@
     </article>
     <div class="tertiary-bg">
       <div class="wrapper">
-        <h1 class="uppercase">Ziel und Vision der Initiative CoronaHelfer</h1>
+        <h1 class="uppercase">{{ $t('goalsHeading') }}</h1>
         <div class="fit row wrap justify-between items-center content-center">
           <div class="vision-box">
             <div class="content-box">
@@ -79,7 +75,7 @@
       </div>
     </div>
     <article class="wrapper">
-      <h1 class="uppercase">Leitsätze für Coronavirus-Nachbarschaftshilfe</h1>
+      <h1 class="uppercase">{{ $t('guidingHeading') }}</h1>
 
       <div class="column">
         <div
@@ -96,21 +92,11 @@
 
       <q-separator inset />
 
-      <h1 class="uppercase">Unser Hintergrund</h1>
+      <h1 class="uppercase">{{ $t('historyHeading') }}</h1>
       <p>
-        Wie ist unsere Idee entstanden? Über soziale Netzwerke sind wir darauf
-        aufmerksam geworden, wie unfassbar viele von euch in ihrer Umgebung
-        Hilfe angesichts der aktuellen Situation anbieten möchten. Bei anderen
-        Vermittlungsportalen fiel uns die große Anzahl an hilfsbereiten Menschen
-        im Gegensatz zu nur wenigen Anfragen auf.<br /><br />
-        Wir haben erkannt, dass die Vermittlung von Fremden an Fremde eine große
-        Herausforderung darstellt und machten uns die Sicherheit unserer Nutzer
-        zur Aufgabe. Auch eine verlässliche und schnelle Vermittlung sowie die
-        Einbindung bereits bestehender Offline-Arbeit vor Ort sind uns bei der
-        Coronavirus-Nachbarschaftshilfe wichtig.<br /><br />
-        Dank des Hackathons #WirVsVirus der Bundesregierung haben wir ein tolles
-        Team für unsere Idee gewinnen können. Seitdem arbeiten wir gemeinsam auf
-        Hochtouren an der Umsetzung und dem Ausbau unserer Vermittlungsplattform
+        {{ $t('historyT1') }}<br /><br />
+        {{ $t('historyT2') }}<br /><br />
+        {{ $t('historyT3') }}
       </p>
     </article>
   </q-page>
