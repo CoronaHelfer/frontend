@@ -76,7 +76,6 @@ export default {
         this.loading = true
         this.error = ''
         const requests = await callApi(
-          // TODO: deduplicate this function
           '/request',
           this.auth.token
         )
