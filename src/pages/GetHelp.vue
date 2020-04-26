@@ -360,8 +360,10 @@ export default {
     },
 
     checkEndDate(endDate) {
-      endDate = parse(endDate, 'dd/MM/yyyy HH:mm', new Date())
-      if (parse(this.startdate, 'dd/MM/yyyy HH:mm', new Date()) > endDate) {
+      const parsedEndDate = parse(endDate, 'dd/MM/yyyy HH:mm', new Date())
+      if (
+        parse(this.startdate, 'dd/MM/yyyy HH:mm', new Date()) > parsedEndDate
+      ) {
         return this.$t('errorEndDate')
       }
     }
