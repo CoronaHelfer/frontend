@@ -346,8 +346,7 @@ export default {
     },
 
     fromToday(date) {
-      const today = new Date().toLocaleDateString().split('/')
-      return date >= today[2] + '/' + today[1] + '/' + today[0]
+      return date >= date.formatDate(new Date(), 'DD/MM/YYYY')
     },
 
     checkDate(inputDate) {
