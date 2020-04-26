@@ -1,8 +1,8 @@
 export default {
-  request: 'Hilfseintrag',
-  myRequests: 'Meine Hilfseinträge',
-  noRequestsCreated: 'Du hast noch keine Hilfseinträge erstellt.',
+  request: 'Hilfsanfrage',
+  myRequests: 'Meine Hilfsanfragen',
+  noRequestsCreated: 'Du hast noch keine Hilfsanfrage erstellt.',
   category: 'Kategorie',
   success: 'Aktion erfolgreich',
-  noRequests: 'Momentan gibt es keine Gesuche!'
+  noRequests: 'Momentan gibt es keine Hilfsanfragen!'
 }
