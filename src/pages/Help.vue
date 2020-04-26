@@ -174,6 +174,10 @@ export default {
     },
 
     foreignRequests: function() {
+      if (this.requests.length === 0) {
+        return []
+      }
+
       return this.requests.filter(function(request) {
         return request.created_by._id !== this.auth.id
       }, this)
@@ -202,8 +206,7 @@ export default {
         const queryString = new URLSearchParams(this.query)
 
         const response = await callApi(`/publicRequest?${queryString}`)
-
-        this.requests = response.result
+        this.requests = response.result || []
       } catch (error) {
         console.error(error)
       } finally {
