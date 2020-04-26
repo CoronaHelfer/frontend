@@ -863,34 +863,32 @@
         einer anderen natürlichen oder juristischen Person erforderlich ist.
       </p>
       <p>
-        {{ $t('imprintContact1')
-        }}<a href="mailto:info@coronahelfer.eu"> info@coronahelfer.eu</a>
+        {{ $t('imprintContact1')}}
+        <a href="mailto:info@coronahelfer.eu"> info@coronahelfer.eu</a>
       </p>
 
       <h3 class="uppercase">{{ $t('imprintSMTitle') }}</h3>
       <p>{{ $t('imprintSM1') }}</p>
       <p>
         Facebook:
-        <a href="https://www.facebook.com/coronahelfer.eu/"
-          >https://www.facebook.com/coronahelfer.eu/</a
-        >
+        <a href="https://www.facebook.com/coronahelfer.eu/">
+        https://www.facebook.com/coronahelfer.eu/
+        </a>
       </p>
       <p>
         Instagram:
-        <a href="https://www.instagram.com/coronahelfer.eu/"
-          >https://www.instagram.com/coronahelfer.eu/</a
-        >
+        <a href="https://www.instagram.com/coronahelfer.eu/">
+          https://www.instagram.com/coronahelfer.eu/
+          </a>
       </p>
       <p>
         Twitter:
-        <a href="https://twitter.com/CoronahelferE"
-          >https://twitter.com/CoronahelferE</a
-        >
+        <a href="https://twitter.com/CoronahelferE">
+        https://twitter.com/CoronahelferE</a>
       </p>
 
       <h3 class="uppercase">{{ $t('imprintCRTitle') }}</h3>
       <p>{{ $t('printCR1') }}</p>
-
       <p>
         In diesem Abschnitt erhalten Sie eine Übersicht über die in dieser
         Datenschutzerklärung verwendeten Begrifflichkeiten. Viele der
@@ -963,9 +961,9 @@
       </ul>
       <p className="seal">
         <a
-                href="https://datenschutz-generator.de/?l=de"
-                title="Rechtstext von Dr. Schwenke - für weitere Informationen bitte anklicken."
-                target="_blank"
+          href="https://datenschutz-generator.de/?l=de"
+          title="Rechtstext von Dr. Schwenke - für weitere Informationen bitte anklicken."
+          target="_blank"
         >
       </p>
 
