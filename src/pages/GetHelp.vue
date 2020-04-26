@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div v-if="error" class="error">{{ error }}</div>
       <h1 class="q-px-lg uppercase">{{ $t('getHelp') }}</h1>
-      <q-form @submit="send()">
+      <q-form>
         <q-stepper
           v-model="step"
           ref="stepper"
@@ -35,17 +35,20 @@
               <q-input
                 filled
                 name="title"
-                class="form-input q-pr-md col-xs-12 col-md-3"
+                class="form-input q-pr-sm col-xs-12 col-md-3"
                 :label="$t('title')"
                 v-model="title"
                 bg-color="accent"
+                lazy-rules
+                :rules="[(val) => !!val || this.$t('emptyField')]"
               />
               <q-input
-                class="q-pr-sm form-input-date form-input col-xs-12 col-md-3"
+                class="q-pr-sm form-input col-xs-12 col-md-3"
                 filled
                 name="startdate"
                 v-model="startdate"
-                :rules="['date', 'time']"
+                lazy-rules
+                :rules="['datetime', checkDate]"
                 :label="$t('startdate')"
                 bg-color="accent"
               >
@@ -58,18 +61,18 @@
                     >
                       <div class="q-gutter-md row">
                         <q-date
-                          mask="DD/MM/YYYY HH:mm"
+                          mask="YYYY-MM-DDTHH:mm:ss"
                           v-model="startdate"
-                          :rules="['date']"
+                          :rules="['datetime']"
                           color="secondary"
                           :options="fromToday"
                         />
                         <q-time
                           v-model="startdate"
-                          mask="DD/MM/YYYY HH:mm"
-                          :rules="['time']"
+                          mask="YYYY-MM-DDTHH:mm:ss"
+                          :rules="['datetime']"
                           color="secondary"
-                          @input="() => $refs.qStartDateProxy.hide()"
+                          @input="$refs.qStartDateProxy.hide()"
                         />
                       </div>
                     </q-popup-proxy>
@@ -77,11 +80,12 @@
                 </template>
               </q-input>
               <q-input
-                class="q-pl-sm form-input-date form-input col-xs-12 col-md-3"
+                class="q-pl-sm form-input col-xs-12 col-md-3"
                 filled
                 v-model="enddate"
                 name="enddate"
-                :rules="['date', 'time']"
+                lazy-rules
+                :rules="['datetime', checkDate, checkEndDate]"
                 :label="$t('enddate')"
                 bg-color="accent"
               >
@@ -94,18 +98,18 @@
                     >
                       <div class="q-gutter-md row">
                         <q-date
-                          mask="DD/MM/YYYY HH:mm"
+                          mask="YYYY-MM-DDTHH:mm:ss"
                           v-model="enddate"
                           color="secondary"
-                          :rules="['date']"
+                          :rules="['datetime']"
                           :options="fromToday"
                         />
                         <q-time
                           v-model="enddate"
-                          mask="DD/MM/YYYY HH:mm"
-                          :rules="['time']"
+                          mask="YYYY-MM-DDTHH:mm:ss"
+                          :rules="['datetime']"
                           color="secondary"
-                          @input="() => $refs.endDateProxy.hide()"
+                          @input="$refs.endDateProxy.hide()"
                         />
                       </div>
                     </q-popup-proxy>
@@ -197,7 +201,7 @@
                 <q-space v-else />
                 <q-btn
                   :loading="loading"
-                  @click="step === 2 ? send() : $refs.stepper.next()"
+                  @click.prevent="step === 2 ? send() : $refs.stepper.next()"
                   color="primary"
                   :label="step === 2 ? $t('send') : $t('continue')"
                 >
@@ -220,9 +224,6 @@
   border-radius: 0
   background: #fff
 
-.form-input-date
-  padding-bottom: 0
-
 .error
   background: RED
   color: WHITE
@@ -234,11 +235,12 @@
 <script>
 import { callApi } from '../../api/requests'
 import { date } from 'quasar'
+import { parse } from 'date-fns'
 
 export default {
   data() {
     const now = Date.now()
-    const defaultTime = date.formatDate(now, 'DD/MM/YYYY HH:mm')
+    const defaultDate = date.formatDate(now, 'DD/MM/YYYY HH:mm')
     return {
       error: false,
       loading: false,
@@ -251,8 +253,8 @@ export default {
       categories: [],
       category: '',
       isHelpForElse: true,
-      startdate: defaultTime,
-      enddate: defaultTime,
+      startdate: defaultDate,
+      enddate: defaultDate,
       step: 1
     }
   },
@@ -309,23 +311,10 @@ export default {
         ) {
           throw new Error(this.$t('missingFields'))
         }
-        const start = this.startdate
-          .replace(' ', '/')
-          .replace(':', '/')
-          .split('/')
-        const end = this.enddate
-          .replace(' ', '/')
-          .replace(':', '/')
-          .split('/')
-        const startdate = date.formatDate(
-          new Date(start[2], start[1], start[0], start[3], start[4], 0),
-          'YYYY-MM-DDTHH:mm:ss.SSSZ'
-        )
-        const enddate = date.formatDate(
-          new Date(end[2], end[1], end[0], end[3], end[4], 0),
-          'YYYY-MM-DDTHH:mm:ss.SSSZ'
-        )
-        console.log(startdate, enddate)
+        const start = parse(this.startdate, 'dd/MM/yyyy HH:mm')
+        const end = parse(this.enddate, 'dd/MM/yyyy HH:mm')
+        const startDate = date.formatDate(start, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
+        const endDate = date.formatDate(end, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
         const res = await callApi(
           '/request',
           this.auth.token,
@@ -337,8 +326,8 @@ export default {
             'address.city': this.city,
             'address.street': this.street,
             'address.street_nr': this.streetNumber,
-            time_start: startdate,
-            time_end: enddate
+            time_start: startDate,
+            time_end: endDate
           },
           'POST'
         )
@@ -359,6 +348,23 @@ export default {
     fromToday(date) {
       const today = new Date().toLocaleDateString().split('/')
       return date >= today[2] + '/' + today[1] + '/' + today[0]
+    },
+
+    checkDate(inputDate) {
+      const parsedInputDate = parse(inputDate, 'dd/MM/yyyy HH:mm', new Date())
+      if (
+        !date.isValid(parsedInputDate) ||
+        inputDate.length < 'dd/MM/yyyy HH:mm'.length
+      ) {
+        return this.$t('errorDate')
+      }
+    },
+
+    checkEndDate(endDate) {
+      endDate = parse(endDate, 'dd/MM/yyyy HH:mm', new Date())
+      if (parse(this.startdate, 'dd/MM/yyyy HH:mm', new Date()) > endDate) {
+        return this.$t('errorEndDate')
+      }
     }
   }
 }
