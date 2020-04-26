@@ -11,6 +11,7 @@ import info from './info'
 import imprint from './imprint'
 import profile from './profile'
 import privacy from './privacy'
+import search from './search'
 
 export default {
   ...main,
@@ -25,5 +26,6 @@ export default {
   ...info,
   ...imprint,
   ...profile,
-  ...privacy
+  ...privacy,
+  searchForm: { ...search }
 }

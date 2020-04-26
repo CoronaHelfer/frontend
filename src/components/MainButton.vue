@@ -28,11 +28,12 @@ export default {
 
 <style lang="sass" scoped>
 .btn-card
-    box-shadow: 0px 10px 6px #00000033
-    border-radius: 10px
+  transition: 300ms ease-in-out
+  box-shadow: 0px 10px 6px #00000033
+  border-radius: 10px
 
 .btn-card-label
-    color: $secondary
-    font-weight: bold
-    font-size: 1.25rem
+  color: $secondary
+  font-weight: bold
+  font-size: 1.25rem
 </style>

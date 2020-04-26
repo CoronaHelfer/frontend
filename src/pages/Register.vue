@@ -4,9 +4,8 @@
       <div class="form-img row items-center justify-between">
         <img
           width="100%"
-          src="statics/images/guus-baggermans.png"
-          alt=""
-          srcset=""
+          src="~assets/CoronaHelfer-Logo.svg"
+          alt="Corona Logo"
         />
       </div>
       <div class="form-fields row">

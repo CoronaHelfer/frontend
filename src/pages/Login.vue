@@ -69,10 +69,6 @@
 <style lang="sass" scoped>
 .login-register
   width: 100%
-.form-img
-  padding: 20%
-  background-color: $primary
-
 .oauth
   background-color: #4285F4
   width: 100%
@@ -142,7 +138,7 @@ export default {
             id: resp.user._id,
             authenticated: true
           }
-          this.$router.go(-1)
+          this.$router.replace('/profile')
         })
       } catch (e) {
         this.error = e
