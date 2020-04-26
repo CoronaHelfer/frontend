@@ -137,8 +137,8 @@ export default {
             id: resp.user._id,
             authenticated: true
           }
+          this.$router.push('/profile')
         })
-        this.$router.go(-1)
       } catch (e) {
         this.error = e
         this.loading = false
