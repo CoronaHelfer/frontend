@@ -16,7 +16,6 @@
             <q-tabs v-model="tab" vertical>
               <q-tab :name="Tabs.Profile" :label="$t('profile')" />
               <q-tab :name="Tabs.Entries" :label="$t('user.myRequests')" />
-              <q-tab :name="Tabs.Offers" :label="$t('user.myOffers')" />
             </q-tabs>
           </template>
 
@@ -103,13 +102,6 @@
               <q-tab-panel :name="Tabs.Entries">
                 <my-requests />
               </q-tab-panel>
-
-              <q-tab-panel :name="Tabs.Offers">
-                <h2>Meine Angebote</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-              </q-tab-panel>
             </q-tab-panels>
           </template>
         </q-splitter>
@@ -183,8 +175,7 @@ import MyRequests from '../components/MyRequests'
 
 const Tabs = {
   Profile: 'Profile',
-  Entries: 'Entries',
-  Offers: 'Offers'
+  Entries: 'Entries'
 }
 
 export default {
