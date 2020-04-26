@@ -282,7 +282,7 @@ export default {
     async loadCategories() {
       try {
         let categories = await fetch(
-          this.$q.localStorage.getItem('server') + '/api/v1/category'
+          '/api/v1/category'
         )
         categories = await categories.json()
 

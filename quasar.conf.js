@@ -9,7 +9,11 @@ module.exports = function(ctx) {
     boot: ['i18n', 'axios'],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
-    css: ['app.sass', 'form.sass'],
+    css: [
+      'app.sass',
+      'form.sass',
+      'elements.sass'
+    ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [

@@ -1,18 +1,17 @@
-const baseUrl = 'https://dev.coronahelfer.eu/api/v1'
+const configuration = require('../src/assets/config')(process.env.NODE_ENV)
 
 export const callApi = async (
-  url = '',
+  path = '',
   token = '',
   data = {},
   method = 'GET'
 ) => {
-  const response = await fetch(baseUrl + url, {
+  const response = await fetch(`${configuration.apiUrl}${path}`, {
     method,
     mode: 'cors',
     cache: 'no-cache',
     headers: {
       'Content-Type': 'application/json',
-      // 'X-Access-Token': token
       Authorization: `Bearer ${token}`
     },
     body:
@@ -24,7 +23,7 @@ export const callApi = async (
 }
 
 export const authApi = async (data = {}, auth = 'login') => {
-  const response = await fetch(`${baseUrl}/auth/${auth}`, {
+  const response = await fetch(`${configuration.apiUrl}/auth/${auth}`, {
     method: 'post',
     mode: 'cors',
     headers: {
