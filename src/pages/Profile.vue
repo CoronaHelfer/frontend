@@ -5,13 +5,22 @@
         <div v-show="error" class="error">{{ error }}</div>
         <q-splitter v-model="splitterModel">
           <template v-slot:before>
+            <input
+              id="photoInput"
+              ref="photoInput"
+              name="photoInput"
+              type="file"
+              @change="encodeImageFileAsURL()"
+            />
             <q-avatar
               class="avatar"
               color="grey-3"
               text-color="white"
               size="100px"
+              @click="clickHiddenFileInput"
             >
-              {{ auth.firstname[0] }}
+              <img v-if="picture" :src="picture">
+              <span v-else>{{ auth.firstname[0] }}</span>
             </q-avatar>
             <q-tabs v-model="tab" vertical>
               <q-tab :name="Tabs.Profile" :label="$t('profile')" />
@@ -93,6 +102,7 @@
 
                 <q-btn
                   class="submit-button"
+                  size="lg"
                   :label="$t('save')"
                   :loading="loading"
                   @click="update">
@@ -156,17 +166,20 @@ h2
   margin-left: 12px
 
 .submit-button
-  margin-left: 10px
-  margin-top: 6px
+  margin: 6px 10px
   border-radius: 12px
 
 .avatar
   margin-left: 30px
   margin-bottom: 15px
+  cursor: pointer
 
 .q-tab-panel
   padding: 0
   padding-left: 16px
+
+#photoInput
+  display: none
 </style>
 
 <script>
@@ -194,6 +207,7 @@ export default {
       zip: '',
       city: '',
       error: '',
+      picture: undefined,
 
       loading: false,
       tab: Tabs.Profile,
@@ -212,17 +226,20 @@ export default {
     }
   },
 
-  mounted() {
+  async mounted() {
+    await this.fetchUserData()
+
     this.firstname = this.auth.firstname
     this.lastname = this.auth.lastname
     this.street = this.auth.street
     this.streetNumber = this.auth.streetNumber
     this.zip = this.auth.zip
     this.city = this.auth.city
+    this.picture = this.auth.picture
   },
 
   methods: {
-    async fetchUserData() { // TODO: Deduplicate this request
+    async fetchUserData() {
       await callApi(
         '/users/me',
         this.auth.token
@@ -231,24 +248,55 @@ export default {
           token: this.auth.token,
           firstname: resp.user.firstName,
           lastname: resp.user.lastName,
+          street: resp.user.address.street,
+          streetNumber: resp.user.address.street_nr,
+          city: resp.user.address.city,
+          zip: resp.user.address.plz,
           email: resp.user.email,
           id: resp.user._id,
+          picture: resp.user.picture,
           authenticated: true
         }
       })
     },
 
-    update() {
+    async update() {
       try {
         this.loading = true
         this.error = ''
-        // TODO: Update user data in the backend
-        throw new Error(this.$t('notImplemented'))
-        // this.fetchUserData()
+
+        await callApi(
+          '/users/me',
+          this.auth.token,
+          {
+            street_nr: this.streetNumber,
+            street: this.street,
+            plz: this.zip,
+            city: this.city,
+            picture: this.picture
+          },
+          'PUT'
+        )
       } catch (error) {
         this.error = error
       } finally {
         this.loading = false
+      }
+    },
+
+    clickHiddenFileInput() {
+      document.querySelector('#photoInput').click()
+    },
+
+    encodeImageFileAsURL() {
+      if (this.$refs.photoInput.files[0]) {
+        const fileReader = new FileReader()
+
+        fileReader.addEventListener('load', () => {
+          this.picture = fileReader.result
+        })
+
+        fileReader.readAsDataURL(this.$refs.photoInput.files[0])
       }
     }
   }
