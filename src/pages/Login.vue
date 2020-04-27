@@ -9,7 +9,6 @@
         <div class="col-xs-12 col-md-4"></div>
         <q-form
           class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
-          @submit="login()"
         >
           <div v-if="error !== ''" class="error">{{ error }}</div>
           <q-input
@@ -37,7 +36,7 @@
               class="c-btn form-input col-xs-12 col-md-4"
               :loading="loading"
               :label="$t('login')"
-              v-on:click="login()"
+              @click.prevent="login"
             ></q-btn>
             <q-btn
               class="c-link q-py-sm col-xs-12 col-md-8"
