@@ -6,9 +6,9 @@
         <q-splitter v-model="splitterModel" :horizontal="$q.screen.lt.md">
           <template v-slot:before>
             <input
-              id="photoInput"
-              ref="photoInput"
-              name="photoInput"
+              id="imageInput"
+              ref="imageInput"
+              name="imageInput"
               type="file"
               @change="encodeImageFileAsURL()"
             />
@@ -178,7 +178,7 @@ h2
   padding: 0
   padding-left: 16px
 
-#photoInput
+#imageInput
   display: none
 </style>
 
@@ -275,7 +275,7 @@ export default {
             city: this.city,
             picture: this.picture
           },
-          'PUT'
+          'PATCH'
         )
       } catch (error) {
         this.error = error
@@ -285,18 +285,34 @@ export default {
     },
 
     clickHiddenFileInput() {
-      document.querySelector('#photoInput').click()
+      document.querySelector('#imageInput').click()
     },
 
     encodeImageFileAsURL() {
-      if (this.$refs.photoInput.files[0]) {
+      this.error = ''
+
+      if (this.$refs.imageInput.files[0]) {
+        const image = this.$refs.imageInput.files[0]
+        console.log(image)
+        const allowedImageTypes = ['image/png', 'image/jpg', 'image/jpeg']
+
+        if (!allowedImageTypes.includes(image.type)) {
+          this.error = 'Dieser Dateityp ist nicht zulässig. Unterstützte Typen: png, jpg, jpeg'
+          return
+        }
+
+        if (image.size > 1000000) {
+          this.error = 'Das Bild überschreitet die maximale Bildgröße. Maximum: 1MB'
+          return
+        }
+
         const fileReader = new FileReader()
 
         fileReader.addEventListener('load', () => {
           this.picture = fileReader.result
         })
 
-        fileReader.readAsDataURL(this.$refs.photoInput.files[0])
+        fileReader.readAsDataURL(this.$refs.imageInput.files[0])
       }
     }
   }
