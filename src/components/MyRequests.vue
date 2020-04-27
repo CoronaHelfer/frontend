@@ -79,7 +79,7 @@ export default {
           '/request',
           this.auth.token
         )
-        this.requests = requests.result
+        this.requests = requests.result || []
       } catch (err) {
         console.error(err)
         this.error = this.$t('somethingWentWrong')

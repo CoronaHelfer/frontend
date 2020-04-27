@@ -3,7 +3,7 @@
     <body>
       <article>
         <div v-show="error" class="error">{{ error }}</div>
-        <q-splitter v-model="splitterModel">
+        <q-splitter v-model="splitterModel" :horizontal="$q.screen.lt.md">
           <template v-slot:before>
             <input
               id="photoInput"
@@ -33,12 +33,12 @@
               <q-tab-panel :name="Tabs.Profile">
                 <div class="profile-header">
                   <h2 class="welcome-heading">
-                    {{ $t('welcome') }}, {{ auth.firstname }} {{ auth.lastname }}
+                    {{ $t('welcome') }}
                   </h2>
                 </div>
 
-                <div class="row">
-                  <div class="col">
+                <div class="row wrap">
+                  <div class="col-xs-12 col-md-6">
                     <q-input
                       dense
                       borderless
@@ -47,7 +47,7 @@
                       class="input"
                     ></q-input>
                   </div>
-                  <div class="col">
+                  <div class="col-xs-12 col-md-6">
                     <q-input
                       dense
                       borderless
@@ -58,17 +58,8 @@
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col">
-                    <q-input
-                      dense
-                      borderless
-                      v-model="street"
-                      :label="$t('address.street')"
-                      class="input"
-                    ></q-input>
-                  </div>
-                  <div class="col-3">
+                <div class="row wrap">
+                  <div class="col-xs-4 col-md-3">
                     <q-input
                       dense
                       borderless
@@ -77,10 +68,19 @@
                       class="input"
                     ></q-input>
                   </div>
+                  <div class="col-xs-8 col-md-9">
+                    <q-input
+                      dense
+                      borderless
+                      v-model="street"
+                      :label="$t('address.street')"
+                      class="input"
+                    ></q-input>
+                  </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-3">
+                <div class="row wrap">
+                  <div class="col-xs-4 col-md-3">
                     <q-input
                       dense
                       borderless
@@ -89,7 +89,7 @@
                       class="input"
                     ></q-input>
                   </div>
-                  <div class="col">
+                  <div class="col-xs-8 col-md-9">
                     <q-input
                       dense
                       borderless
