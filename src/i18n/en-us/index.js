@@ -8,6 +8,7 @@ import principles from './principles'
 import getHelp from './getHelp'
 import errors from './errors'
 import info from './info'
+import profile from './profile'
 import imprint from './imprint'
 import privacy from './privacy'
 import search from './search'
@@ -23,6 +24,7 @@ export default {
   ...getHelp,
   ...errors,
   ...info,
+  ...profile,
   ...imprint,
   ...privacy,
   searchForm: { ...search }

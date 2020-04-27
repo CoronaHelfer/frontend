@@ -1,4 +1,4 @@
-const configuration = require('../src/assets/config')(process.env.NODE_ENV)
+const configuration = require('../src/assets/config')
 
 export const callApi = async (
   path = '',

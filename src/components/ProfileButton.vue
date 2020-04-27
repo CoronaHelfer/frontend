@@ -22,12 +22,6 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-close-popup @click="$router.push('/profile/requests')">
-          <q-item-section>
-            <q-item-label>{{$t('myRequests')}}</q-item-label>
-          </q-item-section>
-        </q-item>
-
         <q-item clickable v-close-popup @click="logout()">
           <q-item-section>
             <q-item-label>{{$t('logout')}}</q-item-label>
