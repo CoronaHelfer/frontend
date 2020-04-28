@@ -175,8 +175,7 @@ h2
   cursor: pointer
 
 .q-tab-panel
-  padding: 0
-  padding-left: 16px
+  padding-left: 0 16px
 
 #imageInput
   display: none

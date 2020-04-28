@@ -12,7 +12,8 @@
         <q-route-tab to="/information" :label="$t('information')" />
         <q-route-tab to="/jobs" :label="$t('jobs')" />
       </q-tabs>
-      <q-btn v-else flat dense round aria-label="Menu" icon="menu">
+      <ProfileButton />
+      <q-btn v-if="!$q.screen.gt.xs" flat dense round aria-label="Menu" icon="menu">
         <q-menu transition-show="jump-down" transition-hide="jump-up">
           <q-list style="min-width: 100px;">
             <q-item to="/help" clickable>
@@ -31,21 +32,6 @@
           </q-list>
         </q-menu>
       </q-btn>
-      <ProfileButton />
-      <q-select
-        class="locale-selector"
-        label-color="white"
-        color="white"
-        v-model="locale"
-        :options="localeOptions"
-        label="Language"
-        dense
-        borderless
-        emit-value
-        map-options
-        options-dense
-        dark
-      />
     </q-toolbar>
   </q-header>
 </template>
@@ -64,31 +50,12 @@
 .login-btn
   background: #ef7d18
   color: white
-.locale-selector
-  min-width: 150px
-  margin-left: 25px
 </style>
 
 <script>
 import ProfileButton from './ProfileButton'
 
 export default {
-  components: { ProfileButton },
-
-  data() {
-    return {
-      locale: this.$i18n.locale,
-      localeOptions: [
-        { value: 'en_US', label: 'English' },
-        { value: 'de_DE', label: 'Deutsch' }
-      ]
-    }
-  },
-
-  watch: {
-    locale(newLocale) {
-      this.$i18n.locale = newLocale
-    }
-  }
+  components: { ProfileButton }
 }
 </script>
