@@ -1,3 +1,3 @@
 module.exports = {
-  apiUrl: 'https://coronahelfer.eu/api/v1'
+  apiUrl: process.env.API_URL
 }
