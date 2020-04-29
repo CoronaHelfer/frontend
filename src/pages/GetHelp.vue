@@ -254,7 +254,6 @@ import { parse } from 'date-fns'
 export default {
   data() {
     const now = Date.now()
-    console.log(date)
     const defaultDate = date.formatDate(now, 'DD/MM/YYYY HH:mm')
     return {
       error: false,
