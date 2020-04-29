@@ -4,15 +4,45 @@
       <q-badge v-if="request.helper.length" color="red" floating>{{request.helper.length}}</q-badge>
       <div class="row">
         <div class="col">
-          <header>
+          <header v-if="!editMode">
             <h2>{{request.title}}</h2>
           </header>
-          <p>
-            <strong>{{$t('category')}}:</strong> {{request.category.name}}
+          <q-input
+            :label="$t('title')"
+            v-model="request.title"
+            v-else
+          />
+
+          <p v-if="!editMode">
+            <strong >{{$t('category')}}:</strong> {{request.category.name}}
           </p>
-          <p>
+          <q-select
+            v-else
+            v-model="request.category"
+            :options="categories"
+            :label="$t('category')"
+            option-value="_id"
+            option-label="name"
+            map-options
+            bg-color="accent"
+          />
+
+          <p v-if="!editMode">
             <strong>{{$t('request')}}:</strong> {{request.description}}
           </p>
+          <div v-else>
+            <q-input
+              class="q-mb-sm"
+              type="textarea"
+              :label="$t('request')"
+              v-model="request.description"
+            />
+            <q-btn
+              color="secondary"
+              :label="$t('send')"
+              @click="saveRequest"
+            />
+          </div>
         </div>
 
         <div class="col-auto">
@@ -94,7 +124,9 @@ export default {
 
   data() {
     return {
-      loading: false
+      loading: false,
+      editMode: false,
+      categories: []
     }
   },
 
@@ -113,9 +145,19 @@ export default {
     }
   },
 
+  async mounted() {
+    const response = await callApi('/category')
+    this.categories = response.result
+  },
+
   methods: {
-    async editRequest() {
-      this.$emit('error', this.$t('notImplemented'))
+    editRequest() {
+      this.editMode = true
+    },
+
+    async saveRequest() {
+      await callApi('/request', this.auth.token, this.request, 'PUT')
+      this.editMode = false
     },
 
     async deleteRequest() {

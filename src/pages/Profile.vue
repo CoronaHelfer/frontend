@@ -274,7 +274,7 @@ export default {
             city: this.city
             // picture: this.picture
           },
-          'PATCH'
+          'PUT'
         )
       } catch (error) {
         this.error = error

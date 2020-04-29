@@ -305,8 +305,8 @@ export default {
           throw new Error(this.$t('missingFields'))
         }
 
-        const start = parse(this.startdate, 'dd/MM/yyyy HH:mm')
-        const end = parse(this.enddate, 'dd/MM/yyyy HH:mm')
+        const start = parse(this.startdate, 'dd/MM/yyyy HH:mm', new Date())
+        const end = parse(this.enddate, 'dd/MM/yyyy HH:mm', new Date())
         const startDate = date.formatDate(start, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
         const endDate = date.formatDate(end, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
 
@@ -333,7 +333,7 @@ export default {
         }
 
         this.loading = false
-        this.$router.push('/profile/requests')
+        this.$router.push('/profile')
       } catch (e) {
         this.loading = false
         this.error = e

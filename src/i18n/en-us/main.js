@@ -17,5 +17,7 @@ export default {
   historyT1: 'Where did our idea come from? Through our social networks we realized what an incredible number of you would like to help your community given the current situation. On other help-matching portals we were struck by how the large number of people willing to help contrasted with the low number of requests.',
   historyT2: 'We recognized that matching strangers to strangers is a great responsibility and made the safety of our users a priority. Reliable and fast matching, as well as the integration of existing local offline support, are important to us for effective coronavirus community support.',
   historyT3: 'Thanks to the #WirVsVirus Hackathon run by the German Federal Government, we assembled a great team to bring our idea to life. Since then we have been working together at full speed on the implementation and development of our matching platform.',
-  language: 'Language'
+  language: 'Language',
+  edit: 'Edit',
+  delete: 'Delete'
 }
