@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md row justify-center items-center">
     <div class="form q-pa-lg">
-      <div class="form-img row items-center justify-between">
+      <div class="form-img row items-center justify-between q-ma-sm">
         <img
           width="100%"
           src="~assets/CoronaHelfer-Logo.svg"
@@ -9,9 +9,9 @@
         />
       </div>
       <div class="form-fields row">
-        <div class="col-xs-12 col-md-4"></div>
+        <div class="col-xs-12 col-md-3"></div>
         <q-form
-          class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
+          class="row items-center justify-between q-pa-lg col-xs-12 col-md-9"
           action=""
         >
           <div v-if="error !== ''" class="error">{{ error }}</div>
@@ -68,10 +68,9 @@
           <div class="q-pa-sm">
             <div>
               {{ $t('acceptPrivacy') }}
-            </div>
-            <div class="c-link">
-              <router-link to="/privacy">{{ $t('privacyTitle') }}</router-link
-              >.
+              <span class="c-link">
+                <router-link to="/privacy">{{ $t('privacyTitle') }}</router-link>.
+              </span>
             </div>
             <q-btn
               color="primary"
