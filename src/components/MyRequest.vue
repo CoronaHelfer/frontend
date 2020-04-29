@@ -67,7 +67,6 @@ header
 .q-card
   border-radius: 10px
   padding: 5px
-  margin: 20px 40px
   background-color: rgb(254, 246, 239)
 
 h2, strong
