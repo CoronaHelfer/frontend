@@ -33,6 +33,7 @@
       </q-btn>
       <ProfileButton />
       <q-select
+        v-if="$q.screen.gt.xs"
         class="locale-selector"
         label-color="white"
         color="white"
