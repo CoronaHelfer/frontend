@@ -25,6 +25,8 @@ h2
   font-size: 2.3rem
   font-weight: bold
   color: #EF7D18
+  display: inline
+  line-height: 1.2
 </style>
 
 <script>

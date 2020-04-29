@@ -5,7 +5,7 @@
         <div v-show="error" class="error">{{ error }}</div>
         <q-splitter v-model="splitterModel" :horizontal="$q.screen.lt.md">
           <template v-slot:before>
-            <input
+            <!-- <input
               id="imageInput"
               ref="imageInput"
               name="imageInput"
@@ -21,7 +21,7 @@
             >
               <img v-if="picture" :src="picture">
               <span v-else>{{ auth.firstname[0] }}</span>
-            </q-avatar>
+            </q-avatar> -->
             <q-tabs v-model="tab" vertical>
               <q-tab :name="Tabs.Profile" :label="$t('profile')" />
               <q-tab :name="Tabs.Entries" :label="$t('user.myRequests')" />
@@ -206,7 +206,7 @@ export default {
       zip: '',
       city: '',
       error: '',
-      picture: undefined,
+      // picture: undefined,
 
       loading: false,
       tab: Tabs.Profile,
@@ -234,7 +234,7 @@ export default {
     this.streetNumber = this.auth.streetNumber
     this.zip = this.auth.zip
     this.city = this.auth.city
-    this.picture = this.auth.picture
+    // this.picture = this.auth.picture
   },
 
   methods: {
@@ -253,8 +253,8 @@ export default {
           zip: resp.user.address.plz,
           email: resp.user.email,
           id: resp.user._id,
-          picture: resp.user.picture,
           authenticated: true
+          // picture: resp.user.picture,
         }
       })
     },
@@ -271,8 +271,8 @@ export default {
             street_nr: this.streetNumber,
             street: this.street,
             plz: this.zip,
-            city: this.city,
-            picture: this.picture
+            city: this.city
+            // picture: this.picture
           },
           'PATCH'
         )
@@ -283,10 +283,12 @@ export default {
       }
     },
 
+    // unused until backend implements a storage solution
     clickHiddenFileInput() {
       document.querySelector('#imageInput').click()
     },
 
+    // unused until backend implements a storage solution
     encodeImageFileAsURL() {
       this.error = ''
 

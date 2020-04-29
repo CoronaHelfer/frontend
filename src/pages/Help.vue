@@ -4,7 +4,7 @@
       <q-linear-progress :indeterminate="loading" color="secondary" />
       <article>
         <div class="row wrap q-mb-md">
-          <div class="col-6 q-px-xs">
+          <div class="col-xs-12 col-md-6 q-pa-sm">
             <q-input
               outlined
               color="secondary"
@@ -16,7 +16,7 @@
               </template>
             </q-input>
           </div>
-          <div class="col-6 q-px-xs">
+          <div class="col-xs-12 col-md-6 q-pa-sm">
             <q-select
               outlined
               color="secondary"
@@ -27,7 +27,7 @@
             />
           </div>
         </div>
-        <div class="row wrap" v-if="categorySelection">
+        <div class="row col-xs-12 col-md-6 q-pa-sm" v-if="categorySelection">
           <q-chip
             v-for="category in categories"
             :key="category._id"
@@ -39,8 +39,9 @@
             {{ category.name }}
           </q-chip>
         </div>
-        <div class="row">
+        <div class="row col-xs-12 col-md-6 q-pa-sm">
           <q-btn
+            rounded
             size="md"
             class="q-ma-xs"
             @click="fetchRequests"
@@ -204,6 +205,7 @@ export default {
         const queryString = new URLSearchParams(this.query)
 
         const response = await callApi(`/publicRequest?${queryString}`)
+        console.log(response.result)
         this.requests = response.result || []
       } catch (error) {
         console.error(error)
