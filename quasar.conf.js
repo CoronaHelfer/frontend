@@ -57,6 +57,10 @@ module.exports = function(ctx) {
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
+      env: {
+        API_URL: JSON.stringify(process.env.API_URL)
+      },
+
       // rtl: false, // https://quasar.dev/options/rtl-support
       // showProgress: false,
       // gzip: true,
