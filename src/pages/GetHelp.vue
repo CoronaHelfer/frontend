@@ -1,9 +1,9 @@
 <template>
   <q-page class="q-pa-md row justify-center items-center">
-    <div class="wrapper">
+    <div>
       <div v-if="error" class="error">{{ error }}</div>
       <h1 class="q-px-lg uppercase">{{ $t('getHelp') }}</h1>
-      <q-form>
+      <q-form ref="helpForm">
         <q-stepper
           v-model="step"
           ref="stepper"
@@ -11,6 +11,7 @@
           alternative-labels
           active-color="secondary"
           inactive-color="primary"
+          :vertical="$q.screen.lt.sm"
         >
           <q-step
             :name="1"
@@ -22,7 +23,8 @@
             <div class="row justify-center items-center">
               <q-select
                 id="categories"
-                class="form-input q-pr-md col-xs-12 col-md-3"
+                class="form-input q-pr-sm col-xs-12 col-md-3"
+                :class="{ 'q-pr-sm': $q.screen.gt.xs }"
                 filled
                 v-model="category"
                 :options="categories"
@@ -35,7 +37,8 @@
               <q-input
                 filled
                 name="title"
-                class="form-input q-pr-sm col-xs-12 col-md-3"
+                class="form-input col-xs-12 col-md-3"
+                :class="{ 'q-px-sm': $q.screen.gt.xs }"
                 :label="$t('title')"
                 v-model="title"
                 bg-color="accent"
@@ -43,7 +46,8 @@
                 :rules="[(val) => !!val || this.$t('emptyField')]"
               />
               <q-input
-                class="q-pr-sm form-input col-xs-12 col-md-3"
+                class="form-input col-xs-12 col-md-3"
+                :class="{ 'q-px-sm': $q.screen.gt.xs }"
                 filled
                 name="startdate"
                 v-model="startdate"
@@ -80,7 +84,8 @@
                 </template>
               </q-input>
               <q-input
-                class="q-pl-sm form-input col-xs-12 col-md-3"
+                class="form-input col-xs-12 col-md-3"
+                :class="{ 'q-pl-sm': $q.screen.gt.xs }"
                 filled
                 v-model="enddate"
                 name="enddate"
@@ -126,6 +131,7 @@
                 :label="$t('description')"
                 v-model="description"
                 bg-color="accent"
+                :rules="[(val) => !!val || this.$t('emptyField')]"
               ></q-input>
             </div>
           </q-step>
@@ -141,32 +147,40 @@
             <div class="row">
               <q-input
                 filled
-                class="form-input col-xs-12 col-md-10"
+                class="form-input col-xs-12 col-md-9"
+                :class="{ 'q-pr-sm': $q.screen.gt.xs }"
                 :label="$t('street')"
                 v-model="street"
                 bg-color="accent"
+                :rules="[(val) => !!val || this.$t('emptyField')]"
               />
               <q-input
                 filled
-                class="q-pl-md form-input col-xs-12 col-md-2"
+                class="form-input col-xs-12 col-md-3"
+                :class="{ 'q-pl-sm': $q.screen.gt.xs }"
                 :label="$t('streetNumber')"
                 v-model="streetNumber"
                 bg-color="accent"
+                :rules="[(val) => !!val || this.$t('emptyField')]"
               />
               <q-input
                 filled
-                class="q-pr-md form-input col-xs-12 col-md-2"
+                class="form-input col-xs-12 col-md-3"
+                :class="{ 'q-pr-sm': $q.screen.gt.xs }"
                 :label="$t('zip')"
                 v-model="zip"
                 bg-color="accent"
                 type="number"
+                :rules="[(val) => !!val || this.$t('emptyField')]"
               />
               <q-input
                 filled
-                class="form-input col-xs-12 col-md-10"
+                class="form-input col-xs-12 col-md-9"
+                :class="{ 'q-pl-sm': $q.screen.gt.xs }"
                 :label="$t('city')"
                 v-model="city"
                 bg-color="accent"
+                :rules="[(val) => !!val || this.$t('emptyField')]"
               />
             </div>
 
@@ -201,7 +215,7 @@
                 <q-space v-else />
                 <q-btn
                   :loading="loading"
-                  @click.prevent="step === 2 ? send() : $refs.stepper.next()"
+                  @click.prevent="onSubmit"
                   color="primary"
                   :label="step === 2 ? $t('send') : $t('continue')"
                 >
@@ -290,20 +304,21 @@ export default {
       }
     },
 
+    async onSubmit() {
+      const isValid = await this.$refs.helpForm.validate()
+
+      if (!isValid) {
+        return
+      }
+
+      this.step === 2
+        ? this.send()
+        : this.$refs.stepper.next()
+    },
+
     async send() {
       try {
         this.loading = true
-
-        if (
-          this.title === '' ||
-          this.description === '' ||
-          this.zip === '' ||
-          this.city === '' ||
-          this.street === '' ||
-          this.streetNumber === ''
-        ) {
-          throw new Error(this.$t('missingFields'))
-        }
 
         const start = parse(this.startdate, 'dd/MM/yyyy HH:mm', new Date())
         const end = parse(this.enddate, 'dd/MM/yyyy HH:mm', new Date())
