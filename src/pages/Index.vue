@@ -12,7 +12,7 @@
           </router-link>
           <router-link
             class="col-xs-12 col-md-5 q-mt-xs q-mb-md uppercase my-card"
-            to="/help"
+            to="/get-help"
           >
             <MainButton content="need-help" />
           </router-link>
