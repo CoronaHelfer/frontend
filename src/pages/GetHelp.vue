@@ -65,7 +65,7 @@
                     >
                       <div class="q-gutter-md row">
                         <q-date
-                          mask="YYYY-MM-DDTHH:mm:ss"
+                          mask="YYYY-MM-DD HH:mm"
                           v-model="startdate"
                           :rules="['datetime']"
                           color="secondary"
@@ -73,7 +73,7 @@
                         />
                         <q-time
                           v-model="startdate"
-                          mask="YYYY-MM-DDTHH:mm:ss"
+                          mask="YYYY-MM-DD HH:mm"
                           :rules="['datetime']"
                           color="secondary"
                           @input="$refs.qStartDateProxy.hide()"
@@ -103,7 +103,7 @@
                     >
                       <div class="q-gutter-md row">
                         <q-date
-                          mask="YYYY-MM-DDTHH:mm:ss"
+                          mask="YYYY-MM-DD HH:mm"
                           v-model="enddate"
                           color="secondary"
                           :rules="['datetime']"
@@ -111,7 +111,7 @@
                         />
                         <q-time
                           v-model="enddate"
-                          mask="YYYY-MM-DDTHH:mm:ss"
+                          mask="YYYY-MM-DD HH:mm"
                           :rules="['datetime']"
                           color="secondary"
                           @input="$refs.endDateProxy.hide()"
@@ -254,6 +254,7 @@ import { parse } from 'date-fns'
 export default {
   data() {
     const now = Date.now()
+    console.log(date)
     const defaultDate = date.formatDate(now, 'DD/MM/YYYY HH:mm')
     return {
       error: false,
@@ -355,14 +356,13 @@ export default {
       }
     },
 
-    fromToday(date) {
-      return date >= date.formatDate(new Date(), 'DD/MM/YYYY')
+    fromToday(inputDate) {
+      return inputDate >= date.formatDate(new Date(), 'YYYY/MM/DD')
     },
 
     checkDate(inputDate) {
-      const parsedInputDate = parse(inputDate, 'dd/MM/yyyy HH:mm', new Date())
       if (
-        !date.isValid(parsedInputDate) ||
+        !date.isValid(inputDate) ||
         inputDate.length < 'dd/MM/yyyy HH:mm'.length
       ) {
         return this.$t('errorDate')
@@ -370,9 +370,12 @@ export default {
     },
 
     checkEndDate(endDate) {
+      const parsedStartDate = parse(this.startdate, 'dd/MM/yyyy HH:mm', new Date())
       const parsedEndDate = parse(endDate, 'dd/MM/yyyy HH:mm', new Date())
       if (
-        parse(this.startdate, 'dd/MM/yyyy HH:mm', new Date()) > parsedEndDate
+        !date.isValid(endDate) ||
+        endDate.length < 'dd/MM/yyyy HH:mm'.length ||
+        parsedStartDate > parsedEndDate
       ) {
         return this.$t('errorEndDate')
       }
