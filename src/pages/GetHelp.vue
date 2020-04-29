@@ -281,26 +281,19 @@ export default {
   methods: {
     async loadCategories() {
       try {
-        let categories = await fetch(
-          '/api/v1/category'
-        )
-        categories = await categories.json()
-
-        if (categories.error || !categories.result) {
-          console.error('Error while fetching categories')
-          throw new Error(this.$t('somethingWentWrong'))
-        }
+        const categories = await callApi('/category')
 
         this.categories = categories.result
         this.category = categories.result[0]._id
-      } catch (e) {
-        this.error = e
+      } catch (error) {
+        this.error = error
       }
     },
 
     async send() {
       try {
         this.loading = true
+
         if (
           this.title === '' ||
           this.description === '' ||
@@ -311,10 +304,12 @@ export default {
         ) {
           throw new Error(this.$t('missingFields'))
         }
+
         const start = parse(this.startdate, 'dd/MM/yyyy HH:mm')
         const end = parse(this.enddate, 'dd/MM/yyyy HH:mm')
         const startDate = date.formatDate(start, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
         const endDate = date.formatDate(end, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
+
         const res = await callApi(
           '/request',
           this.auth.token,
