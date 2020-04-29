@@ -13,7 +13,14 @@
         <q-route-tab to="/jobs" :label="$t('jobs')" />
       </q-tabs>
       <ProfileButton />
-      <q-btn v-if="!$q.screen.gt.xs" flat dense round aria-label="Menu" icon="menu">
+      <q-btn
+        v-if="!$q.screen.gt.xs"
+        flat
+        dense
+        round
+        aria-label="Menu"
+        icon="menu"
+      >
         <q-menu transition-show="jump-down" transition-hide="jump-up">
           <q-list style="min-width: 100px;">
             <q-item to="/help" clickable>

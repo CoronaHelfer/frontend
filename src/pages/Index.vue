@@ -1,33 +1,46 @@
 <template>
   <q-page>
     <div class="tertiary-bg">
-      <div class="wrapper">
+      <div :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
         <h1 class="uppercase">{{ $t('supportTogether') }}</h1>
         <div class="row justify-between">
           <router-link
-            class="col-xs-12 col-md-5 q-mt-xs uppercase my-card"
+            class="col-xs-12 col-md-5 q-mt-xs q-mb-md uppercase my-card"
             to="/help"
           >
             <MainButton content="want-help" />
           </router-link>
           <router-link
-            class="col-xs-12 col-md-5 q-mt-xs uppercase my-card"
+            class="col-xs-12 col-md-5 q-mt-xs q-mb-md uppercase my-card"
             to="/help"
           >
             <MainButton content="need-help" />
           </router-link>
         </div>
       </div>
-      <div class="mouse">
-        <div class="scroll"></div>
+      <div class="row justify-center items-center q-py-lg">
+        <div class="mouse">
+          <div class="scroll"></div>
+        </div>
       </div>
     </div>
-    <svg class="slanted-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <path fill="#FFF3E9" fill-opacity="1" d="M0,192L1440,128L1440,0L0,0Z"></path>
-    </svg>
-    <article class="wrapper">
-      <div class="fit row wrap justify-evenly items-start content-start q-mb-xl">
-        <img width="30%" src="~assets/Logo-2.svg" />
+    <div :class="$q.screen.gt.xs ? 'slanted-line' : ''">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#FFF3E9"
+          fill-opacity="1"
+          d="M0,192L1440,128L1440,0L0,0Z"
+        ></path>
+      </svg>
+    </div>
+    <article :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
+      <div
+        class="fit row wrap justify-evenly items-start content-start q-mb-xl"
+      >
+        <q-img
+          :width="$q.screen.gt.xs ? '30%' : '100%'"
+          src="~assets/Logo-2.svg"
+        />
       </div>
       <div class="title-aboutus">
         <h1 class="uppercase">{{ $t('indexHeading') }}</h1>
@@ -42,19 +55,16 @@
       <div class="q-my-xl">
         <h3>{{ $t('searchForm.title') }}</h3>
         <div class="row wrap">
-          <div class="col-10 q-px-xs">
-            <q-input
-              filled
-              v-model="zipcode"
-              :label="$t('searchForm.zipcode')"
-            >
+          <div class="col-md-10 col-xs-12 q-px-xs q-my-xs">
+            <q-input filled v-model="zipcode" :label="$t('searchForm.zipcode')">
               <template v-slot:append>
                 <q-icon class="icon" name="room" />
               </template>
             </q-input>
           </div>
-          <div class="col-2 q-px-xs">
+          <div class="col-md-2 col-xs-12 q-px-xs q-my-xs">
             <q-btn
+              class="search-btn"
               @click="goToHelp()"
               :label="$t('searchForm.search')"
               color="secondary"
@@ -64,14 +74,20 @@
         </div>
       </div>
     </article>
-    <svg class="slanted-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <path fill="#FFF3E9" fill-opacity="1" d="M0,96L1440,128L1440,320L0,320Z"></path>
-    </svg>
+    <div :class="$q.screen.gt.xs ? 'slanted-line' : 'slanted-line-drag-bottom'">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#FFF3E9"
+          fill-opacity="1"
+          d="M0,96L1440,128L1440,320L0,320Z"
+        ></path>
+      </svg>
+    </div>
     <div class="tertiary-bg">
-      <div class="wrapper">
+      <div :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
         <h1 class="uppercase">{{ $t('goalsHeading') }}</h1>
         <div class="fit row wrap justify-between items-center content-center">
-          <div class="vision-box">
+          <div class="vision-box col-xs-12 col-md-4">
             <div class="content-box">
               <img src="statics/icons/elderly-people-294088.svg" />
               <p class="q-mt-auto">
@@ -79,7 +95,7 @@
               </p>
             </div>
           </div>
-          <div class="vision-box">
+          <div class="vision-box col-xs-12 col-md-4">
             <div class="content-box">
               <img src="statics/icons/entlastet Menschen.svg" />
               <p class="q-mt-auto">
@@ -89,7 +105,7 @@
           </div>
         </div>
         <div class="fit row wrap justify-between items-center content-center">
-          <div class="vision-box">
+          <div class="vision-box col-xs-12 col-md-4">
             <div class="content-box column">
               <img src="statics/icons/children-1296800.svg" />
               <p class="q-mt-auto">
@@ -97,7 +113,7 @@
               </p>
             </div>
           </div>
-          <div class="vision-box">
+          <div class="vision-box col-xs-12 col-md-4">
             <div class="content-box column">
               <img src="statics/icons/volunteer.svg" />
               <p class="q-mt-auto">
@@ -108,10 +124,16 @@
         </div>
       </div>
     </div>
-    <svg class="slanted-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <path fill="#FFF3E9" fill-opacity="1" d="M0,192L1440,128L1440,0L0,0Z"></path>
-    </svg>
-    <article class="wrapper">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#FFF3E9"
+          fill-opacity="1"
+          d="M0,192L1440,128L1440,0L0,0Z"
+        ></path>
+      </svg>
+    </div>
+    <article :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
       <h1 class="uppercase">{{ $t('guidingHeading') }}</h1>
 
       <div class="column">
@@ -123,7 +145,11 @@
           <h2 class="principle-sentences">
             {{ $t(item.principle) }}
           </h2>
-          <img width="40" :src="`statics/icons/${item.img}.svg`" />
+          <img
+            v-if="$q.screen.gt.xs"
+            width="40"
+            :src="`statics/icons/${item.img}.svg`"
+          />
         </div>
       </div>
 
@@ -140,13 +166,13 @@
 </template>
 
 <style lang="scss">
-.my-card{
+.my-card {
   transition: 300ms ease-in-out;
-  &:hover{
+  &:hover {
     transform: scale(1.02) translate(0, -5px);
     transition: 300ms ease-in-out;
-    .btn-card{
-      box-shadow: 0px 20px 12px rgba(0,0,0, 0.1);
+    .btn-card {
+      box-shadow: 0px 20px 12px rgba(0, 0, 0, 0.1);
     }
   }
 }
@@ -155,10 +181,6 @@
   height: 50px;
   border-radius: 25px;
   border: 2px solid $primary;
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translate(-50%);
   opacity: 0.3;
   .scroll {
     width: 2px;
@@ -196,14 +218,10 @@
 <style lang="sass" scoped>
 .tertiary-bg
   padding-top: 1%
-  padding-bottom: 7%
   text-align: center
   background-color: $tertiary
-  position: relative
 
 .vision-box
-  width: 40%
-  height: 300px
   box-shadow: 0px 10px 6px #00000029
   border-radius: 10px
   padding: 5% 0
@@ -230,16 +248,18 @@
   border: 2px solid $tertiary
   background-color: $tertiary
 
-article
-  padding: 5% 0
-  margin: 20px auto 0
-
 h1
   text-align: center
 
 .slanted-line
   margin-top: -75px
   margin-bottom: -150px
+
+.slanted-line-drag-bottom
+  margin-bottom: -10px
+
+.search-btn
+  width: 100%
 </style>
 
 <script>
