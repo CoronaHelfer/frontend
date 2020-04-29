@@ -1,14 +1,14 @@
 <template>
   <q-page class="q-pa-md row justify-center items-center">
-    <div class="form q-pa-lg">
-      <div class="form-img row items-center justify-between">
+    <div class="form q-pa-xs">
+      <div class="form-img row items-center justify-between q-ma-sm">
         <img width="100%" src="~assets/CoronaHelfer-Logo.svg" />
       </div>
 
       <div class="form-fields row">
-        <div class="col-xs-12 col-md-4"></div>
+        <div class="col-xs-12 col-md-3"></div>
         <q-form
-          class="row items-center justify-between q-pa-lg col-xs-12 col-md-8"
+          class="row items-center justify-between q-pa-lg col-xs-12 col-md-9"
         >
           <div v-if="error !== ''" class="error">{{ error }}</div>
           <q-input
@@ -48,16 +48,16 @@
 
           <button class="oauth q-my-md row">
             <div>
-              <q-icon class="q-mr-xl q-ml-md" name="fab fa-facebook-f"></q-icon>
+              <q-icon class="q-mr-md q-ml-xs" name="fab fa-facebook-f"></q-icon>
             </div>
-            <div>{{ $t('loginFacebook') }}</div>
+            <div class="q-mt-xs">{{ $t('loginFacebook') }}</div>
           </button>
 
           <button class="oauth q-my-md row">
             <div>
-              <q-icon class="q-mr-xl q-ml-md" name="fab fa-google"></q-icon>
+              <q-icon class="q-mr-md q-ml-xs" name="fab fa-google"></q-icon>
             </div>
-            <div>{{ $t('loginGoogle') }}</div>
+            <div class="q-mt-xs">{{ $t('loginGoogle') }}</div>
           </button>
         </q-form>
       </div>
