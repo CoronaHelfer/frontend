@@ -86,8 +86,8 @@
     <div class="tertiary-bg">
       <div :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
         <h1 class="uppercase">{{ $t('goalsHeading') }}</h1>
-        <div class="fit row wrap justify-between items-center content-center">
-          <div class="vision-box col-xs-12 col-md-4">
+        <div class="fit row wrap justify-center">
+          <div class="vision-box col-xs-12 col-md-4 q-ma-md">
             <div class="content-box">
               <img src="statics/icons/elderly-people-294088.svg" />
               <p class="q-mt-auto">
@@ -95,7 +95,7 @@
               </p>
             </div>
           </div>
-          <div class="vision-box col-xs-12 col-md-4">
+          <div class="vision-box col-xs-12 col-md-4 q-ma-md">
             <div class="content-box">
               <img src="statics/icons/entlastet Menschen.svg" />
               <p class="q-mt-auto">
@@ -104,8 +104,8 @@
             </div>
           </div>
         </div>
-        <div class="fit row wrap justify-between items-center content-center">
-          <div class="vision-box col-xs-12 col-md-4">
+        <div class="fit row wrap justify-center">
+          <div class="vision-box col-xs-12 col-md-4 q-ma-md">
             <div class="content-box column">
               <img src="statics/icons/children-1296800.svg" />
               <p class="q-mt-auto">
@@ -113,7 +113,7 @@
               </p>
             </div>
           </div>
-          <div class="vision-box col-xs-12 col-md-4">
+          <div class="vision-box col-xs-12 col-md-4 q-ma-md">
             <div class="content-box column">
               <img src="statics/icons/volunteer.svg" />
               <p class="q-mt-auto">
