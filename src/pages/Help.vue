@@ -137,8 +137,6 @@ import Vue from 'vue'
 import Request from '../components/Request'
 import Offer from '../components/Offer'
 import { callApi } from '../../api/requests'
-import { Plugins } from '@capacitor/core'
-const { Geolocation } = Plugins
 
 export default {
   components: {
@@ -237,10 +235,6 @@ export default {
       this.selectedRequest = requestId
       this.isDialogOpen = true
     }
-  },
-
-  beforeDestroy() {
-    Geolocation.clearWatch(this.geoId)
   }
 }
 </script>
