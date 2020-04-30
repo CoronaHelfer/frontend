@@ -247,14 +247,17 @@ export default {
           token: this.auth.token,
           firstname: resp.user.firstName,
           lastname: resp.user.lastName,
-          street: resp.user.address.street,
-          streetNumber: resp.user.address.street_nr,
-          city: resp.user.address.city,
-          zip: resp.user.address.plz,
           email: resp.user.email,
           id: resp.user._id,
           authenticated: true
           // picture: resp.user.picture,
+        }
+
+        if (resp.user.address) {
+          this.auth.streetNumber = resp.user.address.street_nr
+          this.auth.street = resp.user.address.street
+          this.auth.zip = resp.user.address.plz
+          this.auth.city = resp.user.address.city
         }
       })
     },
@@ -294,7 +297,7 @@ export default {
 
       if (this.$refs.imageInput.files[0]) {
         const image = this.$refs.imageInput.files[0]
-        console.log(image)
+
         const allowedImageTypes = ['image/png', 'image/jpg', 'image/jpeg']
 
         if (!allowedImageTypes.includes(image.type)) {
