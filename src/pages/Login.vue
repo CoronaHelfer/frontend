@@ -81,11 +81,18 @@ import { callApi, authApi } from '../../api/requests'
 export default {
   data() {
     return {
+      previousRoute: undefined,
       name: '',
       password: '',
       error: '',
       loading: false
     }
+  },
+
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.previousRoute = from.path
+    })
   },
 
   computed: {
@@ -137,7 +144,12 @@ export default {
             id: resp.user._id,
             authenticated: true
           }
-          this.$router.replace('/profile')
+
+          if (['/help', '/get-help'].includes(this.previousRoute)) {
+            this.$router.replace(this.previousRoute)
+          } else {
+            this.$router.replace('/profile')
+          }
         })
       } catch (e) {
         this.error = e
