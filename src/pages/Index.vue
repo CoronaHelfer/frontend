@@ -208,6 +208,7 @@
 .title-aboutus {
   display: table;
   margin: 6% auto;
+  text-align: center;
   .uppercase {
     margin-bottom: 0px;
     line-height: inherit;
@@ -222,7 +223,7 @@
   background-color: $tertiary
 
 .vision-box
-  box-shadow: 0px 10px 6px #00000029
+  box-shadow: 0px 10px 6px rgba(0,0,0,0.1)
   border-radius: 10px
   padding: 5% 0
   margin-bottom: 2%

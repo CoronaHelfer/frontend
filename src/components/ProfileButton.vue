@@ -6,6 +6,7 @@
       class="rounded q-mr-md"
       size="md"
     >
+      <span v-if="$q.screen.gt.xs" class="q-mr-md">Login</span>
       <q-icon name="fas fa-user" />
     </q-btn>
 
@@ -17,13 +18,13 @@
       <q-list dark dense class="bg-grey-10">
         <q-item clickable v-close-popup @click="$router.push('/profile')">
           <q-item-section>
-            <q-item-label>{{$t('profile')}}</q-item-label>
+            <q-item-label>{{ $t('profile') }}</q-item-label>
           </q-item-section>
         </q-item>
 
         <q-item clickable v-close-popup @click="logout()">
           <q-item-section>
-            <q-item-label>{{$t('logout')}}</q-item-label>
+            <q-item-label>{{ $t('logout') }}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>

@@ -1,10 +1,12 @@
 <template>
   <q-page>
-    <div class="title" />
-    <article>
-      <h3>{{ $t('jobsSubtitle') }}</h3>
-      <h1>{{ $t('jobsTitle') }}</h1>
-
+    <div class="title row items-end">
+      <div :class="$q.screen.gt.xs ? 'wrapper column' : 'column q-px-md'">
+        <div class="banner-sub col">{{ $t('jobsSubtitle') }}</div>
+        <div class="banner-title col">{{ $t('jobsTitle') }}</div>
+      </div>
+    </div>
+    <article :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
       <p>{{ $t('jobsIntro') }}</p>
 
       <h3 class="uppercase">{{ $t('jobsResponsibilities') }}</h3>
@@ -28,38 +30,26 @@
 
 <style lang="sass" scoped>
 .title
-  text-align: center
   background: url('../statics/images/Banner-Jobs.png') no-repeat
-  background-size: 100%
-  color: white
-  height: 28.1rem
+  background-size: cover
+  background-color: $secondary
+  height: 100%
+  padding-top: 15%
+
+  div
+    .banner-title
+      color: white
+      font-weight: bold
+      font-size: 3.4rem
+      margin: 0 0 5% 0
+
+  .banner-sub:first-of-type
+    color: white
+    font-size: 1.3rem
 
 article
-  padding: 1.9rem 0 1.3rem 0
-  margin: -25rem auto 0
-  max-width: 50rem
-  min-height: calc(100vh - 21.3rem)
-
-  h3:first-of-type
-    margin-top: 13.8rem
-    color: white
-
-  h1
-    margin-top: -1.3rem
-    color: white
-    font-weight: bold
-    font-size: 4.4rem
-    line-height: 4.7rem
-    white-space: nowrap
-
   p:first-of-type
     margin-top: 5rem
-
-  h3
-    margin-top: 6.3rem
-
-  a
-    color: $secondary
 </style>
 
 <script>

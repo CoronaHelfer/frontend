@@ -29,7 +29,7 @@ export default {
 <style lang="sass" scoped>
 .btn-card
   transition: 300ms ease-in-out
-  box-shadow: 0px 10px 6px #00000033
+  box-shadow: 0px 10px 6px rgba(0,0,0,0.1)
   border-radius: 10px
 
 .btn-card-label
