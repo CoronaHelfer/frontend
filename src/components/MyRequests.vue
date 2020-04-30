@@ -77,10 +77,7 @@ export default {
       try {
         this.loading = true
         this.error = ''
-        const requests = await callApi(
-          '/request',
-          this.auth.token
-        )
+        const requests = await callApi('/request', this.auth.token)
         this.requests = requests.result || []
       } catch (err) {
         console.error(err)
