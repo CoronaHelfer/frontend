@@ -226,15 +226,19 @@ export default {
   },
 
   async mounted() {
-    await this.fetchUserData()
+    if (this.auth.authenticated) {
+      await this.fetchUserData()
 
-    this.firstname = this.auth.firstname
-    this.lastname = this.auth.lastname
-    this.street = this.auth.street
-    this.streetNumber = this.auth.streetNumber
-    this.zip = this.auth.zip
-    this.city = this.auth.city
-    // this.picture = this.auth.picture
+      this.firstname = this.auth.firstname
+      this.lastname = this.auth.lastname
+      this.street = this.auth.street
+      this.streetNumber = this.auth.streetNumber
+      this.zip = this.auth.zip
+      this.city = this.auth.city
+      // this.picture = this.auth.picture
+    } else {
+      this.$router.push('login')
+    }
   },
 
   methods: {
