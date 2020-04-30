@@ -51,13 +51,13 @@
         </div>
       </article>
       <Request
-        v-for="request in foreignRequests"
+        v-for="request in requests"
         v-bind:key="request._id"
         :user="{ firstName: 'Anonym', image: undefined }"
         :request="request"
         :onClick="openPopUp"
       />
-      <article v-if="foreignRequests.length === 0">
+      <article v-if="requests.length === 0">
         {{ $t('noRequests') }}
       </article>
       <Offer :isDialogOpen="isDialogOpen" :requestId="selectedRequest" />
@@ -170,16 +170,6 @@ export default {
       set(val) {
         this.$store.commit('auth/updateData', val)
       }
-    },
-
-    foreignRequests: function() {
-      if (this.requests.length === 0) {
-        return []
-      }
-
-      return this.requests.filter(function(request) {
-        return request.created_by._id !== this.auth.id
-      }, this)
     }
   },
 
