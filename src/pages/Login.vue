@@ -46,7 +46,7 @@
             ></q-btn>
           </div>
 
-          <button class="oauth q-my-md row">
+          <!-- <button class="oauth q-my-md row">
             <div>
               <q-icon class="q-mr-md q-ml-xs" name="fab fa-facebook-f"></q-icon>
             </div>
@@ -58,7 +58,7 @@
               <q-icon class="q-mr-md q-ml-xs" name="fab fa-google"></q-icon>
             </div>
             <div class="q-mt-xs">{{ $t('loginGoogle') }}</div>
-          </button>
+          </button> -->
         </q-form>
       </div>
     </div>
@@ -111,7 +111,8 @@ export default {
       try {
         this.loading = true
         if (this.name === '' || this.password === '') {
-          throw new Error(this.$t('wrongLogin'))
+          this.error = this.$t('wrongLogin')
+          return
         }
 
         let body = {
@@ -127,12 +128,14 @@ export default {
 
         const res = await authApi(body)
 
-        if (res.error) {
-          console.error(res.error)
-          throw new Error(this.$t('somethingWentWrong'))
-        } else if (!res.token) {
-          console.error('No token provided.')
-          throw new Error(this.$t('somethingWentWrong'))
+        if (res === 404) {
+          this.error = this.$t('unknownUser')
+          return
+        }
+
+        if (res === 401) {
+          this.error = this.$t('wrongPassword')
+          return
         }
 
         await callApi('/users/me', res.token).then((resp) => {
@@ -151,9 +154,8 @@ export default {
             this.$router.replace('/profile')
           }
         })
-      } catch (e) {
-        this.error = e
-        this.loading = false
+      } catch (error) {
+        this.error = error
       } finally {
         this.loading = false
       }

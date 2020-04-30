@@ -31,5 +31,10 @@ export const authApi = async (data = {}, auth = 'login') => {
     },
     body: JSON.stringify(data)
   })
+
+  if (!response.ok) {
+    return response.status
+  }
+
   return await response.json()
 }
