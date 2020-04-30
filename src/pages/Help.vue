@@ -40,12 +40,7 @@
           </q-chip>
         </div>
         <div class="row col-xs-12 col-md-6 q-pa-sm">
-          <q-btn
-            rounded
-            size="md"
-            class="q-ma-xs"
-            @click="fetchRequests"
-          >
+          <q-btn rounded size="md" class="q-ma-xs" @click="fetchRequests">
             {{ $t('searchForm.search') }}
           </q-btn>
         </div>
@@ -61,7 +56,11 @@
       <article v-if="requests.length === 0">
         {{ $t('noRequests') }}
       </article>
-      <Offer :isDialogOpen="isDialogOpen" :requestId="selectedRequest" />
+      <Offer
+        :isDialogOpen="isDialogOpen"
+        :requestId="selectedRequest"
+        @dialogClosed="closePopUp"
+      />
     </body>
   </q-page>
 </template>
@@ -223,10 +222,13 @@ export default {
         }
 
         this.categories = categories.result
-        this.categorySelection = this.categories.reduce((accumulator, current) => {
-          accumulator[current._id] = false
-          return accumulator
-        }, {})
+        this.categorySelection = this.categories.reduce(
+          (accumulator, current) => {
+            accumulator[current._id] = false
+            return accumulator
+          },
+          {}
+        )
       } catch (e) {
         this.error = e
       }
@@ -235,6 +237,10 @@ export default {
     openPopUp(requestId) {
       this.selectedRequest = requestId
       this.isDialogOpen = true
+    },
+
+    closePopUp() {
+      this.isDialogOpen = false
     }
   }
 }

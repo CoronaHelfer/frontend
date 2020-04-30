@@ -2,17 +2,6 @@
   <article class="request">
     <q-card class="request-card" flat bordered>
       <div class="row">
-        <!-- <div class="col-1">
-          <q-avatar
-            class="avatar"
-            v-if="request.created_by.picture"
-          >
-            <img
-              :src="request.created_by.picture"
-              :alt="'Foto von ' + user.firstName"
-            />
-          </q-avatar>
-        </div> -->
         <div class="col-12">
           <q-card-section horizontal>
             <q-card-section class="q-pt-sm section-inner">
@@ -35,9 +24,9 @@
             <q-btn
               class="card-action-button"
               color="secondary"
-              v-on:click="onClick($vnode.key)"
+              @click="onClick(request._id)"
             >
-              {{$t('help')}}
+              {{ $t('help') }}
             </q-btn>
           </q-card-actions>
         </div>

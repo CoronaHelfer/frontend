@@ -65,7 +65,6 @@ export default {
 
   watch: {
     locale(locale) {
-      console.log(locale)
       this.$i18n.locale = locale
     }
   }

@@ -1,20 +1,18 @@
 <template>
-  <q-card>
+  <q-card class="q-my-lg">
     <q-card-section>
-      <q-badge v-if="request.helper.length" color="red" floating>{{request.helper.length}}</q-badge>
+      <q-badge v-if="request.helper.length" color="red" floating>{{
+        request.helper.length
+      }}</q-badge>
       <div class="row">
         <div class="col">
           <header v-if="!editMode">
-            <h2>{{request.title}}</h2>
+            <h2>{{ request.title }}</h2>
           </header>
-          <q-input
-            :label="$t('title')"
-            v-model="request.title"
-            v-else
-          />
+          <q-input :label="$t('title')" v-model="request.title" v-else />
 
           <p v-if="!editMode">
-            <strong >{{$t('category')}}:</strong> {{request.category.name}}
+            <strong>{{ $t('category') }}:</strong> {{ request.category.name }}
           </p>
           <q-select
             v-else
@@ -28,7 +26,7 @@
           />
 
           <p v-if="!editMode">
-            <strong>{{$t('request')}}:</strong> {{request.description}}
+            <strong>{{ $t('request') }}:</strong> {{ request.description }}
           </p>
           <div v-else>
             <q-input
@@ -37,11 +35,7 @@
               :label="$t('request')"
               v-model="request.description"
             />
-            <q-btn
-              color="secondary"
-              :label="$t('send')"
-              @click="saveRequest"
-            />
+            <q-btn color="secondary" :label="$t('send')" @click="saveRequest" />
           </div>
         </div>
 
@@ -56,7 +50,8 @@
                     :label="this.$t('offers')"
                     class="full-width"
                     :loading="loading"
-                    v-on:click="showOffersPage()"></q-btn>
+                    v-on:click="showOffersPage()"
+                  ></q-btn>
                 </q-item>
                 <q-item>
                   <q-btn
@@ -64,7 +59,8 @@
                     icon-right="fas fa-pencil-alt"
                     :label="this.$t('edit')"
                     class="full-width"
-                    v-on:click="editRequest"></q-btn>
+                    v-on:click="editRequest"
+                  ></q-btn>
                 </q-item>
                 <q-item>
                   <q-btn
@@ -73,7 +69,8 @@
                     :label="this.$t('delete')"
                     class="full-width"
                     :loading="loading"
-                    v-on:click="deleteRequest"></q-btn>
+                    v-on:click="deleteRequest"
+                  ></q-btn>
                 </q-item>
               </q-list>
             </q-menu>
@@ -82,7 +79,7 @@
       </div>
     </q-card-section>
     <q-card-section align="right" class="text-grey-7">
-      {{end_date}}
+      {{ end_date }}
     </q-card-section>
   </q-card>
 </template>
