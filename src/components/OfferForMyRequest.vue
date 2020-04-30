@@ -1,19 +1,26 @@
 <template>
-  <q-card class="bg-green-1">
+  <q-card class="accent">
     <q-item>
-      <q-item-section avatar>
-        <q-avatar>
-          <img :src="offer.picture">
-        </q-avatar>
-      </q-item-section>
-
       <q-item-section>
-        <q-item-label>{{offer.firstName}} {{offer.lastName}}</q-item-label>
+        <q-item-label>
+          <h2>{{ offer.firstName }} {{ offer.lastName }}</h2>
+        </q-item-label>
+        <q-item-label v-if="offer.contactEmail">
+          {{ $t('mail') }}:
+          <a :href="`mailto:${offer.contactEmail}`">{{ offer.contactEmail }}</a>
+        </q-item-label>
+        <q-item-label v-if="offer.contactPhone">
+          {{ $t('phone') }}:
+          <a :href="`tel:${offer.contactPhone}`">{{ offer.contactPhone }}</a>
+        </q-item-label>
       </q-item-section>
     </q-item>
-
-    <q-separator/>
-    {{offer.offer_text}}
+    <q-separator />
+    <q-item>
+      <q-item-section>
+        {{ offer.offer_text }}
+      </q-item-section>
+    </q-item>
   </q-card>
 </template>
 
@@ -21,8 +28,11 @@
 .q-card
   border-radius: 10px
   padding: 5px
-  margin: 20px 40px
+  margin: 5% auto
   background-color: rgb(254, 246, 239)
+  width: 50%
+a
+  color: $secondary
 </style>
 
 <script>
