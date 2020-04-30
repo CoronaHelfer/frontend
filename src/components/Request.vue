@@ -15,15 +15,22 @@
         </div> -->
         <div class="col-12">
           <q-card-section horizontal>
-            <q-card-section class="q-pt-sm">
-              <h2>{{request.title}}</h2>
-              <h3>{{request.category.name}}</h3>
+            <q-card-section class="q-pt-sm section-inner">
+              <h2>{{ request.title }}</h2>
+              <h3>{{ request.category.name }}</h3>
+              <div class="date-range">
+                {{ format(new Date(request.time_start), 'dd/MM/yyyy') }}
+                - {{ format(new Date(request.time_end), 'dd/MM/yyyy') }}
+              </div>
               <div>
-                {{request.description}}
+                {{ request.description }}
               </div>
             </q-card-section>
           </q-card-section>
           <q-card-actions>
+            <q-label class="distance" v-if="request.distance">
+              {{ $t('approximateDistance') }}: {{ request.distance }}m
+            </q-label>
             <q-space></q-space>
             <q-btn
               class="card-action-button"
@@ -47,14 +54,33 @@
     margin: 16px
   .card-action-button
     margin: 8px
+  .section-inner
+    width: 100%
+    height: 100%
+    .date-range
+      position: absolute
+      top: 0
+      right: 0
+      padding: 12px
+      color: $secondary
+  .distance
+    position: absolute
+    bottom: 10px
+    left: 16px
+    font-size: 14px
 </style>
 
 <script>
+import { format } from 'date-fns'
 export default {
   props: {
     user: Object,
     request: Object,
     onClick: Function
+  },
+
+  methods: {
+    format
   }
 }
 </script>

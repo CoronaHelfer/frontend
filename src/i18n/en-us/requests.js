@@ -4,5 +4,6 @@ export default {
   noRequestsCreated: "You haven't created any requests yet.",
   category: 'Category',
   success: 'Action was successful',
-  noRequests: 'At the moment there are no requests!'
+  noRequests: 'At the moment there are no requests!',
+  approximateDistance: 'Approximate distance'
 }

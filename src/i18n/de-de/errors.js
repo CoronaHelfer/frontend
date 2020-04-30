@@ -5,5 +5,6 @@ export default {
   somethingWentWrong:
     'Irgendwas ist schief gelaufen. Bitte versuche es nochmal!',
   errorDate: 'Das Format muss in DD/MM/YYYY sein',
-  errorEndDate: 'Enddatum sollte nicht vor dem Startdatum sein'
+  errorEndDate: 'Enddatum sollte nicht vor dem Startdatum sein',
+  positionNotFound: 'Diese Adresse konnte nicht geolokalisiert werden'
 }

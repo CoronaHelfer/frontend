@@ -4,5 +4,6 @@ export default {
   noRequestsCreated: 'Du hast noch keine Hilfsanfrage erstellt.',
   category: 'Kategorie',
   success: 'Aktion erfolgreich',
-  noRequests: 'Momentan gibt es keine Hilfsanfragen!'
+  noRequests: 'Momentan gibt es keine Hilfsanfragen!',
+  approximateDistance: 'Ungefähre Distanz'
 }

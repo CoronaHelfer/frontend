@@ -8,8 +8,8 @@
             <q-input
               outlined
               color="secondary"
-              v-model="query.zipcode"
-              :label="$t('searchForm.zipcode')"
+              v-model="query.address"
+              :label="$t('searchForm.address')"
             >
               <template v-slot:append>
                 <q-icon class="icon" name="room" />
@@ -22,7 +22,7 @@
               color="secondary"
               :options="radii"
               :option-label="(item) => `${item} km`"
-              v-model="query.radius"
+              v-model="query.distance"
               :label="$t('searchForm.radius')"
             />
           </div>
@@ -49,6 +49,7 @@
             {{ $t('searchForm.search') }}
           </q-btn>
         </div>
+        <div v-if="error" class="error">{{ error }}</div>
       </article>
       <Request
         v-for="request in requests"
@@ -147,6 +148,7 @@ export default {
 
   data() {
     return {
+      error: '',
       loading: true,
       requests: [],
       selectedRequest: undefined,
@@ -155,8 +157,8 @@ export default {
       radii: [5, 10, 25, 50, 75, 100],
       query: {
         categoryIds: [],
-        zipcode: undefined,
-        radius: 5
+        address: '',
+        distance: 5
       },
       categorySelection: {}
     }
@@ -174,8 +176,8 @@ export default {
   },
 
   async mounted() {
-    if (this.$route.query && this.$route.query.zipcode) {
-      Vue.set(this.query, 'zipcode', this.$route.query.zipcode)
+    if (this.$route.query && this.$route.query.address) {
+      Vue.set(this.query, 'address', this.$route.query.address)
     }
 
     this.loading = true
@@ -186,6 +188,7 @@ export default {
   methods: {
     async fetchRequests() {
       try {
+        this.error = ''
         this.loading = true
         this.query.categoryIds = Object.entries(this.categorySelection)
           .filter(([key, value]) => !!value)
@@ -195,7 +198,13 @@ export default {
         const queryString = new URLSearchParams(this.query)
 
         const response = await callApi(`/publicRequest?${queryString}`)
-        console.log(response.result)
+
+        if (response.status === 400 && response.message === 'positionNotFound') {
+          this.error = this.$t(response.message)
+          this.requests = []
+
+          return
+        }
         this.requests = response.result || []
       } catch (error) {
         console.error(error)
