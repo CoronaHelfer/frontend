@@ -1,9 +1,6 @@
 <template>
   <q-card class="q-my-lg">
     <q-card-section>
-      <q-badge v-if="request.helper.length" color="red" floating>{{
-        request.helper.length
-      }}</q-badge>
       <div class="row">
         <div class="col">
           <header v-if="!editMode">
@@ -43,7 +40,7 @@
           <q-btn color="grey-7" round flat icon="more_vert">
             <q-menu cover auto-close>
               <q-list>
-                <q-item v-if="request.helper.length">
+                <!-- <q-item v-if="request.helper.length">
                   <q-btn
                     flat
                     icon-right="mail"
@@ -52,7 +49,7 @@
                     :loading="loading"
                     v-on:click="showOffersPage()"
                   ></q-btn>
-                </q-item>
+                </q-item> -->
                 <q-item>
                   <q-btn
                     flat
@@ -81,6 +78,17 @@
     <q-card-section align="right" class="text-grey-7">
       {{ end_date }}
     </q-card-section>
+    <q-card-actions>
+      <q-space />
+      <q-btn
+        class="card-action-button"
+        color="secondary"
+        v-if="request.helper.length"
+        @click="showOffersPage"
+      >
+        {{ request.helper.length }} {{ $t('offers') }}
+      </q-btn>
+    </q-card-actions>
   </q-card>
 </template>
 
@@ -180,8 +188,11 @@ export default {
     },
 
     showOffersPage() {
-      this.$q.localStorage.set('offers', this.request.helper)
-      this.$router.push('offers')
+      console.log('request', this.request)
+      this.$router.push({
+        name: 'Offers',
+        params: { request: this.request }
+      })
     }
   }
 }
