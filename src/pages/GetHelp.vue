@@ -65,18 +65,20 @@
                     >
                       <div class="q-gutter-md row">
                         <q-date
-                          mask="YYYY-MM-DD HH:mm"
+                          mask="DD/MM/YYYY HH:mm"
                           v-model="startdate"
                           :rules="['datetime']"
                           color="secondary"
                           :options="fromToday"
+                          :locale="datePickerTranslations[$i18n.locale]"
                         />
                         <q-time
                           v-model="startdate"
-                          mask="YYYY-MM-DD HH:mm"
+                          mask="DD/MM/YYYY HH:mm"
                           :rules="['datetime']"
                           color="secondary"
                           @input="$refs.qStartDateProxy.hide()"
+                          format24h
                         />
                       </div>
                     </q-popup-proxy>
@@ -103,18 +105,20 @@
                     >
                       <div class="q-gutter-md row">
                         <q-date
-                          mask="YYYY-MM-DD HH:mm"
+                          mask="DD/MM/YYYY HH:mm"
                           v-model="enddate"
                           color="secondary"
                           :rules="['datetime']"
                           :options="fromToday"
+                          :locale="datePickerTranslations[$i18n.locale]"
                         />
                         <q-time
                           v-model="enddate"
-                          mask="YYYY-MM-DD HH:mm"
+                          mask="DD/MM/YYYY HH:mm"
                           :rules="['datetime']"
                           color="secondary"
                           @input="$refs.endDateProxy.hide()"
+                          format24h
                         />
                       </div>
                     </q-popup-proxy>
@@ -249,7 +253,7 @@
 <script>
 import { callApi } from '../../api/requests'
 import { date } from 'quasar'
-import { parse } from 'date-fns'
+import { parse, isValid } from 'date-fns'
 
 export default {
   data() {
@@ -269,7 +273,23 @@ export default {
       isHelpForElse: true,
       startdate: defaultDate,
       enddate: defaultDate,
-      step: 1
+      step: 1,
+      datePickerTranslations: {
+        de_DE: {
+          days: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+          daysShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+          months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+          monthsShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Juni', 'Juli', 'Aug', 'Sept', 'Okt', 'Nov', 'Dez'],
+          firstDayOfWeek: 1
+        },
+        en_US: {
+          days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+          months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+          firstDayOfWeek: 1
+        }
+      }
     }
   },
 
@@ -360,8 +380,10 @@ export default {
     },
 
     checkDate(inputDate) {
+      const parsedInputdate = parse(inputDate, 'dd/MM/yyyy HH:mm', new Date())
+
       if (
-        !date.isValid(inputDate) ||
+        !isValid(parsedInputdate) ||
         inputDate.length < 'dd/MM/yyyy HH:mm'.length
       ) {
         return this.$t('errorDate')
@@ -371,8 +393,9 @@ export default {
     checkEndDate(endDate) {
       const parsedStartDate = parse(this.startdate, 'dd/MM/yyyy HH:mm', new Date())
       const parsedEndDate = parse(endDate, 'dd/MM/yyyy HH:mm', new Date())
+
       if (
-        !date.isValid(endDate) ||
+        !isValid(parsedEndDate) ||
         endDate.length < 'dd/MM/yyyy HH:mm'.length ||
         parsedStartDate > parsedEndDate
       ) {

@@ -7,5 +7,14 @@ export default {
   send: 'Send',
   back: 'Back',
   title: 'Title',
-  description: 'Description'
+  description: 'Description',
+  street: 'Street',
+  streetNumber: 'Number',
+  zip: 'Zip code',
+  city: 'City',
+  helpOthers: 'Need help for another person?',
+  yes: 'Yes',
+  no: 'No',
+  startdate: 'From',
+  enddate: 'To'
 }
