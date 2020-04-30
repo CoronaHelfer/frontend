@@ -56,7 +56,7 @@
         <h3>{{ $t('searchForm.title') }}</h3>
         <div class="row wrap">
           <div class="col-md-10 col-xs-12 q-px-xs q-my-xs">
-            <q-input filled v-model="zipcode" :label="$t('searchForm.zipcode')">
+            <q-input filled v-model="address" :label="$t('searchForm.address')">
               <template v-slot:append>
                 <q-icon class="icon" name="room" />
               </template>
@@ -273,7 +273,7 @@ export default {
 
   data: () => {
     return {
-      zipcode: undefined,
+      address: undefined,
       items: [
         {
           img: 'cool',
@@ -305,7 +305,7 @@ export default {
 
   methods: {
     goToHelp() {
-      this.$router.push({ path: 'help', query: { zipcode: this.zipcode } })
+      this.$router.push({ path: 'help', query: { address: this.address } })
     }
   }
 }

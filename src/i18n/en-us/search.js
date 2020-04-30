@@ -1,7 +1,7 @@
 export default {
   title: 'Requests in your region',
   category: 'Category',
-  zipcode: 'Zipcode',
+  address: 'Address',
   radius: 'Radius',
   search: 'Search'
 }

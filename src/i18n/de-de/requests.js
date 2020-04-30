@@ -5,5 +5,6 @@ export default {
   category: 'Kategorie',
   success: 'Aktion erfolgreich',
   noRequests: 'Momentan gibt es keine Hilfsanfragen!',
-  close: 'Schließen'
+  close: 'Schließen',
+  approximateDistance: 'Ungefähre Distanz'
 }

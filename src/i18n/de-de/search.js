@@ -1,7 +1,7 @@
 export default {
   title: 'Gesuche in deiner Region',
   category: 'Kategorie',
-  zipcode: 'Postleitzahl',
+  address: 'Adresse',
   radius: 'Radius',
   search: 'Suchen'
 }

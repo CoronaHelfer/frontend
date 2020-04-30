@@ -5,5 +5,6 @@ export default {
   category: 'Category',
   success: 'Action was successful',
   noRequests: 'At the moment there are no requests!',
-  close: 'Close'
+  close: 'Close',
+  approximateDistance: 'Approximate distance'
 }
