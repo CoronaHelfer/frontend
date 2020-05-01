@@ -6,7 +6,7 @@ export const callApi = async (
   data = {},
   method = 'GET'
 ) => {
-  const response = await fetch(`https://dev.coronahelfer.eu/api/v1${path}`, {
+  const response = await fetch(`https://api.coronahelfer.eu/api/v1${path}`, {
     method,
     mode: 'cors',
     cache: 'no-cache',
@@ -23,7 +23,7 @@ export const callApi = async (
 }
 
 export const authApi = async (data = {}, auth = 'login') => {
-  const response = await fetch(`https://dev.coronahelfer.eu/api/v1/auth/${auth}`, {
+  const response = await fetch(`https://api.coronahelfer.eu/api/v1/auth/${auth}`, {
     method: 'post',
     mode: 'cors',
     headers: {
