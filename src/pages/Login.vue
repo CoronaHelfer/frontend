@@ -1,107 +1,98 @@
 <template>
-  <q-page>
-    <body>
-      <div class="authenticate">
-        <div class="container">
-          <form class="login">
-            <div v-show="error !== ''" class="error">{{ error }}</div>
-            <input
-              type="text"
-              :placeholder="$t('emailOrPassword')"
-              v-model="name"
-            />
-            <input
-              type="password"
-              :placeholder="$t('password')"
-              v-model="password"
-            />
+  <q-page class="q-pa-md row justify-center items-center">
+    <div class="form q-pa-xs">
+      <div class="form-img row items-center justify-between q-ma-sm">
+        <img width="100%" src="~assets/CoronaHelfer-Logo.svg" />
+      </div>
 
+      <div class="form-fields row">
+        <div class="col-xs-12 col-md-3"></div>
+        <q-form
+          class="row items-center justify-between q-pa-lg col-xs-12 col-md-9"
+        >
+          <div v-if="error !== ''" class="error">{{ error }}</div>
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            :label="$t('emailOrPassword')"
+            v-model="name"
+          />
+          <q-input
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            type="password"
+            :label="$t('password')"
+            v-model="password"
+          />
+
+          <div class="row login-register">
             <q-btn
-              rounded
+              color="primary"
+              type="submit"
+              bg-color="white"
+              filled
+              class="c-btn form-input col-xs-12 col-md-4"
               :loading="loading"
               :label="$t('login')"
-              v-on:click="login()"
+              @click.prevent="login"
             ></q-btn>
-            <q-btn rounded :label="$t('register')" to="/register"></q-btn>
-          </form>
-        </div>
+            <q-btn
+              class="c-link q-py-sm col-xs-12 col-md-8"
+              flat
+              :label="$t('orRegister')"
+              to="/register"
+            ></q-btn>
+          </div>
+
+          <!-- <button class="oauth q-my-md row">
+            <div>
+              <q-icon class="q-mr-md q-ml-xs" name="fab fa-facebook-f"></q-icon>
+            </div>
+            <div class="q-mt-xs">{{ $t('loginFacebook') }}</div>
+          </button>
+
+          <button class="oauth q-my-md row">
+            <div>
+              <q-icon class="q-mr-md q-ml-xs" name="fab fa-google"></q-icon>
+            </div>
+            <div class="q-mt-xs">{{ $t('loginGoogle') }}</div>
+          </button> -->
+        </q-form>
       </div>
-    </body>
+    </div>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-body
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
-
-.authenticate
-  padding: 20px
-  display: flex
-  justify-content: center
-  align-items: center
-  height: calc(100vh - 170px)
-  box-sizing: border-box
-  .container
-    width: 400px
-    .login, .register
-      background-color: WHITE
-      padding: 15px 30px
-      display: flex
-      flex-direction: column
-      border-radius: 25px
-      .error
-        background: RED
-        color: WHITE
-        padding: 10px 25px
-        margin-bottom: 15px
-        border-radius: 19px
-        font-size: 13px
-      input
-        width: 100%
-        background-color: LIGHTGRAY
-        border: none
-        box-shadow: none
-        padding: 0 25px
-        height: 30px
-        box-sizing: border-box
-        margin-bottom: 5px
-        border-radius: 19px
-        &:focus
-          outline: none
-        &.spacer
-          margin-bottom: 15px
-      button, a
-        height: 40px
-        padding: 0
-        font-size: 15px
-        font-weight: 600
-        margin-top: 15px
-    .register
-      .aligner
-        display: flex
-        margin-bottom: 10px
-        .left
-          width: 40%
-          .avatar
-            background: url('../statics/images/avatar.jpg') no-repeat
-            background-size: cover
-            width: 65px
-            height: 65px
-            border-radius: 100%
+.login-register
+  width: 100%
+.oauth
+  background-color: #4285F4
+  width: 100%
+  padding: 0.5rem
+  border-radius: 0
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import { callApi, authApi } from '../../api/requests'
 
 export default {
   data() {
     return {
+      previousRoute: undefined,
       name: '',
       password: '',
       error: '',
       loading: false
     }
+  },
+
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.previousRoute = from.path
+    })
   },
 
   computed: {
@@ -120,7 +111,8 @@ export default {
       try {
         this.loading = true
         if (this.name === '' || this.password === '') {
-          throw new Error(this.$t('wrongLogin'))
+          this.error = this.$t('wrongLogin')
+          return
         }
 
         let body = {
@@ -134,43 +126,37 @@ export default {
           }
         }
 
-        let res = await fetch(
-          this.$q.localStorage.getItem('server') + '/api/v1/auth/login',
-          {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-          }
-        )
-        res = await res.json()
+        const res = await authApi(body)
 
-        if (res.error) {
-          console.error(res.error)
-          throw new Error(this.$t('somethingWentWrong'))
-        } else if (!res.token) {
-          console.error('No token provided.')
-          throw new Error(this.$t('somethingWentWrong'))
+        if (res === 404) {
+          this.error = this.$t('unknownUser')
+          return
         }
 
-        await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/users/me',
-          res.token
-        ).then((resp) => {
+        if (res === 401) {
+          this.error = this.$t('wrongPassword')
+          return
+        }
+
+        await callApi('/users/me', res.token).then((resp) => {
           this.auth = {
             token: res.token,
             firstname: resp.user.firstName,
             lastname: resp.user.lastName,
             email: resp.user.email,
             id: resp.user._id,
+            verified: resp.user.verified,
             authenticated: true
           }
+
+          if (['/help', '/get-help'].includes(this.previousRoute)) {
+            this.$router.replace(this.previousRoute)
+          } else {
+            this.$router.replace('/profile')
+          }
         })
-        this.$router.go(-1)
-      } catch (e) {
-        this.error = e
-        this.loading = false
+      } catch (error) {
+        this.error = error
       } finally {
         this.loading = false
       }

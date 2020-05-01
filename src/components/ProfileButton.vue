@@ -3,81 +3,47 @@
     <q-btn
       v-if="!auth.authenticated"
       to="/login"
-      class="login-btn"
-      label="Login"
-    />
+      class="rounded q-mr-md"
+      size="md"
+    >
+      <span v-if="$q.screen.gt.xs" class="q-mr-md">Login</span>
+      <q-icon name="fas fa-user" />
+    </q-btn>
 
-    <li v-if="auth.authenticated" class="menu-btn" v-on:click="open = !open">
-      <span>{{ auth.firstname }} {{ auth.lastname }}</span>
-      <q-icon
-        :name="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
-      ></q-icon>
-      <ul :class="open ? '' : 'hidden'">
-        <li v-on:click="$router.push('/profile')">PROFIL</li>
-        <li v-on:click="$router.push('/profile/requests')">MEINE ANZEIGEN</li>
-        <li v-on:click="logout()">ABMELDEN</li>
-      </ul>
-    </li>
+    <q-btn-dropdown
+      v-if="auth.authenticated"
+      :label="auth.firstname + ' ' + auth.lastname"
+      class="rounded q-mr-md"
+    >
+      <q-list dark dense class="bg-grey-10">
+        <q-item clickable v-close-popup @click="$router.push('/profile')">
+          <q-item-section>
+            <q-item-label>{{ $t('profile') }}</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-item clickable v-close-popup @click="logout()">
+          <q-item-section>
+            <q-item-label>{{ $t('logout') }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
   </div>
 </template>
 
 <style lang="sass" scoped>
-.login-btn
-  background-color: $secondary
-  padding: 3px 20px
+.rounded
   border-radius: 20px
-  font-weight: 600
-  font-size: 15px
 
-  button
-    padding: 0
-    margin: 0
-    background-color: transparent
-    color: WHITE
-    border: 0
-    font-size: 15px
+.q-icon
+  font-size: 1em
 
-.menu-btn
-  background-color: $secondary
-  padding: 6px 20px
-  border-radius: 20px
-  font-weight: 600
-  font-size: 15px
-  display: flex
-  justify-content: space-between
-  align-items: center
-  box-sizing: border-box
-  cursor: pointer
-  ul
-    z-index: 15
-    position: absolute
-    background-color: $primary
-    list-style-type: none
-    flex-direction: column
-    top: 0
-    right: 0
-    margin-top: 80px
-    margin-right: 15px
-    display: flex
-    padding: 3px 3px
-    border-radius: 20px
-    font-weight: 600
-    font-size: 15px
-    width: 200px
-    box-sizing: border-box
-    li
-      text-align: left
-      margin-left: 0
-      padding: 10px 32px
-      border-radius: 20px
-      cursor: pointer
-      a
-        text-decoration: none
-        color: white
-      &:hover
-        background-color: $secondary
-    &.hidden
-      display: none
+.q-menu
+  background: none
+
+.q-item
+  text-transform: uppercase
 </style>
 
 <script>
@@ -110,9 +76,11 @@ export default {
         picture: '',
         createdAt: '',
         updatedAt: '',
-        authenticated: false
+        authenticated: false,
+        verified: false
       }
       this.$q.sessionStorage.clear()
+      this.$q.localStorage.clear()
       this.$router.push('/login')
     }
   }

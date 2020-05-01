@@ -1,71 +1,87 @@
 <template>
   <article class="request">
-    <header>
-        <span class="avatar">
-            <img
-              v-if="user.image"
-              :src="user.image"
-              :alt="'Foto von ' + user.firstName" />
-            <span
-              v-else
-              class="placeholder">
-              {{user.firstName[0]}}
-            </span>
-        </span>
-      <div class="intro">
-        <h2>{{request.title}}</h2>
-        <sub>
-          {{user.firstName}} wartet {{request.distance}} Meter entfernt auf deine Hilfe!
-        </sub>
+    <q-card class="request-card" flat bordered>
+      <div class="row">
+        <div class="col-12">
+          <q-card-section horizontal>
+            <q-card-section class="q-pt-sm section-inner">
+              <h2>{{ request.title }}</h2>
+              <h3>{{ request.category.name }}</h3>
+              <div class="date-range">
+                {{ format(new Date(request.time_start), 'dd/MM/yyyy') }}
+                - {{ format(new Date(request.time_end), 'dd/MM/yyyy') }}
+              </div>
+              <div>
+                {{ request.description }}
+              </div>
+            </q-card-section>
+          </q-card-section>
+          <q-card-actions>
+            <q-label class="distance" v-if="request.distance">
+              {{ $t('approximateDistance') }}: {{ request.distance }}m
+            </q-label>
+            <q-space></q-space>
+            <q-btn
+              :disabled="!auth.verified"
+              class="card-action-button"
+              color="secondary"
+              @click="onClick(request._id)"
+            >
+              {{ $t('help') }}
+            </q-btn>
+          </q-card-actions>
+        </div>
       </div>
-      <button class="primary" v-on:click="onClick($vnode.key)">Helfen
-      </button>
-    </header>
-    <p v-if="request.category">
-      <strong>Kategorie:</strong> {{request.category.name}}
-    </p>
-    <p>
-      <strong>Gesuch:</strong> {{request.description}}
-    </p>
+    </q-card>
   </article>
 </template>
 
 <style lang="sass" scoped>
-  .request
-    header
-      align-items: center
-      display: flex
-      justify-content: flex-start
-      text-align: center
-
-    .avatar
-      margin-right: 20px
-      width: 80px
-      height: 80px
-      background: #ddd
-      border-radius: 80px
-      overflow: hidden
-      flex-shrink: 0
-
-    .placeholder
-      font-size: 53px
-      color: white
-
-    .intro
-      display: flex
-      flex-direction: column
-      text-align: left
-
-    button
-      margin-left: auto
+.request-card
+  background-color: $tertiary
+  border: none
+  .avatar
+    margin: 16px
+  .card-action-button
+    margin: 8px
+  .section-inner
+    width: 100%
+    height: 100%
+    .date-range
+      position: absolute
+      top: 0
+      right: 0
+      padding: 12px
+      color: $secondary
+  .distance
+    position: absolute
+    bottom: 10px
+    left: 16px
+    font-size: 14px
 </style>
 
 <script>
+import { format } from 'date-fns'
 export default {
   props: {
     user: Object,
     request: Object,
     onClick: Function
+  },
+
+  computed: {
+    auth: {
+      get() {
+        return Object.assign({}, this.$store.state.auth.data)
+      },
+      set(val) {
+        this.$store.commit('auth/updateData', val)
+      }
+    }
+  },
+
+  methods: {
+    format
   }
 }
 </script>

@@ -1,7 +1,7 @@
 export default {
   help: 'Helfen',
   getHelp: 'Hilfe bekommen',
-  information: 'Information',
+  information: 'Infos',
   jobs: 'Jobs',
   imprint: 'Impressum',
   privacy: 'Datenschutz',

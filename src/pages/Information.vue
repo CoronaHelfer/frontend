@@ -1,69 +1,58 @@
 <template>
   <q-page>
-    <header>
-      <h1>Sicherheitsleitfaden</h1>
-    </header>
-    <body>
-      <article>
-        <h2>Unsere CoronaHelfer-Empfehlungen</h2>
-        Bittet beachtet unsere Empfehlungen, damit Ihr bei der Coronavirus-Nachbarschaftshilfe sicher und gesund bleibt!
+    <div class="title row items-end">
+      <div :class="$q.screen.gt.xs ? 'wrapper column' : 'column q-px-md'">
+        <div class="banner-sub col">{{ $t('infoIntro') }}</div>
+        <div
+          class="banner-title col"
+          :style="$q.screen.gt.xs ? '' : 'font-size:2.4rem'"
+        >
+          {{ $t('infoTitle') }}
+        </div>
+      </div>
+    </div>
+    <article :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
+      <h3 class="q-my-xl">{{ $t('infoSubIntro') }}</h3>
+      <h3 class="uppercase">{{ $t('AlgTextTitle') }}</h3>
+      <p>{{ $t('Alg1') }}</p>
+      <p>{{ $t('Alg2') }}</p>
+      <p>{{ $t('Alg3') }}</p>
+      <p>{{ $t('Alg4') }}</p>
+      <p>{{ $t('Alg5') }}</p>
 
-        <h2>Allgemeine und Sicherheitshinweise</h2>
-        <ul>
-          <li>Bitte <strong>bei der ersten Begegnung</strong>, zu deiner eigenen Sicherheit ermöglichen, dass eine weitere Person deines Haushalts anwesend ist.</li>
-          <li><strong>Gebe bitte keine vertraulichen Daten an Dritte weiter</strong>, wie Bankdaten oder Passwörter!</li>
-          <li>Bitte sorge dafür, dass du unter den angegebenen Kontaktdaten auch <strong>erreichbar</strong> bist - sowohl unter der angegebenen E-Mail-Adresse und Telefonnummer, als auch unter der Anschrift.</li>
-          <li>Bitte sei <strong>zum verabredeten Zeitpunkt am abgesprochenen Treffpunkt</strong> - sollte dir das nicht möglich sein, informiere die andere Partei bitte zeitnah darüber.</li>
-          <li><strong>Höflichkeit und Respekt</strong> gehören aktuell mehr denn je zur Tagesordnung. Auch wenn uns dieser neuartige Virus Angst macht, bleiben wir cool und sind freundlich zu unseren Mitmenschen. #spreadlove</li>
-        </ul>
-
-        <h2>Hygiene- und Gesundheitshinweise</h2>
-        <ul>
-          <li>Halte bei der Übergabe einen <strong>Mindestabstand von 1,5 Metern</strong> ein, um beide Parteien zu schützen!</li>
-          <li><strong>Vermeide unnötige Berührungen</strong> und (Hand-)Kontakte mit Dritten.</li>
-          <li>Bitte wasche dir generell häufiger die Hände gründlich <strong>mit Seife für mindestens 20 Sekunden</strong>, insbesondere nach Kontakten und auch vor und nach dem Verzehr von Speisen. Vermeide es hierbei auch, dir ins Gesicht zu fassen.</li>
-          <li>Husten und Niesen, wenn es geht, in die <strong>Armbeuge</strong>. Wenn möglich, trage bitte zum Eigen- und Fremdschutz eine <strong>Atemmaske</strong>.</li>
-          <li><strong>Reinige erhaltene Gegenstände</strong> sofort nach Erhalt gründlich (bestenfalls mit Desinfektionsmittel und Seife). Bei der Übergabe sind ggf. auch <strong>Einmal-Handschuhe</strong> empfehlenswert.</li>
-        </ul>
-      </article>
-    </body>
+      <h3 class="uppercase">{{ $t('HygieneTitle') }}</h3>
+      <p>{{ $t('Hygiene1') }}</p>
+      <p>{{ $t('Hygiene2') }}</p>
+      <p>{{ $t('Hygiene3') }}</p>
+      <p>{{ $t('Hygiene4') }}</p>
+    </article>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-header
-  text-align: center
-  background: url('../statics/images/background.jpg') no-repeat
+.title
+  background: url('../statics/images/Banner-Infos.jpg') no-repeat
   background-size: cover
-  padding: 50px
-  color: white
+  background-color: $secondary
+  height: 100%
+  padding-top: 15%
 
-h4
-  text-transform: uppercase
-  margin: 0 0 30px 0
+  div
+    .banner-title
+      color: white
+      font-weight: bold
+      font-size: 3.4rem
+      margin: 0 0 5% 0
 
-body
-  &:before
-    background-color: white
-    border-radius: 100%
-    content: ''
-    height: 50px
-    position: absolute
-    top: -25px
-    width: 100%
+  .banner-sub:first-of-type
+    color: white
+    font-size: 1.3rem
 
-  background-color: white
-  position: relative
-  padding-bottom: 20px
-  min-height: calc(100vh - 340px)
-
-  article
-    padding-top: 30px
-    margin: 20px auto 0
-    max-width: 800px
+article
+  p:first-of-type
+    margin-top: 5rem
 </style>
 
 <script>
-export default {
-}
+export default {}
 </script>

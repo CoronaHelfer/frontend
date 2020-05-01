@@ -1,142 +1,97 @@
 <template>
-  <q-page>
-    <body>
-      <div class="authenticate">
-        <div class="container">
-          <form class="register">
-            <div v-show="error !== ''" class="error">{{ error }}</div>
-            <div class="aligner">
-              <div class="left">
-                <div class="avatar" />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  name="firstname"
-                  :placeholder="$t('firstname')"
-                  v-model="firstname"
-                />
-                <input
-                  type="text"
-                  name="lastname"
-                  :placeholder="$t('lastname')"
-                  v-model="lastname"
-                />
-              </div>
+  <q-page class="q-pa-md row justify-center items-center">
+    <div class="form q-pa-lg">
+      <div class="form-img row items-center justify-between q-ma-sm">
+        <img
+          width="100%"
+          src="~assets/CoronaHelfer-Logo.svg"
+          alt="Corona Logo"
+        />
+      </div>
+      <div class="form-fields row">
+        <div class="col-xs-12 col-md-3"></div>
+        <q-form
+          class="row items-center justify-between q-pa-lg col-xs-12 col-md-9"
+          action=""
+        >
+          <div v-if="error !== ''" class="error">{{ error }}</div>
+          <q-input
+            name="firstname"
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-6"
+            v-model="firstname"
+            :label="$t('firstname')"
+          />
+          <q-input
+            name="lastname"
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-6"
+            v-model="lastname"
+            :label="$t('lastname')"
+          />
+          <q-input
+            name="mail"
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            v-model="mail"
+            :label="$t('mail')"
+          />
+          <q-input
+            name="phone"
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            v-model="phone"
+            :label="$t('phone')"
+          />
+          <q-input
+            name="password"
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            v-model="password"
+            type="password"
+            :label="$t('password')"
+          />
+          <q-input
+            name="passwordRepeat"
+            bg-color="white"
+            filled
+            class="q-px-sm form-input col-xs-12 col-md-12"
+            v-model="passwordRepeat"
+            type="password"
+            :label="$t('passwordRepeat')"
+          />
+          <div class="q-pa-sm">
+            <div>
+              {{ $t('acceptPrivacy') }}
+              <span class="c-link">
+                <router-link to="/privacy">{{ $t('privacyTitle') }}</router-link>.
+              </span>
             </div>
-            <input
-              type="text"
-              name="mail"
-              :placeholder="$t('mail')"
-              v-model="mail"
-            />
-            <input
-              class="spacer"
-              type="text"
-              name="phone"
-              :placeholder="$t('phone')"
-              v-model="phone"
-            />
-            <input
-              type="password"
-              name="password"
-              :placeholder="$t('password')"
-              v-model="password"
-            />
-            <input
-              type="password"
-              name="passwordRepeat"
-              :placeholder="$t('passwordRepeat')"
-              v-model="passwordRepeat"
-            />
-
-            <p>
-              Mit der Registrierung akzeptierst du unsere
-              <router-link to="/privacy">Datenschutzerklärung</router-link>.
-            </p>
             <q-btn
+              color="primary"
+              class="c-btn q-mt-lg"
               rounded
               id="register"
               :loading="loading"
               :label="$t('register')"
               v-on:click="register"
             />
-          </form>
-        </div>
+          </div>
+        </q-form>
       </div>
-    </body>
+    </div>
   </q-page>
 </template>
 
-<style lang="sass" scoped>
-body
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
-
-.authenticate
-  padding: 20px
-  display: flex
-  justify-content: center
-  align-items: center
-  height: calc(100vh - 170px)
-  box-sizing: border-box
-  .container
-    width: 400px
-    .divider
-      color: WHITE
-      font-weight: 600
-      font-size: 14px
-      text-align: center
-      margin: 14px
-    .login,
-    .register
-      background-color: WHITE
-      padding: 15px 30px
-      display: flex
-      flex-direction: column
-      border-radius: 25px
-      .error
-        background: RED
-        color: WHITE
-        padding: 10px 25px
-        margin-bottom: 15px
-        border-radius: 19px
-        font-size: 13px
-      input
-        width: 100%
-        background-color: LIGHTGRAY
-        border: none
-        box-shadow: none
-        padding: 0 25px
-        height: 30px
-        box-sizing: border-box
-        margin-bottom: 5px
-        border-radius: 19px
-        &:focus
-          outline: none
-        &.spacer
-          margin-bottom: 15px
-      button
-        height: 40px
-        padding: 0
-        font-size: 15px
-        font-weight: 600
-        margin-top: 15px
-      .aligner
-        display: flex
-        margin-bottom: 10px
-        .left
-          width: 40%
-          .avatar
-            background: url('../statics/images/avatar.jpg') no-repeat
-            background-size: cover
-            width: 65px
-            height: 65px
-            border-radius: 100%
-</style>
+<style lang="sass" scoped></style>
 
 <script>
-import { callApi } from '../../api/requests'
+import { callApi, authApi } from '../../api/requests'
 
 export default {
   data() {
@@ -179,25 +134,16 @@ export default {
         ) {
           throw new Error(this.$t('missingFields'))
         }
-
-        let res = await fetch(
-          this.$q.localStorage.getItem('server') + '/api/v1/auth/register',
+        const res = await authApi(
           {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              firstName: this.firstname,
-              lastName: this.lastname,
-              password: this.password,
-              email: this.mail,
-              phoneNumber: this.phone
-            })
-          }
+            firstName: this.firstname,
+            lastName: this.lastname,
+            password: this.password,
+            email: this.mail,
+            phoneNumber: this.phone
+          },
+          'register'
         )
-
-        res = await res.json()
 
         if (res.error) {
           console.error(res.error)
@@ -207,16 +153,14 @@ export default {
           throw new Error(this.$t('somethingWentWrong'))
         }
 
-        await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/users/me',
-          res.token
-        ).then(resp => {
+        await callApi('/users/me', res.token).then((resp) => {
           this.auth = {
             token: res.token,
             firstname: resp.user.firstName,
             lastname: resp.user.lastName,
             email: resp.user.email,
             id: resp.user._id,
+            verified: resp.user.verified,
             authenticated: true
           }
         })

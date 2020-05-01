@@ -12,37 +12,42 @@ html, body
   height: 100%
   padding: 0
   margin: 0
+  font-size: 1rem
 
 h1
-  text-transform: uppercase
-  font-size: 40px
-  line-height: 40px
-  font-weight: bold
-
-h2
-  text-transform: uppercase
-  font-size: 1.5em
-  line-height: 1.5em
+  font-size: 1.5rem
   font-weight: bold
   color: $secondary
+  line-height: normal
+
+h2
+  font-size: 1.5rem
+  line-height: 0
 
 h3
   font-size: 1.17em
   line-height: 1.17em
-  font-weight: bold
+  color: $secondary
+
+.uppercase
+  text-transform: uppercase
+
+.wrapper
+  width: 60%
+  margin: 0 auto
 
 strong
   color: $secondary
 
 button, a[type=button]
-  color: white !important
-  background-color: $secondary !important
+  color: white
+  background-color: $secondary
   border: 0
   border-radius: 19px
   cursor: pointer
-  font-size: 20px
-  font-weight: 400
-  padding: 10px 50px
+  // font-size: 20px
+  // font-weight: 400
+  // padding: 10px 50px
   text-transform: uppercase
   &:focus
     outline: none
@@ -57,8 +62,15 @@ button, a[type=button]
     font-weight: 600
     margin-top: 15px
 
+.q-btn
+  color: white
+  background-color: $secondary
+
+.q-date
+  .q-btn
+    color: initial
+    background-color: initial
+
 a
   text-decoration: none
-
-article
-  padding: 10px
+  color: $secondary

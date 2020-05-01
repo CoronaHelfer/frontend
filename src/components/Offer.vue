@@ -1,55 +1,40 @@
 <template>
-  <q-dialog
-    v-model="isDialogOpen"
-    persistent>
+  <q-dialog v-model="isTheDialogOpen" persistent>
     <q-card v-if="success" class="card">
-        <h2>DANKE FÜR DEINE NACHRICHT</h2>
-        <p>Du wirst bestimmt bald kontaktiert!</p>
+      <q-card-section class="row items-end q-pb-none">
+        <q-space />
         <q-btn
-          rounded
-          to="/profile/requests"
-          label="Anfragen zeigen"
-          style="width: 100%"></q-btn>
+          icon="close"
+          flat
+          round
+          dense
+          v-close-popup
+          @click="reset"
+        ></q-btn>
+      </q-card-section>
+      <h2>DANKE FÜR DEINE NACHRICHT</h2>
+      <p>Du wirst bestimmt bald kontaktiert!</p>
     </q-card>
 
-<!--    <q-card-->
-<!--      v-else-if="!auth.authenticated"-->
-<!--      class="card">-->
-<!--      <q-card-section class="column items-center q-pb-none">-->
-<!--        <h2>DANKE, DASS DU HELFEN WILLST</h2>-->
-<!--        <p>Um zu antworten, musst du angemeldet sein.</p>-->
-<!--      </q-card-section>-->
-<!--      <q-card-actions align="center">-->
-<!--        <q-btn-->
-<!--          rounded-->
-<!--          to="/login"-->
-<!--          label="Zum Login"-->
-<!--          style="width: 100%"></q-btn>-->
-<!--      </q-card-actions>-->
-<!--    </q-card>-->
-
-    <q-card
-      v-else
-      style="min-width: 350px"
-      class="card">
+    <q-card v-else style="min-width: 350px" class="card">
       <q-card-section class="row items-center q-pb-none">
-        <q-space/>
+        <q-space />
         <q-btn icon="close" flat round dense v-close-popup></q-btn>
       </q-card-section>
       <q-card-section class="q-pt-none">
         <q-input
-          dense autofocus filled
+          dense
+          autofocus
+          filled
           type="textarea"
           v-model="offer"
           label="Nachricht"
-          @keyup.enter="selectedRequest = undefined"></q-input>
+          @keyup.enter="selectedRequest = undefined"
+        ></q-input>
       </q-card-section>
 
       <q-card-actions align="right" class="text-primary">
-        <q-btn
-          flat
-          icon="send"
-          v-on:click="sendOffer"></q-btn>
+        <q-btn flat icon="send" v-on:click="sendOffer"></q-btn>
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -70,31 +55,44 @@ export default {
     requestId: String
   },
 
-  data () {
+  data() {
     return {
+      isTheDialogOpen: false,
       success: false,
       offer: ''
     }
   },
 
+  watch: {
+    isDialogOpen(value) {
+      this.isTheDialogOpen = value
+    },
+
+    isTheDialogOpen(value) {
+      if (!value) {
+        this.$emit('dialogClosed')
+      }
+    }
+  },
+
   computed: {
     auth: {
-      get () {
+      get() {
         return Object.assign({}, this.$store.state.auth.data)
       },
-      set (val) {
+      set(val) {
         this.$store.commit('auth/updateData', val)
       }
     }
   },
 
   methods: {
-    async sendOffer () {
+    async sendOffer() {
       try {
         if (this.offer === '') throw new Error(this.$t('emptyField'))
 
         const res = await callApi(
-          this.$q.localStorage.getItem('server') + '/api/v1/request/helper',
+          '/request/helper',
           this.auth.token,
           {
             offerText: this.offer,
@@ -106,9 +104,14 @@ export default {
         if (res.error) throw new Error(this.$t('somethingWentWrong'))
 
         this.success = true
-      } catch (e) {
-        console.error(e)
+      } catch (error) {
+        console.error(error)
       }
+    },
+
+    reset() {
+      this.success = false
+      this.offer = ''
     }
   }
 }

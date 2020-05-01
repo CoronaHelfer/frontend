@@ -1,106 +1,66 @@
 <template>
   <q-page>
-    <header>
-      <h4>Impressum</h4>
-    </header>
-    <body>
+    <div class="title"/>
     <article>
-      <h5>Diensteanbieter</h5>
-      <p>
-        David Louis
-        <br/>
-        Mozartstraße 5<br/>
-        69214 Eppelheim
-        <br/>
-        Deutschland
-      </p>
-      <h5>Kontaktmöglichkeiten</h5>
-      <p>
-        <strong>E-Mail-Adresse:</strong> info@coronahelfer.eu
-      </p>
-      <h5>Social Media und andere Onlinepräsenzen</h5>
-      <p>
-        Dieses Impressum gilt auch für die folgenden Social-Media-Präsenzen
-        und Onlineprofile:
-      </p>
-      <ul>
-        <li>
-          <a href="https://www.facebook.com/coronahelfer.eu/">
-            https://www.facebook.com/coronahelfer.eu/
-          </a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/coronahelfer.eu/">
-            https://www.instagram.com/coronahelfer.eu/
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/CoronahelferE">
-            https://twitter.com/CoronahelferE
-          </a>
-        </li>
-      </ul>
-      <h5>Haftungs- und Urheberrechtshinweise</h5>
-      <p>
-        <strong>Links auf fremde Webseiten:</strong> Inhalte fremder
-        Webseiten, auf die wir direkt oder indirekt verweisen, liegen
-        außerhalb unseres Verantwortungsbereiches und machen wir uns nicht
-        zu Eigen. Für alle Inhalte und insbesondere für Schäden, die aus der
-        Nutzung der in den verlinkten Webseiten aufrufbaren Informationen
-        entstehen, haftet allein der Anbieter der verlinkten Webseiten.
-      </p>
-      <p style="margin-bottom: 0">
-        <a href="https://datenschutz-generator.de/?l=de">
-          Erstellt mit kostenlosem Datenschutz-Generator.de von Dr. Thomas
-          Schwenke
-        </a>
-      </p>
+      <h3>{{$t('imprintIntro')}}</h3>
+      <h1>{{$t('imprintTitle')}}</h1>
+
+      <h3 class="uppercase">{{$t('imprintServiceTitle')}}</h3>
+      <p>{{$t('imprintService1')}}</p>
+      <p>{{$t('imprintService2')}}</p>
+      <p>{{$t('imprintService3')}}</p>
+      <p>{{$t('imprintService4')}}</p>
+
+      <h3 class="uppercase">{{$t('imprintContactTitle')}}</h3>
+      <p>{{$t('imprintContact1')}}<a href="mailto:info@coronahelfer.eu"> info@coronahelfer.eu</a></p>
+
+      <h3 class="uppercase">{{$t('imprintSMTitle')}}</h3>
+      <p>{{$t('imprintSM1')}}</p>
+      <p>Facebook: <a href="https://www.facebook.com/coronahelfer.eu/">https://www.facebook.com/coronahelfer.eu/</a></p>
+      <p>Instagram: <a href="https://www.instagram.com/coronahelfer.eu/">https://www.instagram.com/coronahelfer.eu/</a></p>
+      <p>Twitter: <a href="https://twitter.com/CoronahelferE">https://twitter.com/CoronahelferE</a></p>
+
+      <h3 class="uppercase">{{$t('imprintCRTitle')}}</h3>
+      <p>{{$t('printCR1')}}</p>
+
+      <p><a href="https://datenschutz-generator.de/?l=de">Erstellt mit kostenlosem Datenschutz-Generator.de von Dr. Thomas Schwenke</a></p>
     </article>
-    </body>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-  header
+  .title
     text-align: center
-    padding: 50px
+    background: url('../statics/images/Banner-Imprint.jpg') no-repeat
+    background-size: 100%
     color: white
+    height: 28.1rem
 
-    height: 4px
-    h4
-      text-transform: uppercase
-      margin: 0 0 30px 0
+  article
+    padding: 1.9rem 0 1.3rem 0
+    margin: -25rem auto 0
+    max-width: 50rem
+    min-height: calc(100vh - 21.3rem)
 
-  body
-    &:before
-      background-color: white
-      border-radius: 100%
-      content: ''
-      height: 50px
-      position: absolute
-      top: -25px
-      width: 100%
+    h3:first-of-type
+      margin-top: 13.8rem
+      color: white
 
-    background-color: white
-    position: relative
-    padding-bottom: 100px  // hack for large screens
+    h1
+      margin-top: -1.3rem
+      color: white
+      font-weight: bold
+      font-size: 4.4rem
+      line-height: 4.7rem
+      white-space: nowrap
 
-    article
-      padding-top: 30px
-      margin: 20px auto 0
-      max-width: 800px
+    h3
+      margin-top: 6.3rem
 
-      h5
-        color: $secondary
-        text-transform: uppercase
-        font-weight: 600
-        margin: 20px 0
-
-      strong
-        color: $secondary
+    a
+      color: $secondary
 </style>
 
 <script>
-export default {
-}
+export default {}
 </script>

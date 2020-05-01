@@ -1,58 +1,57 @@
 <template>
   <q-page>
-    <header>
-      <h1>{{$t('jobsHeader')}}</h1>
-    </header>
-    <body>
-      <article>
-        <h2>{{$t('jobsFeDev')}}</h2>
-        <strong>{{$t('jobsQualifications')}}:</strong> Vue.js + Quasar
-        <p>{{$t('jobsLocation')}}</p>
+    <div class="title row items-end">
+      <div :class="$q.screen.gt.xs ? 'wrapper column' : 'column q-px-md'">
+        <div class="banner-sub col">{{ $t('jobsSubtitle') }}</div>
+        <div class="banner-title col">{{ $t('jobsTitle') }}</div>
+      </div>
+    </div>
+    <article :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
+      <p>{{ $t('jobsIntro') }}</p>
 
-        <h2>{{$t('jobsBeDev')}}</h2>
-        <strong>{{$t('jobsQualifications')}}:</strong> Node.js + Swagger
-        <p>{{$t('jobsLocation')}}</p>
+      <h3 class="uppercase">{{ $t('jobsResponsibilities') }}</h3>
+      <p>{{ $t('jobsResp1') }}</p>
+      <p>{{ $t('jobsResp2') }}</p>
+      <p>{{ $t('jobsResp3') }}</p>
 
-        <h2>{{$t('jobsContact1')}}</h2>
-        {{$t('jobsContact2')}}: <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a>
-      </article>
-    </body>
+      <h3 class="uppercase">{{ $t('jobsQualifications') }}</h3>
+      <p>{{ $t('jobsQual1') }}</p>
+      <p>{{ $t('jobsQual2') }}</p>
+      <p>{{ $t('jobsQual3') }}</p>
+      <p>{{ $t('jobsQual4') }}</p>
+      <p>{{ $t('jobsQual5') }}</p>
+
+      <h3 class="uppercase">{{ $t('jobsContact1') }}</h3>
+      {{ $t('jobsContact2') }}:
+      <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a>
+    </article>
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-header
-  text-align: center
-  background: url('../statics/images/background.jpg') no-repeat
+.title
+  background: url('../statics/images/Banner-Jobs.png') no-repeat
   background-size: cover
-  padding: 50px
-  color: white
+  background-color: $secondary
+  height: 100%
+  padding-top: 15%
 
-body
-  &:before
-    background-color: white
-    border-radius: 100%
-    content: ''
-    height: 50px
-    position: absolute
-    top: -25px
-    width: 100%
+  div
+    .banner-title
+      color: white
+      font-weight: bold
+      font-size: 3.4rem
+      margin: 0 0 5% 0
 
-  background-color: white
-  position: relative
-  padding-bottom: 20px
-  min-height: calc(100vh - 340px)
+  .banner-sub:first-of-type
+    color: white
+    font-size: 1.3rem
 
-  article
-    padding-top: 30px
-    margin: 20px auto 0
-    max-width: 800px
-
-h2
-  margin-top: 40px
+article
+  p:first-of-type
+    margin-top: 5rem
 </style>
 
 <script>
-export default {
-}
+export default {}
 </script>

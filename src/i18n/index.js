@@ -1,7 +1,11 @@
 import enUS from './en-us'
-import de from './de'
+import deDE from './de-de'
 
-export default {
-  'en-us': enUS,
-  de: de
+export const translations = {
+  locale: 'de_DE',
+
+  messages: {
+    en_US: enUS,
+    de_DE: deDE
+  }
 }

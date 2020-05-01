@@ -1,155 +1,311 @@
 <template>
   <q-page>
-    <header>
-      <h4>{{ $t('supportTogether') }}</h4>
-      <div class="row justify-center">
-        <router-link class="q-mt-xs action-btn" to="/get-help">
-          <q-btn>{{ $t('needHelp') }}</q-btn>
-        </router-link>
-        <router-link class="q-mt-xs action-btn" to="/help">
-          <q-btn>{{ $t('wantHelp') }}</q-btn>
-        </router-link>
+    <div class="tertiary-bg">
+      <div :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
+        <h1 class="uppercase">{{ $t('supportTogether') }}</h1>
+        <div class="row justify-between">
+          <router-link
+            class="col-xs-12 col-md-5 q-mt-xs q-mb-md uppercase my-card"
+            to="/help"
+          >
+            <MainButton content="want-help" />
+          </router-link>
+          <router-link
+            class="col-xs-12 col-md-5 q-mt-xs q-mb-md uppercase my-card"
+            to="/get-help"
+          >
+            <MainButton content="need-help" />
+          </router-link>
+        </div>
       </div>
-    </header>
+      <div class="row justify-center items-center q-py-lg">
+        <div class="mouse">
+          <div class="scroll"></div>
+        </div>
+      </div>
+    </div>
+    <div :class="$q.screen.gt.xs ? 'slanted-line' : ''">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#FFF3E9"
+          fill-opacity="1"
+          d="M0,192L1440,128L1440,0L0,0Z"
+        ></path>
+      </svg>
+    </div>
+    <article :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
+      <div
+        class="fit row wrap justify-evenly items-start content-start q-mb-xl"
+      >
+        <q-img
+          :width="$q.screen.gt.xs ? '30%' : '100%'"
+          src="~assets/Logo-2.svg"
+        />
+      </div>
+      <div class="title-aboutus">
+        <h1 class="uppercase">{{ $t('indexHeading') }}</h1>
+        <i>{{ $t('indexSubHeading') }}</i>
+      </div>
 
-    <body>
-      <article>
-        <h5>Portal für Nachbarschaftshilfe in deiner Region</h5>
-        <p>
-          <i>“Aus der Region - für die Region”</i> <br />
-          Ganz nach diesem Motto möchten wir Coronavirus-Nachbarschaftshilfe
-          erleichtern und vermitteln. <br /><br />
-          Worum geht es? <br />Die aktuelle Situation stellt die Gesellschaft
-          vor neue Herausforderungen. Das neuartige Coronavirus hat unser
-          Zusammenleben in den vergangenen Wochen zunehmend eingeschränkt. Wir
-          haben das Projekt CoronaHelfer ins Leben gerufen, um gemeinsam die
-          Ausbreitung des Virus zu verlangsamen und einander dort zu
-          unterstützen, wo es möglich ist.
-        </p>
-        <h5>Ziel und Vision der Initiative CoronaHelfer</h5>
-        <ul>
-          <li>CoronaHelfer schützt gefährdete Personen</li>
-          <li>
-            CoronaHelfer entlastet Menschen in systemrelevanten Berufen
-            (Gesundheits-, Dienstleistungssystem etc.)
-          </li>
-          <li>CoronaHelfer unterstütz generell Hilfesuchende</li>
-          <li>Coronavirus-Nachbarschaftshilfe für alle!</li>
-        </ul>
-        <h5>Leitsätze für Coronavirus-Nachbarschaftshilfe</h5>
-        <ul>
-          <li><b>C</b>ool bleiben</li>
-          <li><b>O</b>rdentlich Hände waschen</li>
-          <li><b>R</b>ücksichtsvoll bleiben</li>
-          <li><b>O</b>hne Hamsterkäufe</li>
-          <li><b>N</b>achbarschaftshilfe</li>
-          <li><b>A</b>bstand halten</li>
-        </ul>
-        <h5>Unser Hintergrund</h5>
-        <p>
-          Wie ist unsere Idee entstanden? Über soziale Netzwerke sind wir darauf
-          aufmerksam geworden, wie unfassbar viele von euch in ihrer Umgebung
-          Hilfe angesichts der aktuellen Situation anbieten möchten. Bei anderen
-          Vermittlungsportalen fiel uns die große Anzahl an hilfsbereiten
-          Menschen im Gegensatz zu nur wenigen Anfragen auf.<br /><br />
-          Wir haben erkannt, dass die Vermittlung von Fremden an Fremde eine
-          große Herausforderung darstellt und machten uns die Sicherheit unserer
-          Nutzer zur Aufgabe. Auch eine verlässliche und schnelle Vermittlung
-          sowie die Einbindung bereits bestehender Offline-Arbeit vor Ort sind
-          uns bei der Coronavirus-Nachbarschaftshilfe wichtig.<br /><br />
-          Dank des Hackathons #WirVsVirus der Bundesregierung haben wir ein
-          tolles Team für unsere Idee gewinnen können. Seitdem arbeiten wir
-          gemeinsam auf Hochtouren an der Umsetzung und dem Ausbau unserer
-          Vermittlungsplattform
-        </p>
-      </article>
-    </body>
+      <h3>{{ $t('indexSubHeadingTwo') }}</h3>
+      <p>
+        {{ $t('indexInfoText') }}
+      </p>
+
+      <div class="q-my-xl">
+        <h3>{{ $t('searchForm.title') }}</h3>
+        <div class="row wrap">
+          <div class="col-md-10 col-xs-12 q-px-xs q-my-xs">
+            <q-input filled v-model="address" :label="$t('searchForm.address')">
+              <template v-slot:append>
+                <q-icon class="icon" name="room" />
+              </template>
+            </q-input>
+          </div>
+          <div class="col-md-2 col-xs-12 q-px-xs q-my-xs">
+            <q-btn
+              class="search-btn"
+              @click="goToHelp()"
+              :label="$t('searchForm.search')"
+              color="secondary"
+              size="lg"
+            />
+          </div>
+        </div>
+      </div>
+    </article>
+    <div :class="$q.screen.gt.xs ? 'slanted-line' : 'slanted-line-drag-bottom'">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#FFF3E9"
+          fill-opacity="1"
+          d="M0,96L1440,128L1440,320L0,320Z"
+        ></path>
+      </svg>
+    </div>
+    <div class="tertiary-bg">
+      <div :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
+        <h1 class="uppercase">{{ $t('goalsHeading') }}</h1>
+        <div class="fit row wrap justify-center">
+          <div class="vision-box col-xs-12 col-md-4 q-ma-md">
+            <div class="content-box">
+              <img src="statics/icons/elderly-people-294088.svg" />
+              <p class="q-mt-auto">
+                {{ $t('saveElder') }}
+              </p>
+            </div>
+          </div>
+          <div class="vision-box col-xs-12 col-md-4 q-ma-md">
+            <div class="content-box">
+              <img src="statics/icons/entlastet Menschen.svg" />
+              <p class="q-mt-auto">
+                {{ $t('relievePeople') }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="fit row wrap justify-center">
+          <div class="vision-box col-xs-12 col-md-4 q-ma-md">
+            <div class="content-box column">
+              <img src="statics/icons/children-1296800.svg" />
+              <p class="q-mt-auto">
+                {{ $t('supportPeople') }}
+              </p>
+            </div>
+          </div>
+          <div class="vision-box col-xs-12 col-md-4 q-ma-md">
+            <div class="content-box column">
+              <img src="statics/icons/volunteer.svg" />
+              <p class="q-mt-auto">
+                {{ $t('communitySupport') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#FFF3E9"
+          fill-opacity="1"
+          d="M0,192L1440,128L1440,0L0,0Z"
+        ></path>
+      </svg>
+    </div>
+    <article :class="$q.screen.gt.xs ? 'wrapper' : 'q-mx-lg'">
+      <h1 class="uppercase">{{ $t('guidingHeading') }}</h1>
+
+      <div class="column">
+        <div
+          v-for="item in items"
+          :key="item.img"
+          class="principles row q-pa-lg q-mb-lg justify-between items-center"
+        >
+          <h2 class="principle-sentences">
+            {{ $t(item.principle) }}
+          </h2>
+          <img
+            v-if="$q.screen.gt.xs"
+            width="40"
+            :src="`statics/icons/${item.img}.svg`"
+          />
+        </div>
+      </div>
+
+      <q-separator inset />
+
+      <h1 class="uppercase">{{ $t('historyHeading') }}</h1>
+      <p>
+        {{ $t('historyT1') }}<br /><br />
+        {{ $t('historyT2') }}<br /><br />
+        {{ $t('historyT3') }}
+      </p>
+    </article>
   </q-page>
 </template>
 
+<style lang="scss">
+.my-card {
+  transition: 300ms ease-in-out;
+  &:hover {
+    transform: scale(1.02) translate(0, -5px);
+    transition: 300ms ease-in-out;
+    .btn-card {
+      box-shadow: 0px 20px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+.mouse {
+  width: 35px;
+  height: 50px;
+  border-radius: 25px;
+  border: 2px solid $primary;
+  opacity: 0.3;
+  .scroll {
+    width: 2px;
+    height: 10px;
+    margin: 0 auto;
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: $primary;
+    animation-name: scroll;
+    transition: 800ms ease-in-out;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+}
+@keyframes scroll {
+  from {
+    margin-top: 5px;
+    opacity: 1;
+  }
+  to {
+    margin-top: 15px;
+    opacity: 0;
+  }
+}
+.title-aboutus {
+  display: table;
+  margin: 6% auto;
+  text-align: center;
+  .uppercase {
+    margin-bottom: 0px;
+    line-height: inherit;
+  }
+}
+</style>
+
 <style lang="sass" scoped>
-header
+.tertiary-bg
+  padding-top: 1%
   text-align: center
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
-  padding: 50px
-  color: white
+  background-color: $tertiary
 
-  a
-    text-decoration: none
+.vision-box
+  box-shadow: 0px 10px 6px rgba(0,0,0,0.1)
+  border-radius: 10px
+  padding: 5% 0
+  margin-bottom: 2%
+  background-color: $background
+  .content-box
+    margin: 0 auto
+    width: 75%
 
-  h4
-    text-transform: uppercase
-    margin: 0 0 30px 0
+.icon
+  color: $secondary
+  font-size: 2.5rem
 
-  .q-btn
-    background: white
-    border: 0
-    border-radius: 19px
+.principles
+  background-color: $tertiary
+  border-radius: 10px
+  .principle-sentences::first-letter
+    font-weight: bold
     color: $secondary
-    cursor: pointer
-    font-size: 20px
-    font-weight: 400
-    padding: 0 50px
-    text-transform: uppercase
 
-    &:focus
-      outline: none
+.q-separator
+  width: 30%
+  margin: 3% auto 0 auto
+  border: 2px solid $tertiary
+  background-color: $tertiary
 
-    &.primary
-      background: $secondary
-      color: white
+h1
+  text-align: center
 
-    &.small
-      height: 30px
-      line-height: 30px
-      padding: 0 30px
-      font-size: 15px
-      font-weight: 600
-      margin-top: 15px
+.slanted-line
+  margin-top: -75px
+  margin-bottom: -150px
 
-  .action-btn
-    margin-right: 1%
+.slanted-line-drag-bottom
+  margin-bottom: -10px
 
-body
-  &:before
-    background-color: white
-    border-radius: 100%
-    content: ''
-    height: 50px
-    position: absolute
-    top: -25px
-    width: 100%
-
-  background-color: white
-  // margin-top: 60px
-  // padding: 20px 0 20px
-  position: relative
-  padding-bottom: 20px
-
-  article
-    padding-top: 30px
-    margin: 20px auto 0
-    max-width: 800px
-
-    h5
-      color: $secondary
-      text-transform: uppercase
-      font-weight: 600
-      margin: 20px 0
+.search-btn
+  width: 100%
 </style>
 
 <script>
+import MainButton from 'src/components/MainButton'
+
 export default {
-  mounted() {
-    if (this.$q.localStorage.getItem('server') === null) {
-      // TODO: Set default values in a way that user does not have to access the landing page first
-      const config = require('../assets/config.json')
-      if (config['use-external-backend']) {
-        this.$q.localStorage.set('server', config.url)
-      } else {
-        this.$q.localStorage.set('server', '')
-      }
+  components: {
+    MainButton
+  },
+
+  data: () => {
+    return {
+      address: undefined,
+      items: [
+        {
+          img: 'cool',
+          principle: 'stayCool'
+        },
+        {
+          img: 'Out line',
+          principle: 'washHands'
+        },
+        {
+          img: 'buyer',
+          principle: 'behave'
+        },
+        {
+          img: 'hamster',
+          principle: 'noHamster'
+        },
+        {
+          img: 'help',
+          principle: 'supportNeighbor'
+        },
+        {
+          img: 'distance',
+          principle: 'socialDistance'
+        }
+      ]
+    }
+  },
+
+  methods: {
+    goToHelp() {
+      this.$router.push({ path: 'help', query: { address: this.address } })
     }
   }
 }

@@ -1,4 +1,3 @@
-
 const routes = [
   {
     path: '/',
@@ -14,7 +13,15 @@ const routes = [
       { path: 'help', component: () => import('pages/Help.vue') },
       { path: 'get-help', component: () => import('pages/GetHelp.vue') },
       { path: 'profile', component: () => import('pages/Profile.vue') },
-      { path: 'profile/requests', component: () => import('pages/MyRequests.vue') }
+      {
+        name: 'Offers',
+        path: 'offers',
+        component: () => import('pages/OffersForMyRequest.vue')
+      },
+      {
+        path: 'verify',
+        component: () => import('pages/Verify.vue')
+      }
     ]
   }
 ]

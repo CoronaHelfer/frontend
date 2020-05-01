@@ -1,18 +1,34 @@
 <template>
-  <q-header elevated class="bg-primary text-white" height-hint="98">
+  <q-header class="bg-primary text-white" height-hint="98">
     <q-toolbar>
       <q-toolbar-title>
         <router-link to="/">
           <img class="logo" width="100" src="~assets/CoronaHelfer-Logo.svg" />
         </router-link>
       </q-toolbar-title>
+      <span class="unverified" v-if="auth.authenticated && !auth.verified">
+        <q-icon class="q-mb-xs" name="info" />
+        {{ $t('unverified') }}
+        <q-tooltip content-class="bg-black" content-style="font-size: 16px" :offset="[10, 10]">
+           {{ $t('restrictedAccess') }}
+        </q-tooltip>
+      </span>
+      <q-space />
       <q-tabs v-if="$q.screen.gt.xs" shrink stretch align="right">
         <q-route-tab to="/help" :label="$t('help')" />
         <q-route-tab to="/get-help" :label="$t('getHelp')" />
         <q-route-tab to="/information" :label="$t('information')" />
         <q-route-tab to="/jobs" :label="$t('jobs')" />
       </q-tabs>
-      <q-btn v-else flat dense round aria-label="Menu" icon="menu">
+      <ProfileButton />
+      <q-btn
+        v-if="!$q.screen.gt.xs"
+        flat
+        dense
+        round
+        aria-label="Menu"
+        icon="menu"
+      >
         <q-menu transition-show="jump-down" transition-hide="jump-up">
           <q-list style="min-width: 100px;">
             <q-item to="/help" clickable>
@@ -31,7 +47,6 @@
           </q-list>
         </q-menu>
       </q-btn>
-      <ProfileButton />
     </q-toolbar>
   </q-header>
 </template>
@@ -44,19 +59,32 @@
   color: WHITE
   justify-content: space-between
   box-sizing: border-box
-  height: 90px
   padding: 0 80px
 .logo
   margin: 0.75rem
 .login-btn
   background: #ef7d18
   color: white
+.unverified
+  color: $secondary
+  font-weight: bold
 </style>
 
 <script>
 import ProfileButton from './ProfileButton'
 
 export default {
-  components: { ProfileButton }
+  components: { ProfileButton },
+
+  computed: {
+    auth: {
+      get() {
+        return Object.assign({}, this.$store.state.auth.data)
+      },
+      set(val) {
+        this.$store.commit('auth/updateData', val)
+      }
+    }
+  }
 }
 </script>

@@ -1,13 +1,15 @@
 {
   "name": "corona-helfer",
   "version": "0.0.1",
-  "description": "The Quasar frontend for Corona Helfer",
+  "description": "Corona Helfer",
   "productName": "Corona Helfer",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
   "author": "Jonathan Janetzki <jonathan.janetzki@student.hpi.de>",
   "private": true,
   "scripts": {
+    "dev": "API_URL=http://localhost:3000/api/v1 quasar dev",
+    "build": "quasar build",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0"
   },
@@ -15,6 +17,7 @@
     "@capacitor/core": "^2.0.1",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
+    "date-fns": "^2.12.0",
     "gitmoji-cli": "^3.2.3",
     "npm": "^6.14.4",
     "quasar": "^1.0.0",
@@ -32,7 +35,8 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^6.1.2"
+    "eslint-plugin-vue": "^6.1.2",
+    "quasar-app-extension-qdatetimepicker": "^1.0.0-rc.10"
   },
   "engines": {
     "node": ">= 10.18.1",
