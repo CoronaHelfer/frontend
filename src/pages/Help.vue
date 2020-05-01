@@ -235,8 +235,12 @@ export default {
     },
 
     openPopUp(requestId) {
-      this.selectedRequest = requestId
-      this.isDialogOpen = true
+      if (this.auth.authenticated) {
+        this.selectedRequest = requestId
+        this.isDialogOpen = true
+      } else {
+        this.$router.push('login')
+      }
     },
 
     closePopUp() {
