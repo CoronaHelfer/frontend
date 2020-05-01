@@ -91,7 +91,8 @@ export default {
 
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      vm.previousRoute = from.path
+      vm.previousRoute = from.fullPath
+      console.log(from)
     })
   },
 
@@ -149,7 +150,7 @@ export default {
             authenticated: true
           }
 
-          if (['/help', '/get-help'].includes(this.previousRoute)) {
+          if (['/help', '/get-help'].includes(this.previousRoute) || this.previousRoute.startsWith('/verify')) {
             this.$router.replace(this.previousRoute)
           } else {
             this.$router.replace('/profile')
