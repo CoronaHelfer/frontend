@@ -5,23 +5,6 @@
         <div v-show="error" class="error">{{ error }}</div>
         <q-splitter v-model="splitterModel" :horizontal="$q.screen.lt.md">
           <template v-slot:before>
-            <!-- <input
-              id="imageInput"
-              ref="imageInput"
-              name="imageInput"
-              type="file"
-              @change="encodeImageFileAsURL()"
-            />
-            <q-avatar
-              class="avatar"
-              color="grey-3"
-              text-color="white"
-              size="100px"
-              @click="clickHiddenFileInput"
-            >
-              <img v-if="picture" :src="picture">
-              <span v-else>{{ auth.firstname[0] }}</span>
-            </q-avatar> -->
             <q-tabs v-model="tab" vertical>
               <q-tab :name="Tabs.Profile" :label="$t('profile')" />
               <q-tab :disabled="!auth.verified" :name="Tabs.Entries" :label="$t('user.myRequests')" />
