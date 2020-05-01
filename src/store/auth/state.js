@@ -10,7 +10,8 @@ export default function () {
       createdAt: '',
       updatedAt: '',
       id: '',
-      authenticated: false
+      authenticated: false,
+      verified: false
     }
   }
 }

@@ -33,6 +33,7 @@
                 option-label="name"
                 map-options
                 bg-color="accent"
+                :disabled="!auth.verified"
               ></q-select>
               <q-input
                 filled
@@ -44,6 +45,7 @@
                 bg-color="accent"
                 lazy-rules
                 :rules="[(val) => !!val || this.$t('emptyField')]"
+                :disabled="!auth.verified"
               />
               <q-input
                 class="form-input col-xs-12 col-md-3"
@@ -55,6 +57,7 @@
                 :rules="['datetime', checkDate]"
                 :label="$t('startdate')"
                 bg-color="accent"
+                :disabled="!auth.verified"
               >
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
@@ -71,6 +74,7 @@
                           color="secondary"
                           :options="fromToday"
                           :locale="datePickerTranslations[$i18n.locale]"
+                          :disabled="!auth.verified"
                         />
                         <q-time
                           v-model="startdate"
@@ -79,6 +83,7 @@
                           color="secondary"
                           @input="$refs.qStartDateProxy.hide()"
                           format24h
+                          :disabled="!auth.verified"
                         />
                       </div>
                     </q-popup-proxy>
@@ -95,6 +100,7 @@
                 :rules="['datetime', checkDate, checkEndDate]"
                 :label="$t('enddate')"
                 bg-color="accent"
+                :disabled="!auth.verified"
               >
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
@@ -111,6 +117,7 @@
                           :rules="['datetime']"
                           :options="fromToday"
                           :locale="datePickerTranslations[$i18n.locale]"
+                          :disabled="!auth.verified"
                         />
                         <q-time
                           v-model="enddate"
@@ -119,6 +126,7 @@
                           color="secondary"
                           @input="$refs.endDateProxy.hide()"
                           format24h
+                          :disabled="!auth.verified"
                         />
                       </div>
                     </q-popup-proxy>
@@ -136,6 +144,7 @@
                 v-model="description"
                 bg-color="accent"
                 :rules="[(val) => !!val || this.$t('emptyField')]"
+                :disabled="!auth.verified"
               ></q-input>
             </div>
           </q-step>
@@ -218,6 +227,7 @@
                 />
                 <q-space v-else />
                 <q-btn
+                  :disabled="!auth.verified"
                   :loading="loading"
                   @click.prevent="onSubmit"
                   color="primary"

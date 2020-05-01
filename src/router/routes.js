@@ -17,6 +17,10 @@ const routes = [
         name: 'Offers',
         path: 'offers',
         component: () => import('pages/OffersForMyRequest.vue')
+      },
+      {
+        path: 'verify',
+        component: () => import('pages/Verify.vue')
       }
     ]
   }

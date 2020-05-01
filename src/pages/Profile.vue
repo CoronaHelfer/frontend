@@ -24,7 +24,7 @@
             </q-avatar> -->
             <q-tabs v-model="tab" vertical>
               <q-tab :name="Tabs.Profile" :label="$t('profile')" />
-              <q-tab :name="Tabs.Entries" :label="$t('user.myRequests')" />
+              <q-tab :disabled="!auth.verified" :name="Tabs.Entries" :label="$t('user.myRequests')" />
             </q-tabs>
           </template>
 
@@ -35,6 +35,22 @@
                   <h2 class="welcome-heading">
                     {{ $t('welcome') }}
                   </h2>
+                  <div v-if="!auth.verified">
+                    <h3>{{ $t('unverified') }}</h3>
+                    <p>{{ $t('restrictedAccess') }}</p>
+                    <q-btn
+                      v-if="!verificationEmailSentAgain"
+                      :loading="resending"
+                      size="md"
+                      class="q-mb-md"
+                      color="primary"
+                      :label="$t('resendVerificationEmail')"
+                      @click="resendVerificationEmail"
+                    />
+                    <div v-if="verificationEmailSentAgain">
+                      {{ $t('checkInbox') }}
+                    </div>
+                  </div>
                 </div>
 
                 <div class="row wrap">
@@ -110,7 +126,7 @@
               </q-tab-panel>
 
               <q-tab-panel :name="Tabs.Entries">
-                <my-requests />
+                <my-requests v-if="auth.verified"/>
               </q-tab-panel>
             </q-tab-panels>
           </template>
@@ -210,7 +226,9 @@ export default {
 
       loading: false,
       tab: Tabs.Profile,
-      splitterModel: 20
+      splitterModel: 20,
+      verificationEmailSentAgain: false,
+      resending: false
     }
   },
 
@@ -253,6 +271,7 @@ export default {
           lastname: resp.user.lastName,
           email: resp.user.email,
           id: resp.user._id,
+          verified: resp.user.verified,
           authenticated: true
           // picture: resp.user.picture,
         }
@@ -321,6 +340,18 @@ export default {
         })
 
         fileReader.readAsDataURL(this.$refs.imageInput.files[0])
+      }
+    },
+
+    async resendVerificationEmail() {
+      try {
+        this.resending = true
+        await callApi('/verify/resend', this.auth.token)
+        this.verificationEmailSentAgain = true
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.resending = false
       }
     }
   }

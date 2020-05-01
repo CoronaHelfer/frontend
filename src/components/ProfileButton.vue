@@ -76,7 +76,8 @@ export default {
         picture: '',
         createdAt: '',
         updatedAt: '',
-        authenticated: false
+        authenticated: false,
+        verified: false
       }
       this.$q.sessionStorage.clear()
       this.$q.localStorage.clear()

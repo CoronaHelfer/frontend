@@ -145,6 +145,7 @@ export default {
             lastname: resp.user.lastName,
             email: resp.user.email,
             id: resp.user._id,
+            verified: resp.user.verified,
             authenticated: true
           }
 

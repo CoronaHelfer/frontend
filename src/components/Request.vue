@@ -22,6 +22,7 @@
             </q-label>
             <q-space></q-space>
             <q-btn
+              :disabled="!auth.verified"
               class="card-action-button"
               color="secondary"
               @click="onClick(request._id)"
@@ -66,6 +67,17 @@ export default {
     user: Object,
     request: Object,
     onClick: Function
+  },
+
+  computed: {
+    auth: {
+      get() {
+        return Object.assign({}, this.$store.state.auth.data)
+      },
+      set(val) {
+        this.$store.commit('auth/updateData', val)
+      }
+    }
   },
 
   methods: {
