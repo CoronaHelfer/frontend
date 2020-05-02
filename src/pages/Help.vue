@@ -1,136 +1,82 @@
 <template>
-  <q-page>
-    <body>
-      <q-linear-progress :indeterminate="loading" color="secondary" />
-      <article>
-        <div class="row wrap q-mb-md">
-          <div class="col-xs-12 col-md-6 q-pa-sm">
-            <q-input
-              outlined
-              color="secondary"
-              v-model="query.address"
-              :label="$t('searchForm.address')"
-            >
-              <template v-slot:append>
-                <q-icon class="icon" name="room" />
-              </template>
-            </q-input>
-          </div>
-          <div class="col-xs-12 col-md-6 q-pa-sm">
-            <q-select
-              outlined
-              color="secondary"
-              :options="radii"
-              :option-label="(item) => `${item} km`"
-              v-model="query.distance"
-              :label="$t('searchForm.radius')"
-            />
-          </div>
-        </div>
-        <div class="row col-xs-12 col-md-6 q-pa-sm" v-if="categorySelection">
-          <q-chip
-            v-for="category in categories"
-            :key="category._id"
-            :selected.sync="categorySelection[category._id]"
+  <q-page class="wrapper">
+    <article>
+      <div v-show="showBanner" class="banner q-my-md">
+        <q-banner rounded inline-actions>
+          {{ $t('noAddress') }}
+          <template v-slot:action>
+            <q-btn flat color="white" to="/profile" :label="$t('goSettings')" />
+          </template>
+        </q-banner>
+      </div>
+      <div class="row wrap q-mb-md">
+        <div class="col-xs-12 col-md-6 q-pa-sm">
+          <q-input
+            outlined
             color="secondary"
-            text-color="white"
-            size="md"
+            v-model="query.address"
+            :label="$t('searchForm.address')"
           >
-            {{ category.name }}
-          </q-chip>
+            <template v-slot:append>
+              <q-icon class="icon" name="room" />
+            </template>
+          </q-input>
         </div>
-        <div class="row col-xs-12 col-md-6 q-pa-sm">
-          <q-btn rounded size="md" class="q-ma-xs" @click="fetchRequests">
-            {{ $t('searchForm.search') }}
-          </q-btn>
+        <div class="col-xs-12 col-md-6 q-pa-sm">
+          <q-select
+            outlined
+            color="secondary"
+            :options="radii"
+            :option-label="(item) => `${item} km`"
+            v-model="query.distance"
+            :label="$t('searchForm.radius')"
+          />
         </div>
-        <div v-if="error" class="error">{{ error }}</div>
-      </article>
-      <Request
-        v-for="request in requests"
-        v-bind:key="request._id"
-        :user="{ firstName: 'Anonym', image: undefined }"
-        :request="request"
-        :onClick="openPopUp"
-      />
-      <article v-if="requests.length === 0">
-        {{ $t('noRequests') }}
-      </article>
-      <Offer
-        :isDialogOpen="isDialogOpen"
-        :requestId="selectedRequest"
-        @dialogClosed="closePopUp"
-      />
-    </body>
+      </div>
+      <div class="row col-xs-12 col-md-6 q-pa-sm" v-if="categorySelection">
+        <q-chip
+          v-for="category in categories"
+          :key="category._id"
+          :selected.sync="categorySelection[category._id]"
+          color="secondary"
+          text-color="white"
+          size="md"
+        >
+          {{ category.name }}
+        </q-chip>
+      </div>
+      <div class="row col-xs-12 col-md-6 q-pa-sm">
+        <q-btn rounded size="md" class="q-ma-xs" @click="fetchRequests">
+          {{ $t('searchForm.search') }}
+        </q-btn>
+      </div>
+      <div v-if="error" class="error">{{ error }}</div>
+    </article>
+    <Request
+      v-for="request in requests"
+      v-bind:key="request._id"
+      :user="{ firstName: 'Anonym', image: undefined }"
+      :request="request"
+      :onClick="openPopUp"
+    />
+    <article v-if="requests.length === 0">
+      {{ $t('noRequests') }}
+    </article>
+    <Offer
+      :isDialogOpen="isDialogOpen"
+      :requestId="selectedRequest"
+      @dialogClosed="closePopUp"
+    />
   </q-page>
 </template>
 
 <style lang="sass" scoped>
-header
-  text-align: center
-  background: url('../statics/images/background.jpg') no-repeat
-  background-size: cover
-  padding: 50px
-  color: white
-
-  a
-    text-decoration: none
-
-  h4
-    text-transform: uppercase
-    margin: 0 0 30px 0
-
-  .q-btn
-    background: white
-    border: 0
-    border-radius: 19px
-    color: $secondary
-    cursor: pointer
-    font-size: 20px
-    font-weight: 400
-    padding: 0 50px
-    text-transform: uppercase
-
-    &:focus
-      outline: none
-
-    &.primary
-      background: $secondary
-      color: white
-
-    &.small
-      height: 30px
-      line-height: 30px
-      padding: 0 30px
-      font-size: 15px
-      font-weight: 600
-      margin-top: 15px
-
-body
-  &:before
-    background-color: white
-    border-radius: 100%
-    content: ''
-    height: 50px
-    position: absolute
-    top: -25px
-    width: 100%
-
-  background-color: white
-  position: relative
-  padding-bottom: 20px
-  min-height: calc(100vh - 340px)
-
-  article
-    padding-top: 30px
-    margin: 20px auto 0
-    max-width: 800px
-
-    h5
-      color: $secondary
-      text-transform: uppercase
-      font-weight: 600
-      margin: 20px 0
+article
+  padding-top: 30px
+  margin: 20px auto 0
+  max-width: 800px
+  .q-banner
+    background-color: $accent
 </style>
 
 <script>
@@ -159,7 +105,8 @@ export default {
         address: '',
         distance: 5
       },
-      categorySelection: {}
+      categorySelection: {},
+      showBanner: true
     }
   },
 
@@ -194,11 +141,26 @@ export default {
           .map(([key, value]) => key)
           .join(',')
 
+        // Fetch the Adress of the user
+        if (this.query.address.city === '') {
+          const resp = await callApi('/users/me', this.auth.token)
+          console.log(resp.user.address)
+          this.query = {
+            categoryIds: [],
+            address: `${resp.user.address.street} ${resp.user.address.street_nr}, ${resp.user.address.plz} ${resp.user.address.city}`,
+            distance: 5
+          }
+          this.showBanner = false
+        }
+
         const queryString = new URLSearchParams(this.query)
 
         const response = await callApi(`/publicRequest?${queryString}`)
 
-        if (response.status === 400 && response.message === 'positionNotFound') {
+        if (
+          response.status === 400 &&
+          response.message === 'positionNotFound'
+        ) {
           this.error = this.$t(response.message)
           this.requests = []
 
