@@ -13,12 +13,8 @@ pipeline {
 
                 sh 'npm i --noaudit'
                 sh 'npx audit-ci --high'
-
                 sh 'git clone git@github.com:CoronaHelfer/deployment.git'
-                sh 'cp -R ./deployment/frontend/ .'
-
-                sh 'ls -lah'
-
+                sh 'cp -rT ./deployment/frontend .'
                 sh 'bundle install'
 
                 milestone(1)
