@@ -32,7 +32,7 @@ pipeline {
 
         stage('Deploy to staging') {
             when {
-                branch 'feature/pipeline'
+                branch 'dev'
             }
             steps {
                 sh 'bundle exec cap staging deploy'
