@@ -30,7 +30,7 @@
 
 <style lang="sass" scoped>
 .title
-  background: url('../statics/images/Banner-Jobs.png') no-repeat
+  background: url('../statics/images/Banner-Jobs.jpg') no-repeat
   background-size: cover
   background-color: $secondary
   height: 100%
