@@ -1,7 +1,7 @@
 <template>
   <q-page class="wrapper">
     <article>
-      <div v-show="showBanner" class="banner q-my-md">
+      <div v-show="isUserAddressMissing" class="banner q-my-md">
         <q-banner rounded inline-actions>
           {{ $t('noAddress') }}
           <template v-slot:action>
@@ -106,7 +106,7 @@ export default {
         distance: 5
       },
       categorySelection: {},
-      showBanner: true
+      isUserAddressMissing: true
     }
   },
 
@@ -140,17 +140,22 @@ export default {
           .filter(([key, value]) => !!value)
           .map(([key, value]) => key)
           .join(',')
+        console.log('This Auth', this.auth)
 
         // Fetch the Adress of the user
-        if (this.query.address.city === '') {
+        // The crucial part is PLZ (at least for Germany)
+        // City and Street are optional
+        if (
+          (this.auth.city !== '' || this.auth.street !== '') &&
+          this.auth.plz !== ''
+        ) {
           const resp = await callApi('/users/me', this.auth.token)
-          console.log(resp.user.address)
           this.query = {
             categoryIds: [],
             address: `${resp.user.address.street} ${resp.user.address.street_nr}, ${resp.user.address.plz} ${resp.user.address.city}`,
             distance: 5
           }
-          this.showBanner = false
+          this.isUserAddressMissing = false
         }
 
         const queryString = new URLSearchParams(this.query)

@@ -1,5 +1,5 @@
 export default {
   noAddress:
-    'In order to see all help requests in your neighbourhood, you need to set your address in the settings.',
+    'To see specific requests for help from your neighbourhood, you can enter your address here or save your address in the profile settings.',
   goSettings: 'Go to your Settings'
 }

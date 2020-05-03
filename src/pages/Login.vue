@@ -90,9 +90,8 @@ export default {
   },
 
   beforeRouteEnter(to, from, next) {
-    next(vm => {
+    next((vm) => {
       vm.previousRoute = from.fullPath
-      console.log(from)
     })
   },
 
@@ -147,10 +146,17 @@ export default {
             email: resp.user.email,
             id: resp.user._id,
             verified: resp.user.verified,
-            authenticated: true
+            authenticated: true,
+            street: resp.user.address.street,
+            city: resp.user.address.city,
+            streetNo: resp.user.address.street_nr,
+            plz: resp.user.address.plz
           }
 
-          if (['/help', '/get-help'].includes(this.previousRoute) || this.previousRoute.startsWith('/verify')) {
+          if (
+            ['/help', '/get-help'].includes(this.previousRoute) ||
+            this.previousRoute.startsWith('/verify')
+          ) {
             this.$router.replace(this.previousRoute)
           } else {
             this.$router.replace('/profile')

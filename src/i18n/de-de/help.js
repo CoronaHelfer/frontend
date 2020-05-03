@@ -1,5 +1,5 @@
 export default {
   noAddress:
-    'Um die Hilfsanfragen in deiner Nachbarschaft zuerhalten, müssen Sie Ihre Adresse in den Einstellungen eintragen.',
+    'Um gezielt Hilfsanfragen aus deiner Nachbarschaft zu sehen, können Sie hier Ihre Adresse eintragen oder Ihre Adresse in den Profileinstellungen speichern.',
   goSettings: 'Zu Ihren Einstellungen'
 }

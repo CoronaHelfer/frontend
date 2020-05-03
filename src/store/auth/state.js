@@ -1,4 +1,4 @@
-export default function () {
+export default function() {
   return {
     data: {
       token: '',
@@ -11,7 +11,11 @@ export default function () {
       updatedAt: '',
       id: '',
       authenticated: false,
-      verified: false
+      verified: false,
+      street: '',
+      city: '',
+      streetNo: '',
+      plz: ''
     }
   }
 }
