@@ -11,8 +11,8 @@ pipeline {
                 cleanWs()
                 checkout scm
 
-                sh 'npm i --noaudit'
-                sh 'npx audit-ci --high'
+                //sh 'npm i --noaudit'
+                //sh 'npx audit-ci --high'
                 sh 'git clone git@github.com:CoronaHelfer/deployment.git'
                 sh 'cp -rT ./deployment/frontend .'
                 sh 'bundle install'
@@ -31,10 +31,10 @@ pipeline {
 
         stage('Deploy to staging') {
             when {
-                branch 'development'
+                branch 'feature/pipeline'
             }
             steps {
-                //sh 'bundle exec cap staging deploy'
+                sh 'bundle exec cap staging deploy'
 
                 milestone(3)
             }
@@ -42,7 +42,7 @@ pipeline {
 
         stage('Deploy to preprod') {
             when {
-                tag 'preprod-*'
+                tag pattern: '^preprod-*', comparator: "REGEXP"
             }
             steps {
                 //sh 'bundle exec cap preprod deploy'
@@ -53,7 +53,7 @@ pipeline {
 
         stage('Deploy to prod') {
             when {
-                tag 'release-*'
+                tag pattern: '^release-*', comparator: "REGEXP"
             }
             steps {
                 //sh 'bundle exec cap prod deploy'
