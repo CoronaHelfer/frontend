@@ -1,6 +1,6 @@
 <template>
   <q-card class="btn-card">
-    <img :src="`statics/images/${this.content}.png`" />
+    <img :src="`statics/images/${this.content}.jpg`" />
     <q-list>
       <q-item clickable>
         <q-item-section>
