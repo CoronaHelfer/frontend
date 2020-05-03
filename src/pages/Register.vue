@@ -69,7 +69,8 @@
             <div>
               {{ $t('acceptPrivacy') }}
               <span class="c-link">
-                <router-link to="/privacy">{{ $t('privacyTitle') }}</router-link>.
+                <router-link to="/privacy">{{ $t('privacyTitle') }}</router-link
+                >.
               </span>
             </div>
             <q-btn

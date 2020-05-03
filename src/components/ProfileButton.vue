@@ -77,7 +77,11 @@ export default {
         createdAt: '',
         updatedAt: '',
         authenticated: false,
-        verified: false
+        verified: false,
+        city: '',
+        street: '',
+        plz: '',
+        streetNo: ''
       }
       this.$q.sessionStorage.clear()
       this.$q.localStorage.clear()

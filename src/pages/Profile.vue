@@ -7,7 +7,11 @@
           <template v-slot:before>
             <q-tabs v-model="tab" vertical>
               <q-tab :name="Tabs.Profile" :label="$t('profile')" />
-              <q-tab :disabled="!auth.verified" :name="Tabs.Entries" :label="$t('user.myRequests')" />
+              <q-tab
+                :disabled="!auth.verified"
+                :name="Tabs.Entries"
+                :label="$t('user.myRequests')"
+              />
             </q-tabs>
           </template>
 
@@ -104,12 +108,13 @@
                   size="lg"
                   :label="$t('save')"
                   :loading="loading"
-                  @click="update">
+                  @click="update"
+                >
                 </q-btn>
               </q-tab-panel>
 
               <q-tab-panel :name="Tabs.Entries">
-                <my-requests v-if="auth.verified"/>
+                <my-requests v-if="auth.verified" />
               </q-tab-panel>
             </q-tab-panels>
           </template>
@@ -243,31 +248,6 @@ export default {
   },
 
   methods: {
-    async fetchUserData() {
-      await callApi(
-        '/users/me',
-        this.auth.token
-      ).then((resp) => {
-        this.auth = {
-          token: this.auth.token,
-          firstname: resp.user.firstName,
-          lastname: resp.user.lastName,
-          email: resp.user.email,
-          id: resp.user._id,
-          verified: resp.user.verified,
-          authenticated: true
-          // picture: resp.user.picture,
-        }
-
-        if (resp.user.address) {
-          this.auth.streetNumber = resp.user.address.street_nr
-          this.auth.street = resp.user.address.street
-          this.auth.zip = resp.user.address.plz
-          this.auth.city = resp.user.address.city
-        }
-      })
-    },
-
     async update() {
       try {
         this.loading = true
@@ -307,12 +287,14 @@ export default {
         const allowedImageTypes = ['image/png', 'image/jpg', 'image/jpeg']
 
         if (!allowedImageTypes.includes(image.type)) {
-          this.error = 'Dieser Dateityp ist nicht zulässig. Unterstützte Typen: png, jpg, jpeg'
+          this.error =
+            'Dieser Dateityp ist nicht zulässig. Unterstützte Typen: png, jpg, jpeg'
           return
         }
 
         if (image.size > 1000000) {
-          this.error = 'Das Bild überschreitet die maximale Bildgröße. Maximum: 1MB'
+          this.error =
+            'Das Bild überschreitet die maximale Bildgröße. Maximum: 1MB'
           return
         }
 
