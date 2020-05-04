@@ -1,4 +1,4 @@
-// const configuration = require('../src/assets/config')
+const configuration = require('../src/assets/config')
 
 export const callApi = async (
   path = '',
@@ -6,7 +6,7 @@ export const callApi = async (
   data = {},
   method = 'GET'
 ) => {
-  const response = await fetch(`https://api.coronahelfer.net/api/v1${path}`, {
+  const response = await fetch(`${configuration.apiUrl}${path}`, {
     method,
     mode: 'cors',
     cache: 'no-cache',
@@ -23,7 +23,7 @@ export const callApi = async (
 }
 
 export const authApi = async (data = {}, auth = 'login') => {
-  const response = await fetch(`https://api.coronahelfer.net/api/v1/auth/${auth}`, {
+  const response = await fetch(`${configuration.apiUrl}/auth/${auth}`, {
     method: 'post',
     mode: 'cors',
     headers: {
