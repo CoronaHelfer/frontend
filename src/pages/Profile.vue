@@ -202,7 +202,6 @@ export default {
   data() {
     return {
       Tabs,
-
       firstname: '',
       lastname: '',
       street: '',
@@ -210,8 +209,6 @@ export default {
       zip: '',
       city: '',
       error: '',
-      // picture: undefined,
-
       loading: false,
       tab: Tabs.Profile,
       splitterModel: 20,
@@ -233,14 +230,12 @@ export default {
 
   async mounted() {
     if (this.auth.authenticated) {
-      await this.fetchUserData()
-
       this.firstname = this.auth.firstname
       this.lastname = this.auth.lastname
-      this.street = this.auth.street
-      this.streetNumber = this.auth.streetNumber
-      this.zip = this.auth.zip
-      this.city = this.auth.city
+      this.street = this.auth.address.street
+      this.streetNumber = this.auth.address.streetNumber
+      this.zip = this.auth.address.zip
+      this.city = this.auth.address.city
       // this.picture = this.auth.picture
     } else {
       this.$router.push('login')

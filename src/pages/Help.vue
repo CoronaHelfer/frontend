@@ -141,13 +141,12 @@ export default {
           .map(([key, value]) => key)
           .join(',')
         console.log('This Auth', this.auth)
-
         // Fetch the Adress of the user
         // The crucial part is PLZ (at least for Germany)
         // City and Street are optional
         if (
-          (this.auth.city !== '' || this.auth.street !== '') &&
-          this.auth.plz !== ''
+          (this.auth.address.city !== '' || this.auth.address.street !== '') &&
+          this.auth.address.zip !== ''
         ) {
           const resp = await callApi('/users/me', this.auth.token)
           this.query = {

@@ -139,6 +139,7 @@ export default {
         }
 
         await callApi('/users/me', res.token).then((resp) => {
+          console.log(resp.user)
           this.auth = {
             token: res.token,
             firstname: resp.user.firstName,
@@ -147,10 +148,12 @@ export default {
             id: resp.user._id,
             verified: resp.user.verified,
             authenticated: true,
-            street: resp.user.address.street,
-            city: resp.user.address.city,
-            streetNo: resp.user.address.street_nr,
-            plz: resp.user.address.plz
+            address: {
+              street: resp.user.address.street,
+              city: resp.user.address.city,
+              streetNo: resp.user.address.street_nr,
+              zip: resp.user.address.plz
+            }
           }
 
           if (

@@ -12,10 +12,12 @@ export default function() {
       id: '',
       authenticated: false,
       verified: false,
-      street: '',
-      city: '',
-      streetNo: '',
-      plz: ''
+      address: {
+        street: '',
+        city: '',
+        streetNo: '',
+        zip: ''
+      }
     }
   }
 }

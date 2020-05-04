@@ -78,10 +78,12 @@ export default {
         updatedAt: '',
         authenticated: false,
         verified: false,
-        city: '',
-        street: '',
-        plz: '',
-        streetNo: ''
+        address: {
+          city: '',
+          street: '',
+          zip: '',
+          streetNo: ''
+        }
       }
       this.$q.sessionStorage.clear()
       this.$q.localStorage.clear()
