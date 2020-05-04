@@ -62,7 +62,7 @@
 </style>
 
 <script>
-import { callApi, authApi } from '../../api/requests'
+import { callApi, authApi } from '../services/api'
 
 export default {
   data() {

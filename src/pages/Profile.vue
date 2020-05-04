@@ -186,7 +186,7 @@ h2
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import { callApi } from '../services/api'
 import MyRequests from '../components/MyRequests'
 
 const Tabs = {

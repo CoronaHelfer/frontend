@@ -261,7 +261,7 @@
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import { callApi } from '../services/api'
 import { date } from 'quasar'
 import { parse, isValid } from 'date-fns'
 

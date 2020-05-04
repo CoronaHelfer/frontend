@@ -47,7 +47,7 @@
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import { callApi } from '../services/api'
 
 export default {
   props: {

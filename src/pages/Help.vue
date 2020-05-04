@@ -83,7 +83,7 @@ article
 import Vue from 'vue'
 import Request from '../components/Request'
 import Offer from '../components/Offer'
-import { callApi } from '../../api/requests'
+import { callApi } from '../services/api'
 
 export default {
   components: {

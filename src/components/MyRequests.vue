@@ -30,7 +30,7 @@ h2
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import { callApi } from '../services/api'
 import MyRequest from '../components/MyRequest'
 
 export default {

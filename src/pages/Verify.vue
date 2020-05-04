@@ -50,7 +50,7 @@
 
 <script>
 import Vue from 'vue'
-import { callApi } from '../../api/requests'
+import { callApi } from '../services/api'
 
 export default {
   data() {
