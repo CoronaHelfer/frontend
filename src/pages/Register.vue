@@ -20,7 +20,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-6"
-            v-model="firstname"
+            v-model="registration.firstName"
             :label="$t('firstname')"
           />
           <q-input
@@ -28,7 +28,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-6"
-            v-model="lastname"
+            v-model="registration.lastName"
             :label="$t('lastname')"
           />
           <q-input
@@ -36,7 +36,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="mail"
+            v-model="registration.email"
             :label="$t('mail')"
           />
           <q-input
@@ -44,7 +44,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="phone"
+            v-model="registration.phoneNumber"
             :label="$t('phone')"
           />
           <q-input
@@ -52,7 +52,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="password"
+            v-model="registration.password"
             type="password"
             :label="$t('password')"
           />
@@ -61,7 +61,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="passwordRepeat"
+            v-model="registration.passwordRepeat"
             type="password"
             :label="$t('passwordRepeat')"
           />
@@ -69,8 +69,9 @@
             <div>
               {{ $t('acceptPrivacy') }}
               <span class="c-link">
-                <router-link to="/privacy">{{ $t('privacyTitle') }}</router-link
-                >.
+                <router-link to="/privacy">
+                  {{ $t('privacyTitle') }}
+                </router-link>
               </span>
             </div>
             <q-btn
@@ -97,12 +98,14 @@ import { callApi, authApi } from '../../api/requests'
 export default {
   data() {
     return {
-      firstname: '',
-      lastname: '',
-      mail: '',
-      phone: '',
-      password: '',
-      passwordRepeat: '',
+      registration: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        password: '',
+        passwordRepeat: ''
+      },
       error: '',
       loading: false
     }
@@ -124,24 +127,27 @@ export default {
       try {
         this.loading = true
         this.error = ''
+
         if (this.password !== this.passwordRepeat) {
           throw new Error(this.$t('noMatchingPassword'))
         }
+
         if (
-          this.firstname === '' ||
-          this.lastname === '' ||
-          this.mail === '' ||
-          this.phone === ''
+          this.registration.firstName === '' ||
+          this.registration.lastName === '' ||
+          this.registration.email === '' ||
+          this.registration.phoneNumber === ''
         ) {
           throw new Error(this.$t('missingFields'))
         }
+
         const res = await authApi(
           {
-            firstName: this.firstname,
-            lastName: this.lastname,
-            password: this.password,
-            email: this.mail,
-            phoneNumber: this.phone
+            firstName: this.registration.firstName,
+            lastName: this.registration.lastName,
+            password: this.registration.password,
+            email: this.registration.email,
+            phoneNumber: this.registration.phoneNumber
           },
           'register'
         )
@@ -154,18 +160,19 @@ export default {
           throw new Error(this.$t('somethingWentWrong'))
         }
 
-        await callApi('/users/me', res.token).then((resp) => {
-          this.auth = {
-            token: res.token,
-            firstname: resp.user.firstName,
-            lastname: resp.user.lastName,
-            email: resp.user.email,
-            id: resp.user._id,
-            verified: resp.user.verified,
-            authenticated: true
-          }
-        })
-        this.$router.go(-2) // Assumes that user came via /login page
+        const response = await callApi('/users/me', res.token)
+
+        this.auth = {
+          token: res.token,
+          firstname: response.user.firstName,
+          lastname: response.user.lastName,
+          email: response.user.email,
+          id: response.user._id,
+          verified: response.user.verified,
+          authenticated: true
+        }
+
+        this.$router.push('/profile')
       } catch (e) {
         this.error = e
       } finally {

@@ -23,12 +23,7 @@
               to="/get-help"
               :label="$t('getHelp')"
             />
-            <q-btn
-              size="lg"
-              color="primary"
-              to="/help"
-              :label="$t('help')"
-            />
+            <q-btn size="lg" color="primary" to="/help" :label="$t('help')" />
           </q-card-section>
           <q-card-section v-if="!verified">
             <h1 class="q-mt-none q-mb-xl">
@@ -69,13 +64,8 @@ export default {
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
-      }
+    auth() {
+      return Object.assign({}, this.$store.state.auth.data)
     }
   },
 
@@ -114,28 +104,6 @@ export default {
         if (response.result === 'success') {
           this.verified = true
           Vue.set(this.auth, 'verified', true)
-
-          await callApi(
-            '/users/me',
-            this.auth.token
-          ).then((resp) => {
-            this.auth = {
-              token: this.auth.token,
-              firstname: resp.user.firstName,
-              lastname: resp.user.lastName,
-              email: resp.user.email,
-              id: resp.user._id,
-              verified: resp.user.verified,
-              authenticated: true
-            }
-
-            if (resp.user.address) {
-              this.auth.streetNumber = resp.user.address.street_nr
-              this.auth.street = resp.user.address.street
-              this.auth.zip = resp.user.address.plz
-              this.auth.city = resp.user.address.city
-            }
-          })
         }
       } catch (error) {
         console.error(error)
@@ -145,7 +113,9 @@ export default {
     async resendVerificationEmail() {
       try {
         this.resending = true
+
         await callApi('/verify/resend', this.auth.token)
+
         this.verificationEmailSentAgain = true
       } catch (error) {
         console.log(error)

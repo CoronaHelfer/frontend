@@ -106,7 +106,7 @@ export default {
         distance: 5
       },
       categorySelection: {},
-      isUserAddressMissing: true
+      isUserAddressMissing: false
     }
   },
 
@@ -126,6 +126,14 @@ export default {
       Vue.set(this.query, 'address', this.$route.query.address)
     }
 
+    console.log('This Auth', this.auth)
+
+    if (this.auth.address.city === '' || this.auth.address.zip === '') {
+      this.isUserAddressMissing = true
+    } else {
+      this.query.address = `${this.auth.address.number} ${this.auth.address.street} ${this.auth.address.zipcode} ${this.auth.address.city}`
+    }
+
     this.loading = true
     await this.loadCategories()
     await this.fetchRequests()
@@ -140,22 +148,6 @@ export default {
           .filter(([key, value]) => !!value)
           .map(([key, value]) => key)
           .join(',')
-        console.log('This Auth', this.auth)
-        // Fetch the Adress of the user
-        // The crucial part is PLZ (at least for Germany)
-        // City and Street are optional
-        if (
-          (this.auth.address.city !== '' || this.auth.address.street !== '') &&
-          this.auth.address.zip !== ''
-        ) {
-          const resp = await callApi('/users/me', this.auth.token)
-          this.query = {
-            categoryIds: [],
-            address: `${resp.user.address.street} ${resp.user.address.street_nr}, ${resp.user.address.plz} ${resp.user.address.city}`,
-            distance: 5
-          }
-          this.isUserAddressMissing = false
-        }
 
         const queryString = new URLSearchParams(this.query)
 
@@ -170,6 +162,7 @@ export default {
 
           return
         }
+
         this.requests = response.result || []
       } catch (error) {
         console.error(error)

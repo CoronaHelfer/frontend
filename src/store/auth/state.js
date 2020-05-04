@@ -2,8 +2,8 @@ export default function() {
   return {
     data: {
       token: '',
-      firstname: '',
-      lastname: '',
+      firstName: '',
+      lastName: '',
       email: '',
       phoneNumber: '',
       picture: '',
@@ -15,8 +15,8 @@ export default function() {
       address: {
         street: '',
         city: '',
-        streetNo: '',
-        zip: ''
+        number: '',
+        zipcode: ''
       }
     }
   }

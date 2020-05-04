@@ -45,20 +45,6 @@
               to="/register"
             ></q-btn>
           </div>
-
-          <!-- <button class="oauth q-my-md row">
-            <div>
-              <q-icon class="q-mr-md q-ml-xs" name="fab fa-facebook-f"></q-icon>
-            </div>
-            <div class="q-mt-xs">{{ $t('loginFacebook') }}</div>
-          </button>
-
-          <button class="oauth q-my-md row">
-            <div>
-              <q-icon class="q-mr-md q-ml-xs" name="fab fa-google"></q-icon>
-            </div>
-            <div class="q-mt-xs">{{ $t('loginGoogle') }}</div>
-          </button> -->
         </q-form>
       </div>
     </div>
@@ -126,45 +112,44 @@ export default {
           }
         }
 
-        const res = await authApi(body)
+        const loginResponse = await authApi(body)
 
-        if (res === 404) {
+        if (loginResponse === 404) {
           this.error = this.$t('unknownUser')
           return
         }
 
-        if (res === 401) {
+        if (loginResponse === 401) {
           this.error = this.$t('wrongPassword')
           return
         }
 
-        await callApi('/users/me', res.token).then((resp) => {
-          console.log(resp.user)
-          this.auth = {
-            token: res.token,
-            firstname: resp.user.firstName,
-            lastname: resp.user.lastName,
-            email: resp.user.email,
-            id: resp.user._id,
-            verified: resp.user.verified,
-            authenticated: true,
-            address: {
-              street: resp.user.address.street,
-              city: resp.user.address.city,
-              streetNo: resp.user.address.street_nr,
-              zip: resp.user.address.plz
-            }
-          }
+        const response = await callApi('/users/me', loginResponse.token)
 
-          if (
-            ['/help', '/get-help'].includes(this.previousRoute) ||
-            this.previousRoute.startsWith('/verify')
-          ) {
-            this.$router.replace(this.previousRoute)
-          } else {
-            this.$router.replace('/profile')
+        this.auth = {
+          token: loginResponse.token,
+          firstName: response.user.firstName,
+          lastName: response.user.lastName,
+          email: response.user.email,
+          id: response.user._id,
+          verified: response.user.verified,
+          authenticated: true,
+          address: {
+            number: response.user.address.street_nr,
+            street: response.user.address.street,
+            zipcode: response.user.address.plz,
+            city: response.user.address.city
           }
-        })
+        }
+
+        if (
+          ['/help', '/get-help'].includes(this.previousRoute) ||
+          this.previousRoute.startsWith('/verify')
+        ) {
+          this.$router.replace(this.previousRoute)
+        } else {
+          this.$router.replace('/profile')
+        }
       } catch (error) {
         this.error = error
       } finally {

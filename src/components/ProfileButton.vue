@@ -12,7 +12,7 @@
 
     <q-btn-dropdown
       v-if="auth.authenticated"
-      :label="auth.firstname + ' ' + auth.lastname"
+      :label="auth.firstName + ' ' + auth.lastName"
       class="rounded q-mr-md"
     >
       <q-list dark dense class="bg-grey-10">

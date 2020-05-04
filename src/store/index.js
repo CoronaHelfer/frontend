@@ -16,7 +16,7 @@ Vue.use(Vuex)
  * with the Store instance.
  */
 
-export default function (/* { ssrContext } */) {
+export default function(/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       auth
@@ -26,9 +26,11 @@ export default function (/* { ssrContext } */) {
     // for dev mode only
     strict: process.env.DEV,
 
-    plugins: [createPersistedState({
-      storage: window.sessionStorage
-    })]
+    plugins: [
+      createPersistedState({
+        storage: window.sessionStorage
+      })
+    ]
   })
 
   return Store

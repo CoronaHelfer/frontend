@@ -45,7 +45,7 @@
                     <q-input
                       dense
                       borderless
-                      v-model="firstname"
+                      v-model="user.firstName"
                       :label="$t('firstName')"
                       class="input"
                     ></q-input>
@@ -54,7 +54,7 @@
                     <q-input
                       dense
                       borderless
-                      v-model="lastname"
+                      v-model="user.lastName"
                       :label="$t('lastName')"
                       class="input"
                     ></q-input>
@@ -66,7 +66,7 @@
                     <q-input
                       dense
                       borderless
-                      v-model="streetNumber"
+                      v-model="user.address.number"
                       :label="$t('address.number')"
                       class="input"
                     ></q-input>
@@ -75,7 +75,7 @@
                     <q-input
                       dense
                       borderless
-                      v-model="street"
+                      v-model="user.address.street"
                       :label="$t('address.street')"
                       class="input"
                     ></q-input>
@@ -87,7 +87,7 @@
                     <q-input
                       dense
                       borderless
-                      v-model="zip"
+                      v-model="user.address.zipcode"
                       :label="$t('address.zipcode')"
                       class="input"
                     ></q-input>
@@ -96,7 +96,7 @@
                     <q-input
                       dense
                       borderless
-                      v-model="city"
+                      v-model="user.address.city"
                       :label="$t('address.city')"
                       class="input"
                     ></q-input>
@@ -202,18 +202,22 @@ export default {
   data() {
     return {
       Tabs,
-      firstname: '',
-      lastname: '',
-      street: '',
-      streetNumber: '',
-      zip: '',
-      city: '',
+      tab: Tabs.Profile,
+      user: {
+        firstName: '',
+        lastName: '',
+        address: {
+          number: '',
+          street: '',
+          zipcode: '',
+          city: ''
+        }
+      },
       error: '',
       loading: false,
-      tab: Tabs.Profile,
-      splitterModel: 20,
+      resending: false,
       verificationEmailSentAgain: false,
-      resending: false
+      splitterModel: 20
     }
   },
 
@@ -230,13 +234,7 @@ export default {
 
   async mounted() {
     if (this.auth.authenticated) {
-      this.firstname = this.auth.firstname
-      this.lastname = this.auth.lastname
-      this.street = this.auth.address.street
-      this.streetNumber = this.auth.address.streetNumber
-      this.zip = this.auth.address.zip
-      this.city = this.auth.address.city
-      // this.picture = this.auth.picture
+      this.user = this.auth
     } else {
       this.$router.push('login')
     }
@@ -248,18 +246,32 @@ export default {
         this.loading = true
         this.error = ''
 
-        await callApi(
+        const response = await callApi(
           '/users/me',
           this.auth.token,
           {
-            street_nr: this.streetNumber,
-            street: this.street,
-            plz: this.zip,
-            city: this.city
-            // picture: this.picture
+            street_nr: this.user.address.number,
+            street: this.user.address.street,
+            plz: this.user.address.zipcode,
+            city: this.user.address.city
           },
           'PUT'
         )
+
+        this.auth = {
+          authenticated: true,
+          firstName: response.result.firstName,
+          lastName: response.result.lastName,
+          email: response.result.email,
+          id: response.result._id,
+          verified: response.result.verified,
+          address: {
+            number: response.result.address.street_nr,
+            street: response.result.address.street,
+            zipcode: response.result.address.plz,
+            city: response.result.address.city
+          }
+        }
       } catch (error) {
         this.error = error
       } finally {
