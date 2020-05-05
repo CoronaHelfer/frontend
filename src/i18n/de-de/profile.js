@@ -13,5 +13,6 @@ export default {
     city: 'Ortschaft',
     country: 'Land'
   },
-  save: 'Speichern'
+  save: 'Speichern',
+  profileUpdated: 'Deine Profiländerungen wurden gespeichert'
 }

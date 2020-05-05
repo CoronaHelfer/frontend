@@ -47,6 +47,8 @@
 </style>
 
 <script>
+import { clone } from 'ramda'
+
 export default {
   data() {
     return {
@@ -57,34 +59,14 @@ export default {
   computed: {
     auth: {
       get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
+        return clone(this.$store.state.auth)
       }
     }
   },
 
   methods: {
     logout() {
-      this.auth = {
-        token: '',
-        firstname: '',
-        lastname: '',
-        email: '',
-        phoneNumber: '',
-        picture: '',
-        createdAt: '',
-        updatedAt: '',
-        authenticated: false,
-        verified: false,
-        address: {
-          city: '',
-          street: '',
-          zip: '',
-          streetNo: ''
-        }
-      }
+      this.$store.dispatch('auth/logout')
       this.$q.sessionStorage.clear()
       this.$q.localStorage.clear()
       this.$router.push('/login')

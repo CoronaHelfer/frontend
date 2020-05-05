@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { callApi } from '../services/api'
+import apiService from '../services/api'
+import { clone } from 'ramda'
 
 export default {
   data() {
@@ -65,7 +65,7 @@ export default {
 
   computed: {
     auth() {
-      return Object.assign({}, this.$store.state.auth.data)
+      return clone(this.$store.state.auth)
     }
   },
 
@@ -94,16 +94,13 @@ export default {
 
         const queryString = new URLSearchParams({ key: this.key })
 
-        const response = await callApi(
-          `/verify?${queryString}`,
-          this.auth.token
-        )
+        const response = await apiService.get(`/verify?${queryString}`, this.auth.token)
 
         this.verifying = false
 
-        if (response.result === 'success') {
+        if (response.status === 200) {
           this.verified = true
-          Vue.set(this.auth, 'verified', true)
+          this.$store.commit('auth/setUser', { user: { ...this.auth, verified: true } })
         }
       } catch (error) {
         console.error(error)
@@ -114,11 +111,11 @@ export default {
       try {
         this.resending = true
 
-        await callApi('/verify/resend', this.auth.token)
+        await apiService.get('/verify/resend', this.auth.token)
 
         this.verificationEmailSentAgain = true
       } catch (error) {
-        console.log(error)
+        console.error(error)
       } finally {
         this.resending = false
       }

@@ -40,68 +40,78 @@
                   </div>
                 </div>
 
-                <div class="row wrap">
-                  <div class="col-xs-12 col-md-6">
-                    <q-input
-                      dense
-                      borderless
-                      v-model="user.firstName"
-                      :label="$t('firstName')"
-                      class="input"
-                    ></q-input>
-                  </div>
-                  <div class="col-xs-12 col-md-6">
-                    <q-input
-                      dense
-                      borderless
-                      v-model="user.lastName"
-                      :label="$t('lastName')"
-                      class="input"
-                    ></q-input>
-                  </div>
-                </div>
+                <div v-show="updated" class="success">{{ $t('profileUpdated') }}</div>
 
-                <div class="row wrap">
-                  <div class="col-xs-4 col-md-3">
-                    <q-input
-                      dense
-                      borderless
-                      v-model="user.address.number"
-                      :label="$t('address.number')"
-                      class="input"
-                    ></q-input>
+                <q-form ref="profileForm">
+                  <div class="row wrap">
+                    <div class="col-xs-12 col-md-6">
+                      <q-input
+                        dense
+                        borderless
+                        v-model="user.firstName"
+                        :label="$t('firstName')"
+                        class="input"
+                        disabled
+                      ></q-input>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                      <q-input
+                        dense
+                        borderless
+                        v-model="user.lastName"
+                        :label="$t('lastName')"
+                        class="input"
+                        disabled
+                      ></q-input>
+                    </div>
                   </div>
-                  <div class="col-xs-8 col-md-9">
-                    <q-input
-                      dense
-                      borderless
-                      v-model="user.address.street"
-                      :label="$t('address.street')"
-                      class="input"
-                    ></q-input>
-                  </div>
-                </div>
 
-                <div class="row wrap">
-                  <div class="col-xs-4 col-md-3">
-                    <q-input
-                      dense
-                      borderless
-                      v-model="user.address.zipcode"
-                      :label="$t('address.zipcode')"
-                      class="input"
-                    ></q-input>
+                  <div class="row wrap">
+                    <div class="col-xs-8 col-md-9">
+                      <q-input
+                        dense
+                        borderless
+                        v-model="user.address.street"
+                        :label="$t('address.street')"
+                        class="input"
+                        :rules="[(val) => !!val || $t('emptyField')]"
+                      ></q-input>
+                    </div>
+                    <div class="col-xs-4 col-md-3">
+                      <q-input
+                        dense
+                        borderless
+                        v-model="user.address.number"
+                        :label="$t('address.number')"
+                        class="input"
+                        :rules="[(val) => !!val || $t('emptyField')]"
+                      ></q-input>
+                    </div>
                   </div>
-                  <div class="col-xs-8 col-md-9">
-                    <q-input
-                      dense
-                      borderless
-                      v-model="user.address.city"
-                      :label="$t('address.city')"
-                      class="input"
-                    ></q-input>
+
+                  <div class="row wrap">
+                    <div class="col-xs-4 col-md-3">
+                      <q-input
+                        dense
+                        borderless
+                        v-model="user.address.zipcode"
+                        :label="$t('address.zipcode')"
+                        class="input"
+                        :rules="[(val) => !!val || $t('emptyField')]"
+                      ></q-input>
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                      <q-input
+                        dense
+                        borderless
+                        v-model="user.address.city"
+                        :label="$t('address.city')"
+                        class="input"
+                        :rules="[(val) => !!val || $t('emptyField')]"
+                      ></q-input>
+                    </div>
                   </div>
-                </div>
+                </q-form>
 
                 <q-btn
                   class="submit-button"
@@ -156,7 +166,15 @@ body
   background: RED
   color: WHITE
   padding: 10px 25px
-  margin-bottom: 15px
+  margin: 16px
+  border-radius: 12px
+  font-size: 13px
+
+.success
+  background: GREEN
+  color: WHITE
+  padding: 10px 25px
+  margin: 12px
   border-radius: 12px
   font-size: 13px
 
@@ -186,8 +204,9 @@ h2
 </style>
 
 <script>
-import { callApi } from '../services/api'
 import MyRequests from '../components/MyRequests'
+import { clone } from 'ramda'
+import apiService from '../services/api'
 
 const Tabs = {
   Profile: 'Profile',
@@ -217,18 +236,14 @@ export default {
       loading: false,
       resending: false,
       verificationEmailSentAgain: false,
-      splitterModel: 20
+      splitterModel: 20,
+      updated: false
     }
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(value) {
-        this.$store.commit('auth/updateData', value)
-      }
+    auth() {
+      return clone(this.$store.state.auth)
     }
   },
 
@@ -243,36 +258,43 @@ export default {
   methods: {
     async update() {
       try {
+        if (!(await this.$refs.profileForm.validate())) {
+          return
+        }
+
         this.loading = true
         this.error = ''
 
-        const response = await callApi(
+        const response = await apiService.put(
           '/users/me',
-          this.auth.token,
           {
             street_nr: this.user.address.number,
             street: this.user.address.street,
             plz: this.user.address.zipcode,
             city: this.user.address.city
           },
-          'PUT'
+          this.auth.token
         )
 
-        this.auth = {
-          authenticated: true,
-          firstName: response.result.firstName,
-          lastName: response.result.lastName,
-          email: response.result.email,
-          id: response.result._id,
-          verified: response.result.verified,
-          address: {
-            number: response.result.address.street_nr,
-            street: response.result.address.street,
-            zipcode: response.result.address.plz,
-            city: response.result.address.city
+        this.$store.commit('auth/setUser', {
+          user: {
+            firstName: response.data.result.firstName,
+            lastName: response.data.result.lastName,
+            email: response.data.result.email,
+            id: response.data.result._id,
+            verified: response.data.result.verified,
+            address: {
+              number: response.data.result.address.street_nr || '',
+              street: response.data.result.address.street || '',
+              zipcode: response.data.result.address.plz || '',
+              city: response.data.result.address.city || ''
+            }
           }
-        }
+        })
+
+        this.updated = true
       } catch (error) {
+        console.error(error)
         this.error = error
       } finally {
         this.loading = false
@@ -294,14 +316,12 @@ export default {
         const allowedImageTypes = ['image/png', 'image/jpg', 'image/jpeg']
 
         if (!allowedImageTypes.includes(image.type)) {
-          this.error =
-            'Dieser Dateityp ist nicht zulässig. Unterstützte Typen: png, jpg, jpeg'
+          this.error = 'Dieser Dateityp ist nicht zulässig. Unterstützte Typen: png, jpg, jpeg'
           return
         }
 
         if (image.size > 1000000) {
-          this.error =
-            'Das Bild überschreitet die maximale Bildgröße. Maximum: 1MB'
+          this.error = 'Das Bild überschreitet die maximale Bildgröße. Maximum: 1MB'
           return
         }
 
@@ -318,10 +338,12 @@ export default {
     async resendVerificationEmail() {
       try {
         this.resending = true
-        await callApi('/verify/resend', this.auth.token)
+
+        await apiService.get('/verify/resend', this.auth.token)
+
         this.verificationEmailSentAgain = true
       } catch (error) {
-        console.log(error)
+        console.error(error)
       } finally {
         this.resending = false
       }

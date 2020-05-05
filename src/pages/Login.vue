@@ -62,7 +62,7 @@
 </style>
 
 <script>
-import { callApi, authApi } from '../services/api'
+import { clone } from 'ramda'
 
 export default {
   data() {
@@ -82,65 +82,34 @@ export default {
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
-      }
+    auth() {
+      return clone(this.$store.state.auth)
     }
   },
 
   methods: {
     async login() {
-      try {
-        this.loading = true
-        if (this.name === '' || this.password === '') {
-          this.error = this.$t('wrongLogin')
-          return
-        }
+      this.loading = true
 
-        let body = {
-          email: this.name,
+      if (this.name === '' || this.password === '') {
+        this.error = this.$t('wrongLogin')
+        return
+      }
+
+      let body = {
+        email: this.name,
+        password: this.password
+      }
+
+      if (this.name.indexOf('@') === -1) {
+        body = {
+          phone: this.name,
           password: this.password
         }
-        if (this.name.indexOf('@') === -1) {
-          body = {
-            phone: this.name,
-            password: this.password
-          }
-        }
+      }
 
-        const loginResponse = await authApi(body)
-
-        if (loginResponse === 404) {
-          this.error = this.$t('unknownUser')
-          return
-        }
-
-        if (loginResponse === 401) {
-          this.error = this.$t('wrongPassword')
-          return
-        }
-
-        const response = await callApi('/users/me', loginResponse.token)
-
-        this.auth = {
-          token: loginResponse.token,
-          firstName: response.user.firstName,
-          lastName: response.user.lastName,
-          email: response.user.email,
-          id: response.user._id,
-          verified: response.user.verified,
-          authenticated: true,
-          address: {
-            number: response.user.address.street_nr,
-            street: response.user.address.street,
-            zipcode: response.user.address.plz,
-            city: response.user.address.city
-          }
-        }
+      try {
+        await this.$store.dispatch('auth/login', body)
 
         if (
           ['/help', '/get-help'].includes(this.previousRoute) ||
@@ -151,7 +120,18 @@ export default {
           this.$router.replace('/profile')
         }
       } catch (error) {
-        this.error = error
+        if (!error.response) {
+          console.error(error)
+          this.error = 'An unexpected error occurred!'
+        }
+
+        if (error.response.status === 404) {
+          this.error = this.$t('unknownUser')
+        }
+
+        if (error.response.status === 401) {
+          this.error = this.$t('wrongPassword')
+        }
       } finally {
         this.loading = false
       }

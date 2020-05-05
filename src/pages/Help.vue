@@ -1,7 +1,7 @@
 <template>
   <q-page class="wrapper">
     <article>
-      <div v-show="isUserAddressMissing" class="banner q-my-md">
+      <div v-show="auth.authenticated && isUserAddressMissing" class="banner q-my-md">
         <q-banner rounded inline-actions>
           {{ $t('noAddress') }}
           <template v-slot:action>
@@ -83,7 +83,8 @@ article
 import Vue from 'vue'
 import Request from '../components/Request'
 import Offer from '../components/Offer'
-import { callApi } from '../services/api'
+import { clone } from 'ramda'
+import apiService from '../services/api'
 
 export default {
   components: {
@@ -111,13 +112,8 @@ export default {
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
-      }
+    auth() {
+      return clone(this.$store.state.auth)
     }
   },
 
@@ -125,8 +121,6 @@ export default {
     if (this.$route.query && this.$route.query.address) {
       Vue.set(this.query, 'address', this.$route.query.address)
     }
-
-    console.log('This Auth', this.auth)
 
     if (this.auth.address.city === '' || this.auth.address.zip === '') {
       this.isUserAddressMissing = true
@@ -151,21 +145,18 @@ export default {
 
         const queryString = new URLSearchParams(this.query)
 
-        const response = await callApi(`/publicRequest?${queryString}`)
+        const response = await apiService.get(`/publicRequest?${queryString}`)
 
-        if (
-          response.status === 400 &&
-          response.message === 'positionNotFound'
-        ) {
-          this.error = this.$t(response.message)
+        this.requests = response.data.result || []
+      } catch (error) {
+        console.error(error)
+
+        if (error.response.status === 400) {
+          this.error = this.$t(error.response.data.message)
           this.requests = []
 
           return
         }
-
-        this.requests = response.result || []
-      } catch (error) {
-        console.error(error)
       } finally {
         this.loading = false
       }
@@ -173,14 +164,9 @@ export default {
 
     async loadCategories() {
       try {
-        const categories = await callApi('/category')
+        const categories = await apiService.get('/category')
 
-        if (categories.error || !categories.result) {
-          console.error('Error while fetching categories')
-          throw new Error(this.$t('somethingWentWrong'))
-        }
-
-        this.categories = categories.result
+        this.categories = categories.data.result
         this.categorySelection = this.categories.reduce(
           (accumulator, current) => {
             accumulator[current._id] = false
@@ -188,8 +174,10 @@ export default {
           },
           {}
         )
-      } catch (e) {
-        this.error = e
+      } catch (error) {
+        console.error(error)
+
+        this.error = error
       }
     },
 

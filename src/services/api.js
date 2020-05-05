@@ -1,46 +1,37 @@
-const configuration = require('../assets/config')
+import configuration from '../assets/config'
+import { axiosInstance } from '../boot/axios'
 
-export const callApi = async (
-  path = '',
-  token = '',
-  data = {},
-  method = 'GET'
-) => {
-  const response = await fetch(
-    `${configuration.apiUrl}${configuration.apiRoot}${path}`,
-    {
-      method,
-      mode: 'cors',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body:
-        method === 'POST' || method === 'PUT' || method === 'DELETE'
-          ? JSON.stringify(data)
-          : undefined // body data type must match "Content-Type" header
-    }
-  )
-  return await response.json() // parses JSON response into native JavaScript objects
-}
+export default {
+  get: (path, token) => {
+    return axiosInstance.get(
+      `${configuration.apiUrl}${configuration.apiRoot}${path}`,
+      token ? { headers: { Authorization: `Bearer ${token}` } } : null
+    )
+  },
 
-export const authApi = async (data = {}, auth = 'login') => {
-  const response = await fetch(
-    `${configuration.apiUrl}${configuration.apiRoot}/auth/${auth}`,
-    {
-      method: 'post',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }
-  )
+  post: (path, payload, token) => {
+    return axiosInstance.post(
+      `${configuration.apiUrl}${configuration.apiRoot}${path}`,
+      payload,
+      token ? { headers: { Authorization: `Bearer ${token}` } } : null
+    )
+  },
 
-  if (!response.ok) {
-    return response.status
+  put: (path, payload, token) => {
+    return axiosInstance.put(
+      `${configuration.apiUrl}${configuration.apiRoot}${path}`,
+      payload,
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+  },
+
+  delete: (path, payload, token) => {
+    return axiosInstance.delete(
+      `${configuration.apiUrl}${configuration.apiRoot}${path}`,
+      {
+        data: payload,
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    )
   }
-
-  return await response.json()
 }

@@ -14,7 +14,7 @@
           class="row items-center justify-between q-pa-lg col-xs-12 col-md-9"
           action=""
         >
-          <div v-if="error !== ''" class="error">{{ error }}</div>
+          <div v-if="error !== ''" class="error col-12">{{ error }}</div>
           <q-input
             name="firstname"
             bg-color="white"
@@ -93,7 +93,7 @@
 <style lang="sass" scoped></style>
 
 <script>
-import { callApi, authApi } from '../services/api'
+import { clone } from 'ramda'
 
 export default {
   data() {
@@ -112,13 +112,8 @@ export default {
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
-      }
+    auth() {
+      return clone(this.$store.state.auth)
     }
   },
 
@@ -128,8 +123,9 @@ export default {
         this.loading = true
         this.error = ''
 
-        if (this.password !== this.passwordRepeat) {
-          throw new Error(this.$t('noMatchingPassword'))
+        if (this.registration.password !== this.registration.passwordRepeat) {
+          this.error = this.$t('noMatchingPassword')
+          return
         }
 
         if (
@@ -138,43 +134,30 @@ export default {
           this.registration.email === '' ||
           this.registration.phoneNumber === ''
         ) {
-          throw new Error(this.$t('missingFields'))
+          this.error = this.$t('missingFields')
+          return
         }
 
-        const res = await authApi(
-          {
-            firstName: this.registration.firstName,
-            lastName: this.registration.lastName,
-            password: this.registration.password,
-            email: this.registration.email,
-            phoneNumber: this.registration.phoneNumber
-          },
-          'register'
-        )
-
-        if (res.error) {
-          console.error(res.error)
-          throw new Error(this.$t('somethingWentWrong'))
-        } else if (!res.token) {
-          console.error('No token provided.')
-          throw new Error(this.$t('somethingWentWrong'))
-        }
-
-        const response = await callApi('/users/me', res.token)
-
-        this.auth = {
-          token: res.token,
-          firstname: response.user.firstName,
-          lastname: response.user.lastName,
-          email: response.user.email,
-          id: response.user._id,
-          verified: response.user.verified,
-          authenticated: true
-        }
+        await this.$store.dispatch('auth/register', {
+          firstName: this.registration.firstName,
+          lastName: this.registration.lastName,
+          password: this.registration.password,
+          email: this.registration.email,
+          phoneNumber: this.registration.phoneNumber
+        })
 
         this.$router.push('/profile')
-      } catch (e) {
-        this.error = e
+      } catch (error) {
+        console.error(error)
+
+        if (!error.response) {
+          this.error = 'An unexpected error occurred!'
+        }
+
+        if (error.response.status === 400) {
+          // TODO check or implement 400 on backend
+          this.error = this.$t('badRequest')
+        }
       } finally {
         this.loading = false
       }
