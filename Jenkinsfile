@@ -56,7 +56,7 @@ pipeline {
         }
     }
 
-    post {
+    /* post {
         success {
             mail (
                 to: 'david@coronahelfer.eu, kevin.l@coronahelfer.eu',
@@ -72,5 +72,5 @@ pipeline {
                 body: """Build '${env.JOB_NAME} [${env.BUILD_NUMBER}] failed!\n Status: ${currentBuild.result}\n Check console output at ${env.BUILD_URL}/console""",
             )
         }
-    }
+    } */
 }
