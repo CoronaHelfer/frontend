@@ -46,19 +46,19 @@ pipeline {
 
         stage('Deploy to prod') {
             when {
-                tag pattern: '^release-*', comparator: "REGEXP"
+                buildingTag()
             }
             steps {
-                sh 'bundle exec cap prod deploy'
+                sh 'bundle exec cap production deploy'
 
-                milestone(5)
+                milestone(4)
             }
         }
     }
 
     post {
         success {
-            emailext (
+            mail (
                 to: 'david@coronahelfer.eu, kevin.l@coronahelfer.eu',
                 subject: "${env.JOB_NAME} succeeded!",
                 body: """Build ${env.JOB_NAME} [${env.BUILD_NUMBER}] succeeded!\n Status: ${currentBuild.result}""",
@@ -66,7 +66,7 @@ pipeline {
         }
 
         failure {
-            emailext (
+            mail (
                 to: 'david@coronahelfer.eu, kevin.l@coronahelfer.eu',
                 subject: "${env.JOB_NAME} failed!",
                 body: """Build '${env.JOB_NAME} [${env.BUILD_NUMBER}] failed!\n Status: ${currentBuild.result}\n Check console output at ${env.BUILD_URL}/console""",
