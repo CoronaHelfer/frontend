@@ -22,10 +22,18 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            type="password"
+            :type="isPwd ? 'password' : 'text'"
             :label="$t('password')"
             v-model="password"
-          />
+          >
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
 
           <div class="row login-register">
             <q-btn
@@ -71,7 +79,8 @@ export default {
       name: '',
       password: '',
       error: '',
-      loading: false
+      loading: false,
+      isPwd: true
     }
   },
 
