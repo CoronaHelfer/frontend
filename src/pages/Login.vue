@@ -22,15 +22,15 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            :type="isPwd ? 'password' : 'text'"
+            :type="showPassword ? 'password' : 'text'"
             :label="$t('password')"
             v-model="password"
           >
             <template v-slot:append>
               <q-icon
-                :name="isPwd ? 'visibility_off' : 'visibility'"
+                :name="showPassword ? 'visibility_off' : 'visibility'"
                 class="cursor-pointer"
-                @click="isPwd = !isPwd"
+                @click="showPassword = !showPassword"
               />
             </template>
           </q-input>
@@ -89,12 +89,12 @@ import { callApi, authApi } from '../../api/requests'
 export default {
   data() {
     return {
+      showPassword: false,
       previousRoute: undefined,
       name: '',
       password: '',
       error: '',
-      loading: false,
-      isPwd: true
+      loading: false
     }
   },
 
