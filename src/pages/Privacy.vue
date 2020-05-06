@@ -973,7 +973,3 @@ article
   a
     color: $secondary
 </style>
-
-<script>
-export default {}
-</script>

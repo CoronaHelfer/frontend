@@ -13,5 +13,6 @@ export default {
     city: 'City',
     country: 'Country'
   },
-  save: 'Save'
+  save: 'Save',
+  profileUpdated: 'Your profile information has been updated'
 }

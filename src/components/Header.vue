@@ -72,6 +72,7 @@
 
 <script>
 import ProfileButton from './ProfileButton'
+import { clone } from 'ramda'
 
 export default {
   components: { ProfileButton },
@@ -79,10 +80,7 @@ export default {
   computed: {
     auth: {
       get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
+        return clone(this.$store.state.auth)
       }
     }
   }

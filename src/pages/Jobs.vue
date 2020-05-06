@@ -51,7 +51,3 @@ article
   p:first-of-type
     margin-top: 5rem
 </style>
-
-<script>
-export default {}
-</script>

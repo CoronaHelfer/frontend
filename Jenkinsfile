@@ -32,7 +32,10 @@ pipeline {
 
         stage('Deploy to staging') {
             when {
-                branch 'development'
+                anyOf {
+                    branch 'development'
+                    branch 'release/*'
+                }
             }
             steps {
                 sh 'bundle exec cap staging deploy'
@@ -41,26 +44,33 @@ pipeline {
             }
         }
 
-        stage('Deploy to preprod') {
+        stage('Deploy to prod') {
             when {
-                tag pattern: '^preprod-*', comparator: "REGEXP"
+                buildingTag()
             }
             steps {
-                //sh 'bundle exec cap preprod deploy'
+                sh 'bundle exec cap production deploy'
 
                 milestone(4)
             }
         }
-
-        stage('Deploy to prod') {
-            when {
-                tag pattern: '^release-*', comparator: "REGEXP"
-            }
-            steps {
-                //sh 'bundle exec cap prod deploy'
-
-                milestone(5)
-            }
-        }
     }
+
+    /* post {
+        success {
+            mail (
+                to: 'david@coronahelfer.eu, kevin.l@coronahelfer.eu',
+                subject: "${env.JOB_NAME} succeeded!",
+                body: """Build ${env.JOB_NAME} [${env.BUILD_NUMBER}] succeeded!\n Status: ${currentBuild.result}""",
+            )
+        }
+
+        failure {
+            mail (
+                to: 'david@coronahelfer.eu, kevin.l@coronahelfer.eu',
+                subject: "${env.JOB_NAME} failed!",
+                body: """Build '${env.JOB_NAME} [${env.BUILD_NUMBER}] failed!\n Status: ${currentBuild.result}\n Check console output at ${env.BUILD_URL}/console""",
+            )
+        }
+    } */
 }

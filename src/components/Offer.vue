@@ -47,7 +47,8 @@
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import apiService from '../services/api'
+import { clone } from 'ramda'
 
 export default {
   props: {
@@ -76,13 +77,8 @@ export default {
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
-      }
+    auth() {
+      return clone(this.$store.state.auth)
     }
   },
 
@@ -91,17 +87,14 @@ export default {
       try {
         if (this.offer === '') throw new Error(this.$t('emptyField'))
 
-        const res = await callApi(
+        await apiService.post(
           '/request/helper',
-          this.auth.token,
           {
             offerText: this.offer,
             requestId: this.requestId
           },
-          'POST'
+          this.auth.token
         )
-
-        if (res.error) throw new Error(this.$t('somethingWentWrong'))
 
         this.success = true
       } catch (error) {
