@@ -22,10 +22,18 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            type="password"
+            :type="isPwd ? 'password' : 'text'"
             :label="$t('password')"
             v-model="password"
-          />
+          >
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
 
           <div class="row login-register">
             <q-btn
@@ -85,12 +93,13 @@ export default {
       name: '',
       password: '',
       error: '',
-      loading: false
+      loading: false,
+      isPwd: true
     }
   },
 
   beforeRouteEnter(to, from, next) {
-    next(vm => {
+    next((vm) => {
       vm.previousRoute = from.fullPath
       console.log(from)
     })
@@ -150,7 +159,10 @@ export default {
             authenticated: true
           }
 
-          if (['/help', '/get-help'].includes(this.previousRoute) || this.previousRoute.startsWith('/verify')) {
+          if (
+            ['/help', '/get-help'].includes(this.previousRoute) ||
+            this.previousRoute.startsWith('/verify')
+          ) {
             this.$router.replace(this.previousRoute)
           } else {
             this.$router.replace('/profile')
