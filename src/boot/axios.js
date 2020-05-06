@@ -1,8 +1,10 @@
 import axios from 'axios'
-const axiosInstance = axios.create({
-  baseURL: 'https://coronahelfer.eu/api/v1'
+import configuration from '../assets/config'
+
+export const axiosInstance = axios.create({
+  baseURL: `${configuration.apiUrl}${configuration.apiRoot}`
 })
+
 export default ({ Vue }) => {
   Vue.prototype.$axios = axios
 }
-export { axiosInstance }

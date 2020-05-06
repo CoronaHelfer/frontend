@@ -45,20 +45,6 @@
               to="/register"
             ></q-btn>
           </div>
-
-          <!-- <button class="oauth q-my-md row">
-            <div>
-              <q-icon class="q-mr-md q-ml-xs" name="fab fa-facebook-f"></q-icon>
-            </div>
-            <div class="q-mt-xs">{{ $t('loginFacebook') }}</div>
-          </button>
-
-          <button class="oauth q-my-md row">
-            <div>
-              <q-icon class="q-mr-md q-ml-xs" name="fab fa-google"></q-icon>
-            </div>
-            <div class="q-mt-xs">{{ $t('loginGoogle') }}</div>
-          </button> -->
         </q-form>
       </div>
     </div>
@@ -76,7 +62,7 @@
 </style>
 
 <script>
-import { callApi, authApi } from '../../api/requests'
+import { clone } from 'ramda'
 
 export default {
   data() {
@@ -90,74 +76,62 @@ export default {
   },
 
   beforeRouteEnter(to, from, next) {
-    next(vm => {
+    next((vm) => {
       vm.previousRoute = from.fullPath
-      console.log(from)
     })
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
-      }
+    auth() {
+      return clone(this.$store.state.auth)
     }
   },
 
   methods: {
     async login() {
-      try {
-        this.loading = true
-        if (this.name === '' || this.password === '') {
-          this.error = this.$t('wrongLogin')
-          return
-        }
+      this.loading = true
 
-        let body = {
-          email: this.name,
+      if (this.name === '' || this.password === '') {
+        this.error = this.$t('wrongLogin')
+        return
+      }
+
+      let body = {
+        email: this.name,
+        password: this.password
+      }
+
+      if (this.name.indexOf('@') === -1) {
+        body = {
+          phone: this.name,
           password: this.password
         }
-        if (this.name.indexOf('@') === -1) {
-          body = {
-            phone: this.name,
-            password: this.password
-          }
+      }
+
+      try {
+        await this.$store.dispatch('auth/login', body)
+
+        if (
+          ['/help', '/get-help'].includes(this.previousRoute) ||
+          this.previousRoute.startsWith('/verify')
+        ) {
+          this.$router.replace(this.previousRoute)
+        } else {
+          this.$router.replace('/profile')
         }
-
-        const res = await authApi(body)
-
-        if (res === 404) {
-          this.error = this.$t('unknownUser')
-          return
-        }
-
-        if (res === 401) {
-          this.error = this.$t('wrongPassword')
-          return
-        }
-
-        await callApi('/users/me', res.token).then((resp) => {
-          this.auth = {
-            token: res.token,
-            firstname: resp.user.firstName,
-            lastname: resp.user.lastName,
-            email: resp.user.email,
-            id: resp.user._id,
-            verified: resp.user.verified,
-            authenticated: true
-          }
-
-          if (['/help', '/get-help'].includes(this.previousRoute) || this.previousRoute.startsWith('/verify')) {
-            this.$router.replace(this.previousRoute)
-          } else {
-            this.$router.replace('/profile')
-          }
-        })
       } catch (error) {
-        this.error = error
+        if (!error.response) {
+          console.error(error)
+          this.error = 'An unexpected error occurred!'
+        }
+
+        if (error.response.status === 404) {
+          this.error = this.$t('unknownUser')
+        }
+
+        if (error.response.status === 401) {
+          this.error = this.$t('wrongPassword')
+        }
       } finally {
         this.loading = false
       }

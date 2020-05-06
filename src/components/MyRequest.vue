@@ -120,7 +120,8 @@ a
 
 <script>
 import { date } from 'quasar'
-import { callApi } from '../../api/requests'
+import { clone } from 'ramda'
+import apiService from '../services/api'
 
 export default {
   props: {
@@ -138,7 +139,7 @@ export default {
   computed: {
     auth: {
       get() {
-        return Object.assign({}, this.$store.state.auth.data)
+        return clone(this.$store.state.auth)
       },
       set(val) {
         this.$store.commit('auth/updateData', val)
@@ -151,8 +152,8 @@ export default {
   },
 
   async mounted() {
-    const response = await callApi('/category')
-    this.categories = response.result
+    const response = await apiService.get('/category')
+    this.categories = response.data.result
   },
 
   methods: {
@@ -161,7 +162,7 @@ export default {
     },
 
     async saveRequest() {
-      await callApi('/request', this.auth.token, this.request, 'PUT')
+      await apiService.put('/request', this.request, this.auth.token)
       this.editMode = false
     },
 
@@ -170,25 +171,22 @@ export default {
         this.loading = true
         this.$emit('error', '')
 
-        await callApi(
+        await apiService.delete(
           '/request',
-          this.auth.token,
-          {
-            requestId: this.request._id
-          },
-          'DELETE'
+          { requestId: this.request._id },
+          this.auth.token
         )
-        this.$emit('reloadRequests')
-      } catch (err) {
-        console.error(err)
+      } catch (error) {
+        console.error(error)
+
         this.$emit('error', this.$t('somethingWentWrong'))
       } finally {
+        this.$emit('reloadRequests')
         this.loading = false
       }
     },
 
     showOffersPage() {
-      console.log('request', this.request)
       this.$router.push({
         name: 'Offers',
         params: { request: this.request }

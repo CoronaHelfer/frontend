@@ -944,7 +944,7 @@
 <style lang="sass" scoped>
 .title
   text-align: center
-  background: url('../statics/images/Banner-Jobs.png') no-repeat
+  background: url('../statics/images/Banner-Jobs.jpg') no-repeat
   background-size: 100%
   color: white
   height: 28.1rem
@@ -973,7 +973,3 @@ article
   a
     color: $secondary
 </style>
-
-<script>
-export default {}
-</script>

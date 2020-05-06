@@ -7,7 +7,7 @@
       >
     </p>
     <p class="text-faded">
-      Sorry, nothing here...<strong>(404)</strong>
+      Sorry, nothing here... <strong>(404)</strong>
     </p>
     <q-btn
       style="width:200px;"
@@ -16,8 +16,3 @@
     />
   </div>
 </template>
-
-<script>
-export default {
-}
-</script>

@@ -14,13 +14,13 @@
           class="row items-center justify-between q-pa-lg col-xs-12 col-md-9"
           action=""
         >
-          <div v-if="error !== ''" class="error">{{ error }}</div>
+          <div v-if="error !== ''" class="error col-12">{{ error }}</div>
           <q-input
             name="firstname"
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-6"
-            v-model="firstname"
+            v-model="registration.firstName"
             :label="$t('firstname')"
           />
           <q-input
@@ -28,7 +28,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-6"
-            v-model="lastname"
+            v-model="registration.lastName"
             :label="$t('lastname')"
           />
           <q-input
@@ -36,7 +36,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="mail"
+            v-model="registration.email"
             :label="$t('mail')"
           />
           <q-input
@@ -44,7 +44,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="phone"
+            v-model="registration.phoneNumber"
             :label="$t('phone')"
           />
           <q-input
@@ -52,7 +52,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="password"
+            v-model="registration.password"
             type="password"
             :label="$t('password')"
           />
@@ -61,7 +61,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            v-model="passwordRepeat"
+            v-model="registration.passwordRepeat"
             type="password"
             :label="$t('passwordRepeat')"
           />
@@ -69,7 +69,9 @@
             <div>
               {{ $t('acceptPrivacy') }}
               <span class="c-link">
-                <router-link to="/privacy">{{ $t('privacyTitle') }}</router-link>.
+                <router-link to="/privacy">
+                  {{ $t('privacyTitle') }}
+                </router-link>
               </span>
             </div>
             <q-btn
@@ -91,30 +93,27 @@
 <style lang="sass" scoped></style>
 
 <script>
-import { callApi, authApi } from '../../api/requests'
+import { clone } from 'ramda'
 
 export default {
   data() {
     return {
-      firstname: '',
-      lastname: '',
-      mail: '',
-      phone: '',
-      password: '',
-      passwordRepeat: '',
+      registration: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        password: '',
+        passwordRepeat: ''
+      },
       error: '',
       loading: false
     }
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
-      }
+    auth() {
+      return clone(this.$store.state.auth)
     }
   },
 
@@ -123,50 +122,42 @@ export default {
       try {
         this.loading = true
         this.error = ''
-        if (this.password !== this.passwordRepeat) {
-          throw new Error(this.$t('noMatchingPassword'))
+
+        if (this.registration.password !== this.registration.passwordRepeat) {
+          this.error = this.$t('noMatchingPassword')
+          return
         }
+
         if (
-          this.firstname === '' ||
-          this.lastname === '' ||
-          this.mail === '' ||
-          this.phone === ''
+          this.registration.firstName === '' ||
+          this.registration.lastName === '' ||
+          this.registration.email === '' ||
+          this.registration.phoneNumber === ''
         ) {
-          throw new Error(this.$t('missingFields'))
-        }
-        const res = await authApi(
-          {
-            firstName: this.firstname,
-            lastName: this.lastname,
-            password: this.password,
-            email: this.mail,
-            phoneNumber: this.phone
-          },
-          'register'
-        )
-
-        if (res.error) {
-          console.error(res.error)
-          throw new Error(this.$t('somethingWentWrong'))
-        } else if (!res.token) {
-          console.error('No token provided.')
-          throw new Error(this.$t('somethingWentWrong'))
+          this.error = this.$t('missingFields')
+          return
         }
 
-        await callApi('/users/me', res.token).then((resp) => {
-          this.auth = {
-            token: res.token,
-            firstname: resp.user.firstName,
-            lastname: resp.user.lastName,
-            email: resp.user.email,
-            id: resp.user._id,
-            verified: resp.user.verified,
-            authenticated: true
-          }
+        await this.$store.dispatch('auth/register', {
+          firstName: this.registration.firstName,
+          lastName: this.registration.lastName,
+          password: this.registration.password,
+          email: this.registration.email,
+          phoneNumber: this.registration.phoneNumber
         })
-        this.$router.go(-2) // Assumes that user came via /login page
-      } catch (e) {
-        this.error = e
+
+        this.$router.push('/profile')
+      } catch (error) {
+        console.error(error)
+
+        if (!error.response) {
+          this.error = 'An unexpected error occurred!'
+        }
+
+        if (error.response.status === 400) {
+          // TODO check or implement 400 on backend
+          this.error = this.$t('badRequest')
+        }
       } finally {
         this.loading = false
       }
