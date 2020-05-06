@@ -70,9 +70,9 @@ export default {
 
       if (payload.user.address) {
         state.address = {
-          number: payload.user.address.number,
+          number: payload.user.address.street_nr || '',
           street: payload.user.address.street,
-          zipcode: payload.user.address.zipcode,
+          zipcode: payload.user.address.plz || '',
           city: payload.user.address.city
         }
       }
