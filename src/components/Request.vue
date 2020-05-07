@@ -22,7 +22,6 @@
             </q-label>
             <q-space></q-space>
             <q-btn
-              :disabled="!auth.verified"
               class="card-action-button"
               color="secondary"
               @click="onClick(request._id)"
@@ -62,6 +61,8 @@
 
 <script>
 import { format } from 'date-fns'
+import { clone } from 'ramda'
+
 export default {
   props: {
     user: Object,
@@ -72,10 +73,7 @@ export default {
   computed: {
     auth: {
       get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
+        return clone(this.$store.state.auth)
       }
     }
   },

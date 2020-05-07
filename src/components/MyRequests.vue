@@ -5,12 +5,12 @@
     <div class="row justify-center">
       <q-spinner v-if="loading" color="secondary" size="5em" />
     </div>
-    <p v-if="!loading && ownRequests.length === 0">
+    <p v-if="!loading && requests.length === 0">
       {{ $t('noRequestsCreated') }}
     </p>
     <MyRequest
       v-else
-      v-for="request in ownRequests"
+      v-for="request in requests"
       v-bind:key="request._id"
       :request="request"
       @reloadRequests="fetchRequests"
@@ -30,8 +30,9 @@ h2
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import apiService from '../services/api'
 import MyRequest from '../components/MyRequest'
+import { clone } from 'ramda'
 
 export default {
   name: 'my-requests',
@@ -49,19 +50,8 @@ export default {
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
-      }
-    },
-
-    ownRequests: function() {
-      return this.requests.filter(function(request) {
-        return request.created_by === this.auth.id
-      }, this)
+    auth() {
+      return clone(this.$store.state.auth)
     }
   },
 
@@ -69,6 +59,7 @@ export default {
     if (!this.auth.authenticated) {
       this.$router.push('/login')
     }
+
     this.fetchRequests()
   },
 
@@ -77,10 +68,12 @@ export default {
       try {
         this.loading = true
         this.error = ''
-        const requests = await callApi('/request', this.auth.token)
-        this.requests = requests.result || []
-      } catch (err) {
-        console.error(err)
+
+        const requests = await apiService.get('/request', this.auth.token)
+
+        this.requests = requests.data.result || []
+      } catch (error) {
+        console.error(error)
         this.error = this.$t('somethingWentWrong')
       } finally {
         this.loading = false

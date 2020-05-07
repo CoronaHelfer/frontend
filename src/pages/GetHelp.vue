@@ -261,9 +261,11 @@
 </style>
 
 <script>
-import { callApi } from '../../api/requests'
+import apiService from '../services/api'
 import { date } from 'quasar'
 import { parse, isValid } from 'date-fns'
+import { clone } from 'ramda'
+import { datePickerTranslations } from '../i18n/component-translations'
 
 export default {
   data() {
@@ -284,33 +286,13 @@ export default {
       startdate: defaultDate,
       enddate: defaultDate,
       step: 1,
-      datePickerTranslations: {
-        de_DE: {
-          days: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
-          daysShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
-          months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-          monthsShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Juni', 'Juli', 'Aug', 'Sept', 'Okt', 'Nov', 'Dez'],
-          firstDayOfWeek: 1
-        },
-        en_US: {
-          days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-          daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-          months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-          monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-          firstDayOfWeek: 1
-        }
-      }
+      datePickerTranslations
     }
   },
 
   computed: {
-    auth: {
-      get() {
-        return Object.assign({}, this.$store.state.auth.data)
-      },
-      set(val) {
-        this.$store.commit('auth/updateData', val)
-      }
+    auth() {
+      return clone(this.$store.state.auth)
     }
   },
 
@@ -325,10 +307,10 @@ export default {
   methods: {
     async loadCategories() {
       try {
-        const categories = await callApi('/category')
+        const categories = await apiService.get('/category')
 
-        this.categories = categories.result
-        this.category = categories.result[0]._id
+        this.categories = categories.data.result
+        this.category = categories.data.result[0]._id
       } catch (error) {
         this.error = error
       }
@@ -341,9 +323,7 @@ export default {
         return
       }
 
-      this.step === 2
-        ? this.send()
-        : this.$refs.stepper.next()
+      this.step === 2 ? this.send() : this.$refs.stepper.next()
     },
 
     async send() {
@@ -355,21 +335,22 @@ export default {
         const startDate = date.formatDate(start, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
         const endDate = date.formatDate(end, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
 
-        const res = await callApi(
+        const res = await apiService.post(
           '/request',
-          this.auth.token,
           {
             title: this.title,
             description: this.description,
             category: this.category,
-            'address.plz': this.zip,
-            'address.city': this.city,
-            'address.street': this.street,
-            'address.street_nr': this.streetNumber,
+            address: {
+              plz: this.zip,
+              city: this.city,
+              street: this.street,
+              street_nr: this.streetNumber
+            },
             time_start: startDate,
             time_end: endDate
           },
-          'POST'
+          this.auth.token
         )
 
         if (res.error) {
@@ -379,9 +360,10 @@ export default {
 
         this.loading = false
         this.$router.push('/profile')
-      } catch (e) {
+      } catch (error) {
         this.loading = false
-        this.error = e
+        console.error(error)
+        this.error = 'An unexpected error occurred'
       }
     },
 
@@ -401,7 +383,11 @@ export default {
     },
 
     checkEndDate(endDate) {
-      const parsedStartDate = parse(this.startdate, 'dd/MM/yyyy HH:mm', new Date())
+      const parsedStartDate = parse(
+        this.startdate,
+        'dd/MM/yyyy HH:mm',
+        new Date()
+      )
       const parsedEndDate = parse(endDate, 'dd/MM/yyyy HH:mm', new Date())
 
       if (
