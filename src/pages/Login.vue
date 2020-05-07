@@ -22,7 +22,7 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            :type="showPassword ? 'password' : 'text'"
+            :type="showPassword ? 'text' : 'password'"
             :label="$t('password')"
             v-model="password"
           >
