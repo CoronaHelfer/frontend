@@ -3,18 +3,27 @@
     <q-toolbar>
       <q-toolbar-title>
         <router-link to="/">
-          <img class="logo" width="100" src="~assets/CoronaHelfer-Logo.svg" />
+          <img
+            class="logo"
+            width="100"
+            src="statics/images/CoronaHelfer-Logo.svg"
+          />
         </router-link>
       </q-toolbar-title>
       <span class="unverified" v-if="auth.authenticated && !auth.verified">
         <q-icon class="q-mb-xs" name="info" />
         {{ $t('unverified') }}
-        <q-tooltip content-class="bg-black" content-style="font-size: 16px" :offset="[10, 10]">
-           {{ $t('restrictedAccess') }}
+        <q-tooltip
+          content-class="bg-black"
+          content-style="font-size: 16px"
+          :offset="[10, 10]"
+        >
+          {{ $t('restrictedAccess') }}
         </q-tooltip>
       </span>
       <q-space />
       <q-tabs v-if="$q.screen.gt.xs" shrink stretch align="right">
+        <q-route-tab to="/press" :label="$t('press')" />
         <q-route-tab to="/help" :label="$t('help')" />
         <q-route-tab to="/get-help" :label="$t('getHelp')" />
         <q-route-tab to="/information" :label="$t('information')" />

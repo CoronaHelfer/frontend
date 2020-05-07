@@ -3,7 +3,11 @@
     <div class="q-mb-md">
       <q-toolbar class="wrapper row no-wrap items-center justify-between">
         <router-link to="/">
-          <img class="logo" width="100" src="~assets/CoronaHelfer-Logo.svg" />
+          <img
+            class="logo"
+            width="100"
+            src="statics/images/CoronaHelfer-Logo.svg"
+          />
         </router-link>
         <q-select
           class="locale-selector"

@@ -5,5 +5,7 @@ export default {
   jobs: 'Jobs',
   imprint: 'Imprint',
   privacy: 'Privacy',
-  profile: 'Profile'
+  profile: 'Profile',
+  press: 'Press',
+  readMore: 'Read More'
 }

@@ -4,7 +4,7 @@
       <div class="form-img row items-center justify-between q-ma-sm">
         <img
           width="100%"
-          src="~assets/CoronaHelfer-Logo.svg"
+          src="statics/images/CoronaHelfer-Logo.svg"
           alt="Corona Logo"
         />
       </div>
