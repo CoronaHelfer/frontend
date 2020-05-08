@@ -68,6 +68,7 @@
             </q-img>
           </q-card-section>
         </q-card>
+        <q-separator class="q-my-lg" />
       </div>
     </article>
   </q-page>
@@ -135,8 +136,20 @@ export default {
       ]
     }
   },
+  mounted() {
+    this.loadCategories()
+  },
   methods: {
-    dateFormat: (val) => date.formatDate(val, 'DD.MM.YYYY')
+    dateFormat: (val) => date.formatDate(val, 'DD.MM.YYYY'),
+    loadCategories: function() {
+      this.categorySelection = this.categories.reduce(
+        (accumulator, current) => {
+          accumulator[current.id] = false
+          return accumulator
+        },
+        {}
+      )
+    }
   }
 }
 </script>
