@@ -6,6 +6,6 @@ export default {
   imprint: 'Impressum',
   privacy: 'Datenschutz',
   profile: 'Profil',
-  page: 'Presseportal',
+  pressPortal: 'Presseportal',
   readMore: 'Mehr Erfahren'
 }

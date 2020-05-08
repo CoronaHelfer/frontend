@@ -23,7 +23,7 @@
       </span>
       <q-space />
       <q-tabs v-if="$q.screen.gt.xs" shrink stretch align="right">
-        <q-route-tab to="/press" :label="$t('press')" />
+        <q-route-tab to="/press" :label="$t('pressPortal')" />
         <q-route-tab to="/help" :label="$t('help')" />
         <q-route-tab to="/get-help" :label="$t('getHelp')" />
         <q-route-tab to="/information" :label="$t('information')" />
