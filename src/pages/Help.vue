@@ -71,12 +71,14 @@
 </template>
 
 <style lang="sass" scoped>
-article
-  padding-top: 30px
-  margin: 20px auto 0
-  max-width: 800px
-  .q-banner
-    background-color: $accent
+.wrapper
+  width: 90%
+  article
+    padding-top: 30px
+    margin: 20px auto 0
+    max-width: 800px
+    .q-banner
+      background-color: $accent
 </style>
 
 <script>

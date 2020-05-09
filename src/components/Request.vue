@@ -5,12 +5,14 @@
         <div class="col-12">
           <q-card-section horizontal>
             <q-card-section class="q-pt-sm section-inner">
-              <h2>{{ request.title }}</h2>
-              <h3>{{ request.category.name }}</h3>
-              <div class="date-range">
-                {{ format(new Date(request.time_start), 'dd/MM/yyyy') }}
-                - {{ format(new Date(request.time_end), 'dd/MM/yyyy') }}
+              <div class="row">
+                <div class="col"><h2>{{ request.title }}</h2></div>
+                <div class="col date-range">
+                  {{ format(new Date(request.time_start), 'dd/MM/yyyy') }}
+                  - {{ format(new Date(request.time_end), 'dd/MM/yyyy') }}
+                </div>
               </div>
+              <h3>{{ request.category.name }}</h3>
               <div>
                 {{ request.description }}
               </div>
@@ -47,9 +49,7 @@
     width: 100%
     height: 100%
     .date-range
-      position: absolute
-      top: 0
-      right: 0
+      text-align: right
       padding: 12px
       color: $secondary
   .distance
