@@ -22,10 +22,18 @@
             bg-color="white"
             filled
             class="q-px-sm form-input col-xs-12 col-md-12"
-            type="password"
+            :type="showPassword ? 'text' : 'password'"
             :label="$t('password')"
             v-model="password"
-          />
+          >
+            <template v-slot:append>
+              <q-icon
+                :name="showPassword ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="showPassword = !showPassword"
+              />
+            </template>
+          </q-input>
 
           <div class="row login-register">
             <q-btn
@@ -67,6 +75,7 @@ import { clone } from 'ramda'
 export default {
   data() {
     return {
+      showPassword: false,
       previousRoute: undefined,
       name: '',
       password: '',
