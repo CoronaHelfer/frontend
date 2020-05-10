@@ -13,6 +13,7 @@ import imprint from './imprint'
 import privacy from './privacy'
 import search from './search'
 import help from './help'
+import press from './press'
 
 export default {
   ...main,
@@ -29,5 +30,6 @@ export default {
   ...imprint,
   ...privacy,
   ...help,
+  ...press,
   searchForm: { ...search }
 }

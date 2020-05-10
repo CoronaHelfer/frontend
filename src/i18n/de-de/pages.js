@@ -5,5 +5,7 @@ export default {
   jobs: 'Jobs',
   imprint: 'Impressum',
   privacy: 'Datenschutz',
-  profile: 'Profil'
+  profile: 'Profil',
+  pressPortal: 'Presse',
+  readMore: 'Mehr Erfahren'
 }
