@@ -969,7 +969,4 @@ article
 
   h3
     margin-top: 6.3rem
-
-  a
-    color: $secondary
 </style>
