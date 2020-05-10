@@ -3,7 +3,11 @@
     <div class="q-mb-md">
       <q-toolbar class="wrapper row no-wrap items-center justify-between">
         <router-link to="/">
-          <img class="logo" width="100" src="~assets/CoronaHelfer-Logo.svg" />
+          <img
+            class="logo"
+            width="100"
+            src="statics/images/CoronaHelfer-Logo.svg"
+          />
         </router-link>
         <q-select
           class="locale-selector"
@@ -46,6 +50,7 @@
       <q-tabs class="footer-links">
         <q-route-tab to="/imprint" :label="$t('imprint')" />
         <q-route-tab to="/privacy" :label="$t('privacy')" />
+        <q-route-tab to="/press" :label="$t('press')" />
       </q-tabs>
     </q-toolbar>
   </q-footer>
