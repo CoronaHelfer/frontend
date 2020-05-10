@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="row justify-center items-center q-py-lg">
-        <div class="mouse" v-on:click="scrollDown()">
+        <div class="mouse" @click="scrollDown()">
           <div class="scroll"></div>
         </div>
       </div>
@@ -182,6 +182,7 @@
   border-radius: 25px;
   border: 2px solid $primary;
   opacity: 0.3;
+  cursor: pointer;
   .scroll {
     width: 2px;
     height: 10px;
@@ -311,10 +312,10 @@ export default {
     },
 
     scrollDown() {
-      const ele = document.getElementById('search-section') // You need to get your element here
-      const target = getScrollTarget(ele)
-      const offset = ele.offsetTop - ele.scrollHeight
-      const duration = 1000
+      const element = document.getElementById('search-section') // You need to get your element here
+      const target = getScrollTarget(element)
+      const offset = element.offsetTop - element.scrollHeight
+      const duration = 300
       setScrollPosition(target, offset, duration)
     }
   }
