@@ -30,7 +30,7 @@
                 :options="categories"
                 :label="$t('category')"
                 option-value="_id"
-                option-label="name"
+                :option-label="item => $t(`categoryNameByInternalId.${item.internal_id}`)"
                 map-options
                 bg-color="accent"
                 :disabled="!auth.verified"

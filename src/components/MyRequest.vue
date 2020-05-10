@@ -9,7 +9,7 @@
           <q-input :label="$t('title')" v-model="request.title" v-else />
 
           <p v-if="!editMode">
-            <strong>{{ $t('category') }}:</strong> {{ request.category.name }}
+            <strong>{{ $t('category') }}:</strong> {{ $t(`categoryNameByInternalId.${request.category.internal_id}`) }}
           </p>
           <q-select
             v-else
@@ -17,7 +17,7 @@
             :options="categories"
             :label="$t('category')"
             option-value="_id"
-            option-label="name"
+            :option-label="item => $t(`categoryNameByInternalId.${item.internal_id}`)"
             map-options
             bg-color="accent"
           />
