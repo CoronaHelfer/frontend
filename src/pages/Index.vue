@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="row justify-center items-center q-py-lg">
-        <div class="mouse">
+        <div class="mouse" @click="scrollDown()">
           <div class="scroll"></div>
         </div>
       </div>
@@ -52,7 +52,7 @@
         {{ $t('indexInfoText') }}
       </p>
 
-      <div class="q-my-xl">
+      <div id="search-section" class="q-my-xl">
         <h3>{{ $t('searchForm.title') }}</h3>
         <div class="row wrap">
           <div class="col-md-10 col-xs-12 q-px-xs q-my-xs">
@@ -182,6 +182,7 @@
   border-radius: 25px;
   border: 2px solid $primary;
   opacity: 0.3;
+  cursor: pointer;
   .scroll {
     width: 2px;
     height: 10px;
@@ -265,6 +266,8 @@ h1
 
 <script>
 import MainButton from 'src/components/MainButton'
+import { scroll } from 'quasar'
+const { getScrollTarget, setScrollPosition } = scroll
 
 export default {
   components: {
@@ -306,6 +309,14 @@ export default {
   methods: {
     goToHelp() {
       this.$router.push({ path: 'help', query: { address: this.address } })
+    },
+
+    scrollDown() {
+      const element = document.getElementById('search-section') // You need to get your element here
+      const target = getScrollTarget(element)
+      const offset = element.offsetTop - element.scrollHeight
+      const duration = 300
+      setScrollPosition(target, offset, duration)
     }
   }
 }
