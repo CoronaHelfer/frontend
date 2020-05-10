@@ -240,6 +240,8 @@
 .principles
   background-color: $tertiary
   border-radius: 10px
+  .principle-sentences
+    margin: 0
   .principle-sentences::first-letter
     font-weight: bold
     color: $secondary
