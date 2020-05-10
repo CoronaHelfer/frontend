@@ -1,12 +1,12 @@
 <template>
   <q-card class="btn-card">
-    <img :src="`statics/images/${this.content}.jpg`" />
+    <img class="image" :src="`statics/images/${this.content}.jpg`" />
     <q-list>
       <q-item clickable>
         <q-item-section>
-          <q-item-label class="btn-card-label" header>{{
-            getLabel
-          }}</q-item-label>
+          <q-item-label class="btn-card-label" header>
+            {{ getLabel }}
+          </q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
@@ -35,5 +35,9 @@ export default {
 .btn-card-label
   color: $secondary
   font-weight: bold
-  font-size: 1.25rem
+  font-size: 1.00rem
+
+.image
+  object-fit: cover
+  max-height: 20vh
 </style>
