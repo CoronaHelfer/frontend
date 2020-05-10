@@ -12,7 +12,7 @@
       </div>
       <div class="row col-xs-12 col-md-6 q-pt-md">
         <q-chip
-          v-for="category in filteredCategories"
+          v-for="category in categories"
           :key="category.id"
           :selected.sync="categorySelection[category.id]"
           color="secondary"
@@ -115,36 +115,36 @@ export default {
     return {
       categorySelection: {},
       categories: [
-        { id: 1, name: 'general', count: 1 },
-        { id: 2, name: 'corporate', count: 1 },
+        { id: 1, name: 'general', count: 3 },
+        { id: 2, name: 'corporate', count: 0 },
         { id: 3, name: 'press', count: 0 },
-        { id: 4, name: 'technology', count: 1 },
+        { id: 4, name: 'technology', count: 0 },
         { id: 5, name: 'socialMedia', count: 0 }
       ],
       filteredPosts: this.posts,
       posts: [
         {
-          id: 1,
-          date: '2020-05-05',
+          id: 3,
+          date: '2020-05-06',
           category: 1,
-          title: this.$t('srfTitle'),
-          desc: this.$t('srfDesc'),
-          img: 'https://cdn.quasar.dev/img/parallax2.jpg',
-          url: 'https://www.srf.ch/play/radio/rendez-vous/audio/eine-app-fuer-mitmenschlichkeit-auch-nach-corona?id=0c548517-50e8-4f5f-80f9-fae34f476cc7',
+          title: 'Soziale Wärme im Internet verknüpfen',
+          desc: '„CoronaHelfer“ soll die Vernetzungsplattform für nachbarschaftliche Fürsorge werden',
+          img: 'statics/images/website-mockup.jpg',
+          url: 'https://www.wnoz.de/Soziale-Waerme-im-Internet-verknuepfen-a37ad3de-c7d8-47e2-9a10-f4a991c767e2-ds',
           lang: 'German',
           caption: {
-            name: 'SRF',
+            name: 'WNOZ',
             img: ''
           }
         },
         {
           id: 2,
-          date: '2020-05-06',
-          category: 2,
-          title: this.$t('mannheimerTitle'),
-          desc: this.$t('mannheimerDesc'),
-          img: 'https://cdn.quasar.dev/img/parallax2.jpg',
-          url: '',
+          date: '2020-05-05',
+          category: 1,
+          title: 'Eine App für Mitmenschlichkeit - auch nach Corona',
+          desc: 'Die Plattform wurde in Luxemburg und Österreich bereits ausgezeichnet. Was ist die Idee dahinter? Gespräch mit der Gründerin Regina Roos.',
+          img: 'statics/images/mockup.jpg',
+          url: 'https://www.srf.ch/play/radio/rendez-vous/audio/eine-app-fuer-mitmenschlichkeit-auch-nach-corona?id=0c548517-50e8-4f5f-80f9-fae34f476cc7&fbclid=IwAR1De9qvJiYghbtFoI3gvXrYi206jP5tmliSYauHuCfkjcveuoB9YBkgdSg',
           lang: 'German',
           caption: {
             name: 'SRF',
@@ -152,17 +152,17 @@ export default {
           }
         },
         {
-          id: 3,
-          date: '2020-05-07',
-          category: 4,
-          title: this.$t('mannheimerTitle'),
-          desc: this.$t('mannheimerDesc'),
-          img: 'https://cdn.quasar.dev/img/parallax2.jpg',
-          url: '',
+          id: 1,
+          date: '2020-05-04',
+          category: 1,
+          title: 'Badener Team entwickelt Corona-App, die nach dem Vorbild von Uber funktioniert',
+          desc: 'Wenn von Corona und Handy-Apps die Rede ist, geht es meist um das sogenannte Contact Tracing. Doch Smartphones bieten auch andere Möglichkeiten, um den Alltag während der Pandemie zu meistern.',
+          img: 'statics/images/mockup.jpg',
+          url: 'https://www.aargauerzeitung.ch/aargau/baden/badener-team-entwickelt-corona-app-die-nach-dem-vorbild-von-uber-funktioniert-137778177',
           lang: 'German',
           caption: {
-            name: 'Coronahelfer.eu',
-            img: 'statics/images/CoronaHelfer-Logo.svg'
+            name: 'AZ',
+            img: ''
           }
         }
       ]
@@ -202,11 +202,6 @@ export default {
           ? this.posts.filter(post => selectedCategories.includes(post.category))
           : this.posts
       }
-    }
-  },
-  computed: {
-    filteredCategories: function () {
-      return this.categories.filter(category => category.count > 0)
     }
   }
 }

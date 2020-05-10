@@ -1,8 +1,6 @@
 export default {
   pressTitle: 'Aktuelle Presse',
   pressSubtitle: 'Reinschauen lohnt sich',
-  srfTitle: 'SRF Radio',
-  srfDesc: 'Eine App für Mitmenschlichkeit - auch nach Corona',
   contactTitle: 'Kontaktdaten',
   contactName1: 'David Louis',
   contactTitle1: 'CEO/Founder',

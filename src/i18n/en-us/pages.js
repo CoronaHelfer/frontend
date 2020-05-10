@@ -6,6 +6,6 @@ export default {
   imprint: 'Imprint',
   privacy: 'Privacy',
   profile: 'Profile',
-  pressPortal: 'Press Portal',
+  pressPortal: 'Press',
   readMore: 'Read More'
 }
