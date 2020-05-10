@@ -12,7 +12,7 @@
       </div>
       <div class="row col-xs-12 col-md-6 q-pa-sm">
         <q-chip
-          v-for="category in categories"
+          v-for="category in availableCats"
           :key="category.id"
           :selected.sync="categorySelection[category.id]"
           color="secondary"
@@ -26,11 +26,14 @@
       <div
         v-for="(card, idx) in cards"
         :key="card.id"
-        class="q-pa-md row items-start q-gutter-md"
+        class="q-pa-md q-gutter-md"
       >
-        <q-card class="media-card" flat>
-          <q-card-section horizontal>
-            <q-img class="col-5" v-if="idx % 2 === 0" :src="card.img">
+        <div class="media-card row justify-around items-center">
+          <div
+            v-if="idx % 2 === 0 || $q.screen.lt.md"
+            class="col-xs-12 col-md-5"
+          >
+            <q-img width="100%" :src="card.img">
               <div class="text-subtitle2 absolute-top-left text-center">
                 <span v-if="card.caption.img === ''">{{
                   card.caption.name
@@ -38,27 +41,32 @@
                 <img v-else width="50" :src="card.caption.img" />
               </div>
             </q-img>
+          </div>
 
-            <q-card-section class="card-text">
-              <div class="card-date-cat">
-                {{ dateFormat(card.date) }} /
-                {{ $t(categories.find((cat) => cat.id == card.category).name) }}
-              </div>
-              <h3>{{ card.title }}</h3>
-              {{ card.desc }}
-              <div class="q-mt-lg">
-                <q-btn
-                  type="a"
-                  :href="card.url"
-                  class="rounded q-mr-md col-xs-12 col-md-6"
-                  size="md"
-                >
-                  <span>{{ $t('readMore') }}</span>
-                </q-btn>
-              </div>
-            </q-card-section>
+          <div class="card-text col-xs-12 col-md-5">
+            <div class="card-date-cat">
+              {{ dateFormat(card.date) }} /
+              {{ $t(categories.find((cat) => cat.id == card.category).name) }}
+            </div>
+            <h3>{{ card.title }}</h3>
+            {{ card.desc }}
+            <div class="q-mt-lg">
+              <q-btn
+                type="a"
+                :href="card.url"
+                class="rounded q-mr-md col-xs-12 col-md-5"
+                size="md"
+              >
+                <span>{{ $t('readMore') }}</span>
+              </q-btn>
+            </div>
+          </div>
 
-            <q-img class="col-5" v-if="idx % 2 === 1" :src="card.img">
+          <div
+            v-if="$q.screen.gt.xs && idx % 2 === 1"
+            class="col-xs-12 col-md-5"
+          >
+            <q-img :src="card.img">
               <div class="text-subtitle2 absolute-top-left text-center">
                 <span v-if="card.caption.img === ''">{{
                   card.caption.name
@@ -66,8 +74,8 @@
                 <img v-else width="50" :src="card.caption.img" />
               </div>
             </q-img>
-          </q-card-section>
-        </q-card>
+          </div>
+        </div>
         <q-separator class="q-my-lg" />
       </div>
     </article>
@@ -110,7 +118,8 @@ export default {
           date: '2020-05-06',
           category: 2,
           title: this.$t('mannheimerTitle'),
-          desc: this.$t('mannheimerDesc'),
+          desc:
+            'Aliquip voluptate occaecat in dolor aliqua non exercitation sunt eiusmod officia minim anim. Officia amet irure deserunt magna nulla. Officia sit in qui laboris eiusmod mollit incididunt cillum aliqua sint mollit pariatur sunt officia. Culpa et eu consequat sunt quis tempor ea aute dolore nisi pariatur cupidatat. Culpa officia culpa labore anim proident consequat deserunt elit laboris. Nulla est ex elit sit aliqua nisi nulla dolor officia cillum laborum ullamco. Dolore eu esse sint ea. Id amet enim amet Lorem excepteur nulla est. Minim excepteur nulla aute irure sunt ut eiusmod. Anim fugiat reprehenderit irure aliqua ex aliquip. Nostrud ullamco laborum ex velit proident. In esse officia laborum labore eu Lorem.',
           img: 'https://cdn.quasar.dev/img/parallax2.jpg',
           url: '',
           lang: 'German',
@@ -150,41 +159,22 @@ export default {
         {}
       )
     }
+  },
+  computed: {
+    availableCats: function() {
+      return this.categories.filter((cat) => cat)
+    }
   }
 }
 </script>
 <style lang="sass" scoped>
 .title
   background: url('../statics/images/Banner-Media.jpg') no-repeat
-  background-size: cover
-  background-color: $secondary
-  height: 100%
-  padding-top: 15%
 
-  div
-    .banner-title
-      color: white
-      font-weight: bold
-      font-size: 3.4rem
-      margin: 0 0 5% 0
-
-    .banner-sub:first-of-type
-      color: white
-      font-size: 1.3rem
 .card-date-cat
   font-size: 0.8rem
   font-weight: bold
-.card-text
-  width: 50%
-.media-card
-  width: 100%
 
 article
   margin-top: 5rem
-
-// .read-more-btn
-//   background-color: $secondary
-//   padding: 5px
-//   color: white
-//   border-radius: 10px 10px
 </style>

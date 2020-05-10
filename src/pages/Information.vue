@@ -32,21 +32,6 @@
 <style lang="sass" scoped>
 .title
   background: url('../statics/images/Banner-Infos.jpg') no-repeat
-  background-size: cover
-  background-color: $secondary
-  height: 100%
-  padding-top: 15%
-
-  div
-    .banner-title
-      color: white
-      font-weight: bold
-      font-size: 3.4rem
-      margin: 0 0 5% 0
-
-  .banner-sub:first-of-type
-    color: white
-    font-size: 1.3rem
 
 article
   p:first-of-type
