@@ -31,8 +31,6 @@
   margin: 5% auto
   background-color: rgb(254, 246, 239)
   width: 50%
-a
-  color: $secondary
 </style>
 
 <script>
