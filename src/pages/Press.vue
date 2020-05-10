@@ -10,50 +10,54 @@
       <div class="row">
         {{ $t('pressIntro') }}
       </div>
-      <div class="row col-xs-12 col-md-6 q-pa-sm">
+      <div class="row col-xs-12 col-md-6 q-pt-md">
         <q-chip
-          v-for="category in availableCats"
+          v-for="category in filteredCategories"
           :key="category.id"
           :selected.sync="categorySelection[category.id]"
           color="secondary"
           text-color="white"
-          size="md"
+          size="lg"
         >
-          {{ $t(category.name) }}
+          {{ $t(category.name) }} &nbsp;&nbsp; <span class="category-count">{{ category.count }}</span>
         </q-chip>
       </div>
-      <q-separator class="q-my-lg" />
+      <q-separator class="q-my-xl" />
       <div
-        v-for="(card, idx) in cards"
-        :key="card.id"
-        class="q-pa-md q-gutter-md"
+        v-for="(post, index) in filteredPosts"
+        :key="post.id"
       >
-        <div class="media-card row justify-around items-center">
-          <div
-            v-if="idx % 2 === 0 || $q.screen.lt.md"
-            class="col-xs-12 col-md-5"
-          >
-            <q-img width="100%" :src="card.img">
+        <div
+          class="media-card row items-center"
+          v-if="index % 2 === 0 || $q.screen.lt.md"
+        >
+          <div class="col-xs-12 col-md-5">
+            <q-img class="image" :src="post.img">
               <div class="text-subtitle2 absolute-top-left text-center">
-                <span v-if="card.caption.img === ''">{{
-                  card.caption.name
+                <span v-if="post.caption.img === ''">{{
+                  post.caption.name
                 }}</span>
-                <img v-else width="50" :src="card.caption.img" />
+                <img v-else width="50" :src="post.caption.img" />
               </div>
             </q-img>
           </div>
-
-          <div class="card-text col-xs-12 col-md-5">
+          <div
+            class="col-xs-12 col-md-7"
+            :class="{
+              'q-pl-xl': $q.screen.gt.sm,
+              'q-pt-lg': $q.screen.lt.md,
+            }"
+          >
             <div class="card-date-cat">
-              {{ dateFormat(card.date) }} /
-              {{ $t(categories.find((cat) => cat.id == card.category).name) }}
+              {{ dateFormat(post.date) }} /
+              {{ $t(getCategoryName(post.category)) }}
             </div>
-            <h3>{{ card.title }}</h3>
-            {{ card.desc }}
+            <h3>{{ post.title }}</h3>
+            {{ post.desc }}
             <div class="q-mt-lg">
               <q-btn
                 type="a"
-                :href="card.url"
+                :href="post.url"
                 class="rounded q-mr-md col-xs-12 col-md-5"
                 size="md"
               >
@@ -61,22 +65,41 @@
               </q-btn>
             </div>
           </div>
-
-          <div
-            v-if="$q.screen.gt.xs && idx % 2 === 1"
-            class="col-xs-12 col-md-5"
-          >
-            <q-img :src="card.img">
+        </div>
+        <div
+          class="media-card row items-center"
+          v-if="$q.screen.gt.sm && index % 2 === 1"
+        >
+          <div class="card-text col-xs-12 col-md-7 q-pr-xl">
+            <div class="card-date-cat">
+              {{ dateFormat(post.date) }} /
+              {{ $t(getCategoryName(post.category)) }}
+            </div>
+            <h3>{{ post.title }}</h3>
+            {{ post.desc }}
+            <div class="q-mt-lg">
+              <q-btn
+                type="a"
+                :href="post.url"
+                class="rounded q-mr-md col-xs-12 col-md-5"
+                size="md"
+              >
+                <span>{{ $t('readMore') }}</span>
+              </q-btn>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-5">
+            <q-img class="image" :src="post.img">
               <div class="text-subtitle2 absolute-top-left text-center">
-                <span v-if="card.caption.img === ''">{{
-                  card.caption.name
-                }}</span>
-                <img v-else width="50" :src="card.caption.img" />
+                <span v-if="post.caption.img === ''">
+                  {{ post.caption.name }}
+                </span>
+                <img v-else width="50" :src="post.caption.img" />
               </div>
             </q-img>
           </div>
         </div>
-        <q-separator class="q-my-lg" />
+        <q-separator class="q-my-xl" />
       </div>
     </article>
   </q-page>
@@ -84,6 +107,7 @@
 
 <script>
 import { date } from 'quasar'
+import { isEmpty } from 'ramda'
 
 export default {
   name: 'Press',
@@ -91,13 +115,14 @@ export default {
     return {
       categorySelection: {},
       categories: [
-        { id: '1', name: 'general' },
-        { id: '2', name: 'corporate' },
-        { id: '3', name: 'press' },
-        { id: '4', name: 'technology' },
-        { id: '5', name: 'socialMedia' }
+        { id: 1, name: 'general', count: 1 },
+        { id: 2, name: 'corporate', count: 1 },
+        { id: 3, name: 'press', count: 0 },
+        { id: 4, name: 'technology', count: 1 },
+        { id: 5, name: 'socialMedia', count: 0 }
       ],
-      cards: [
+      filteredPosts: this.posts,
+      posts: [
         {
           id: 1,
           date: '2020-05-05',
@@ -105,8 +130,7 @@ export default {
           title: this.$t('srfTitle'),
           desc: this.$t('srfDesc'),
           img: 'https://cdn.quasar.dev/img/parallax2.jpg',
-          url:
-            'https://www.srf.ch/play/radio/rendez-vous/audio/eine-app-fuer-mitmenschlichkeit-auch-nach-corona?id=0c548517-50e8-4f5f-80f9-fae34f476cc7',
+          url: 'https://www.srf.ch/play/radio/rendez-vous/audio/eine-app-fuer-mitmenschlichkeit-auch-nach-corona?id=0c548517-50e8-4f5f-80f9-fae34f476cc7',
           lang: 'German',
           caption: {
             name: 'SRF',
@@ -118,8 +142,7 @@ export default {
           date: '2020-05-06',
           category: 2,
           title: this.$t('mannheimerTitle'),
-          desc:
-            'Aliquip voluptate occaecat in dolor aliqua non exercitation sunt eiusmod officia minim anim. Officia amet irure deserunt magna nulla. Officia sit in qui laboris eiusmod mollit incididunt cillum aliqua sint mollit pariatur sunt officia. Culpa et eu consequat sunt quis tempor ea aute dolore nisi pariatur cupidatat. Culpa officia culpa labore anim proident consequat deserunt elit laboris. Nulla est ex elit sit aliqua nisi nulla dolor officia cillum laborum ullamco. Dolore eu esse sint ea. Id amet enim amet Lorem excepteur nulla est. Minim excepteur nulla aute irure sunt ut eiusmod. Anim fugiat reprehenderit irure aliqua ex aliquip. Nostrud ullamco laborum ex velit proident. In esse officia laborum labore eu Lorem.',
+          desc: this.$t('mannheimerDesc'),
           img: 'https://cdn.quasar.dev/img/parallax2.jpg',
           url: '',
           lang: 'German',
@@ -150,6 +173,7 @@ export default {
   },
   methods: {
     dateFormat: (val) => date.formatDate(val, 'DD.MM.YYYY'),
+
     loadCategories: function() {
       this.categorySelection = this.categories.reduce(
         (accumulator, current) => {
@@ -158,11 +182,31 @@ export default {
         },
         {}
       )
+    },
+
+    getCategoryName(categoryId) {
+      const category = this.categories.find((category) => category.id === categoryId)
+
+      return category.name
+    }
+  },
+  watch: {
+    categorySelection: {
+      deep: true,
+      handler: function(selection) {
+        const selectedCategories = Object.entries(selection)
+          .filter(([key, value]) => !!value)
+          .map(([key, value]) => Number(key))
+
+        this.filteredPosts = !isEmpty(selectedCategories)
+          ? this.posts.filter(post => selectedCategories.includes(post.category))
+          : this.posts
+      }
     }
   },
   computed: {
-    availableCats: function() {
-      return this.categories.filter((cat) => cat)
+    filteredCategories: function () {
+      return this.categories.filter(category => category.count > 0)
     }
   }
 }
@@ -177,4 +221,11 @@ export default {
 
 article
   margin-top: 5rem
+
+.image
+  border-radius: 8px
+
+.category-count
+  font-size: 1rem
+  font-weight: bold
 </style>

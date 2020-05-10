@@ -20,8 +20,8 @@
         >
           {{ $t('restrictedAccess') }}
         </q-tooltip>
+        <q-space />
       </span>
-      <q-space />
       <q-tabs v-if="$q.screen.gt.xs" shrink stretch align="right">
         <q-route-tab to="/press" :label="$t('pressPortal')" />
         <q-route-tab to="/help" :label="$t('help')" />

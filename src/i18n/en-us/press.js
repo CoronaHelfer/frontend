@@ -1,6 +1,6 @@
 export default {
-  pressTitle: 'Press Portal',
-  pressSubtitle: 'CoronaHelfer Press Portal',
+  pressTitle: 'Current press releases',
+  pressSubtitle: "It's worth a look",
   srfTitle: 'SRF Radio',
   srfDesc: 'Eine App für Mitmenschlichkeit - auch nach Corona',
   contactTitle: 'Contact Information',
