@@ -42,7 +42,7 @@
           text-color="white"
           size="md"
         >
-          {{ category.name }}
+          {{ $t(`categoryNameByInternalId.${category.internal_id}`) }}
         </q-chip>
       </div>
       <div class="row col-xs-12 col-md-6 q-pa-sm">
@@ -167,6 +167,8 @@ export default {
     async loadCategories() {
       try {
         const categories = await apiService.get('/category')
+
+        console.log(categories)
 
         this.categories = categories.data.result
         this.categorySelection = this.categories.reduce(

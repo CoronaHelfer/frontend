@@ -6,5 +6,11 @@ export default {
   success: 'Aktion erfolgreich',
   noRequests: 'Momentan gibt es keine Hilfsanfragen!',
   close: 'Schließen',
-  approximateDistance: 'Ungefähre Distanz'
+  approximateDistance: 'Ungefähre Distanz',
+  categoryNameByInternalId: {
+    1: 'Kurierdienste',
+    2: 'Warenleistungen',
+    3: 'Bildung',
+    4: 'Soziales und Gemeinschaft'
+  }
 }

@@ -12,7 +12,7 @@
                   - {{ format(new Date(request.time_end), 'dd/MM/yyyy') }}
                 </div>
               </div>
-              <h3>{{ request.category.name }}</h3>
+              <h3>{{ $t(`categoryNameByInternalId.${request.category.internal_id}`) }}</h3>
               <div>
                 {{ request.description }}
               </div>
