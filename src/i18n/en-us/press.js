@@ -12,5 +12,6 @@ export default {
   corporate: 'Corporate',
   press: 'Technical Press',
   technology: 'Technology',
-  socialMedia: 'Social Media'
+  socialMedia: 'Social Media',
+  pressIntro: 'In our press area you will find all information about Corona helpers and top stories of our activities. Especially in the current time actuality is very important, therefore we keep you up to date.'
 }
