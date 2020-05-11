@@ -10,6 +10,9 @@
       <div class="row">
         {{ $t('pressIntro') }}
       </div>
+      <div class="press-contacts row q-mb-md">
+        {{ $t('pressContacts') }}: David Louis, Celal Simsek &nbsp; <a href="mailto:presse@coronahelfer.eu">presse@coronahelfer.eu</a>
+      </div>
       <div class="row col-xs-12 col-md-6 q-pt-md">
         <q-chip
           v-for="category in categories"
@@ -206,9 +209,12 @@ export default {
   }
 }
 </script>
+
 <style lang="sass" scoped>
 .title
   background: url('../statics/images/Banner-Media.jpg') no-repeat
+  background-size: cover
+  background-color: $secondary
 
 .card-date-cat
   font-size: 0.8rem
@@ -223,4 +229,11 @@ article
 .category-count
   font-size: 1rem
   font-weight: bold
+
+.press-contacts
+  color: $secondary
+  border-radius: 8px
+  a
+    font-weight: bold
+    color: $secondary
 </style>

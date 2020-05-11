@@ -945,7 +945,8 @@
 .title
   text-align: center
   background: url('../statics/images/Banner-Jobs.jpg') no-repeat
-  background-size: 100%
+  background-size: cover
+  background-color: $secondary
   color: white
   height: 28.1rem
 
