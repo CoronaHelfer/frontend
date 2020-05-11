@@ -276,35 +276,40 @@ export default {
     MainButton
   },
 
-  data: () => {
-    return {
-      address: undefined,
-      items: [
+  computed: {
+    items() {
+      return [
         {
           img: 'cool',
-          principle: 'stayCool'
+          principle: 'principle.first'
         },
         {
-          img: 'Out line',
-          principle: 'washHands'
+          img: this.$i18n.locale === 'de_DE' ? 'Out line' : 'distance',
+          principle: 'principle.second'
         },
         {
           img: 'buyer',
-          principle: 'behave'
+          principle: 'principle.third'
         },
         {
-          img: 'hamster',
-          principle: 'noHamster'
+          img: this.$i18n.locale === 'de_DE' ? 'hamster' : 'help',
+          principle: 'principle.fourth'
         },
         {
-          img: 'help',
-          principle: 'supportNeighbor'
+          img: this.$i18n.locale === 'de_DE' ? 'help' : 'hamster',
+          principle: 'principle.fifth'
         },
         {
-          img: 'distance',
-          principle: 'socialDistance'
+          img: this.$i18n.locale === 'de_DE' ? 'distance' : 'Out line',
+          principle: 'principle.sixth'
         }
       ]
+    }
+  },
+
+  data() {
+    return {
+      address: undefined
     }
   },
 
