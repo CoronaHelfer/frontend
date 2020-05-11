@@ -37,9 +37,9 @@
           <div class="col-xs-12 col-md-5">
             <q-img class="image" :src="post.img">
               <div class="text-subtitle2 absolute-top-left text-center">
-                <span v-if="post.caption.img === ''">{{
-                  post.caption.name
-                }}</span>
+                <span v-if="post.caption.img === ''">
+                  {{ post.caption.name }}
+                </span>
                 <img v-else width="50" :src="post.caption.img" />
               </div>
             </q-img>
@@ -61,6 +61,7 @@
               <q-btn
                 type="a"
                 :href="post.url"
+                target="__blank"
                 class="rounded q-mr-md col-xs-12 col-md-5"
                 size="md"
               >
@@ -83,6 +84,7 @@
             <div class="q-mt-lg">
               <q-btn
                 type="a"
+                target="__blank"
                 :href="post.url"
                 class="rounded q-mr-md col-xs-12 col-md-5"
                 size="md"
