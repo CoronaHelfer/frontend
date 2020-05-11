@@ -40,7 +40,7 @@
           :selected.sync="categorySelection[category._id]"
           color="secondary"
           text-color="white"
-          size="md"
+          size="lg"
         >
           {{ $t(`categoryNameByInternalId.${category.internal_id}`) }}
         </q-chip>

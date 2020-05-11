@@ -86,7 +86,7 @@
         v-if="request.helper.length"
         @click="showOffersPage"
       >
-        {{ request.helper.length }} {{ $t('offers') }}
+        {{ request.helper.length }} {{ $tc('offers', request.helper.length) }}
       </q-btn>
     </q-card-actions>
   </q-card>

@@ -39,5 +39,6 @@ export default {
 
 .image
   object-fit: cover
-  max-height: 20vh
+  @media screen and (max-width: 1000px)
+    max-height: 20vh
 </style>

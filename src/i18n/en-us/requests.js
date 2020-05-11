@@ -7,6 +7,7 @@ export default {
   noRequests: 'At the moment there are no requests!',
   close: 'Close',
   approximateDistance: 'Approximate distance',
+  offers: 'offer | offers',
   categoryNameByInternalId: {
     1: 'Courier services',
     2: 'Goods services',

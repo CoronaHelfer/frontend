@@ -7,6 +7,7 @@ export default {
   noRequests: 'Momentan gibt es keine Hilfsanfragen!',
   close: 'Schließen',
   approximateDistance: 'Ungefähre Distanz',
+  offers: 'Angebot | Angebote',
   categoryNameByInternalId: {
     1: 'Kurierdienste',
     2: 'Warenleistungen',
