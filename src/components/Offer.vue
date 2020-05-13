@@ -49,6 +49,8 @@
 <script>
 import apiService from '../services/api'
 import { clone } from 'ramda'
+import ga from '../analytics'
+import hash from 'object-hash'
 
 export default {
   props: {
@@ -60,7 +62,8 @@ export default {
     return {
       isTheDialogOpen: false,
       success: false,
-      offer: ''
+      offer: '',
+      sessionId: hash(this.auth.id)
     }
   },
 
@@ -97,6 +100,8 @@ export default {
         )
 
         this.success = true
+
+        ga.logEvent('Buttons', 'Click', 'Offer help on request', this.sessionId)
       } catch (error) {
         console.error(error)
       }
