@@ -24,11 +24,11 @@
     "quasar": "^1.0.0",
     "ramda": "^0.27.0",
     "vue-i18n": "^8.16.0",
-    "vuex-persistedstate": "^3.0.1",
-    "@quasar/app": "^1.6.2",
-    "quasar-app-extension-qdatetimepicker": "^1.0.0-rc.10"
+    "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {
+    "@quasar/app": "^1.6.2",
+    "quasar-app-extension-qdatetimepicker": "^1.0.0-rc.10",
     "babel-eslint": "^10.0.1",
     "cypress": "^4.3.0",
     "eslint": "^6.8.0",
