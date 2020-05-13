@@ -62,8 +62,7 @@ export default {
     return {
       isTheDialogOpen: false,
       success: false,
-      offer: '',
-      sessionId: hash(this.auth.id)
+      offer: ''
     }
   },
 
@@ -82,6 +81,9 @@ export default {
   computed: {
     auth() {
       return clone(this.$store.state.auth)
+    },
+    sessionId() {
+      return hash(this.auth.id)
     }
   },
 
