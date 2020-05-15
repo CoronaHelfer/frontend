@@ -4,12 +4,7 @@
     <article>
       <h3>{{ $t('privacyIntro') }}</h3>
       <h1>{{ $t('privacyTitle') }}</h1>
-      <!-- dynamicCode -->
-      <q-btn @click="toggleTracking" class="q-mt-xl" :color="trackingDisabled ? 'green' : 'red'">
-        {{ trackingDisabled ? $t('enableTracking') : $t('disableTracking') }}
-      </q-btn>
-      <!-- /dynamicCode -->
-      <h5>Einleitung</h5>
+      <h5 class="q-pt-xl">Einleitung</h5>
       <p>
         Mit der folgenden Datenschutzerklärung möchten wir Sie darüber
         aufklären, welche Arten Ihrer personenbezogenen Daten (nachfolgend auch
@@ -25,21 +20,21 @@
       <p>Stand: 13. Mai 2020</p>
       <h2>Inhaltsübersicht</h2>
       <ul class="index">
-        <li><a class="index-link" href="#m3">Verantwortlicher</a></li>
-        <li><a class="index-link" href="#mOverview">Übersicht der Verarbeitungen</a></li>
-        <li><a class="index-link" href="#m13">Maßgebliche Rechtsgrundlagen</a></li>
-        <li><a class="index-link" href="#m27">Sicherheitsmaßnahmen</a></li>
-        <li><a class="index-link" href="#m25">Übermittlung und Offenbarung von personenbezogenen Daten</a></li>
-        <li><a class="index-link" href="#m225">Bereitstellung des Onlineangebotes und Webhosting</a></li>
-        <li><a class="index-link" href="#m182">Kontaktaufnahme</a></li>
-        <li><a class="index-link" href="#m29">Cloud-Dienste</a></li>
-        <li><a class="index-link" href="#m264">Onlinemarketing</a></li>
-        <li><a class="index-link" href="#m136">Präsenzen in sozialen Netzwerken (Social Media)</a></li>
-        <li><a class="index-link" href="#m328">Plugins und eingebettete Funktionen sowie Inhalte</a></li>
-        <li><a class="index-link" href="#m12">Löschung von Daten</a></li>
-        <li><a class="index-link" href="#m15">Änderung und Aktualisierung der Datenschutzerklärung</a></li>
-        <li><a class="index-link" href="#m10">Rechte der betroffenen Personen</a></li>
-        <li><a class="index-link" href="#m42">Begriffsdefinitionen</a></li>
+        <li><a class="index-link" href="/privacy#m3">Verantwortlicher</a></li>
+        <li><a class="index-link" href="/privacy#mOverview">Übersicht der Verarbeitungen</a></li>
+        <li><a class="index-link" href="/privacy#m13">Maßgebliche Rechtsgrundlagen</a></li>
+        <li><a class="index-link" href="/privacy#m27">Sicherheitsmaßnahmen</a></li>
+        <li><a class="index-link" href="/privacy#m25">Übermittlung und Offenbarung von personenbezogenen Daten</a></li>
+        <li><a class="index-link" href="/privacy#m225">Bereitstellung des Onlineangebotes und Webhosting</a></li>
+        <li><a class="index-link" href="/privacy#m182">Kontaktaufnahme</a></li>
+        <li><a class="index-link" href="/privacy#m29">Cloud-Dienste</a></li>
+        <li><a class="index-link" href="/privacy#m264">Onlinemarketing</a></li>
+        <li><a class="index-link" href="/privacy#m136">Präsenzen in sozialen Netzwerken (Social Media)</a></li>
+        <li><a class="index-link" href="/privacy#m328">Plugins und eingebettete Funktionen sowie Inhalte</a></li>
+        <li><a class="index-link" href="/privacy#m12">Löschung von Daten</a></li>
+        <li><a class="index-link" href="/privacy#m15">Änderung und Aktualisierung der Datenschutzerklärung</a></li>
+        <li><a class="index-link" href="/privacy#m10">Rechte der betroffenen Personen</a></li>
+        <li><a class="index-link" href="/privacy#m42">Begriffsdefinitionen</a></li>
       </ul>
       <h2 id="m3">Verantwortlicher</h2>
       <p>David Louis CoronaHelfer<br>Mozartstraße, 5<br>69214, Eppelheim</p>
@@ -153,6 +148,11 @@
       <ul class="m-elements">
         <li><strong>Google Analytics:</strong> Onlinemarketing und Webanalyse; Dienstanbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland, Mutterunternehmen: Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; Website: <a href="https://marketingplatform.google.com/intl/de/about/analytics/" target="_blank">https://marketingplatform.google.com/intl/de/about/analytics/</a>; Datenschutzerklärung: <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a>; Privacy Shield (Gewährleistung Datenschutzniveau bei Verarbeitung von Daten in den USA): <a href="https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active" target="_blank">https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active</a>; Widerspruchsmöglichkeit (Opt-Out): Opt-Out-Plugin: <a href="https://tools.google.com/dlpage/gaoptout?hl=de" target="_blank">https://tools.google.com/dlpage/gaoptout?hl=de</a>,  Einstellungen für die Darstellung von Werbeeinblendungen: <a href="https://adssettings.google.com/authenticated" target="_blank">https://adssettings.google.com/authenticated</a>.</li>
       </ul>
+      <!-- dynamicCode -->
+      <q-btn @click="toggleTracking" class="q-ml-xl" size="sm" color="primary">
+        {{ trackingDisabled ? $t('enableTracking') : $t('disableTracking') }}
+      </q-btn>
+      <!-- /dynamicCode -->
       <h2 id="m136">Präsenzen in sozialen Netzwerken (Social Media)</h2>
       <p>Wir unterhalten Onlinepräsenzen innerhalb sozialer Netzwerke und verarbeiten in diesem Rahmen Daten der Nutzer, um mit den dort aktiven Nutzern zu kommunizieren oder um Informationen über uns anzubieten.</p>
       <p>Wir weisen darauf hin, dass dabei Daten der Nutzer außerhalb des Raumes der Europäischen Union verarbeitet werden können. Hierdurch können sich für die Nutzer Risiken ergeben, weil so z.B. die Durchsetzung der Rechte der Nutzer erschwert werden könnte. Im Hinblick auf US-Anbieter, die unter dem Privacy-Shield zertifiziert sind oder vergleichbare Garantien eines sicheren Datenschutzniveaus bieten, weisen wir darauf hin, dass sie sich damit verpflichten, die Datenschutzstandards der EU einzuhalten.</p>
