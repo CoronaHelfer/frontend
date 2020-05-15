@@ -46,7 +46,7 @@ pipeline {
 
         stage('Deploy to prod') {
             when {
-                branch 'master'
+                buildingTag()
             }
             steps {
                 sh 'bundle exec cap production deploy'
