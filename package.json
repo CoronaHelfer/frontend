@@ -1,6 +1,6 @@
 {
   "name": "corona-helfer",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "Corona Helfer",
   "productName": "Corona Helfer",
   "cordovaId": "org.cordova.quasar.app",
