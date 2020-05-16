@@ -13,7 +13,7 @@ pipeline {
 
                 //sh 'npm i --noaudit'
                 //sh 'npx audit-ci --high'
-                sh 'git clone git@github.com:CoronaHelfer/deployment.git'
+                sh 'git clone ssh://vcs@phabricator.coronahelfer.eu:2222/source/deployment.git'
                 sh 'cp -rT ./deployment/frontend .'
                 sh 'bundle config set path "/var/lib/jenkins/.gem"'
                 sh 'bundle install'
