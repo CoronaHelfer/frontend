@@ -1,8 +1,8 @@
 <template>
   <q-page class="q-pa-md row justify-center items-center">
     <div class="form q-pa-xs">
-      <div class="form-img row items-center justify-between q-ma-sm">
-        <img width="100%" src="statics/images/CoronaHelfer-Logo.svg" />
+      <div class="form-img row items-center justify-center q-ma-sm">
+        <img src="statics/images/CoronaHelfer-Logo.svg" />
       </div>
 
       <div class="form-fields row">
