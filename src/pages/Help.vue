@@ -168,8 +168,6 @@ export default {
       try {
         const categories = await apiService.get('/category')
 
-        console.log(categories)
-
         this.categories = categories.data.result
         this.categorySelection = this.categories.reduce(
           (accumulator, current) => {
