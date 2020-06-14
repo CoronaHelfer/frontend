@@ -62,6 +62,7 @@
 <style lang="sass" scoped>
 .login-register
   width: 100%
+
 .oauth
   background-color: #4285F4
   width: 100%

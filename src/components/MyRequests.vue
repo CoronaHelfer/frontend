@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{ $t('myRequests') }}</h2>
+    <h2 class="colored-heading">{{ $t('myRequests') }}</h2>
     <div v-if="error !== ''" class="error">{{ error }}</div>
     <div class="row justify-center">
       <q-spinner v-if="loading" color="secondary" size="5em" />
@@ -20,11 +20,7 @@
 </template>
 
 <style lang="sass" scoped>
-h2
-  text-transform: none
-  font-size: 2.3rem
-  font-weight: bold
-  color: #EF7D18
+.colored-heading
   display: inline
   line-height: 1.2
 </style>

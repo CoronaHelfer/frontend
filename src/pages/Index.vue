@@ -165,14 +165,14 @@
   </q-page>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .my-card {
   transition: 300ms ease-in-out;
   &:hover {
     transform: scale(1.02) translate(0, -5px);
     transition: 300ms ease-in-out;
     .btn-card {
-      box-shadow: 0px 20px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 12px rgba(0, 0, 0, 0.1);
     }
   }
 }
@@ -211,7 +211,7 @@
   margin: 6% auto;
   text-align: center;
   .uppercase {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     line-height: inherit;
   }
 }
@@ -224,7 +224,7 @@
   background-color: $tertiary
 
 .vision-box
-  box-shadow: 0px 10px 6px rgba(0,0,0,0.1)
+  box-shadow: 0 10px 6px rgba(0,0,0,0.1)
   border-radius: 10px
   padding: 5% 0
   margin-bottom: 2%

@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="title" />
-    <article>
+    <article class="large-article">
       <h3>{{ $t('privacyIntro') }}</h3>
       <h1>{{ $t('privacyTitle') }}</h1>
       <h5 class="q-pt-xl">Einleitung</h5>
@@ -227,14 +227,10 @@
 
 <style lang="sass" scoped>
 .title
-  text-align: center
   background: url('../statics/images/Banner-Jobs.jpg') no-repeat
-  background-size: cover
-  background-color: $secondary
-  color: white
   height: 28.1rem
 
-article
+.large-article
   padding: 1.9rem 0 1.3rem 0
   margin: -25rem auto 0
   max-width: 50rem

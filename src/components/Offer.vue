@@ -16,7 +16,7 @@
       <p>Du wirst bestimmt bald kontaktiert!</p>
     </q-card>
 
-    <q-card v-else style="min-width: 350px" class="card">
+    <q-card v-else class="card write-message">
       <q-card-section class="row items-center q-pb-none">
         <q-space />
         <q-btn icon="close" flat round dense v-close-popup></q-btn>
@@ -44,6 +44,9 @@
 .card
   border-radius: 10px
   padding: 20px
+
+.write-message
+  min-width: 350px
 </style>
 
 <script>

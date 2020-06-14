@@ -19,9 +19,9 @@
             </q-card-section>
           </q-card-section>
           <q-card-actions>
-            <q-label class="distance" v-if="request.distance">
+            <div class="distance" v-if="request.distance">
               {{ $t('approximateDistance') }}: {{ request.distance }}m
-            </q-label>
+            </div>
             <q-space></q-space>
             <q-btn
               class="card-action-button"

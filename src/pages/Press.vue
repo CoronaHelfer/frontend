@@ -110,6 +110,32 @@
   </q-page>
 </template>
 
+<style lang="sass" scoped>
+.title
+  background: url('../statics/images/Banner-Media.jpg') no-repeat
+
+.card-date-cat
+  font-size: 0.8rem
+  font-weight: bold
+
+article
+  margin-top: 5rem
+
+.image
+  border-radius: 8px
+
+.category-count
+  font-size: 1rem
+  font-weight: bold
+
+.press-contacts
+  color: $secondary
+  border-radius: 8px
+  a
+    font-weight: bold
+    color: $secondary
+</style>
+
 <script>
 import { date } from 'quasar'
 import { isEmpty } from 'ramda'
@@ -211,31 +237,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-.title
-  background: url('../statics/images/Banner-Media.jpg') no-repeat
-  background-size: cover
-  background-color: $secondary
-
-.card-date-cat
-  font-size: 0.8rem
-  font-weight: bold
-
-article
-  margin-top: 5rem
-
-.image
-  border-radius: 8px
-
-.category-count
-  font-size: 1rem
-  font-weight: bold
-
-.press-contacts
-  color: $secondary
-  border-radius: 8px
-  a
-    font-weight: bold
-    color: $secondary
-</style>

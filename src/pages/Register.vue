@@ -87,8 +87,6 @@
   </q-page>
 </template>
 
-<style lang="sass" scoped></style>
-
 <script>
 import { clone } from 'ramda'
 

@@ -32,8 +32,6 @@
 <style lang="sass" scoped>
 .title
   background: url('../statics/images/Banner-Infos.jpg') no-repeat
-  background-size: cover
-  background-color: $secondary
 
 article
   p:first-of-type

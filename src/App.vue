@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .q-notification__actions
   .q-btn
     margin: 16px

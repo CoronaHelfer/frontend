@@ -11,7 +11,6 @@
 <style lang="sass" scoped>
 body
   background-color: $background
-
   main
     margin: 0 auto
 </style>

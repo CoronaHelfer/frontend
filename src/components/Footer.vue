@@ -56,6 +56,19 @@
   </q-footer>
 </template>
 
+<style lang="sass" scoped>
+footer
+  position: initial
+  .locale-selector
+    min-width: 100px
+  .q-toolbar
+    padding: 0
+    .social-media
+      a
+        color: white
+        justify-content: space-evenly
+</style>
+
 <script>
 export default {
   data() {
@@ -75,16 +88,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-footer
-  position: initial
-  .locale-selector
-    min-width: 100px
-  .q-toolbar
-    padding: 0
-    .social-media
-      a
-        color: white
-        justify-content: space-evenly
-</style>

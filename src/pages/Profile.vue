@@ -19,7 +19,7 @@
             <q-tab-panels v-model="tab" vertical>
               <q-tab-panel :name="Tabs.Profile">
                 <div class="profile-header">
-                  <h2 class="welcome-heading">
+                  <h2 class="colored-heading">
                     {{ $t('welcome') }}
                   </h2>
                   <div v-if="!auth.verified">
@@ -177,12 +177,6 @@ body
   margin: 12px
   border-radius: 12px
   font-size: 13px
-
-h2
-  text-transform: none
-  font-size: 2.3rem
-  font-weight: bold
-  color: #EF7D18
 
 .profile-header
   margin-left: 12px

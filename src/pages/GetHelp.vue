@@ -251,13 +251,6 @@
   box-shadow: 0 0
   border-radius: 0
   background: #fff
-
-.error
-  background: RED
-  color: WHITE
-  padding: 10px 25px
-  margin-bottom: 15px
-  font-size: 13px
 </style>
 
 <script>

@@ -39,7 +39,7 @@
         icon="menu"
       >
         <q-menu transition-show="jump-down" transition-hide="jump-up">
-          <q-list style="min-width: 100px;">
+          <q-list>
             <q-item to="/help" clickable>
               <q-item-section>{{ $t('help') }}</q-item-section>
             </q-item>
@@ -72,14 +72,20 @@
   justify-content: space-between
   box-sizing: border-box
   padding: 0 80px
+
 .logo
   margin: 0.75rem
+
 .login-btn
-  background: #ef7d18
+  background: $secondary
   color: white
+
 .unverified
   color: $secondary
   font-weight: bold
+
+.q-list
+  min-width: 100px
 </style>
 
 <script>
