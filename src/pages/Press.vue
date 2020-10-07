@@ -11,7 +11,7 @@
         {{ $t('pressIntro') }}
       </div>
       <!-- <div class="press-contacts row q-mb-md">
-        {{ $t('pressContacts') }}: David Louis, Celal Simsek &nbsp; <a href="mailto:presse@coronahelfer.eu">presse@coronahelfer.eu</a>
+        {{ $t('pressContacts') }}: Celal Simsek &nbsp; <a href="mailto:presse@coronahelfer.eu">presse@coronahelfer.eu</a>
       </div> -->
       <div class="row col-xs-12 col-md-6 q-pt-md">
         <q-chip
