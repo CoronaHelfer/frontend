@@ -37,7 +37,6 @@
         <li><a class="index-link" href="/privacy#m42">Begriffsdefinitionen</a></li>
       </ul>
       <h2 id="m3">Verantwortlicher</h2>
-      <p>David Louis CoronaHelfer<br>Mozartstraße, 5<br>69214, Eppelheim</p>
       <p><strong>E-Mail-Adresse</strong>: <a href="mailto:info@coronahelfer.eu">info@coronahelfer.eu</a></p>
       <p><strong>Impressum</strong>: <a href="https://coronahelfer.eu/imprint" target="_blank">https://coronahelfer.eu/imprint</a></p>
       <h2 id="mOverview">Übersicht der Verarbeitungen</h2>
